@@ -5,4 +5,4 @@
 npm install --save
 
 运行：
-gulp -w
+gulp -sw
