@@ -1,5 +1,5 @@
 seajs.config({
-    base: '/dist/',
+    base: '/blog/form/dist/',
     paths: {
         'mod': 'js/mod',
         'lib': 'js/lib'
