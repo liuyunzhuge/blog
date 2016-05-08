@@ -1,0 +1,1300 @@
+html,
+body {
+  min-width: 100%;
+  min-height: 100%;
+}
+input,
+textarea,
+select {
+  font-size: 100%;
+  font-family: inherit;
+}
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+form {
+  margin: 0;
+}
+h4,
+h5,
+h6 {
+  font-size: 1em;
+}
+ul,
+ol {
+  padding-left: 0;
+  list-style-type: none;
+}
+/*image with no-border*/
+img {
+  border: 0;
+}
+a:hover,
+a:focus,
+a:active {
+  text-decoration: none;
+  outline: none;
+}
+button:hover,
+button:focus,
+button:active,
+.btn:hover,
+.btn:active,
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn.focus:active,
+.btn.active.focus {
+  outline: none;
+}
+label {
+  font-weight: normal;
+}
+/*!
+* by zhangxinxu(.com) 2010-?
+* https://github.com/zhangxinxu/zxx.lib.css
+* under MIT license
+*/
+/*
+* 2010-07-12 v1.0
+* 2010-07-21 v1.1 添加block元素居中之auto属性，增加鼠标手形样式
+* 2010-09-17 v1.2 添加z-index层级属性
+* 2010-09-29 v1.3 添加break-word属性
+* 2010-11-12 v1.4 添加white-space:nowrap;值，去掉Georgia字体
+* 2011-01-17 v1.5 去除red颜色，添加cell双栏自适应属性，z样式影响扩至IE7，样式位置以及顺序调整，dib样式忽略Firefox 2，去除Lucida Console字体，添加Verdana字体，添加letter-spacing样式
+* 2011-07-28 v1.6 增加vertical-align:bottom属性，增加点点点效果多样
+* 2012-01-18 v1.7 点点点效果样式去除-moz-前缀，多余；增加修复cell下连续单词字符换行问题；去除.ovs{overflow:scroll;}
+                  去除.vimg{margin-bottom:-3px;}
+* 2013-05-24 v2.0 为开源到github上做大改
+                  1. 增加margin负值范围
+                  2. margin/padding增加15px/30px组
+                  3. 中文字体改成英文字符表示，例如“微软雅黑” → "microsoft yahei"
+                  4. 新增border系列, background-color系列, width(fixed value/percent value)系列以及.ell以下所有样式
+* 2013-07-31 v2.1 inline_any等12px字体大小限制去除，inline_box的-3px间距缩进改成-.25em, 以便适应各种字体大小环境
+* 2013-09-13 v2.2 12px字体大小限制修改为1px笔误了，应该为1em, 删除-ms-transition
+* 2013-10-11 v2.3 float_seven一直没删除，清掉。增加两个绝对定位隐藏：abs_out和abs_clip
+* 2013-11-23 v2.4 add p0, ova, f18. 去除trans中-moz-和-o-私有前缀
+* 2014-02-26 v2.5 fix two name mistake
+* 2014-02-27 v2.6 add fl
+* 2015-02-08 v2.7 具体改动有：
+                  1. 添加h0
+                  2. 修改 .vn -2px → -4px
+                  3. zoom增加webkit重绘修复
+                  4. 去除.trans非webkit私有前缀
+                  5. loading背景图使用about:blank代替
+* 2015-02-09 v2.8 具体改动有：
+                  1. 添加.lh0
+                  2. 移除.f10, .f13, 添加f28，因为现代web站点字号越来越大
+                  3. .n添加white-space: normal声明
+                  4. 移除.vn使用具体负值代替，因为图标+不同字号，vertical-align的负值也不同，新增.v-1 ~ .v-5 按钮与文字的垂直对齐也可使用，兼容IE6+
+                  5. 移除.z中-webkit-transform: translateZ(0)此声明虽然能修复一些重绘问题，但同时也会带来垂直位置，position:fixed限制，影响overflow对absolute元素限制等一系列问题，移除之~
+                  6. 移除cell_bk, 若遭遇不换行问题，使用.cell_ovh代替~
+                  7. .trans中时间0.3s → .3s
+                  8. .disabled禁用大改造，使适用性更广泛
+                  9. 增加.opa0 透明度0
+                  10. float percent more accurate for IE8+
+* 2016-03-25 v2.9 本次改动有：
+                  1. fix w300宽度值为280px的错误
+                  2. dib增加div,p等标签的IE7特别处理，之前建议使用inline_any
+                  3. add h30, lh30，因为随着大屏普及，页面元素尺寸更大了
+                  4. transition时间从.3s → .15s
+                  5. pointer-events增加-ms-私有前缀for IE10+
+*/
+/* ---------------------single CSS----------------------- */
+/* display */
+.dn {
+  display: none;
+}
+.di {
+  display: inline;
+}
+.db {
+  display: block;
+}
+.dib {
+  display: inline-block;
+}
+div.dib {
+  *display: inline;
+  *zoom: 1;
+}
+/* other block level tag(eg. p, li, h1~h6), using 'inline_any' instead */
+/* height */
+.h0 {
+  height: 0;
+}
+.h16 {
+  height: 14px;
+}
+.h16 {
+  height: 16px;
+}
+.h18 {
+  height: 18px;
+}
+.h20 {
+  height: 20px;
+}
+.h22 {
+  height: 22px;
+}
+.h24 {
+  height: 24px;
+}
+.h30 {
+  height: 30px;
+}
+/* percent width value */
+.pct10 {
+  width: 10%;
+}
+.pct15 {
+  width: 15%;
+}
+.pct20 {
+  width: 20%;
+}
+.pct25 {
+  width: 25%;
+}
+.pct30 {
+  width: 30%;
+}
+.pct33 {
+  width: 33.3%;
+}
+.pct40 {
+  width: 40%;
+}
+.pct50 {
+  width: 50%;
+}
+.pct60 {
+  width: 60%;
+}
+.pct66 {
+  width: 66.6%;
+}
+.pct70 {
+  width: 70%;
+}
+.pct75 {
+  width: 75%;
+}
+.pct80 {
+  width: 80%;
+}
+.pct90 {
+  width: 90%;
+}
+.pct100 {
+  width: 100%;
+}
+/* line-height */
+.lh0 {
+  line-height: 0;
+}
+.lh16 {
+  line-height: 14px;
+}
+.lh16 {
+  line-height: 16px;
+}
+.lh18 {
+  line-height: 18px;
+}
+.lh20 {
+  line-height: 20px;
+}
+.lh22 {
+  line-height: 22px;
+}
+.lh24 {
+  line-height: 24px;
+}
+.lh30 {
+  line-height: 30px;
+}
+/* border-color name rule: border(b)-position(l/r/t/b/d)-width(null/2)-style(null/sh)-color(first one letter/first two letter) |-> All colors are safe color*/
+.bdc {
+  border: 1px solid #ccc;
+}
+.blc {
+  border-left: 1px solid #ccc;
+}
+.brc {
+  border-right: 1px solid #ccc;
+}
+.btc {
+  border-top: 1px solid #ccc;
+}
+.bbc {
+  border-bottom: 1px solid #ccc;
+}
+.bdd {
+  border: 1px solid #ddd;
+}
+.bld {
+  border-left: 1px solid #ddd;
+}
+.brd {
+  border-right: 1px solid #ddd;
+}
+.btd {
+  border-top: 1px solid #ddd;
+}
+.bbd {
+  border-bottom: 1px solid #ddd;
+}
+.bde {
+  border: 1px solid #eee;
+}
+.ble {
+  border-left: 1px solid #eee;
+}
+.bre {
+  border-right: 1px solid #eee;
+}
+.bte {
+  border-top: 1px solid #eee;
+}
+.bbe {
+  border-bottom: 1px solid #eee;
+}
+/* background-color name rule: bg - (key word/Hex color) |-> All colors are safe color */
+.bgwh {
+  background-color: #fff;
+}
+.bgfb {
+  background-color: #fbfbfb;
+}
+.bgf5 {
+  background-color: #f5f5f5;
+}
+.bgf0 {
+  background-color: #f0f0f0;
+}
+.bgeb {
+  background-color: #ebebeb;
+}
+.bge0 {
+  background-color: #e0e0e0;
+}
+/* safe color */
+.g0 {
+  color: #000;
+}
+.g3 {
+  color: #333;
+}
+.g6 {
+  color: #666;
+}
+.g9 {
+  color: #999;
+}
+.gc {
+  color: #ccc;
+}
+.wh {
+  color: white;
+}
+/* font-size */
+.f0 {
+  font-size: 0;
+}
+.f12 {
+  font-size: 12px;
+}
+.f13 {
+  font-size: 13px;
+}
+.f14 {
+  font-size: 14px;
+}
+.f16 {
+  font-size: 16px;
+}
+.f18 {
+  font-size: 18px;
+}
+.f20 {
+  font-size: 20px;
+}
+.f24 {
+  font-size: 24px;
+}
+.f28 {
+  font-size: 28px;
+}
+/* font-style */
+.n {
+  font-weight: normal;
+  font-style: normal;
+  white-space: normal;
+}
+.b {
+  font-weight: bold;
+}
+.i {
+  font-style: italic;
+}
+/* text-align */
+.tc {
+  text-align: center;
+}
+.tr {
+  text-align: right;
+}
+.tl {
+  text-align: left;
+}
+.tj {
+  text-align: justify;
+}
+/* text-decoration */
+.tdl {
+  text-decoration: underline;
+}
+.tdn,
+.tdn:hover,
+.tdn a:hover,
+a.tdl:hover {
+  text-decoration: none;
+}
+/* letter-spacing */
+.lt-1 {
+  letter-spacing: -1px;
+}
+.lt0 {
+  letter-spacing: 0;
+}
+.lt1 {
+  letter-spacing: 1px;
+}
+/* white-space */
+.nowrap {
+  white-space: nowrap;
+}
+/* word-wrap */
+.bk {
+  word-wrap: break-word;
+}
+/* vertical-align */
+.vm {
+  vertical-align: middle;
+}
+.vtb {
+  vertical-align: text-bottom;
+}
+.vb {
+  vertical-align: bottom;
+}
+.vt {
+  vertical-align: top;
+}
+.v-1 {
+  vertical-align: -1px;
+}
+.v-2 {
+  vertical-align: -2px;
+}
+.v-3 {
+  vertical-align: -3px;
+}
+.v-4 {
+  vertical-align: -4px;
+}
+.v-5 {
+  vertical-align: -5px;
+}
+/* float */
+.l {
+  float: left;
+}
+.r {
+  float: right;
+}
+/* clear */
+.cl {
+  clear: both;
+}
+/* position */
+.rel {
+  position: relative;
+}
+.abs {
+  position: absolute;
+}
+/*z-index*/
+.zx1 {
+  z-index: 1;
+}
+.zx2 {
+  z-index: 2;
+}
+/* cursor */
+.poi {
+  cursor: pointer;
+}
+.def {
+  cursor: default;
+}
+/* overflow */
+.ovh {
+  overflow: hidden;
+}
+.ova {
+  overflow: auto;
+}
+/* visibility */
+.vh {
+  visibility: hidden;
+}
+.vv {
+  visibility: visible;
+}
+/* zoom */
+.z {
+  *zoom: 1;
+}
+/* ------------------- multiply CSS ------------------ */
+/* 块状元素水平居中 */
+.auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+/* 清除浮动*/
+.fix {
+  *zoom: 1;
+}
+.fix:after {
+  display: table;
+  content: '';
+  clear: both;
+}
+/* 基于display:table-cell的自适应布局 */
+.cell {
+  display: table-cell;
+  *display: inline-block;
+  width: 3000px;
+  *width: auto;
+}
+/* 双栏自适应cell部分连续英文字符换行 */
+.cell2 {
+  overflow: hidden;
+  _display: inline-block;
+}
+/* 单行文字溢出虚点显 示*/
+.ell {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+/* css3过渡动画效果 */
+.trans {
+  -webkit-transition: all .15s;
+  transition: all .15s;
+}
+/* 大小不定元素垂直居中 */
+.dib_vm {
+  display: inline-block;
+  width: 0;
+  height: 100%;
+  vertical-align: middle;
+}
+/* 无框文本框文本域 */
+.bd_none {
+  border: 0;
+  outline: none;
+}
+/* 绝对定位隐藏 */
+.abs_out {
+  position: absolute;
+  left: -999em;
+  top: -999em;
+}
+.abs_clip {
+  position: absolute;
+  clip: rect(0 0 0 0);
+}
+/*inline-block与float等宽列表*/
+.inline_box {
+  font-size: 1em;
+  letter-spacing: -0.25em;
+  font-family: Arial;
+}
+.inline_two,
+.inline_three,
+.inline_four,
+.inline_five,
+.inline_six,
+.inline_any {
+  display: inline-block;
+  *display: inline;
+  letter-spacing: 0;
+  vertical-align: top;
+  *zoom: 1;
+}
+.float_two,
+.float_three,
+.float_four,
+.float_five,
+.float_six {
+  float: left;
+}
+.inline_two,
+.float_two {
+  width: 50%;
+  *width: 49.9%;
+}
+.inline_three,
+.float_three {
+  width: 33.33333%;
+  *width: 33.3%;
+}
+.inline_four,
+.float_four {
+  width: 25%;
+  *width: 24.9%;
+}
+.inline_five,
+.float_five {
+  width: 20%;
+  *width: 19.9%;
+}
+.inline_six,
+.float_six {
+  width: 16.66666%;
+  *width: 16.6%;
+}
+.inline_fix {
+  display: inline-block;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+}
+.navbar {
+  border-radius: 0;
+  border: none;
+}
+.dropdown-menu {
+  padding: 0;
+  border-radius: 2px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+.dropdown-menu .divider {
+  height: 1px;
+  margin: 1px 0;
+  overflow: hidden;
+  background-color: #e5e5e5;
+}
+.dropdown-menu > li > a {
+  line-height: 2;
+}
+.layout {
+  width: 1200px;
+}
+.navbar-top {
+  background-color: #29434a;
+}
+.navbar-top .navbar-brand {
+  color: #fff;
+}
+.navbar-top .navbar-brand:hover,
+.navbar-top .navbar-brand:focus {
+  color: #e6e6e6;
+  background-color: transparent;
+}
+.navbar-top .navbar-brand.img {
+  padding-right: 0;
+}
+.navbar-top .navbar-brand.img > img {
+  position: relative;
+  top: -7px;
+}
+.navbar-top .navbar-nav > li + li {
+  margin-left: 1px;
+}
+.navbar-top .navbar-nav > li > a {
+  color: #fff;
+  font-size: 14px;
+}
+.navbar-top .navbar-nav > li > a:hover,
+.navbar-top .navbar-nav > li > a:focus {
+  color: #fff;
+  background-color: #1F3238;
+}
+.navbar-top .navbar-nav > .active > a,
+.navbar-top .navbar-nav > .active > a:hover,
+.navbar-top .navbar-nav > .active > a:focus {
+  color: #fff;
+  background-color: #1F3238;
+}
+.navbar-top .navbar-nav > .open > a,
+.navbar-top .navbar-nav > .open > a:hover,
+.navbar-top .navbar-nav > .open > a:focus {
+  color: #fff;
+  background-color: #1F3238;
+}
+.navbar-top .logout {
+  position: relative;
+}
+.navbar-top .logout:before {
+  content: '  ';
+  position: absolute;
+  left: -1px;
+  top: 20%;
+  width: 1px;
+  background: #1F3238;
+  bottom: 20%;
+}
+.navbar-top .fa-sign-out {
+  font-size: 18px;
+}
+.holy-a,
+.holy-m {
+  float: left;
+}
+.holy {
+  padding-left: 200px;
+}
+.holy.layout {
+  margin-bottom: 20px;
+  border-radius: 6px;
+  box-shadow: 0 2px 10px -3px rgba(0, 0, 0, 0.8);
+  background: url("/dist/img/layout_bg.png") left top repeat-y #fff;
+}
+.holy-m {
+  width: 100%;
+}
+.holy-a {
+  width: 200px;
+  margin-left: -200px;
+}
+.navbar-nav > li > .dropdown-menu {
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  margin-top: 6px;
+  border-color: #29434a;
+}
+.navbar-nav > li > .dropdown-menu .divider {
+  background-color: #29434a;
+}
+.navbar-nav > li > .dropdown-menu:after,
+.navbar-nav > li > .dropdown-menu:before {
+  bottom: 100%;
+  left: 80%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  margin-top: -1px;
+}
+.navbar-nav > li > .dropdown-menu:after {
+  border-bottom-color: #fff;
+  border-width: 5px;
+  margin-left: -5px;
+}
+.navbar-nav > li > .dropdown-menu:before {
+  border-bottom-color: #29434a;
+  border-width: 6px;
+  margin-left: -6px;
+}
+.navbar-nav > li > .dropdown-menu > li > a {
+  color: #29434a;
+}
+.navbar-nav > li > .dropdown-menu > li > a:hover,
+.navbar-nav > li > .dropdown-menu > li > a:focus {
+  color: #29434a;
+}
+.nav-menu {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom-left-radius: 6px;
+  border-top-left-radius: 6px;
+}
+.nav-menu li + li {
+  margin-top: 1px;
+}
+.nav-item {
+  display: block;
+  color: #4db6ac;
+  padding: 8px 15px;
+}
+.nav-first .nav-item:hover {
+  color: #4db6ac;
+  cursor: default;
+}
+li.active .nav-item {
+  background: #4db6ac;
+  color: #fff;
+}
+.nav-second .nav-item {
+  padding-left: 30px;
+  color: #fff;
+}
+.nav-second .nav-item:hover {
+  background: #4db6ac;
+  color: #fff;
+  cursor: pointer;
+}
+footer {
+  color: #29434a;
+}
+.layout-inner {
+  padding: 15px;
+}
+.page-bar {
+  margin-bottom: 15px;
+}
+.breadcrumb {
+  border-radius: 0;
+  border-top-right-radius: 6px;
+  border-bottom: 2px solid #4db6ac;
+  background-color: #fff;
+  margin-bottom: 0;
+}
+.breadcrumb > li:nth-child(1) {
+  color: #777777;
+}
+.breadcrumb > li:nth-child(2):before {
+  content: " ";
+  padding: 0;
+}
+.btn-toolbar.btn-toolbar-right {
+  margin-left: 0;
+  margin-right: -5px;
+}
+.btn-toolbar.btn-toolbar-right .btn,
+.btn-toolbar.btn-toolbar-right .btn-group,
+.btn-toolbar.btn-toolbar-right .input-group {
+  float: right;
+}
+.btn-toolbar.btn-toolbar-right > .btn,
+.btn-toolbar.btn-toolbar-right > .btn-group,
+.btn-toolbar.btn-toolbar-right > .input-group {
+  margin-right: 5px;
+  margin-left: 0;
+}
+.tooltip.fv-error.fv-force-tip-left {
+  left: 15px !important;
+}
+.tooltip.fv-error.in {
+  opacity: 1;
+}
+.tooltip.fv-error .tooltip-inner {
+  max-width: 200px;
+  padding: 5px 8px;
+  color: #fff;
+  text-align: center;
+  background-color: #FF8585;
+  border-radius: 4px;
+}
+.tooltip.fv-error.top .tooltip-arrow {
+  border-top-color: #FF8585;
+}
+.tooltip.fv-error.top-left .tooltip-arrow {
+  border-top-color: #FF8585;
+}
+.tooltip.fv-error.top-right .tooltip-arrow {
+  border-top-color: #FF8585;
+}
+.tooltip.fv-error.right .tooltip-arrow {
+  border-right-color: #FF8585;
+}
+.tooltip.fv-error.left .tooltip-arrow {
+  border-left-color: #FF8585;
+}
+.tooltip.fv-error.bottom .tooltip-arrow {
+  border-bottom-color: #FF8585;
+}
+.tooltip.fv-error.bottom-left .tooltip-arrow {
+  border-bottom-color: #FF8585;
+}
+.tooltip.fv-error.bottom-right .tooltip-arrow {
+  border-bottom-color: #FF8585;
+}
+.checkbox,
+.radio {
+  margin: 0 0;
+  line-height: 24px;
+}
+.checkbox label,
+.radio label {
+  padding-left: 4px;
+  margin-right: 10px;
+}
+.checkbox input[type="checkbox"],
+.radio input[type="checkbox"],
+.checkbox input[type="radio"],
+.radio input[type="radio"] {
+  position: absolute;
+  left: -999em;
+}
+.checkbox .checked,
+.radio .checked {
+  position: relative;
+  top: 1px;
+  -webkit-transition: all .15s;
+  transition: all .15s;
+}
+.checkbox input[type="checkbox"]:checked + .checked,
+.radio input[type="checkbox"]:checked + .checked,
+.checkbox input[type="radio"]:checked + .checked,
+.radio input[type="radio"]:checked + .checked,
+.checkbox input[type="checkbox"]:checked:focus + .checked,
+.radio input[type="checkbox"]:checked:focus + .checked,
+.checkbox input[type="radio"]:checked:focus + .checked,
+.radio input[type="radio"]:checked:focus + .checked {
+  color: #4db6ac;
+}
+.checkbox input[type="checkbox"]:focus + .checked,
+.radio input[type="checkbox"]:focus + .checked,
+.checkbox input[type="radio"]:focus + .checked,
+.radio input[type="radio"]:focus + .checked {
+  color: #4db6ac;
+}
+.checkbox input[type="checkbox"].disabled + .checked,
+.radio input[type="checkbox"].disabled + .checked,
+.checkbox input[type="radio"].disabled + .checked,
+.radio input[type="radio"].disabled + .checked,
+.checkbox input[type="checkbox"][disabled] + .checked,
+.radio input[type="checkbox"][disabled] + .checked,
+.checkbox input[type="radio"][disabled] + .checked,
+.radio input[type="radio"][disabled] + .checked,
+fieldset[disabled] .checkbox input[type="checkbox"] + .checked,
+fieldset[disabled] .radio input[type="checkbox"] + .checked,
+fieldset[disabled] .checkbox input[type="radio"] + .checked,
+fieldset[disabled] .radio input[type="radio"] + .checked {
+  color: #e6e6e6;
+  cursor: not-allowed;
+}
+.checkbox .checked,
+.radio .checked {
+  color: #ccc;
+}
+.checkbox .checked,
+.radio .checked {
+  font-size: 14px;
+  width: 17px;
+}
+.checkbox input[type="checkbox"]:checked + .checked:before {
+  content: "\f14a";
+}
+.checkbox .checked:before {
+  content: "\f096";
+}
+.checkbox-md,
+.radio-md {
+  line-height: 30px;
+}
+.checkbox-md .checked,
+.radio-md .checked {
+  font-size: 16px;
+  width: 19px;
+}
+.checkbox-md .checked,
+.radio-md .checked {
+  top: 1px;
+}
+.radio input[type="radio"]:checked + .checked:before {
+  content: "\f192";
+}
+.radio .checked:before {
+  content: "\f10c";
+}
+@media (min-width: 768px) {
+  .form-horizontal .control-label {
+    padding-top: 9px;
+  }
+}
+.form-group-no-margin {
+  margin-bottom: 0;
+}
+.form-query .form-control {
+  width: 100%;
+  display: block;
+}
+.query-label {
+  line-height: 30px;
+  margin-bottom: 0;
+  font-weight: bold;
+}
+.query-row {
+  display: none;
+}
+.query-row:first-child {
+  display: block;
+}
+.query-row .query-label + .form-control,
+.query-row .form-control + .query-label,
+.query-row .form-control + .btn {
+  margin-left: 15px;
+}
+.query-row + .query-row {
+  margin-top: 15px;
+}
+.query-collapse {
+  border-top: 1px solid #4db6ac;
+  margin-top: 15px;
+  text-align: center;
+}
+.query-collapse a {
+  display: inline-block;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  padding: 0 12px;
+  background-color: #4db6ac;
+  color: #fff;
+}
+.query-collapse a:hover {
+  color: #f7f7f7;
+}
+.form-edit {
+  width: 90%;
+  margin: 20px 0;
+}
+.form-edit i.fv-error {
+  display: none !important;
+}
+.form-edit .checkbox.fv-error input[type="checkbox"]:checked + .checked,
+.form-edit .radio.fv-error input[type="checkbox"]:checked + .checked,
+.form-edit .checkbox.fv-error input[type="radio"]:checked + .checked,
+.form-edit .radio.fv-error input[type="radio"]:checked + .checked,
+.form-edit .checkbox.fv-error input[type="checkbox"]:checked:focus + .checked,
+.form-edit .radio.fv-error input[type="checkbox"]:checked:focus + .checked,
+.form-edit .checkbox.fv-error input[type="radio"]:checked:focus + .checked,
+.form-edit .radio.fv-error input[type="radio"]:checked:focus + .checked {
+  color: #4db6ac;
+}
+.form-edit .checkbox.fv-error input[type="checkbox"]:focus + .checked,
+.form-edit .radio.fv-error input[type="checkbox"]:focus + .checked,
+.form-edit .checkbox.fv-error input[type="radio"]:focus + .checked,
+.form-edit .radio.fv-error input[type="radio"]:focus + .checked {
+  color: #FF8585;
+}
+.form-edit .checkbox.fv-error input[type="checkbox"].disabled + .checked,
+.form-edit .radio.fv-error input[type="checkbox"].disabled + .checked,
+.form-edit .checkbox.fv-error input[type="radio"].disabled + .checked,
+.form-edit .radio.fv-error input[type="radio"].disabled + .checked,
+.form-edit .checkbox.fv-error input[type="checkbox"][disabled] + .checked,
+.form-edit .radio.fv-error input[type="checkbox"][disabled] + .checked,
+.form-edit .checkbox.fv-error input[type="radio"][disabled] + .checked,
+.form-edit .radio.fv-error input[type="radio"][disabled] + .checked,
+fieldset[disabled] .form-edit .checkbox.fv-error input[type="checkbox"] + .checked,
+fieldset[disabled] .form-edit .radio.fv-error input[type="checkbox"] + .checked,
+fieldset[disabled] .form-edit .checkbox.fv-error input[type="radio"] + .checked,
+fieldset[disabled] .form-edit .radio.fv-error input[type="radio"] + .checked {
+  color: #ffb8b8;
+  cursor: not-allowed;
+}
+.form-edit .checkbox.fv-error .checked,
+.form-edit .radio.fv-error .checked {
+  color: #FF8585;
+}
+.form-edit .form-control {
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 28px;
+  border-radius: 0;
+  height: 42px;
+  background-color: #fff;
+  color: #555555;
+  border-color: #ccc;
+  box-shadow: none;
+}
+select.form-edit .form-control {
+  height: 42px;
+  line-height: 42px;
+}
+textarea.form-edit .form-control,
+select[multiple] .form-edit .form-control {
+  height: auto;
+}
+.form-edit .form-control.fv-error:focus,
+.form-edit .form-control.fv-error {
+  background-color: #fff;
+  color: #555555;
+  border-color: #FF8585;
+  box-shadow: none;
+}
+.form-edit .form-control:focus {
+  background-color: #fff;
+  color: #333333;
+  border-color: #4db6ac;
+  box-shadow: none;
+}
+.form-edit .form-control[disabled] {
+  background-color: #eeeeee;
+  color: #555555;
+  border-color: #ccc;
+  box-shadow: none;
+}
+.form-edit textarea.form-control {
+  height: auto;
+}
+.form-edit .btn-toolbar {
+  padding-left: 150px;
+}
+.form-edit legend {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.form-edit .radio,
+.form-edit .checkbox {
+  padding-top: 5px;
+}
+.form-edit textarea[data-type="ueditor"] {
+  display: none;
+}
+.required {
+  color: red;
+}
+.btn-form {
+  padding: 6px 32px;
+  font-size: 14px;
+  line-height: 28px;
+  border-radius: 0;
+}
+.btn-form.btn-primary {
+  color: #fff;
+  background-color: #4db6ac;
+  border-color: #4db6ac;
+  /*
+  .badge {
+    color: @background;
+    background-color: @color;
+  }*/
+}
+.btn-form.btn-primary:focus,
+.btn-form.btn-primary.focus {
+  color: #fff;
+  background-color: #3c948b;
+  border-color: #3c948b;
+}
+.btn-form.btn-primary:hover {
+  color: #fff;
+  background-color: #3c948b;
+  border-color: #3c948b;
+}
+.btn-form.btn-primary:active,
+.btn-form.btn-primary.active,
+.open > .dropdown-toggle.btn-form.btn-primary {
+  color: #fff;
+  background-color: #3c948b;
+  border-color: #3c948b;
+  box-shadow: none;
+}
+.btn-form.btn-primary:active:hover,
+.btn-form.btn-primary.active:hover,
+.open > .dropdown-toggle.btn-form.btn-primary:hover,
+.btn-form.btn-primary:active:focus,
+.btn-form.btn-primary.active:focus,
+.open > .dropdown-toggle.btn-form.btn-primary:focus,
+.btn-form.btn-primary:active.focus,
+.btn-form.btn-primary.active.focus,
+.open > .dropdown-toggle.btn-form.btn-primary.focus {
+  color: #fff;
+  background-color: #35817a;
+  border-color: #35817a;
+  box-shadow: none;
+}
+.btn-form.btn-primary:active,
+.btn-form.btn-primary.active,
+.open > .dropdown-toggle.btn-form.btn-primary {
+  background-image: none;
+}
+.btn-form.btn-primary.disabled:hover,
+.btn-form.btn-primary[disabled]:hover,
+fieldset[disabled] .btn-form.btn-primary:hover,
+.btn-form.btn-primary.disabled:focus,
+.btn-form.btn-primary[disabled]:focus,
+fieldset[disabled] .btn-form.btn-primary:focus,
+.btn-form.btn-primary.disabled.focus,
+.btn-form.btn-primary[disabled].focus,
+fieldset[disabled] .btn-form.btn-primary.focus {
+  background-color: #4db6ac;
+  border-color: #4db6ac;
+}
+.btn-form.btn-lg {
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.3333333;
+  border-radius: 0;
+}
+.btn-form.btn-sm {
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 0;
+}
+.btn-form.btn-xs {
+  padding: 1px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 0;
+}
+.cascade-view > li {
+  float: left;
+}
+.cascade-view > li + li {
+  margin-left: 20px;
+}
+.image-upload-view {
+  float: left;
+}
+.image-upload-view a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.image-upload-view img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+}
+.image-upload-view > li {
+  float: left;
+  width: 118px;
+  height: 118px;
+  line-height: 116px;
+  margin-right: 22px;
+  border: 1px solid #ccc;
+  border-radius: 0;
+}
+.image-upload-view .view-act-add {
+  font-size: 60px;
+  color: #ccc;
+  line-height: 115px;
+}
+.image-upload-view .view-act-add:hover,
+.image-upload-view .view-act-add:focus {
+  color: #999999;
+}
+.image-upload-view .view-act-add:active {
+  color: #ccc;
+}
+.image-upload-view.fv-error .view-item-add {
+  border: 1px solid #FF8585;
+}
+.image-upload-view.fv-error .view-act-add {
+  color: #FF8585;
+}
+.image-upload-view.fv-error .view-act-add:hover,
+.image-upload-view.fv-error .view-act-add:focus {
+  color: #ff1f1f;
+}
+.image-upload-view.fv-error .view-act-add:active {
+  color: #FF8585;
+}
+.image-upload-view .view-act-del {
+  position: absolute;
+  line-height: 30px;
+  background: #000;
+  opacity: 0.6;
+  width: 100%;
+  color: #fff;
+  left: 0;
+  bottom: -30px;
+  -webkit-transition: all .2s;
+  transition: all .2s;
+}
+.image-upload-view .view-act-preview:hover .view-act-del {
+  bottom: 0;
+}
+.webuploader-container {
+	position: relative;
+}
+.webuploader-element-invisible {
+	position: absolute !important;
+	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px,1px,1px,1px);
+}
+.webuploader-pick {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+	background: #00b7ee;
+	padding: 10px 15px;
+	color: #fff;
+	text-align: center;
+	border-radius: 3px;
+	overflow: hidden;
+}
+.webuploader-pick-hover {
+	background: #00a2d4;
+}
+
+.webuploader-pick-disable {
+	opacity: 0.6;
+	pointer-events:none;
+}
+
+
+.webuploader-container--init {
+  position: fixed;
+  left: -1000em;
+  top: -1000em;
+}
+.modal-header-hd .modal-header {
+  display: none;
+}
+.modal-footer-hd .modal-footer {
+  display: none;
+}
+.modal-invisible {
+  visibility: hidden;
+}
+.modal-center .modal-dialog {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+@media (max-width: 768px) {
+  .modal-dialog {
+    width: auto !important;
+    top: 0 !important;
+    height: auto !important;
+  }
+  .modal-center .modal-dialog {
+    margin: 10px;
+  }
+}
+@media (min-width: 768px) {
+  .modal-content {
+    box-shadow: none;
+  }
+}
+.modal-content {
+  box-shadow: none;
+}
+.modal-msg .modal-body {
+  text-align: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+.modal-footer {
+  padding: 5px 15px;
+}
+.modal-baidu-map .modal-body {
+  padding: 0;
+}
+.baidu-map {
+  width: 100%;
+  height: 400px;
+}
