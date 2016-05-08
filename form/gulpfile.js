@@ -1,11 +1,11 @@
 var gulp = require('gulp'),
     yargs = require('yargs').argv,//获取运行gulp命令时附加的命令行参数
     clean = require('gulp-clean'),//清理文件或文件夹
-    autoprefixer = require('gulp-autoprefixer'),//自动添加CSS3的前缀
-    less = require('gulp-less'),//编译less
+    replace = require('gulp-replace-task'),//对文件中的字符串进行替换
     browserSync = require('browser-sync'),
     src = 'src',
-    dist = 'dist';
+    dist = 'dist',
+    CONTEXT_PATH = 'blog/form/';
 
 //清理
 gulp.task('clean', function () {
@@ -22,6 +22,21 @@ gulp.task('static', function () {
         .pipe(gulp.dest(dist));
 });
 
+//html
+gulp.task('html', function () {
+    return gulp.src(src + '/html/**/*')
+        .pipe(replace({
+            patterns: [
+                {
+                    match: 'CONTEXT_PATH',
+                    replacement: yargs.r ? CONTEXT_PATH : ''
+                }
+            ]
+        }))
+        .pipe(gulp.dest(dist + '/html/'));
+});
+
+
 //style
 gulp.task('style', function () {
     return gulp.src(src + '/css/**/*')
@@ -31,11 +46,19 @@ gulp.task('style', function () {
 //scripts
 gulp.task('script', function () {
     return gulp.src(src + '/js/**/*')
+        .pipe(replace({
+            patterns: [
+                {
+                    match: 'CONTEXT_PATH',
+                    replacement: yargs.r ? CONTEXT_PATH : ''
+                }
+            ]
+        }))
         .pipe(gulp.dest(dist + '/js/'));
 });
 
 gulp.task('build', ['clean'], function () {
-    return gulp.start('style', 'script', 'static');
+    return gulp.start('style', 'script', 'static','html');
 });
 
 gulp.task('watch', function () {
@@ -56,7 +79,7 @@ gulp.task('server', function () {
             }
         },
         port: yargs.p,
-        startPath: 'demo/index.html'
+        startPath: 'dist/html/demo1.html'
     });
 });
 
@@ -66,6 +89,7 @@ gulp.task('server', function () {
  * -w: 监听文件改变
  * -s: 启动browserAsync
  * -p: 指定端口
+ * -r: 需要更新github上的demo时才会用到的参数
  *
  * 常用命令如下
  * 构建：gulp
