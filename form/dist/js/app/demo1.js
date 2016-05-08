@@ -21,7 +21,7 @@ define(function (require, exports, module) {
     //业务逻辑
     BUTTONS.SAVE.click(function(){
         BUTTONS.SAVE.button('loading');
-        Ajax.post(Url.getUrl(API.save,appForm.getData())).done(function(res){
+        Ajax.get(Url.getUrl(API.save,appForm.getData())).done(function(res){
             if(res.code == 200) {
                 alert('保存成功！');
             } else {
