@@ -19,17 +19,17 @@ define(function (require, exports, module) {
         });
 
     //业务逻辑
-    BUTTONS.SAVE.click(function(){
+    BUTTONS.SAVE.click(function () {
         BUTTONS.SAVE.button('loading');
-        Ajax.get(Url.getUrl(API.save,appForm.getData())).done(function(res){
-            if(res.code == 200) {
+        Ajax.post(Url.getUrl(API.save), appForm.getData()).done(function (res) {
+            if (res.code == 200) {
                 alert('保存成功！');
             } else {
                 alert('保存失败！');
             }
-        }).fail(function(){
+        }).fail(function () {
             alert('保存失败！');
-        }).always(function(){
+        }).always(function () {
             BUTTONS.SAVE.button('reset');
         });
     });
