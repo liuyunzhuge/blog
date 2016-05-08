@@ -5,7 +5,7 @@ define(function (require, exports, module) {
 
     var DEFAULTS = {
         name: '',//字段名称
-        type: '',//字段类型：text checkbox radio date number select等
+        type: '',//字段类型：text checkbox radio date number select ueditor等
         value: '',//在mode为2,3时显示的值
         defaultValue: '',//在mode为1时显示的值
         mode: 1,//可选值有1,2,3，分别代表字段属于新增，编辑和查看模式

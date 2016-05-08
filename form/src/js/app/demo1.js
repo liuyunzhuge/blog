@@ -4,8 +4,7 @@ define(function (require, exports, module) {
     var $ = require('jquery'),
         bootstrap = require('lib/bootstrap'),
         Form = require('mod/formMap'),
-        Url = require('mod/url'),
-        Ajax = require('mod/ajax');
+        Url = require('mod/url');
 
     //定义常量及组件初始化
     var API = {
@@ -20,17 +19,6 @@ define(function (require, exports, module) {
 
     //业务逻辑
     BUTTONS.SAVE.click(function () {
-        BUTTONS.SAVE.button('loading');
-        Ajax.post(Url.getUrl(API.save), appForm.getData()).done(function (res) {
-            if (res.code == 200) {
-                alert('保存成功！');
-            } else {
-                alert('保存失败！');
-            }
-        }).fail(function () {
-            alert('保存失败！');
-        }).always(function () {
-            BUTTONS.SAVE.button('reset');
-        });
+        alert(JSON.stringify(appForm.getData()))
     });
 });
