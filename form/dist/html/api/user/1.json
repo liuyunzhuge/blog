@@ -1,0 +1,14 @@
+{
+  "code": 200,
+  "data": {
+    "id": "1",
+    "name": "felix",
+    "birthday": "1991-06-26",
+    "hobby": "游戏",
+    "gender": 2,
+    "work": "JAVA后端",
+    "industry": "电子商务",
+    "desc": "felix is a student.",
+    "detailDesc": "<p>i'm felix.</p>"
+  }
+}

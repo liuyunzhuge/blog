@@ -59,13 +59,13 @@ define(function (require, exports, module) {
                 this.ue && this.ue.ready(function () {
                     that._ueReady = true;
 
-                    /*//粘贴时只粘贴文本
-                     that.ue.execCommand('pasteplain');
+                    //粘贴时只粘贴文本
+                    that.ue.execCommand('pasteplain');
 
-                     //粘贴后再次做格式清理
-                     that.ue.addListener('afterpaste', function (t, arg) {
-                     that.ue.execCommand('autotypeset');
-                     });*/
+                    //粘贴后再次做格式清理
+                    that.ue.addListener('afterpaste', function (t, arg) {
+                        that.ue.execCommand('autotypeset');
+                    });
 
                     //编辑器文本变化
                     that.subscribeUeContentChange();
