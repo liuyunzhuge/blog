@@ -45,14 +45,6 @@ define(function (require, exports, module) {
 
                 var that = this;
 
-                //注册事件
-                $(document).on('keypress.formSubmit', function (e) {
-                    var isTextArea = e.target.tagName.toLowerCase() === 'textarea';
-                    if (!isTextArea && e.which == 13) {
-                        e.preventDefault();
-                    }
-                });
-
                 if (typeof(opts.onInit) === 'function') {
                     this.on('formInit', $.proxy(opts.onInit, this));
                 }
