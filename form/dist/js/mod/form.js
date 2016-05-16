@@ -10,10 +10,10 @@ define(function (require, exports, module) {
         mode: 1, //同FormFieldBase的mod
         postUrl: '',//编辑时保存的url
         putUrl: '',//新增时保存的url
-        queryUrl: '',//加载数据时的url
-        key: '',//主键的值
-        keyName: '',//主键的名称
-        defaultData: {},//默认值
+        queryUrl: '',//编辑模式时查询初始值的url
+        key: '',//编辑模式时使用它作为主键的值，跟在queryUrl后面传递到后台查询数据
+        keyName: '',//编辑模式时使用它作为主键的名称，跟在queryUrl后面传递到后台查询数据
+        defaultData: {},//新增模式时的默认值，可以是一个object，也可以是一个字符串，是字符串的时候表示一个后台查询的接口地址
         ajaxMethod: 'post',//发ajax请求的时候用的方法
         fieldOptions: {},//各个字段的选项
         parseData: $.noop,//获取初始化数据时，通过这个回调来解析初始化数据
