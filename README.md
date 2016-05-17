@@ -9,6 +9,6 @@
 
 (2) 该文件夹内容的相关介绍：
 
-1. 简洁易用的表单数据设置和收集管理组件[http://www.cnblogs.com/lyzg/p/5467691.html]
+1. [简洁易用的表单数据设置和收集管理组件](http://www.cnblogs.com/lyzg/p/5467691.html)
 
-2. 进一步丰富和简化表单管理的组件：form.js[http://www.cnblogs.com/lyzg/p/5476478.html]
+2. [进一步丰富和简化表单管理的组件：form.js](http://www.cnblogs.com/lyzg/p/5476478.html)
