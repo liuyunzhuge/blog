@@ -15,6 +15,7 @@
 
 ##numerGrow
 原本应该把这个文件夹命名为numberGrow，结果弄错了，懒得改了...
+
 (1) 该文件夹内的demo运行方法：
 
 1. 前提：安装node.js git
