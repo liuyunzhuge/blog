@@ -1,6 +1,6 @@
 define(function (require, exports, module) {
     var $ = require('jquery'),
-        ScrollLazyInit = require('proj/scrollLazyInit'),
+        ScrollLazyInit = require('mod/scrollLazyInit'),
         scrollLazy = new ScrollLazyInit({
             ns: '.numberGrow'
         });
