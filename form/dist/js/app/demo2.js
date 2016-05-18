@@ -2,7 +2,7 @@ define(function (require, exports, module) {
 
     //引入依赖的组件
     var $ = require('jquery'),
-        bootstrap = require('lib/bootstrap'),
+        bootstrap = require('bootstrap'),
         Form = require('mod/form'),
         Url = require('mod/url');
 

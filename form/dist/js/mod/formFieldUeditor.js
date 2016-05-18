@@ -117,6 +117,10 @@ define(function (require, exports, module) {
                 }
             },
             getValue: function () {
+                var ue = this.ue;
+                if (ue && this._ueReady) {
+                    return ue.getContent();
+                }
                 return this.$element.val();
             },
             disable: function () {
