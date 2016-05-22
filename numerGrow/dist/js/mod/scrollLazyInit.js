@@ -20,6 +20,7 @@ define(function (require, exports, module) {
                     var rect = this.getBoundingClientRect(),
                         docH = document.documentElement.clientHeight;
 
+                    //只有elem完全进入浏览器可视区域的时候才初始化
                     if (rect.top >= 0 && rect.bottom <= docH) {
                         init.call(elem);
 
@@ -40,7 +41,7 @@ define(function (require, exports, module) {
                         }
                     });
 
-                    //destroy
+                    //如果都初始化完了就destroy
                     if (called === callbacks.length) {
                         $(window).off('scroll' + ns);
                         callbacks = undefined;

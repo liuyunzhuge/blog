@@ -30,7 +30,7 @@ define(function (require, exports, module) {
             var t = Math.floor(start);
 
             //t未发生改变的话就直接返回
-            //避免调用text函数，降低DOM性能
+            //避免调用text函数，提高DOM性能
             if (t == old) {
                 return;
             }
@@ -40,12 +40,15 @@ define(function (require, exports, module) {
         }, 16);
     }
 
-    //当numberGrow在浏览器可视区域的时候自动初始化
+    //通过[data-ride="numberGrow"]自动注册组件
+    //将每个自动注册的组件的逻辑添加到scrollLazy来管理
+    //以便当numberGrow在浏览器可视区域的时候自动初始化
     $('[data-ride="numberGrow"]').each(function () {
         scrollLazy.add(this, function () {
             new NumberGrow(this);
         });
     });
 
+    //开始scrollLazy的监听管理
     scrollLazy.start();
 });
