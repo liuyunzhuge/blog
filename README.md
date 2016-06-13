@@ -1,3 +1,8 @@
+##css_name
+(1) 该文件夹内容的相关介绍：
+
+1. [面向属性的CSS命名](http://www.cnblogs.com/lyzg/p/5561001.html)
+
 ##form
 (1) 该文件夹内的demo运行方法：
 
@@ -24,6 +29,6 @@
 
 3. 运行：gulp -sw
 
-(2) 该文件夹内的demo
+(2) 该文件夹内容的相关介绍：
 
-[demo](http://liuyunzhuge.github.io/blog/numerGrow/dist/html/demo.html)
+1. [数字限时增长效果实现：numberGrow.js](http://www.cnblogs.com/lyzg/p/5517190.html)
