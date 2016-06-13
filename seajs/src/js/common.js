@@ -4,7 +4,7 @@ seajs.config({
         'app': 'js/app',
         'mod': 'js/mod',
         'lib': 'js/lib',
-        'proj': 'js/proj'
+        'deps': 'js/deps'
     },
     alias: {
         'jquery': 'lib/jquery.js?v=20160518',

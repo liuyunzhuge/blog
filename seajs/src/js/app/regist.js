@@ -1,4 +1,4 @@
-define('js/app/regist.js', function (require, exports, module) {
+define('app/regist', function (require, exports, module) {
 
     var $ = require('jquery');
 
