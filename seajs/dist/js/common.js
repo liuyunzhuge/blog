@@ -1,11 +1,5 @@
 seajs.config({
-    base: '/blog/seajs/dist/',
-    paths: {
-        'app': 'js/app',
-        'mod': 'js/mod',
-        'lib': 'js/lib',
-        'deps': 'js/deps'
-    },
+    base: '/blog/seajs/dist/js/',
     alias: {
         'jquery': 'lib/jquery.js?v=20160518',
         'bootstrap': 'lib/bootstrap.js?v=20160518',
