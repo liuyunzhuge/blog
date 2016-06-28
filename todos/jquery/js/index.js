@@ -45,9 +45,11 @@ updateHeader();
 
 //注册新待办的事件回调
 $new_input.focus().on('keypress', function (e) {
-    if (e.which == 13) {
+    var value = $.trim(this.value);
+    if (e.which == 13 && value) {
         //添加新的todo
-        var new_todo = todoList.add({text: $.trim(this.value)});
+        var new_todo = todoList.add({text: value});
+
         todoListView.add(new_todo);
         updateFooter();
         updateHeader();
