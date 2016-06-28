@@ -1,12 +1,5 @@
 seajs.config({
-    base: '/@@CONTEXT_PATHdist/',
-    paths: {
-        'app': 'js/app',
-        'mod': 'js/mod',
-        'lib': 'js/lib',
-        'proj': 'js/proj'
-    },
-    //对应lib/中的12个文件
+    base: '/@@CONTEXT_PATHdist/js/',
     alias: {
         'jquery': 'lib/jquery.js?v=20160518',
         'bootstrap': 'lib/bootstrap.js?v=20160518',

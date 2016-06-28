@@ -32,3 +32,17 @@
 (2) 该文件夹内容的相关介绍：
 
 1. [数字限时增长效果实现：numberGrow.js](http://www.cnblogs.com/lyzg/p/5517190.html)
+
+##seajs
+
+(1) 该文件夹内的demo运行方法：
+
+1. 前提：安装node.js git
+
+2. 安装：npm install --save
+
+3. 运行：gulp -sw
+
+(2) 该文件夹内容的相关介绍：
+
+1. [介绍一种基于gulp对seajs的模块做合并压缩的方式](http://www.cnblogs.com/lyzg/p/5581961.html)

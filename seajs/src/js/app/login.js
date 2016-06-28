@@ -1,4 +1,4 @@
-define('js/app/login.js', function (require, exports, module) {
+define(function (require, exports, module) {
 
     var $ = require('jquery');
 
@@ -7,4 +7,5 @@ define('js/app/login.js', function (require, exports, module) {
 
     require('mod/mod1');
     require('mod/mod2');
+    require('deps/fastclick');
 });
