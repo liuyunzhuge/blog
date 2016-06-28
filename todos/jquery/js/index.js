@@ -1,44 +1,42 @@
 var $new_input = $('#new_input'),
     $complete_all = $('#complete_all'),
-    $footer = $('#footer');
+    $footer = $('#footer'),
+    todoList = new TodoList(),
+    todoListView = new TodoListView('#todos_list', {
+        onUpdate: function (todo) {
+            todoList.update(todo);
+            updateFooter();
+            updateHeader();
+        },
+        onRemove: function (id) {
+            todoList.remove(id);
+            updateFooter();
+            updateHeader();
+        }
+    }),
+    //更新顶部全选的相关内容
+    updateHeader = function () {
+        var all = todoList.getCount();
 
-var todoList = new TodoList();
-var todoListView = new TodoListView('#todos_list', {
-    onUpdate: function (todo) {
-        todoList.update(todo);
-        updateFooter();
-        updateHeader();
+        $complete_all.toggleClass('hidden', !all);
+        $complete_all.find('input')[0].checked = all == todoList.getCompletedCount();
     },
-    onRemove: function (id) {
-        todoList.remove(id);
-        updateFooter();
-        updateHeader();
-    }
-});
+    //更新footer的统计信息
+    updateFooter = function () {
+        var all = todoList.getCount(),
+            complete = todoList.getCompletedCount(),
+            unComplete = all - complete;
 
-//更新顶部全选的相关内容
-var updateHeader = function () {
-    var all = todoList.getCount();
+        //一个待办项都没有时隐藏footer
+        $footer.toggleClass('hidden', !all);
 
-    $complete_all.toggleClass('hidden', !all);
-    $complete_all.find('input')[0].checked = all == todoList.getCompletedCount();
-};
+        //显示已完成和未完成的统计信息
+        //已完成数量为0时不显示清除已完成的按钮
+        $footer.find('.uncomplete_count').text(unComplete).end()
+            .find('.complete_count').text(complete).closest('.btn-clear-all').toggleClass('hidden', !complete);
+    };
 
-//更新footer的统计信息
-var updateFooter = function () {
-    var all = todoList.getCount(),
-        complete = todoList.getCompletedCount(),
-        unComplete = all - complete;
-
-    //一个待办项都没有时隐藏footer
-    $footer.toggleClass('hidden', !all);
-
-    //显示已完成和未完成的统计信息
-    //已完成数量为0时不显示清除已完成的按钮
-    $footer.find('.uncomplete_count').text(unComplete).end()
-        .find('.complete_count').text(complete).closest('.btn-clear-all').toggleClass('hidden', !complete);
-};
-
+//初始化
 todoListView.render(todoList.data());
 updateFooter();
 updateHeader();

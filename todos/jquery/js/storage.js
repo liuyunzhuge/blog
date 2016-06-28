@@ -1,3 +1,4 @@
+//提供对localStorage和sessionStorage的简洁访问
 var Storage = (function () {
     var key = 'todos-app',
         create = function (storage) {

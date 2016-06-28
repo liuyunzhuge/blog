@@ -26,19 +26,20 @@ var TodoListView = function (element, options) {
         };
 
     //注册事件
-    $element.on('change', '.chk_complete', function (e) {
+    //因为后面有清空DOM的操作，所以事件都采用委托方式注册
+    $element.on('change', '.chk_complete', function (e) {//单个完成
         var $target = $(e.currentTarget),
             $parent = $target.closest('li');
 
         //修改样式
         $parent.toggleClass('complete', $target[0].checked);
 
-        //修改数据
+        //通知外部修改数据
         opts.onUpdate({
             id: $parent.data('id'),
             complete: $target[0].checked
         });
-    }).on('click', '.remove', function (e) {
+    }).on('click', '.remove', function (e) {//单个清除
         e.preventDefault();
 
         var $target = $(e.currentTarget),
@@ -48,15 +49,15 @@ var TodoListView = function (element, options) {
         //删除dom
         $parent.remove();
 
-        //删除数据
+        //通知外部删除数据
         opts.onRemove(id);
-    }).on('dblclick', 'li', function (e) {
+    }).on('dblclick', 'li', function (e) {//双击进入修改模式
         var $li = $(e.currentTarget);
         $li.addClass('edit');
         setTimeout(function(){
             $li.find('.edit_input').focus();
         },0);
-    }).on('blur keypress', '.edit_input', function(e){
+    }).on('blur keypress', '.edit_input', function(e){//修改生效
         var $target = $(e.currentTarget),
             $parent = $target.closest('li'),
             id = $parent.data('id');
@@ -68,7 +69,7 @@ var TodoListView = function (element, options) {
         //修改样式及文本
         $parent.removeClass('edit').find('.todo_text').text(value);
 
-        //修改数据
+        //通知外部修改数据
         opts.onUpdate({
             id: id,
             text: value
