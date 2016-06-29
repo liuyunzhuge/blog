@@ -51,4 +51,6 @@
 这个文件夹提供多个版本的todos这个经典应用的实现。里面的子文件夹名分别代表它的实现方式。暂时只想用jquery和
 backbone两个库来分别实现。目的是为了对比传统面向对象开发方法与MVVM开发方法的区别。
 
-[jquery版本的预览地址](http://liuyunzhuge.github.io/blog/todos/jquery/index.html)
+[jquery版本的预览地址（我实现的）](http://liuyunzhuge.github.io/blog/todos/jquery/index.html)
+[jquery版本的其它实现（可通过chrome的开发者工具查看源码）](http://todomvc.com/examples/jquery/#/all)
+[原生js的实现（可通过chrome的开发者工具查看源码）](http://www.todolist.cn/)
