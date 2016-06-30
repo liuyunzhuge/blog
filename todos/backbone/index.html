@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>backbone版本的todos</title>
+    <link rel="stylesheet" href="./css/bootstrap.css"/>
+    <link rel="stylesheet" href="./css/index.css"/>
+</head>
+<body>
+<div id="app">
+    <h1>Todos</h1>
+    <hr>
+    <div class="pl20 pr20">
+        <div>
+            <input id="new_input" class="form-control input-lg" type="text" placeholder="输入您要添加的待办">
+        </div>
+        <div class="checkbox hidden" id="complete_all">
+            <label>
+                <input type="checkbox"> 全部标记为已完成
+            </label>
+        </div>
+    </div>
+    <ul id="todos_list" class="pl20 pr20">
+    </ul>
+    <footer id="footer" class="clearfix hidden">
+        <span class="pull-left">还有<span class="uncomplete_count">0</span>个待办项未完成</span>
+        <a class="pull-right btn btn-default btn-clear-all" href="javascript:;">清除已经完成的<span
+                class="complete_count">0</span>项</a>
+    </footer>
+    <script id="todo_view_tpl" type="text/html">
+        <label>
+            <input type="checkbox" class="chk_complete" {{#complete}}checked="checked" {{/complete}}>
+        </label>
+        <span class="todo_text">{{text}}</span>
+        <a href="javascript:;" class="remove pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+        <input class="form-control edit_input" type="text" value="{{text}}">
+    </script>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/underscore.js"></script>
+    <script src="./js/backbone.js"></script>
+    <script src="./js/backbone.localStorage.js"></script>
+    <script src="./js/mustache.js"></script>
+    <script src="./js/index.js"></script>
+</div>
+</body>
+</html>

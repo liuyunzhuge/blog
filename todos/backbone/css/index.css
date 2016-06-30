@@ -1,0 +1,95 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 1.4em;
+    background: #eee;
+    color: #333333;
+    -webkit-font-smoothing: antialiased;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#app {
+    width: 600px;
+    margin: 0 auto 100px auto;
+    background: #fff;
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    padding-bottom: 20px;
+}
+
+@media (max-width: 599px) {
+    #app {
+        width: 100%;
+    }
+}
+
+h1 {
+    margin: 0;
+    line-height: 100px;
+    text-align: center;
+}
+
+.pl20 {
+    padding-left: 20px;
+}
+
+.pr20 {
+    padding-right: 20px;
+}
+
+#todos_list > li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+#todos_list > li.edit > .edit_input {
+    display: block;
+}
+
+#todos_list > li > .edit_input,
+#todos_list > li.edit > :not(.edit_input) {
+    display: none;
+}
+
+#todos_list .remove {
+    text-decoration: none;
+    color: red;
+    width: 20px;
+    text-align: center;
+    position: relative;
+    top: 4px;
+}
+
+#todos_list .remove:hover {
+    text-decoration: none;
+}
+
+#todos_list > li:last-child {
+    margin-bottom: 15px;
+}
+
+#todos_list > .complete > .todo_text {
+    text-decoration: line-through;
+}
+
+.uncomplete_count {
+    font-weight: bold;
+}
+
+footer {
+    line-height: 30px;
+    background-color: #e2e2e2;
+    padding: 5px 20px;
+    margin-bottom: -20px;
+}
