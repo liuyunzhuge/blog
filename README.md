@@ -53,6 +53,10 @@ backbone两个库来分别实现。目的是为了对比传统面向对象开发
 
 [jquery版本的预览地址（我实现的）](http://liuyunzhuge.github.io/blog/todos/jquery/index.html)
 
+[backbone版本的预览地址（我实现的）](http://liuyunzhuge.github.io/blog/todos/backbone/index.html)
+
 [jquery版本的其它实现（可通过chrome的开发者工具查看源码）](http://todomvc.com/examples/jquery/#/all)
+
+[backbone版本的官方实现（可通过chrome的开发者工具查看源码）](http://backbonejs.org/examples/todos/index.html)
 
 [原生js的实现（可通过chrome的开发者工具查看源码）](http://www.todolist.cn/)
