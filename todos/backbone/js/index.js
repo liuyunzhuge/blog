@@ -116,6 +116,11 @@ var AppView = Backbone.View.extend({
         'change #complete_all': 'toggleAll',
         'click .btn-clear-all': 'clearCompleted'
     },
+    footerTemplate: (function () {
+        var t = $('#footer_tpl').html();
+        Mustache.parse(t);
+        return t;
+    })(),
     initialize: function () {
         //创建一个内部的todos_list
         this.todos = new TodoList();
@@ -144,9 +149,10 @@ var AppView = Backbone.View.extend({
         this.$footer.toggleClass('hidden', !all);
 
         //显示已完成和未完成的统计信息
-        //已完成数量为0时不显示清除已完成的按钮
-        this.$footer.find('.uncomplete_count').text(unComplete).end()
-            .find('.complete_count').text(complete).closest('.btn-clear-all').toggleClass('hidden', !complete);
+        this.$footer.html(Mustache.render(this.footerTemplate, {
+            unComplete: unComplete,
+            complete: complete
+        }));
     },
     createTodo: function (e) {
         var $new_input = this.$new_input,
@@ -185,11 +191,16 @@ var AppView = Backbone.View.extend({
     addAll: function () {
         this.todos.each(this.addOne, this);
     },
-    toggleAll: function(){
-
+    toggleAll: function(e){
+        //todo 应该改成批量处理
+        var complete = this.$complete_all.find('input')[0].checked;
+        this.todos.each(function (todo) {
+            todo.save({complete: complete});
+        });
     },
     clearCompleted: function(){
-
+        //todo 应该改成批量处理
+        _.invoke(this.todos.getComplete(),'destroy');
     }
 });
 
