@@ -54,26 +54,30 @@ var TodoListView = function (element, options) {
     }).on('dblclick', 'li', function (e) {//双击进入修改模式
         var $li = $(e.currentTarget);
         $li.addClass('edit');
-        setTimeout(function(){
+        setTimeout(function () {
             $li.find('.edit_input').focus();
-        },0);
-    }).on('blur keypress', '.edit_input', function(e){//修改生效
+        }, 0);
+    }).on('blur keypress', '.edit_input', function (e) {//修改生效
         var $target = $(e.currentTarget),
             $parent = $target.closest('li'),
             id = $parent.data('id');
 
-        if(e.type == 'keypress' && e.which != 13) return;
+        if (e.type == 'keypress' && e.which != 13) return;
 
         var value = $.trim($target.val());
 
-        //修改样式及文本
-        $parent.removeClass('edit').find('.todo_text').text(value);
+        if (value) {
+            //修改样式及文本
+            $parent.removeClass('edit').find('.todo_text').text(value);
 
-        //通知外部修改数据
-        opts.onUpdate({
-            id: id,
-            text: value
-        });
+            //通知外部修改数据
+            opts.onUpdate({
+                id: id,
+                text: value
+            });
+        } else {
+            $element.find('.remove').trigger('click');
+        }
     });
 
     return {
