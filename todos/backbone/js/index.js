@@ -194,15 +194,53 @@ var AppView = Backbone.View.extend({
         this.todos.each(this.addOne, this);
     },
     toggleAll: function (e) {
-        //todo 应该改成批量处理
-        var complete = this.$complete_all.find('input')[0].checked;
+        //1. 批量修改model，但是先不发异步请求
+        var complete = this.$complete_all.find('input')[0].checked, data = [];
         this.todos.each(function (todo) {
-            todo.save({complete: complete});
+            todo.set({complete: complete});
+            data.push(todo.toJSON());
+
+            //由于这个批量功能只是对真实的功能场景的模拟，数据实际上还是存在localStorage里面的
+            //前面并没有调用todo的save方法，导致数据的修改并没有同步到localStorage里面，所以为了保存数据，必须直接拿localStorage对象来更新todo。
+            //在真实的环境中，也就是使用ajax的场景里面，这一步不需要。
+            todo.collection.localStorage.update(todo);
+        });
+
+        //2. 发送异步请求批量更新
+        $.ajax({
+            url: '',//这里应该是真实的批量修改的接口地址
+            data: {
+                data: JSON.stringify(data)
+            }
+        }).done(function(){
+            TipView.create({info: '批量更新成功！', type: 'success'}).show();
         });
     },
     clearCompleted: function () {
-        //todo 应该改成批量处理
-        _.invoke(this.todos.getComplete(), 'destroy', {wait: true});
+        //1. 先获取所有要删除的model id，放到一个数组里面
+        var data = [];
+        this.todos.getComplete().forEach(function (todo) {
+            data.push(todo.id);
+
+            //由于这个批量功能只是对真实的功能场景的模拟，数据实际上还是存在localStorage里面的
+            //后面的clear跟destory会导致todo不能自动从localStorage里面删除，所以也必须手动的去更新localStorage里面的数据
+            //在真实的环境中，也就是使用ajax的场景里面，这一步不需要。
+            todo.collection.localStorage.destroy(todo);
+
+            //清空todo的内容，让backbone认为它是一个新创建的对象，以便在下一步调用destroy的时候不会发送请求！
+            todo.clear({slient: true});
+            todo.destroy();
+        });
+
+        //2. 发送异步请求批量删除
+        $.ajax({
+            url: '',//这里应该是真实的批量删除的接口地址
+            data: {
+                ids: JSON.stringify(data)
+            }
+        }).done(function(){
+            TipView.create({info: '批量删除成功！', type: 'success'}).show();
+        });
     }
 });
 
