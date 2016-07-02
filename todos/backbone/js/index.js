@@ -218,18 +218,9 @@ var AppView = Backbone.View.extend({
     },
     clearCompleted: function () {
         //1. 先获取所有要删除的model id，放到一个数组里面
-        var data = [];
-        this.todos.getComplete().forEach(function (todo) {
+        var data = [],completes = this.todos.getComplete();
+        completes.forEach(function (todo) {
             data.push(todo.id);
-
-            //由于这个批量功能只是对真实的功能场景的模拟，数据实际上还是存在localStorage里面的
-            //后面的clear跟destory会导致todo不能自动从localStorage里面删除，所以也必须手动的去更新localStorage里面的数据
-            //在真实的环境中，也就是使用ajax的场景里面，这一步不需要。
-            todo.collection.localStorage.destroy(todo);
-
-            //清空todo的内容，让backbone认为它是一个新创建的对象，以便在下一步调用destroy的时候不会发送请求！
-            todo.clear({slient: true});
-            todo.destroy();
         });
 
         //2. 发送异步请求批量删除
@@ -240,6 +231,17 @@ var AppView = Backbone.View.extend({
             }
         }).done(function(){
             TipView.create({info: '批量删除成功！', type: 'success'}).show();
+
+            completes.forEach(function (todo) {
+                //由于这个批量功能只是对真实的功能场景的模拟，数据实际上还是存在localStorage里面的
+                //后面的clear跟destory会导致todo不能自动从localStorage里面删除，所以也必须手动的去更新localStorage里面的数据
+                //在真实的环境中，也就是使用ajax的场景里面，这一步不需要。
+                todo.collection.localStorage.destroy(todo);
+
+                //清空todo的内容，让backbone认为它是一个新创建的对象，以便在下一步调用destroy的时候不会发送请求！
+                todo.clear({slient: true});
+                todo.destroy();
+            });
         });
     }
 });
