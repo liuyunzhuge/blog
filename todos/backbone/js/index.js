@@ -33,9 +33,9 @@ var Todo = Backbone.Model.extend({
         }
     },
     toggle: function () {
-        //1. 只有后台更新成功了才触发change事件
-        //2. 将异步对象返回，方便view层做交互
-        return this.save('complete', !this.get('complete'), {wait: true});
+        //1. 将异步对象返回，方便view层做交互
+        //2. 此处调用save方法不建议加{wait: true}，如果加了，就只能等到异步请求成功才会触发change事件，而此时可能UI已经发生变化，最终导致UI与model不一致的问题
+        return this.save('complete', !this.get('complete'));
     }
 });
 
@@ -83,7 +83,7 @@ var TodoView = Backbone.View.extend({
         var value = $.trim(this.$input.val());
 
         if (value) {
-            var _async = this.model.save({text: value}, {wait: true});
+            var _async = this.model.save({text: value});
             _async && _async.done(function () {
                 TipView.create({info: '修改成功', type: 'success'}).show();
             });
@@ -92,6 +92,7 @@ var TodoView = Backbone.View.extend({
         }
     },
     clear: function (e) {
+        //1. 此处调用destroy方法建议加{wait: true}，目的是为了只有在后端添加成功之后才去更新UI，否则可能会出现后端没有删除成功，但是前端已经删除了的问题
         var _async = this.model.destroy({wait: true});
         _async && _async.done(function () {
             TipView.create({info: '删除成功', type: 'success'}).show();
@@ -169,6 +170,7 @@ var AppView = Backbone.View.extend({
             });
 
             //异步保存
+            //此处加wait: true也是为了保证后端请求与前端UI展现一致，只有后端保存成功了，我们才会在前端新增一个TodoView
             var _async = td.save({}, {wait: true}), that = this;
 
             _async && _async.done(function () {
@@ -191,16 +193,16 @@ var AppView = Backbone.View.extend({
     addAll: function () {
         this.todos.each(this.addOne, this);
     },
-    toggleAll: function(e){
+    toggleAll: function (e) {
         //todo 应该改成批量处理
         var complete = this.$complete_all.find('input')[0].checked;
         this.todos.each(function (todo) {
             todo.save({complete: complete});
         });
     },
-    clearCompleted: function(){
+    clearCompleted: function () {
         //todo 应该改成批量处理
-        _.invoke(this.todos.getComplete(),'destroy');
+        _.invoke(this.todos.getComplete(), 'destroy', {wait: true});
     }
 });
 
