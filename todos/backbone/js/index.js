@@ -161,17 +161,26 @@ var AppView = Backbone.View.extend({
 
         if (e.which == 13 && value) {
 
-            $new_input.focus().val('');
-
             //创建todo
-            //此处加wait: true也是为了保证后端请求与前端UI展现一致，只有后端保存成功了，我们才会在前端新增一个TodoView
-            var _async = this.todos.create({
+            var td = new Todo({
                 text: value
-            },{wait: true});
+            }, {
+                //必须通过collection指定todo属于的集合，否则后面的save方法会报错
+                collection: this.todos
+            });
+
+            //异步保存
+            //此处加wait: true也是为了保证后端请求与前端UI展现一致，只有后端保存成功了，我们才会在前端新增一个TodoView
+            var _async = td.save({}, {wait: true}), that = this;
 
             _async && _async.done(function () {
                 //保存成功后与用户交互
                 TipView.create({info: '新增成功', type: 'success'}).show();
+
+                //添加到todos，以便触发todos的add事件
+                that.todos.add(td);
+
+                $new_input.focus().val('');
             });
         }
     },
