@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>backbone自定义ajax模块</title>
+    <link rel="stylesheet" href="./css/bootstrap.css"/>
+    <link rel="stylesheet" href="./css/codemirror.css"/>
+    <link rel="stylesheet" href="./css/monokai.css"/>
+    <link rel="stylesheet" href="./css/index.css"/>
+</head>
+<body>
+<header>
+    <h1>Backbone自定义ajax测试</h1>
+</header>
+<div class="container">
+    <ul class="test_list">
+        <li>
+            <h2>0. 模块说明</h2>
+            <div class="desc">
+                <p>backbone默认的异步请求方式完全按照restful的规则来，导致：</p>
+                <ul>
+                    <li>1. HTTP METHOD很严格，必须根据特定场合使用GET POST DELETE PUT PATCH中的一种，而我更习惯于只使用GET POST；</li>
+                    <li>2. sync只会在HTTP 200的时候触发，如果后端用自定义code的形式封装了HTTP Response，可能会导致sync事件没有触发的机会；</li>
+                    <li>3. 异步请求时，除了会自动发送的model的数据，没有提供可以追加额外的请求参数的方法。</li>
+                </ul>
+                <p style="margin-top: 10px">针对这些问题，我覆盖了Backbone.ajax的默认实现，使得：</p>
+                <ul>
+                    <li>1. HTTP METHOD回归到传统的GET跟POST请求；</li>
+                    <li>2. 修改了sync事件触发的时机，判断当response.code = 200的时候，就触发sync事件，其它情况均触发error事件；</li>
+                    <li>3. 在各个异步请求的api方法的options中，可以通过{params: {...}}来传递额外的请求参数。</li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            <h2>1. 测试准备</h2>
+            <div class="desc">
+                <p>下面的代码中有一个Todo类和一个TodoList类，后面的测试会以它们的实例来演示自定义backbone的ajax模块之后，它们的一些跟异步请求相关的方法的使用变化。</p>
+                <p>这些跟异步请求的相关的api有：</p>
+                <ul>
+                    <li>Backbone.Model.fetch([options])</li>
+                    <li>Backbone.Model.save([attributes], [options])</li>
+                    <li>Backbone.Model.destroy([options])</li>
+                    <li>Backbone.Collection.create(attributes, [options])</li>
+                    <li>Backbone.Collection.fetch([options])</li>
+                </ul>
+            </div>
+            <div class="code">
+                <textarea class="form-control">var Todo = Backbone.Model.extend({
+    defaults: function(){
+        return {
+            text: '',
+            complete: false
+        }
+    },
+    parse: function(res){
+        return res.data;
+    }
+});
+
+var TodoList = Backbone.Collection.extend({
+    model: Todo,
+    parse: function (res) {
+        return res.data;
+    }
+});</textarea>
+            </div>
+        </li>
+        <li>
+            <h2>2. Backbone.Model.fetch[options]</h2>
+            <div class="desc">
+                <p>测试1：模拟一次成功的数据查询请求，该请求返回的响应中code等于200，并用data属性传递了要获取的数据。</p>
+            </div>
+            <div class="code">
+                <button class="btn btn-default btn-excute" data-target="model_fetch_test_1">执行</button>
+                <textarea data-index="model_fetch_test_1" class="form-control">var t = new Todo({
+    id: 1
+});
+
+t.on('request', function () {
+    console.log('请求发送成功！');
+});
+
+t.on('sync', function (model,res) {
+    console.log('请求正确，获得服务器返回的数据: ' + JSON.stringify(res));
+});
+
+t.on('error', function(model,res){
+    console.log('请求出错，获得服务器返回的数据: ' + JSON.stringify(res));
+});
+
+t.fetch({
+    params: {
+        id: t.id
+    },
+    url: './api/model_fetch_success.json'
+});</textarea>
+            </div>
+            <div class="result hidden">
+
+            </div>
+            <div class="desc">
+                <p>测试2：模拟一次“失败”的数据查询请求，该请求返回的响应中code等于500，点击右边的运行，可以看到sync事件不会触发，而error事件会触发。</p>
+            </div>
+            <div class="code">
+                <button class="btn btn-default btn-excute" data-target="model_fetch_test_2">执行</button>
+                <textarea data-index="model_fetch_test_2" class="form-control">var t = new Todo({
+    id: 1
+});
+
+t.on('request', function () {
+    console.log('请求发送成功！');
+});
+
+t.on('sync', function (model,res) {
+    console.log('请求正确，获得服务器返回的数据: ' + JSON.stringify(res));
+});
+
+t.on('error', function(model,res){
+    console.log('请求出错，获得服务器返回的数据: ' + JSON.stringify(res));
+});
+
+t.fetch({
+    params: {
+        id: t.id
+    },
+    url: './api/error.json'
+});</textarea>
+            </div>
+            <div class="result hidden">
+
+            </div>
+        </li>
+        <li>
+            <h2>3. Backbone.Model.save([attributes], [options])</h2>
+            <div class="desc">
+                <p>测试1：模拟一次成功的数据更新请求，该请求返回的响应中code等于200，并用data属性传递了保存之后的数据。</p>
+            </div>
+            <div class="code">
+                <button class="btn btn-default btn-excute" data-target="model_save_test_1">执行</button>
+                <textarea data-index="model_save_test_1" class="form-control">var t = new Todo({
+    id: 1,
+    text: 'a todo',
+    complete: true
+});
+
+t.on('request', function () {
+    console.log('请求发送成功！');
+});
+
+t.on('sync', function (model, res) {
+    console.log('请求正确，获得服务器返回的数据: ' + JSON.stringify(res));
+});
+
+t.on('error', function (model, res) {
+    console.log('请求出错，获得服务器返回的数据: ' + JSON.stringify(res));
+});
+
+t.save({
+    text: 'undone',
+    complete: false
+}, {
+    url: './api/model_save_success.json'
+});</textarea>
+            </div>
+            <div class="result hidden">
+
+            </div>
+            <div class="desc">
+                <p>测试2：模拟一次“失败”的数据更新请求，该请求返回的响应中code等于500，点击右边的运行，可以看到sync事件不会触发，而error事件会触发。</p>
+            </div>
+            <div class="code">
+                <button class="btn btn-default btn-excute" data-target="model_save_test_2">执行</button>
+                <textarea data-index="model_save_test_2" class="form-control">var t = new Todo({
+    id: 1,
+    text: 'a todo',
+    complete: true
+});
+
+t.on('request', function () {
+    console.log('请求发送成功！');
+});
+
+t.on('sync', function (model, res) {
+    console.log('请求正确，获得服务器返回的数据: ' + JSON.stringify(res));
+});
+
+t.on('error', function (model, res) {
+    console.log('请求出错，获得服务器返回的数据: ' + JSON.stringify(res));
+});
+
+t.save({
+    text: 'undone',
+    complete: false
+}, {
+    url: './api/error.json'
+});</textarea>
+            </div>
+            <div class="result hidden">
+
+            </div>
+        </li>
+        <li>
+            <h2>4. Backbone.Model.destroy([options])</h2>
+            <div class="desc">
+                <p>测试1：模拟一次成功的数据删除请求，该请求返回的响应中code等于200。</p>
+            </div>
+            <div class="code">
+                <button class="btn btn-default btn-excute" data-target="model_destroy_test_1">执行</button>
+                <textarea data-index="model_destroy_test_1" class="form-control">var t = new Todo({
+    id: 1,
+    text: 'a todo',
+    complete: true
+});
+
+t.on('request', function () {
+    console.log('请求发送成功！');
+});
+
+t.on('sync', function (model, res) {
+    console.log('请求正确，获得服务器返回的数据: ' + JSON.stringify(res));
+});
+
+t.on('error', function (model, res) {
+    console.log('请求出错，获得服务器返回的数据: ' + JSON.stringify(res));
+});
+
+t.destroy({
+    params: {
+        id: t.id
+    },
+    url: './api/model_destroy_success.json'
+});</textarea>
+            </div>
+            <div class="result hidden">
+
+            </div>
+            <div class="desc">
+                <p>测试2：模拟一次“失败”的数据删除请求，该请求返回的响应中code等于500，点击右边的运行，可以看到sync事件不会触发，而error事件会触发。</p>
+            </div>
+            <div class="code">
+                <button class="btn btn-default btn-excute" data-target="model_destroy_test_2">执行</button>
+                <textarea data-index="model_destroy_test_2" class="form-control">var t = new Todo({
+    id: 1,
+    text: 'a todo',
+    complete: true
+});
+
+t.on('request', function () {
+    console.log('请求发送成功！');
+});
+
+t.on('sync', function (model, res) {
+    console.log('请求正确，获得服务器返回的数据: ' + JSON.stringify(res));
+});
+
+t.on('error', function (model, res) {
+    console.log('请求出错，获得服务器返回的数据: ' + JSON.stringify(res));
+});
+
+t.destroy({
+    params: {
+        id: t.id
+    },
+    url: './api/error.json'
+});</textarea>
+            </div>
+            <div class="result hidden">
+
+            </div>
+        </li>
+        <li>
+            <h2>5. Backbone.Collection.fetch([options])</h2>
+            <div class="desc">
+                <p>测试1：模拟一次成功的数据查询请求，一次性查询多条数据，该请求返回的响应中code等于200，并用data属性传递了要获取的数据。</p>
+            </div>
+            <div class="code">
+                <button class="btn btn-default btn-excute" data-target="collection_fetch_test_1">执行</button>
+                <textarea data-index="collection_fetch_test_1" class="form-control">var todos = new TodoList();
+
+todos.on('request', function () {
+    console.log('请求发送成功！');
+});
+
+todos.on('sync', function (model,res) {
+    console.log('请求正确，获得服务器返回的数据: ' + JSON.stringify(res));
+});
+
+todos.on('error', function(model,res){
+    console.log('请求出错，获得服务器返回的数据: ' + JSON.stringify(res));
+});
+
+
+todos.fetch({
+    url: './api/collection_fetch_success.json'
+});</textarea>
+            </div>
+            <div class="result hidden">
+
+            </div>
+            <div class="desc">
+                <p>测试2：模拟一次“失败”的数据查询请求，该请求返回的响应中code等于500，点击右边的运行，可以看到sync事件不会触发，而error事件会触发。</p>
+            </div>
+            <div class="code">
+                <button class="btn btn-default btn-excute" data-target="collection_fetch_test_2">执行</button>
+                <textarea data-index="collection_fetch_test_2" class="form-control">var todos = new TodoList();
+
+todos.on('request', function () {
+    console.log('请求发送成功！');
+});
+
+todos.on('sync', function (model,res) {
+    console.log('请求正确，获得服务器返回的数据: ' + JSON.stringify(res));
+});
+
+todos.on('error', function(model,res){
+    console.log('请求出错，获得服务器返回的数据: ' + JSON.stringify(res));
+});
+
+
+todos.fetch({
+    url: './api/error.json'
+});</textarea>
+            </div>
+            <div class="result hidden">
+
+            </div>
+        </li>
+        <li>
+            <h2>6. 补充说明</h2>
+            <div class="desc">
+                <ul>
+                    <li>1. 以上在调用各个API时，都直接用url指定了相关接口地址，在实际使用过程中，完全可以不直接指定，而是依赖Backbone自带的api生成机制去用，虽然不是很喜欢rest接口，但是api如果是rest风格的话，系统的接口看起来也会更规范些；</li>
+                    <li>2. Backbone.Collection.create这个api虽然也有异步的操作，但是它的返回值并不是xhr对象，有的时候我们需要xhr对象做一些额外的回调，这个时候用Create就不合适，还不如先通过Backbone.Model.save完成异步的请求，最后再通过Backbone.Collection.add手动添加到集合中去。</li>
+                </ul>
+                <p style="margin-top: 10px">是否要采用传统的异步方式，完全取决于自己的喜好以及后端服务的架构，这些东西只是给自己在不想用或者用不了rest接口时，提供的一个选择。</p>
+            </div>
+        </li>
+    </ul>
+</div>
+<script src="./js/jquery.js"></script>
+<script src="./js/underscore.js"></script>
+<script src="./js/backbone.js"></script>
+<script src="./js/backbone.localStorage.js"></script>
+<script src="./js/backbone.ajax.js"></script>
+<script src="./js/mustache.js"></script>
+<script src="./js/codemirror.js"></script>
+<script src="./js/javascript.js"></script>
+<script src="./js/index.js"></script>
+</body>
+</html>

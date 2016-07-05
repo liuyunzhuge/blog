@@ -60,3 +60,9 @@ backbone两个库来分别实现。目的是为了对比传统面向对象开发
 [backbone版本的官方实现（可通过chrome的开发者工具查看源码）](http://backbonejs.org/examples/todos/index.html)
 
 [原生js的实现（可通过chrome的开发者工具查看源码）](http://www.todolist.cn/)
+
+##backbone_ajax
+这个文件夹提供了一个简单的自定义ajax模块，覆盖了Backbone原有的ajax模块的实现，使得我们可以在用Backbone
+完成异步请求时，完全跟传统的异步方式保持一致，代码很简单，相关的测试页面如下：
+
+[backbone_ajax的测试地址](http://liuyunzhuge.github.io/blog/backbone_ajax/index.html)
