@@ -4,6 +4,7 @@ define(function (require, exports, module) {
         FormFieldMap = require('mod/formFieldMap'),
         Class = require('mod/class'),
         hasOwn = Object.prototype.hasOwnProperty,
+        toString = Object.prototype.toString,
         DEFAULTS = {
             mode: 1, //跟FormFieldBase一致
             fieldSelector: '.form-field', //用来获取要初始化的表单元素
@@ -99,6 +100,16 @@ define(function (require, exports, module) {
                 for (var i in cache) {
                     if (hasOwn.call(cache, i) && (i in data)) {
                         cache[i].formField.setValue(data[i], trigger);
+                    }
+                }
+            },
+            each: function(callback){
+                var cache = this.cache;
+                for (var i in cache) {
+                    if (hasOwn.call(cache, i)) {
+                        if(toString.call(callback) == '[object Function]') {
+                            callback.call(cache[i].formField, i, cache[i].formField);
+                        }
                     }
                 }
             }

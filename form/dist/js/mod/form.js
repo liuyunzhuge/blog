@@ -43,6 +43,10 @@ define(function (require, exports, module) {
                 this.mode = ~~opts.mode;
                 delete opts.mode;
 
+                $element[0].onsubmit = function(){
+                    return false;
+                };
+
                 var that = this;
 
                 if (typeof(opts.onInit) === 'function') {

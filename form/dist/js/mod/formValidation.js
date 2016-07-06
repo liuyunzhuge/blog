@@ -183,6 +183,12 @@ define(function (require, exports, module) {
                     $field.on('afterChange.validate', function () {
                         that.validateField($field[0]);
                     });
+                },
+                date: function ($field) {
+                    var that = this;
+                    $field.on('afterChange.validate', function () {
+                        that.validateField($field[0]);
+                    });
                 }
             },
             customErrorElement: {
@@ -382,7 +388,7 @@ define(function (require, exports, module) {
                     var customEventFields = {};
                     //因为checkbox radio hidden textarea[data-type="ueditor"]在默认情况下，change事件触发的时候不会引发校验
                     //所以针对这类字段，主动添加一个监听，调用validation的validateField来引发校验
-                    $element.find('input[type="checkbox"],input[type="radio"],input[type="hidden"],textarea[data-type="ueditor"]').each(function () {
+                    $element.find('input[type="checkbox"],input[type="radio"],input[type="hidden"],textarea[data-type="ueditor"],input[data-type="date"]').each(function () {
                         var $input = $(this),
                             name = $input.data('name') || $input.attr('name');
 

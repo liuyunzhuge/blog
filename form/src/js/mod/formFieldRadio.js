@@ -50,6 +50,9 @@ define(function (require, exports, module) {
             _setValue: function (value, trigger) {
                 //只要trigger不等于false，调用setValue的时候都要触发change事件
                 trigger !== false && this.$inputs.eq(0).trigger('change');
+                if(trigger === false) {
+                    this.lastValue = value;
+                }
             },
             setFieldValue: function (value) {
                 if (value !== '') {
@@ -61,7 +64,7 @@ define(function (require, exports, module) {
                 }
             },
             getValue: function () {
-                return this.$inputs.filter(':checked').val();
+                return $.trim(this.$inputs.filter(':checked').val());
             },
             disable: function () {
                 this.$element.addClass('disabled');

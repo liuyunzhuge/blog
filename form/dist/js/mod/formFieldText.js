@@ -44,6 +44,9 @@ define(function (require, exports, module) {
             _setValue: function (value, trigger) {
                 //只要trigger不等于false，调用setValue的时候都要触发change事件
                 trigger !== false && this.$element.trigger('change');
+                if(trigger === false) {
+                    this.lastValue = value;
+                }
             },
             setFieldValue: function (value) {
                 var $element = this.$element,
