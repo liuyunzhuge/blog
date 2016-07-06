@@ -4,227 +4,37 @@ define(function (require, exports, module) {
         hasOwn = Object.prototype.hasOwnProperty,
         isFunc = function (f) {
             return Object.prototype.toString.call(f) === '[object Function]';
-        },
-        isArray = function (a) {
-            return Object.prototype.toString.call(a) === '[object Array]';
         };
 
+    //这个模块依赖jquery.validate来完成表单验证以及bootstrap的tooltip.js来完成气泡提示
     require('jquery.validate');
     require('bootstrap');
-    //require('additional-methods');
+    require('mod/validation/validator');
 
-    /**
-     * hidden 元素不会自动触发jq validation插件的校验
-     * 必须通过外部的api主动调用
-     * jq validation提供了element方法，可以对单个元素进行校验
-     */
+    var DEFAULTS = {
+        useTooltip: true,//配置是否启用气泡提示来显示校验失败的信息，默认启用
+        tooltipConfig: {},//配置气泡提示的位置以及气泡提示关联的DOM元素等
+        tipPlacement: 'right',//全局的气泡提示的位置
+        tooltipDuration: 2500,//多久自动隐藏tooltip
 
-    $.extend($.validator.messages, {
-        required: "请输入必填字段.",
-        remote: "请重新输入该字段.",
-        email: "请输入合法的邮箱.",
-        url: "请输入合法的网址.",
-        date: "请输入合法的日期.",
-        dateISO: "请输入合法的日期( ISO ).",
-        number: "请输入合法的数字.",
-        digits: "请输入整数.",
-        equalTo: "请再次输入相同的内容.",
-        maxlength: $.validator.format("您最多可输入{0}个字符."),
-        minlength: $.validator.format("您至少要输入{0}个字符."),
-        rangelength: $.validator.format("请输入{0}-{1}个字符."),
-        range: $.validator.format("请输入{0}-{1}之间的值."),
-        max: $.validator.format("请输入小于等于{0}的值."),
-        min: $.validator.format("请输入大于等于{0}的值."),
-        step: $.validator.format("Please enter a multiple of {0}.")
-    });
+        errorPlacementConfig: {},//配置校验失败信息生成的元素在DOM中的插入位置
 
-    //手机校验
-    $.validator.addMethod("mobile", function (value, element) {
-        var length = value.length;
-        var mobile = /^(13[0-9]{9})|(18[0-9]{9})|(14[0-9]{9})|(17[0-9]{9})|(15[0-9]{9})$/;
-        return this.optional(element) || (length == 11 && mobile.test(value));
-    }, "请输入合法的手机号码.");
+        /*以上都是新添加的option，以下都是jquery.validate提供的option，下面是对该插件默认方式的覆盖*/
 
-
-    var uploadRequired = function (value, element) {
-        value = value === '' ? [] : JSON.parse(value);
-        var count = value.length;
-        return !!count;
+        debug: true,//防止校验成功后表单自动提交
+        submitHandler: $.noop,//屏蔽表单校验成功后的表单提交功能，由外部的Form组件负责提交
+        ignore: '[type="hidden"]:not(.fv-yes),[disabled]:not(.fv-yes),.fv-no',//用于过滤不参与校验的元素
+        errorElement: 'i',//使用<i>元素来包裹校验失败的信息
+        errorClass: 'fv-error',//校验失败时相应的class
+        validClass: 'fv-valid'//校验成功时相应的class
     };
 
-    //文件上传必填校验
-    $.validator.addMethod("uploadRequired", uploadRequired, "请上传{0}.");
-
-    //文件上传总数的范围校验
-    $.validator.addMethod("uploadRange", function (value, element, param) {
-        if (!uploadRequired(value, element)) return;
-
-        if (!isArray(param)) {
-            param = [];
+    function checkHideTimeout(tooltip) {
+        if (tooltip.hideTimeout) {
+            clearTimeout(tooltip.hideTimeout);
+            tooltip.hideTimeout = undefined;
         }
-
-        var min = param[0],
-            max = param[1];
-
-        value = value === '' ? [] : JSON.parse(value);
-        var count = value.length;
-
-        return min <= count && count <= max;
-
-    }, "请上传{0}-{1}张{2}.");
-
-    //文件上传最小数量校验
-    $.validator.addMethod("uploadMin", function (value, element, param) {
-        if (!uploadRequired(value, element)) return;
-
-        if (!isArray(param)) {
-            param = [];
-        }
-
-        var min = param[0];
-
-        value = value === '' ? [] : JSON.parse(value);
-        var count = value.length;
-
-        return min <= count;
-
-    }, "请至少上传{0}张{1}.");
-
-    //文件上传最大数量校验
-    $.validator.addMethod("uploadMax", function (value, element, param) {
-        if (!uploadRequired(value, element)) return;
-
-        if (!isArray(param)) {
-            param = [];
-        }
-
-        var max = param[0];
-
-        value = value === '' ? [] : JSON.parse(value);
-        var count = value.length;
-
-        return count <= max;
-
-    }, "您最多上传{0}张{1}.");
-
-    //文件上传固定数量校验
-    $.validator.addMethod("uploadFixed", function (value, element, param) {
-        if (!uploadRequired(value, element)) return;
-
-        if (!isArray(param)) {
-            param = [];
-        }
-
-        var fixedCount = param[0];
-
-        value = value === '' ? [] : JSON.parse(value);
-        var count = value.length;
-
-        return count === fixedCount;
-
-    }, "请上传{0}张{1}.");
-
-    var CUSTOM_ERROR_ELEMENT = function ($target, opts) {
-            !$target.hasClass(opts.errorClass) && $target.removeClass(opts.validClass)
-                .addClass('fv-valid-container ' + opts.errorClass);
-
-            //fv-valid-container这个class很关键，在validation reset方法中
-            //将根据它来进行部分重置逻辑
-        },
-        CUSTOM_VALID_ELEMENT = function ($target, opts) {
-            !$target.hasClass(opts.validClass) && $target.removeClass(opts.errorClass)
-                .addClass(opts.validClass);
-        },
-        DEFAULTS = {
-            tipPlacement: 'right',
-            tipDuration: 2000,
-            config: {},
-            debug: true,
-            submitHandler: $.noop,
-            ignore: '[type="hidden"]:not(.fv-yes),[disabled]:not(.fv-yes),.fv-no',
-            errorElement: 'i',
-            errorClass: 'fv-error',
-            validClass: 'fv-valid',
-            customErrorPlacement: {
-                checkbox: function (error, element) {
-                    element.parent().append(error);
-                },
-                radio: function (error, element) {
-                    element.parent().append(error);
-                },
-                imageUploadView: function (error, element) {
-                    element.parent().append(error);
-                }
-            },
-            customValidateEvent: {
-                //checkbox radio hidden都不会在change事件发生的时候主动触发校验
-                //所以通过注册下面这些事件来手动触发
-                checkbox: function ($field) {
-                    var that = this;
-                    $field.closest('[data-type="checkbox"]').on('afterChange.validate', function () {
-                        that.validateField($field[0]);
-                    });
-                },
-                radio: function ($field) {
-                    var that = this;
-                    $field.closest('[data-type="radio"]').on('afterChange.validate', function () {
-                        that.validateField($field[0]);
-                    });
-                },
-                //只有hidden才会用下面的
-                hidden: function ($field) {
-                    var that = this;
-                    $field.on('afterChange.validate', function () {
-                        that.validateField($field[0]);
-                    });
-                },
-                ueditor: function ($field) {
-                    var that = this;
-                    $field.on('afterChange.validate', function () {
-                        that.validateField($field[0]);
-                    });
-                },
-                date: function ($field) {
-                    var that = this;
-                    $field.on('afterChange.validate', function () {
-                        that.validateField($field[0]);
-                    });
-                }
-            },
-            customErrorElement: {
-                checkbox: function ($field) {
-                    //这个代码比较死
-                    //跟formFieldCheckbox 和 formFieldRadio的实现机制有强耦合
-                    //但是对于整体框架而言，这是没问题的
-                    //之所以要加下面这段处理，是因为checkbox或radio通常有多个input元素
-                    //但是jq validation这个插件默认情况下只给第一个input添加相关的校验样式
-                    //而且系统里用到的checkbox和radio都做过自定义样式
-                    //所以把这些校验相关的class加在它们的父元素上更方便些
-                    CUSTOM_ERROR_ELEMENT($field.closest('[data-type="checkbox"]')
-                        .find('.checkbox'), this.options);
-                },
-                radio: function ($field) {
-                    CUSTOM_ERROR_ELEMENT($field.closest('[data-type="radio"]')
-                        .find('.radio'), this.options);
-                },
-                imageUploadView: function ($field) {
-                    CUSTOM_ERROR_ELEMENT($field.parent().children('.image-upload-view'), this.options);
-                }
-            },
-            customValidElement: {
-                checkbox: function ($field) {
-                    CUSTOM_VALID_ELEMENT($field.closest('[data-type="checkbox"]')
-                        .find('.checkbox'), this.options);
-                },
-                radio: function ($field) {
-                    CUSTOM_VALID_ELEMENT($field.closest('[data-type="radio"]')
-                        .find('.radio'), this.options);
-                },
-                imageUploadView: function ($field) {
-                    CUSTOM_VALID_ELEMENT($field.parent().children('.image-upload-view'), this.options);
-                }
-            }
-        };
+    }
 
     var Validation = Class({
         instanceMembers: {
@@ -238,51 +48,97 @@ define(function (require, exports, module) {
                     that._inited = true;
                     $element.validate($.extend(opts, {
                         errorPlacement: function (error, element) {
-                            /*var type = element.data('fvType') || element.attr('type');
+                            if (opts.useTooltip) {
+                                //如果采用气泡提示来做校验信息的展示，那么这个errorPlacement就什么都不用处理了
+                                return;
+                            }
 
-                            if (type in opts.customErrorPlacement) {
-                                opts.customErrorPlacement[type].call(this, error, element);
-                            }*/
+                            //jquery.validate组件默认的校验方式是：
+                            //当一个元素校验失败后，就在该元素后面插入校验失败的信息
+                            //当一个元素校验成功后，移除该元素后面可能有的校验失败信息
+
+                            //通过errorPlacementConfig配置不同类型的元素校验失败信息的插入规则
+                            //如果要自定义所有元素的默认插入规则，可在errorPlacementConfig内
+                            //配置一个all: function(error,element){...}的选项
+
+                            var type = element.data('fvType') || element.data('type') || element.attr('type'),
+                                errorPlacementConfig = opts.errorPlacementConfig;
+
+                            if (type in errorPlacementConfig) {
+                                errorPlacementConfig[type](error, element);
+                            } else if ('all' in errorPlacementConfig) {
+                                errorPlacementConfig['all'](error, element);
+                            } else {
+                                error.insertAfter(element);
+                            }
                         },
                         showErrors: function (errorMap, errorList) {
-                            var successList = this.successList,
-                                config = opts.config;
+                            //覆盖这个方法以便在校验失败的时候显示tooltip
 
+                            //不启用tooltip的时候按默认的方式显示失败信息
+                            if (!opts.useTooltip) {
+                                this.defaultShowErrors();
+                                return;
+                            }
+
+                            var successList = this.successList,
+                                tooltipConfig = opts.tooltipConfig;
+
+                            function getFieldName($field) {
+                                return $field.attr('name') || $field.data('name');
+                            }
+
+                            function getValdationType($field) {
+                                return $field.data('fvType') || element.data('type') || $field.attr('type');
+                            }
+
+                            //处理本次校验失败的字段
                             if ($.isArray(errorList)) {
                                 errorList.forEach(function (item) {
                                     var $field = $(item.element),
                                         msg = item.message,
-                                        name = $field.attr('name') || $field.data('name'),
+                                        name = getFieldName($field),
+                                        type = getValdationType($field),
                                         $tipTarget = $field,
-                                        type = $field.data('fvType') || $field.attr('type'),
                                         tipPlacement = opts.tipPlacement,
                                         tooltipClass = '';
 
-                                    if (name in config) {
-                                        if (isFunc(config[name].fvTipTarget)) {
+                                    //name用于一些按字段配置的config中查找规则
+                                    //type用于一些按类型配置的config中查找规则
+
+                                    //tooltipConfig中按字段来配置气泡提示的位置及关联的DOM元素
+                                    //如： title: {
+                                    //       fvTipTarget: function($field){
+                                    //           return $field.parent();
+                                    //       },
+                                    //       tipPlacement: 'top'
+                                    //     }
+                                    if (name in tooltipConfig) {
+                                        if (isFunc(tooltipConfig[name].fvTipTarget)) {
                                             //$tipTarget是用来显示校验提示的元素
                                             //默认是字段元素本身
                                             //但是对于部分场景下，可能用父元素来显示提示更合适
                                             //所以通过fvTipTarget由外部来指定
-                                            $tipTarget = config[name].fvTipTarget($field);
+                                            $tipTarget = tooltipConfig[name].fvTipTarget($field);
                                         }
 
                                         //让每个字段都支持自定义校验提示的显示位置
-                                        if (config[name].tipPlacement) {
-                                            tipPlacement = config[name].tipPlacement;
+                                        if (tooltipConfig[name].tipPlacement) {
+                                            tipPlacement = tooltipConfig[name].tipPlacement;
                                         }
 
                                         //每个字段需要额外添加到tooltip的class
-                                        if (config[name].tooltipClass) {
-                                            tooltipClass = config[name].tooltipClass || '';
+                                        if (tooltipConfig[name].tooltipClass) {
+                                            tooltipClass = tooltipConfig[name].tooltipClass || '';
                                         }
                                     }
 
-                                    if (type in opts.customErrorElement) {
-                                        opts.customErrorElement[type].call(that, $field);
-                                    }
+                                    /* if (type in opts.customErrorElement) {
+                                     opts.customErrorElement[type].call(that, $field);
+                                     }*/
 
                                     var tooltip = $tipTarget.data('bs.tooltip');
+
                                     if (!tooltip) {
                                         //初始化tooltip的组件
                                         $tipTarget.tooltip({
@@ -298,19 +154,14 @@ define(function (require, exports, module) {
                                     tooltip.options.title = msg;
 
                                     if (tooltip.$tip && tooltip.$tip.hasClass('in')) {
-                                        //如果tooltip本身已经显示那么只要改变其内容即可
+                                        //如果tooltip已经显示那么只要改变其内容即可
                                         //不能再调用一次show方法
                                         //否则会出现闪烁的效果
                                         tooltip.$tip.find('.tooltip-inner').text(msg);
-                                    } else {
-                                        tooltip.show();
                                     }
+                                    tooltip.show();
 
-                                    //durationTimeout这个定时器是用来自动隐藏tooltip的
-                                    if (tooltip.durationTimeout) {
-                                        clearTimeout(tooltip.durationTimeout);
-                                        tooltip.durationTimeout = undefined;
-                                    }
+                                    checkHideTimeout(tooltip);
 
                                     //由于tooltip会自动隐藏
                                     //所以为了在修改表单的时候还能看到校验提示
@@ -318,52 +169,46 @@ define(function (require, exports, module) {
                                     $tipTarget.off('.fv');
 
                                     $tipTarget.on('mouseenter.fv', function () {
-                                        if (tooltip && tooltip.durationTimeout) {
-                                            clearTimeout(tooltip.durationTimeout);
-                                            tooltip.durationTimeout = undefined;
-                                        }
+                                        checkHideTimeout(tooltip);
 
                                         if (!(tooltip && tooltip.$tip && tooltip.$tip.hasClass('in'))) {
                                             tooltip.show();
                                         }
                                     }).on('mouseleave.fv', function () {
-                                        if (tooltip && tooltip.durationTimeout) {
-                                            clearTimeout(tooltip.durationTimeout);
-                                            tooltip.durationTimeout = undefined;
-                                        }
+                                        checkHideTimeout(tooltip);
 
                                         if (tooltip && tooltip.$tip && tooltip.$tip.hasClass('in')) {
                                             tooltip.hide();
                                         }
                                     });
 
-                                    //默认3s后自动隐藏tooltip
-                                    tooltip.durationTimeout = setTimeout(function () {
+                                    //经过tooltipDuration时间后自动隐藏tooltip
+                                    tooltip.hideTimeout = setTimeout(function () {
                                         tooltip.hide();
-                                        tooltip.durationTimeout = undefined;
-                                    }, opts.tipDuration);
+                                        tooltip.hideTimeout = undefined;
+                                    }, opts.tooltipDuration);
 
-                                    //fv-tip-target方便在reset的时候找到这些元素，移除相关的事件
+                                    //fv-tip-target方便在reset的时候找到这些元素，移除相关的tooltip组件及事件
                                     !$tipTarget.hasClass('fv-tip-target') && $tipTarget.addClass('fv-tip-target');
                                 });
                             }
 
                             if ($.isArray(successList)) {
                                 successList.forEach(function (item) {
-                                    var $field = $(item),
-                                        name = $field.attr('name') || $field.data('name'),
-                                        $tipTarget = $field,
-                                        type = $field.data('fvType') || $field.attr('type');
+                                    var $field = $(item.element),
+                                        name = getFieldName($field),
+                                        type = getValdationType($field),
+                                        $tipTarget = $field;
 
-                                    if (name in config) {
-                                        if (isFunc(config[name].fvTipTarget)) {
-                                            $tipTarget = config[name].fvTipTarget($field);
+                                    if (name in tooltipConfig) {
+                                        if (isFunc(tooltipConfig[name].fvTipTarget)) {
+                                            $tipTarget = tooltipConfig[name].fvTipTarget($field);
                                         }
                                     }
 
-                                    if (type in opts.customValidElement) {
-                                        opts.customValidElement[type].call(that, $field);
-                                    }
+                                    /*if (type in opts.customValidElement) {
+                                     opts.customValidElement[type].call(that, $field);
+                                     }*/
 
                                     var tooltip = $tipTarget.data('bs.tooltip');
 
@@ -371,10 +216,7 @@ define(function (require, exports, module) {
 
                                     if (tooltip) {
                                         tooltip.hide();
-                                        if (tooltip.durationTimeout) {
-                                            clearTimeout(tooltip.durationTimeout);
-                                            tooltip.durationTimeout = undefined;
-                                        }
+                                        checkHideTimeout(tooltip);
                                         tooltip.destroy();
                                     }
                                 });
@@ -384,33 +226,6 @@ define(function (require, exports, module) {
                         }
                     }));
                     that._validator = $element.data('validator');
-
-                    var customEventFields = {};
-                    //因为checkbox radio hidden textarea[data-type="ueditor"]在默认情况下，change事件触发的时候不会引发校验
-                    //所以针对这类字段，主动添加一个监听，调用validation的validateField来引发校验
-                    $element.find('input[type="checkbox"],input[type="radio"],input[type="hidden"],textarea[data-type="ueditor"],input[data-type="date"]').each(function () {
-                        var $input = $(this),
-                            name = $input.data('name') || $input.attr('name');
-
-                        if (!customEventFields[name]) {
-                            customEventFields[name] = $input;
-                        }
-                    });
-
-                    for (var i in customEventFields) {
-                        if (hasOwn.call(customEventFields, i)) {
-                            var $field = customEventFields[i],
-                                eventFieldType = $field.data('type') || $field.attr('type');
-
-                            if ($field.attr('type') === 'hidden') {
-                                eventFieldType = 'hidden';
-                            }
-
-                            if (eventFieldType in opts.customValidateEvent) {
-                                opts.customValidateEvent[eventFieldType].call(that, $field);
-                            }
-                        }
-                    }
                 });
 
                 $element.data('validation', this);
@@ -443,14 +258,14 @@ define(function (require, exports, module) {
                 var $element = this.$element,
                     opts = this.options;
 
-                $element.find('.fv-tip-target').each(function () {
-                    var tooltip = $(this).data('bs.tooltip');
-                    if (tooltip && tooltip.$tip && tooltip.$tip.hasClass('in')) {
-                        tooltip.hide();
-                    }
-                }).off('.fv');
-
-                $element.find('.fv-valid-container').removeClass(opts.validClass + ' ' + opts.errorClass);
+                //清除掉tooltip组件及绑定的事件
+                if (!opts.useTooltip) {
+                    $element.find('.fv-tip-target').each(function () {
+                        var tooltip = $(this).data('bs.tooltip');
+                        checkHideTimeout(tooltip);
+                        tooltip && tooltip.destroy();
+                    }).off('.fv');
+                }
 
                 this._validator.resetForm();
             }

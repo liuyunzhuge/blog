@@ -963,10 +963,12 @@ fieldset[disabled] .radio input[type="radio"] + .checked {
 }
 .form-edit {
   width: 90%;
-  margin: 20px 0;
+  margin: 0;
+  padding-top: 20px;
 }
 .form-edit i.fv-error {
-  display: none !important;
+  color: #FF8585;
+  font-style: normal;
 }
 .form-edit .checkbox.fv-error input[type="checkbox"]:checked + .checked,
 .form-edit .radio.fv-error input[type="checkbox"]:checked + .checked,
