@@ -35,18 +35,7 @@ define(function (require, exports, module) {
         step: $.validator.format("Please enter a multiple of {0}.")
     });
 
-    var CUSTOM_ERROR_ELEMENT = function ($target, opts) {
-            !$target.hasClass(opts.errorClass) && $target.removeClass(opts.validClass)
-                .addClass('fv-valid-container ' + opts.errorClass);
-
-            //fv-valid-container这个class很关键，在validation reset方法中
-            //将根据它来进行部分重置逻辑
-        },
-        CUSTOM_VALID_ELEMENT = function ($target, opts) {
-            !$target.hasClass(opts.validClass) && $target.removeClass(opts.errorClass)
-                .addClass(opts.validClass);
-        },
-        DEFAULTS = {
+    var DEFAULTS = {
             tipPlacement: 'right',
             tipDuration: 2000,
             config: {},
@@ -89,39 +78,6 @@ define(function (require, exports, module) {
                     $field.on('afterChange.validate', function () {
                         that.validateField($field[0]);
                     });
-                }
-            },
-            customErrorElement: {
-                checkbox: function ($field) {
-                    //这个代码比较死
-                    //跟formFieldCheckbox 和 formFieldRadio的实现机制有强耦合
-                    //但是对于整体框架而言，这是没问题的
-                    //之所以要加下面这段处理，是因为checkbox或radio通常有多个input元素
-                    //但是jq validation这个插件默认情况下只给第一个input添加相关的校验样式
-                    //而且系统里用到的checkbox和radio都做过自定义样式
-                    //所以把这些校验相关的class加在它们的父元素上更方便些
-                    CUSTOM_ERROR_ELEMENT($field.closest('[data-type="checkbox"]')
-                        .find('.checkbox'), this.options);
-                },
-                radio: function ($field) {
-                    CUSTOM_ERROR_ELEMENT($field.closest('[data-type="radio"]')
-                        .find('.radio'), this.options);
-                },
-                imageUploadView: function ($field) {
-                    CUSTOM_ERROR_ELEMENT($field.parent().children('.image-upload-view'), this.options);
-                }
-            },
-            customValidElement: {
-                checkbox: function ($field) {
-                    CUSTOM_VALID_ELEMENT($field.closest('[data-type="checkbox"]')
-                        .find('.checkbox'), this.options);
-                },
-                radio: function ($field) {
-                    CUSTOM_VALID_ELEMENT($field.closest('[data-type="radio"]')
-                        .find('.radio'), this.options);
-                },
-                imageUploadView: function ($field) {
-                    CUSTOM_VALID_ELEMENT($field.parent().children('.image-upload-view'), this.options);
                 }
             }
         };
@@ -283,7 +239,7 @@ define(function (require, exports, module) {
                     var customEventFields = {};
                     //因为checkbox radio hidden textarea[data-type="ueditor"]在默认情况下，change事件触发的时候不会引发校验
                     //所以针对这类字段，主动添加一个监听，调用validation的validateField来引发校验
-                    $element.find('input[type="checkbox"],input[type="radio"],input[type="hidden"],textarea[data-type="ueditor"],input[data-type="date"]').each(function () {
+                    $element.find('').each(function () {
                         var $input = $(this),
                             name = $input.data('name') || $input.attr('name');
 

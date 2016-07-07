@@ -68,7 +68,7 @@ gulp.task('watch', function () {
 });
 
 gulp.task('server', function () {
-    yargs.p = yargs.p || 8080;
+    yargs.p = yargs.p || 8083;
     browserSync.init({
         server: {
             baseDir: "./"
