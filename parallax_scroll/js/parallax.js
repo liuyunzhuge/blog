@@ -8,7 +8,7 @@
         $this.addClass('parallax');
 
         function updateParallax(initial) {
-          var container_height;
+          var container_height;//容器高度
           if (window_width < 601) {
             container_height = ($this.height() > 0) ? $this.height() : $this.children("img").height();
           }
@@ -16,13 +16,13 @@
             container_height = ($this.height() > 0) ? $this.height() : 500;
           }
           var $img = $this.children("img").first();
-          var img_height = $img.height();
-          var parallax_dist = img_height - container_height;
-          var bottom = $this.offset().top + container_height;
-          var top = $this.offset().top;
-          var scrollTop = $(window).scrollTop();
-          var windowHeight = window.innerHeight;
-          var windowBottom = scrollTop + windowHeight;
+          var img_height = $img.height();//图片高度
+          var parallax_dist = img_height - container_height;//视差距离
+          var bottom = $this.offset().top + container_height;//容器底部到页面顶部的距离
+          var top = $this.offset().top;//容器顶部到页面顶部的距离
+          var scrollTop = $(window).scrollTop();//页面滚动距离
+          var windowHeight = window.innerHeight;//页面可视区域的高度
+          var windowBottom = scrollTop + windowHeight;//页面可视区域底部到页面顶部的距离
           var percentScrolled = (windowBottom - top) / (container_height + windowHeight);
           var parallax = Math.round((parallax_dist * percentScrolled));
 

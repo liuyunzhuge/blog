@@ -20,6 +20,7 @@
             border-radius: 4px;
             transition: all .15s ease-in;
             backface-visibility: hidden;
+
         }
 
         .hex_wrapper + .hex_wrapper {
@@ -27,9 +28,29 @@
         }
 
         .hex_wrapper:hover .hex {
-            background-color: #2dd4af;
-            transform: scale(1.1,1.1);
-            z-index: 10;
+            animation: hvr-pop .2s ease-in 1;
+            animation-fill-mode: forwards;
+        }
+
+        @-webkit-keyframes hvr-pop {
+            50% {
+                transform: scale(1.1);
+                background-color: #fff;
+            }
+
+            100% {
+                background-color: #2dd4af;
+            }
+        }
+
+        @keyframes hvr-pop {
+            50% {
+                transform: scale(1.1);
+                background-color: #fff;
+            }
+            100% {
+                background-color: #2dd4af;
+            }
         }
 
         .hex:before,.hex:after {
