@@ -1,3 +1,15 @@
+##backbone_ajax
+这个文件夹提供了一个简单的自定义ajax模块，覆盖了Backbone原有的ajax模块的实现，使得我们可以在用Backbone
+完成异步请求时，完全跟传统的异步方式保持一致，代码很简单，相关的测试页面如下：
+
+[backbone_ajax的测试地址](http://liuyunzhuge.github.io/blog/backbone_ajax/index.html)
+
+但是该地址中大部分测试代码都无法获取期望的结果，因为是在gh-pages分支上发布的，github不允许静态页面内发送post请求，所以要想看到测试效果，最好是clone到本地预览了。
+
+该文件夹内容的也在下面这篇文章中的第3部分有说明：
+
+[我对Backbone.js的一些认识](http://www.cnblogs.com/lyzg/p/5634565.html)
+
 ##css_name
 (1) 该文件夹内容的相关介绍：
 
@@ -62,17 +74,5 @@ backbone两个库来分别实现。目的是为了对比传统面向对象开发
 [原生js的实现（可通过chrome的开发者工具查看源码）](http://www.todolist.cn/)
 
 该文件夹内容的相关介绍：
-
-[我对Backbone.js的一些认识](http://www.cnblogs.com/lyzg/p/5634565.html)
-
-##backbone_ajax
-这个文件夹提供了一个简单的自定义ajax模块，覆盖了Backbone原有的ajax模块的实现，使得我们可以在用Backbone
-完成异步请求时，完全跟传统的异步方式保持一致，代码很简单，相关的测试页面如下：
-
-[backbone_ajax的测试地址](http://liuyunzhuge.github.io/blog/backbone_ajax/index.html)
-
-但是该地址中大部分测试代码都无法获取期望的结果，因为是在gh-pages分支上发布的，github不允许静态页面内发送post请求，所以要想看到测试效果，最好是clone到本地预览了。
-
-该文件夹内容的也在下面这篇文章中的第3部分有说明：
 
 [我对Backbone.js的一些认识](http://www.cnblogs.com/lyzg/p/5634565.html)

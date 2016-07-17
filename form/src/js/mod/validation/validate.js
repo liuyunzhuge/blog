@@ -34,6 +34,8 @@ define(function (require, exports, module) {
          * {
          *   date: {
          *      fvTipTarget: function($field){ return $field.closest(...);}, //配置date类型的字段校验失败时气泡提示关联的DOM元素
+         *      tipPlacement: 'top', //配置date类型的字段校验失败时气泡提示的显示位置：上下左右
+         *      tooltipClass: 'tooltip-name', //配置date类型的字段校验失败时气泡提示组件需要添加的css类
          *      errorPlacement: function(error,element){}, //配置date类型的字段的错误信息的插入位置
          *      fvRelatedTarget: function($field){return ...}, //配置date类型的字段时校验时关联影响的DOM元素
          *   }
@@ -295,6 +297,7 @@ define(function (require, exports, module) {
                             });
                         }
 
+                        //官方文档要求，在自定义showErrors之后，通过调用下面的方法完全内置的其它处理
                         this.defaultShowErrors();
                     }
                 }));
