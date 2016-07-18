@@ -30,6 +30,8 @@
 
 2. [进一步丰富和简化表单管理的组件：form.js](http://www.cnblogs.com/lyzg/p/5476478.html)
 
+3. [利用jquery.validate以及bootstrap的tooltip开发气泡式的表单校验组件](http://www.cnblogs.com/lyzg/p/5679408.html)
+
 ##numerGrow
 原本应该把这个文件夹命名为numberGrow，结果弄错了，懒得改了...
 
