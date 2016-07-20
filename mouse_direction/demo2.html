@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>鼠标移入移出方向判断</title>
+    <style>
+        body, html, ul, p, h1, h2, h3, h4, h5, h6 {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        body {
+            padding-top: 100px;
+            text-align: center;
+        }
+
+        .box {
+            width: 300px;
+            height: 200px;
+            margin: 10px auto;
+            border: 1px solid #ccc;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .content {
+            position: absolute;
+            z-index: 2;
+            background-color: lightcoral;
+            width: 100%;
+            height: 100%;
+            left: -100%;
+            top: -100%;
+            line-height: 198px;
+            text-align: center;
+            color: #fff;
+            font-size: 70px;
+        }
+
+        .content.trans {
+            transition: all .2s;
+            backface-visibility: hidden;
+        }
+
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="content">
+1
+    </div>
+</div><div class="box">
+
+    <div class="content">
+2
+    </div>
+</div><div class="box">
+
+    <div class="content">
+3
+    </div>
+</div><div class="box">
+
+    <div class="content">
+4
+    </div>
+</div>
+<script src="jquery.js"></script>
+<script src="demo2.js"></script>
+<script>
+
+    var DIR_POS = {
+        left: {
+            top: '0',
+            left: '-100%'
+        },
+        right: {
+            top: '0',
+            left: '100%'
+        },
+        bottom: {
+            top: '100%',
+            left: '0'
+        },
+        top: {
+            top: '-100%',
+            left: '0'
+        }
+    };
+
+    $('.box').each(function () {
+        new MouseDirection(this, {
+            enter: function ($element, dir) {
+                //每次进入前先把.trans类移除掉，以免后面调整位置的时候也产生过渡效果
+                var $content = $element.find('.content').removeClass('trans');
+
+                //调整位置
+                $content.css(DIR_POS[dir]);
+
+                //reflow
+                $content[0].offsetWidth;
+
+                //启用过渡
+                $content.addClass('trans');
+
+                //滑入
+                $content.css({left: '0', top: '0'});
+            },
+            leave: function ($element, dir) {
+                $element.find('.content').css(DIR_POS[dir]);
+            }
+        });
+    });
+
+
+</script>
+</body>
+</html>
