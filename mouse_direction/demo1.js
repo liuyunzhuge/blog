@@ -60,7 +60,7 @@ var MouseDirection = function (element, opts) {
 
         kk = (y - y0) / (x - x0);
 
-        //根据斜率是否在range范围内，可判断鼠标是在水平还是垂直方向
+        //如果斜率在range范围内，则鼠标是从左右方向移入移出的
         if (isFinite(kk) && range[0] < kk && kk < range[1]) {
             //根据x与x0判断左右
             return x > x0 ? 1 : 3;
