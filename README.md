@@ -32,6 +32,12 @@
 
 3. [利用jquery.validate以及bootstrap的tooltip开发气泡式的表单校验组件](http://www.cnblogs.com/lyzg/p/5679408.html)
 
+##mouse_direction
+
+该文件夹内容的相关介绍：
+
+1. [判断鼠标移入移出元素时的方向](http://www.cnblogs.com/lyzg/p/5689761.html)
+
 ##numerGrow
 原本应该把这个文件夹命名为numberGrow，结果弄错了，懒得改了...
 
