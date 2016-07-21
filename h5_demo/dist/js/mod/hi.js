@@ -1,0 +1,1 @@
+define("mod/hi",[],function(){return{hi:function(){console.log("hi")}}});

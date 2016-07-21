@@ -1,0 +1,1 @@
+define("js/app/youku_summer.js?v=1d982a1df0",["swiper","mod/hi"],function(require,exports,module){var i=require("swiper");new i("#swiper",{direction:"vertical"}),require("mod/hi").hi()}),define("mod/hi",[],function(){return{hi:function(){console.log("hi")}}});
