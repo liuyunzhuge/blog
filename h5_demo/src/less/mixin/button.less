@@ -1,0 +1,41 @@
+@import "../_variables";
+
+.btn-size(@font-size: @btn-font-size, @line-height: @btn-line-height, @border-radius: @btn-border-radius) {
+  & {
+    font-size: @font-size;
+    line-height: @line-height;
+    border-radius: @border-radius;
+
+    &:after {
+      border-radius: @border-radius*2;
+    }
+  }
+}
+
+.btn-variant(@color:@btn-color; @background:@btn-bg-color; @border:@btn-border-color; @percent: 10%) {
+  &, &:visited {
+    color: @color;
+    background-color: @background;
+
+    &:after {
+      border-color: @border;
+    }
+  }
+
+  &:active {
+    color: @color;
+    background-color: darken(@background, @percent);
+    &:after {
+      border-color: darken(@border, @percent);
+    }
+  }
+
+  &[disabled],&.disabled {
+    &,&:active {
+      background-color: lighten(@background, @percent);
+      &:after {
+        border-color: lighten(@border, @percent);
+      }
+    }
+  }
+}

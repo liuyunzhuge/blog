@@ -1,0 +1,314 @@
+/* display */
+.dn {
+  display: none;
+}
+
+.di {
+  display: inline;
+}
+
+.db {
+  display: block;
+}
+
+.dib {
+  display: inline-block;
+}
+
+div.dib {
+  *display: inline;
+  *zoom: 1;
+}
+
+/* font-style */
+.n {
+  font-weight: normal;
+  font-style: normal;
+  white-space: normal;
+}
+
+.b {
+  font-weight: bold;
+}
+
+.i {
+  font-style: italic;
+}
+
+/* text-align */
+.tc {
+  text-align: center;
+}
+
+.tr {
+  text-align: right;
+}
+
+.tl {
+  text-align: left;
+}
+
+.tj {
+  text-align: justify;
+}
+
+/* text-decoration */
+.tdl {
+  text-decoration: underline;
+}
+
+.tdn, .tdn:hover, .tdn a:hover, a.tdl:hover {
+  text-decoration: none;
+}
+
+/* letter-spacing */
+.lt-1 {
+  letter-spacing: -1px;
+}
+
+.lt0 {
+  letter-spacing: 0;
+}
+
+.lt1 {
+  letter-spacing: 1px;
+}
+
+/* white-space */
+.nowrap {
+  white-space: nowrap;
+}
+
+/* word-wrap */
+.bk {
+  word-wrap: break-word;
+}
+
+/* vertical-align */
+.vm {
+  vertical-align: middle;
+}
+
+.vtb {
+  vertical-align: text-bottom;
+}
+
+.vb {
+  vertical-align: bottom;
+}
+
+.vt {
+  vertical-align: top;
+}
+
+.v-1 {
+  vertical-align: -1px;
+}
+
+.v-2 {
+  vertical-align: -2px;
+}
+
+.v-3 {
+  vertical-align: -3px;
+}
+
+.v-4 {
+  vertical-align: -4px;
+}
+
+.v-5 {
+  vertical-align: -5px;
+}
+
+/* float */
+.l {
+  float: left;
+}
+
+.r {
+  float: right;
+}
+
+/* clear */
+.cl {
+  clear: both;
+}
+
+/* position */
+.rel {
+  position: relative;
+}
+
+.abs {
+  position: absolute;
+}
+
+/*z-index*/
+.zx1 {
+  z-index: 1;
+}
+
+.zx2 {
+  z-index: 2;
+}
+
+/* cursor */
+.poi {
+  cursor: pointer;
+}
+
+.def {
+  cursor: default;
+}
+
+/* overflow */
+.ovh {
+  overflow: hidden;
+}
+
+.ova {
+  overflow: auto;
+}
+
+/* visibility */
+.vh {
+  visibility: hidden;
+}
+
+.vv {
+  visibility: visible;
+}
+
+/* opacity */
+.opa0 {
+  opacity: 0;
+}
+
+/* zoom */
+.z {
+  *zoom: 1;
+}
+
+/* ------------------- multiply CSS ------------------ */
+/* 块状元素水平居中 */
+.auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 清除浮动*/
+.fix {
+  *zoom: 1;
+}
+
+.fix:after {
+  display: table;
+  content: '';
+  clear: both;
+}
+
+/* 基于display:table-cell的自适应布局 */
+.cell {
+  display: table-cell;
+  *display: inline-block;
+  width: 2000px;
+  *width: auto;
+}
+
+/* 双栏自适应cell部分连续英文字符换行 */
+.cell2 {
+  overflow: hidden;
+  _display: inline-block;
+}
+
+/* 单行文字溢出虚点显 示*/
+.ell {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* css3过渡动画效果 */
+.trans {
+  -webkit-transition: all .15s;
+  transition: all .15s;
+}
+
+/* 大小不定元素垂直居中 */
+.dib_vm {
+  display: inline-block;
+  width: 0;
+  height: 100%;
+  vertical-align: middle;
+}
+
+
+/* 无框文本框文本域 */
+.bd_none {
+  border: 0;
+  outline: none;
+}
+
+/* 绝对定位隐藏 */
+.abs_out {
+  position: absolute;
+  left: -999em;
+  top: -999em;
+}
+
+.abs_clip {
+  position: absolute;
+  clip: rect(0 0 0 0);
+}
+
+/*inline-block与float等宽列表*/
+.inline_box {
+  font-size: 1em;
+  letter-spacing: -.25em;
+  font-family: Arial;
+}
+
+.inline_two, .inline_three, .inline_four, .inline_five, .inline_six, .inline_any {
+  display: inline-block;
+  *display: inline;
+  letter-spacing: 0;
+  vertical-align: top;
+  *zoom: 1;
+}
+
+.float_two, .float_three, .float_four, .float_five, .float_six {
+  float: left;
+}
+
+.inline_two, .float_two {
+  width: 50%;
+  *width: 49.9%;
+}
+
+.inline_three, .float_three {
+  width: 33.33333%;
+  *width: 33.3%;
+}
+
+.inline_four, .float_four {
+  width: 25%;
+  *width: 24.9%;
+}
+
+.inline_five, .float_five {
+  width: 20%;
+  *width: 19.9%;
+}
+
+.inline_six, .float_six {
+  width: 16.66666%;
+  *width: 16.6%;
+}
+
+.inline_fix {
+  display: inline-block;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+}

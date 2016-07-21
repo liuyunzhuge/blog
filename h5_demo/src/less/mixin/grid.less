@@ -1,0 +1,17 @@
+@import "../_variables";
+@import "./clearfix";
+
+.make-row(@gutter: @grid-gutter-width) {
+  margin-left:  ceil((@gutter / -2));
+  margin-right: floor((@gutter / -2));
+  .clearfix();
+}
+
+.make-column(@columns; @gutter: @grid-gutter-width) {
+  position: relative;
+  float: left;
+  width: percentage((@columns / @grid-columns));
+  min-height: 1px;
+  padding-left:  (@gutter / 2);
+  padding-right: (@gutter / 2);
+}

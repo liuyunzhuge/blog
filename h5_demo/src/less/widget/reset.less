@@ -1,0 +1,83 @@
+@import "../_variables";
+@import "../_mixin";
+
+* {
+  box-sizing: border-box;
+}
+
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+  /**
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-touch-callout: none;
+  -webkit-user-select:none;
+  -webkit-text-size-adjust: 100%;
+  **/
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: @font-family-base;
+  font-size: @font-size-base;
+  line-height: @line-height-base;
+  color: @text-color;
+  background-color: @body-bg;
+}
+
+input,
+button,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+ul, ol {
+  list-style-type: none;
+}
+
+img {
+  &, a & {
+    border: 0;
+  }
+  vertical-align: middle;
+}
+
+a {
+  &, &:visited {
+    color: @link-color;
+    text-decoration: none;
+  }
+
+  &:active {
+    color: @link-hover-color;
+    text-decoration: @link-hover-decoration;
+  }
+
+  &:active,&:focus {
+    outline: none;
+  }
+}
+
+button,label[for],input,textarea,select {
+  &:active,&:focus {
+    outline: none;
+  }
+}
