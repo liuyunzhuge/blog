@@ -161,20 +161,22 @@ gulp.task('rev', ['rev_replace'], function (cb) {
         .pipe(clean());
 });
 
-//make file inline
+//make file inline todo seajs main js inline
 gulp.task('inline', function () {
     return gulp.src(dist + '/html/**/*', option)
         .pipe(tap(function (file) {
             var dir = __dirname;
             var contents = file.contents.toString();
-            contents = contents.replace(/<link\s+rel="inline"\s+source="([^"']*)".*>/gi, function (match, $1) {
-                var filename = path.join(dir, $1),
+
+            contents = contents.replace(/<link.+inline="([^"']+)".*>|<script.+inline="([^"']+)".*>\s*<\/script>/gi, function (match, $1, $2) {
+                //console.log(match)
+                var filename = path.join(dir, $1 || $2),
                     qIndex = filename.indexOf('?');
                 if (qIndex > -1) {
                     filename = filename.substring(0, qIndex);
                 }
                 var content = fs.readFileSync(filename, 'utf-8');
-                return '<style type="text/css">\n' + content + '\n</style>';
+                return $1 ? '<style type="text/css">\n' + content + '\n</style>' : '<script>' + content + '\n</script>';
             });
             file.contents = new Buffer(contents);
         }))
