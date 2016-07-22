@@ -105,7 +105,7 @@ gulp.task("release_js", function () {
 
     return merge(
         //concat all script file exclude those in folder /lib
-        gulp.src(src + "/js/!(lib)/**/*.js", {base: src + '/js'})
+        gulp.src(src + "/js/!(lib|conf)/**/*.js", {base: src + '/js'})
             .pipe(transport())
             .pipe(concat({
                 base: src + "/js"
@@ -116,7 +116,7 @@ gulp.task("release_js", function () {
             .pipe(uglify_js())
             .pipe(gulp.dest(dist + "/js")),
 
-        gulp.src([src + '/js/lib/**/*', src + '/js/common/**/*.js'], {base: src + '/js'})
+        gulp.src([src + '/js/lib/**/*', src + '/js/conf/**/*.js'], {base: src + '/js'})
             .pipe(replace({
                 patterns: replace_patterns
             }))
@@ -136,7 +136,7 @@ gulp.task('rev_manifest', function (cb) {
         dist + '/css/**/*.css',
         dist + '/img/**/*',
         dist + '/js/app/**/*.js',
-        dist + '/js/common/**/*.js'
+        dist + '/js/conf/**/*.js'
     ], {base: dist})
         .pipe(rev())
         .pipe(gulp.dest(dist + '/revTmp'))

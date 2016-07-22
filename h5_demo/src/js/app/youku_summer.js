@@ -27,8 +27,6 @@ define('js/app/youku_summer.js', function (require, exports, module) {
 
         $preloader_content.text((percentage * 100).toFixed(0) + '%');
 
-        return;
-
         if (percentage >= 1) {
             $preloader.addClass('leave').one($.transitionEnd.end, function () {
                 $preloader.remove();
