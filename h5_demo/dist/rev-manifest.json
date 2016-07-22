@@ -1,5 +1,5 @@
 {
-  "css/youku_summer.css": "css/youku_summer.css?v=1dcc9daa5c",
+  "css/youku_summer.css": "css/youku_summer.css?v=996fb7bda5",
   "img/youku_summer/1.png": "img/youku_summer/1.png?v=7b1dd18ccc",
   "img/youku_summer/10.png": "img/youku_summer/10.png?v=9fded4d8f2",
   "img/youku_summer/11.png": "img/youku_summer/11.png?v=e581412336",
@@ -31,6 +31,7 @@
   "img/youku_summer/7.png": "img/youku_summer/7.png?v=cb65abfa3a",
   "img/youku_summer/8.png": "img/youku_summer/8.png?v=804c09c22e",
   "img/youku_summer/9.png": "img/youku_summer/9.png?v=14b8f69445",
-  "js/app/youku_summer.js": "js/app/youku_summer.js?v=1d982a1df0",
-  "js/common.js": "js/common.js?v=f7f677dbb5"
+  "img/youku_summer/load_bg.jpg": "img/youku_summer/load_bg.jpg?v=c6fc9d9fcb",
+  "js/app/youku_summer.js": "js/app/youku_summer.js?v=8b1881a8f0",
+  "js/common/youku_summer.js": "js/common/youku_summer.js?v=2982701413"
 }

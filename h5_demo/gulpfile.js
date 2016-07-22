@@ -51,6 +51,9 @@ gulp.task('style', function (cb) {
         .pipe(plumber(plumber_config(cb)))
         .pipe(less())
         .pipe(autoprefixer())
+        .pipe(replace({
+            patterns: replace_patterns
+        }))
         .pipe(gulpif(yargs.r, minifycss()))
         .pipe(gulp.dest(dist + '/css/'))
         .pipe(browserSync.reload({stream: true}));
@@ -113,7 +116,7 @@ gulp.task("release_js", function () {
             .pipe(uglify_js())
             .pipe(gulp.dest(dist + "/js")),
 
-        gulp.src([src + '/js/lib/**/*.js', src + '/js/common.js'], {base: src + '/js'})
+        gulp.src([src + '/js/lib/**/*', src + '/js/common/**/*.js'], {base: src + '/js'})
             .pipe(replace({
                 patterns: replace_patterns
             }))
@@ -133,7 +136,7 @@ gulp.task('rev_manifest', function (cb) {
         dist + '/css/**/*.css',
         dist + '/img/**/*',
         dist + '/js/app/**/*.js',
-        dist + '/js/common.js'
+        dist + '/js/common/**/*.js'
     ], {base: dist})
         .pipe(rev())
         .pipe(gulp.dest(dist + '/revTmp'))

@@ -7,6 +7,7 @@
     "gulp-autoprefixer": "^3.1.0",
     "gulp-cheerio": "^0.6.2",
     "gulp-clean": "^0.3.2",
+    "gulp-filter": "^4.0.0",
     "gulp-if": "^2.0.0",
     "gulp-imagemin": "^3.0.1",
     "gulp-less": "^3.0.5",

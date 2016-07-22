@@ -1,7 +1,9 @@
+@import "../_variables";
 @import "../widget/reset";
 @import "../widget/swiper";
 @import "../widget/flex";
 @import "../widget/animate";
+@import "../widget/preloader";
 
 html, body {
   height: 100%;
@@ -249,4 +251,17 @@ html, body {
 .swiper-slide-active .zoomInRight {
   -webkit-animation-name: zoomInRight;
   animation-name: zoomInRight;
+}
+
+.preloader_container {
+  background: url("@{CONTEXT_PATH}/img/youku_summer/load_bg.jpg") left top repeat-y;
+}
+
+.preloader_content {
+  width: 80%;
+  line-height: 100px;
+  height: 100px;
+  text-align: center;
+  font-size: 40px;
+  color: #fff;
 }
