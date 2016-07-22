@@ -18,7 +18,7 @@
 ##form
 (1) 该文件夹内的demo运行方法：
 
-1. 前提：安装node.js git
+1. 前提：安装node.js git gulp
 
 2. 安装：npm install --save
 
@@ -34,6 +34,22 @@
 
 ##mouse_direction
 
+该文件夹存放我做的一些h5活动页面的demo，现在放的还比较少，将来会放地更多，对h5活动页面制作感兴趣的话欢迎关注这个文件夹的内容。
+
+另外该文件夹里的东西，也包含一个比较全的gulp配置方案，可以做压缩，合并，以及资源的内联处理等，通过研究里面的gulpfile.js就能明白。
+
+该文件夹内的demo运行方法：
+
+1. 前提：安装node.js git gulp
+
+2. 安装：npm install --save
+
+3. 运行：gulp -sw
+
+1. [判断鼠标移入移出元素时的方向](http://www.cnblogs.com/lyzg/p/5689761.html)
+
+##mouse_direction
+
 该文件夹内容的相关介绍：
 
 1. [判断鼠标移入移出元素时的方向](http://www.cnblogs.com/lyzg/p/5689761.html)
@@ -43,7 +59,7 @@
 
 (1) 该文件夹内的demo运行方法：
 
-1. 前提：安装node.js git
+1. 前提：安装node.js git gulp
 
 2. 安装：npm install --save
 
@@ -57,7 +73,7 @@
 
 (1) 该文件夹内的demo运行方法：
 
-1. 前提：安装node.js git
+1. 前提：安装node.js git gulp
 
 2. 安装：npm install --save
 
