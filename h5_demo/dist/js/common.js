@@ -1,1 +1,1 @@
-seajs.config({base:"/dist/",paths:{app:"js/app",mod:"js/mod",lib:"js/lib"},debug:!1,alias:{"swiper.jquery":"lib/swiper.jquery.js?v=20160721",swiper:"lib/swiper.js?v=20160721"}});
+seajs.config({base:"/blog/h5_demo/dist/",paths:{app:"js/app",mod:"js/mod",lib:"js/lib"},debug:!1,alias:{"swiper.jquery":"lib/swiper.jquery.js?v=20160721",swiper:"lib/swiper.js?v=20160721"}});

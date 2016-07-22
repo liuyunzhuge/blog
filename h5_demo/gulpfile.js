@@ -23,10 +23,11 @@ var gulp = require('gulp'),
     src = './src',
     dist = './dist',
     option = {base: src},
+    CONTEXT_PATH = '/blog/h5_demo',
     replace_patterns = [
         {
             match: 'CONTEXT_PATH',
-            replacement: yargs.g ? '/blog/h5_demo' : ''
+            replacement: yargs.g ? CONTEXT_PATH : ''
         }
     ];
 
@@ -168,13 +169,17 @@ gulp.task('inline', function () {
             var dir = __dirname;
             var contents = file.contents.toString();
 
-            contents = contents.replace(/<link.+inline="([^"']+)".*>|<script.+inline="([^"']+)".*>\s*<\/script>/gi, function (match, $1, $2) {
+            contents = contents.replace(/<link.+inline.+href="([^"']+)".*>|<script.+inline.+src="([^"']+)".*>\s*<\/script>/gi, function (match, $1, $2) {
                 //console.log(match)
-                var filename = path.join(dir, $1 || $2),
-                    qIndex = filename.indexOf('?');
+                var filename = $1 || $2;
+                filename = path.join(dir, filename.replace(CONTEXT_PATH, ''));
+                var qIndex = filename.indexOf('?');
+
                 if (qIndex > -1) {
                     filename = filename.substring(0, qIndex);
                 }
+
+                //console.log(filename);
                 var content = fs.readFileSync(filename, 'utf-8');
                 return $1 ? '<style type="text/css">\n' + content + '\n</style>' : '<script>' + content + '\n</script>';
             });
