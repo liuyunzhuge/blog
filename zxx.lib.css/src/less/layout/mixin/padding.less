@@ -1,0 +1,42 @@
+@import "../../variables";
+@import "./common";
+
+.padding(@value) {
+  .common-size(p, padding, @value);
+}
+
+.padding-series(@start:@padding-start;@end:@padding-end;@step:@padding-step) {
+  .common-size-series(p, padding, @start, @end, @step);
+}
+
+.padding-left(@value) {
+  .common-size(pl, padding-left, @value);
+}
+
+.padding-left-series(@start:@padding-start;@end:@padding-end;@step:@padding-step) {
+  .common-size-series(pl, padding-left, @start, @end, @step);
+}
+
+.padding-top(@value) {
+  .common-size(pt, padding-top, @value);
+}
+
+.padding-top-series(@start:@padding-start;@end:@padding-end;@step:@padding-step) {
+  .common-size-series(pt, padding-top, @start, @end, @step);
+}
+
+.padding-right(@value) {
+  .common-size(pr, padding-right, @value);
+}
+
+.padding-right-series(@start:@padding-start;@end:@padding-end;@step:@padding-step) {
+  .common-size-series(pr, padding-right, @start, @end, @step);
+}
+
+.padding-bottom(@value) {
+  .common-size(pb, padding-bottom, @value);
+}
+
+.padding-bottom(@start:@padding-start;@end:@padding-end;@step:@padding-step) {
+  .common-size-series(pb, padding-bottom, @start, @end, @step);
+}

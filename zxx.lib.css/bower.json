@@ -1,0 +1,9 @@
+{
+  "name": "h5_demo",
+  "private": true,
+  "dependencies": {
+    "Swiper": "swiper#^3.3.1",
+    "seajs": "2.3.0",
+    "zepto": "git://github.com/madrobby/zepto.git#^1.2.0"
+  }
+}

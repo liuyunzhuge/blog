@@ -1,0 +1,35 @@
+@import "../../variables";
+
+.common-size(@selector,@prop,@value) {
+  @selector_value: unit(@value);
+  .@{selector}@{selector_value} {
+    @{prop}: @value;
+  }
+}
+
+.common-size-series(@selector;@prop;@start;@end;@step) when (@start =< @end) {
+  .common-size(@selector, @prop, unit(@start, px));
+  .common-size-series(@selector, @prop, @start + @step, @end, @step);
+}
+
+.common-negative-size(@selector,@prop,@value) {
+  @selector_value: unit(@value);
+  .@{selector}-@{selector_value} {
+    @{prop}: -@value;
+  }
+}
+
+.common-negative-size-series(@selector;@prop;@start;@end;@step) when (@start =< @end) {
+  .common-negative-size(@selector, @prop, unit(@start, px));
+  .common-negative-size-series(@selector, @prop, @start + @step, @end, @step);
+}
+
+.common-pct-series(@selector,@start:1,@end) when (@start =< @end) {
+  @selector_value: floor((@start/@end) * 100);
+
+  .@{selector}@{selector_value} {
+    width: unit(round((@start/@end) * 100, 3), %);
+  }
+
+  .common-pct-series(@selector, @start+1, @end);
+}

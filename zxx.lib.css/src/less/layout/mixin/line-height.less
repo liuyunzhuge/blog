@@ -1,0 +1,10 @@
+@import "../../variables";
+@import "./common";
+
+.line-height(@value) {
+  .common-size(lh, line-height, @value);
+}
+
+.line-height-series(@start:@line-height-start;@end:@line-height-end;@step:@line-height-step) {
+  .common-size-series(lh, line-heiht, @start, @end, @step);
+}

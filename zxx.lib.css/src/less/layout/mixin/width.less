@@ -1,0 +1,14 @@
+@import "../../variables";
+@import "./common";
+
+.width(@value) {
+  .common-size(w, width, @value);
+}
+
+.width-series(@start:@width-start;@end:@width-end;@step:@width-step) {
+  .common-size-series(w, width, @start, @end, @step);
+}
+
+.width-pct-series(@start:1,@end){
+  .common-pct-series(pct,@start,@end);
+}

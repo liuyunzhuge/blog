@@ -1,0 +1,26 @@
+@import "../../variables";
+@import "./common";
+
+.height(@value) {
+  .common-size(h, height, @value);
+}
+
+.height-series(@start:@height-start;@end:@height-end;@step:@height-step) {
+  .common-size-series(h, height, @start, @end, @step);
+}
+
+.height-pct-series(@start:1,@end) when (@start =< @end) {
+  @selector_value: floor((@start/@end) * 100);
+
+  .h-pct@{selector_value} {
+    width: unit(round((@start/@end) * 100, 3), %);
+  }
+
+  .height-pct-series(@start+1, @end);
+}
+
+.height-pct-series(@start:1,@end){
+  .common-pct-series(h-pct,@start,@end);
+}
+
+.height-series(100,1000,100);

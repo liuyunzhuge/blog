@@ -1,0 +1,10 @@
+@import "../../variables";
+@import "./common";
+
+.font-size(@value) {
+  .common-size(f, font-size, @value);
+}
+
+.font-size-series(@start:@font-size-start;@end:@font-size-end;@step:@font-size-step) {
+  .common-size-series(f, font-size, @start, @end, @step);
+}
