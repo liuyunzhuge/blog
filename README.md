@@ -32,7 +32,7 @@
 
 3. [利用jquery.validate以及bootstrap的tooltip开发气泡式的表单校验组件](http://www.cnblogs.com/lyzg/p/5679408.html)
 
-##mouse_direction
+##h5_demo
 
 该文件夹存放我做的一些h5活动页面的demo，现在放的还比较少，将来会放地更多，对h5活动页面制作感兴趣的话欢迎关注这个文件夹的内容。
 
@@ -45,8 +45,6 @@
 2. 安装：npm install --save
 
 3. 运行：gulp -sw
-
-1. [判断鼠标移入移出元素时的方向](http://www.cnblogs.com/lyzg/p/5689761.html)
 
 ##mouse_direction
 
