@@ -1,5 +1,5 @@
 seajs.config({
-    base: '@@CONTEXT_PATH/dist/',
+    base: '@@CONTEXT_PATH/',
     paths: {
         'app': 'js/app',
         'mod': 'js/mod',

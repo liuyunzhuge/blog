@@ -23,7 +23,7 @@ var gulp = require('gulp'),
     src = './src',
     dist = './dist',
     option = {base: src},
-    CONTEXT_PATH = '/blog/h5_demo',
+    CONTEXT_PATH = '/blog/h5_demo/dist',
     replace_patterns = [
         {
             match: 'CONTEXT_PATH',
@@ -172,7 +172,7 @@ gulp.task('inline', function () {
             contents = contents.replace(/<link.+inline.+href="([^"']+)".*>|<script.+inline.+src="([^"']+)".*>\s*<\/script>/gi, function (match, $1, $2) {
                 //console.log(match)
                 var filename = $1 || $2;
-                filename = path.join(dir, filename.replace(CONTEXT_PATH, ''));
+                filename = path.join(dir, dist + filename.replace(CONTEXT_PATH, ''));
                 var qIndex = filename.indexOf('?');
 
                 if (qIndex > -1) {
@@ -209,7 +209,7 @@ gulp.task('server', function () {
     yargs.p = yargs.p || 8083;
     browserSync.init({
         server: {
-            baseDir: "./"
+            baseDir: "./dist"
         },
         ui: {
             port: yargs.p + 1,
@@ -218,7 +218,7 @@ gulp.task('server', function () {
             }
         },
         port: yargs.p,
-        startPath: 'dist/html/youku_summer.html'
+        startPath: 'html/youku_summer.html'
     });
 });
 
