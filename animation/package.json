@@ -1,0 +1,20 @@
+{
+  "private": true,
+  "dependencies": {
+    "browser-sync": "^2.13.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-clean": "^0.3.2",
+    "gulp-if": "^2.0.1",
+    "gulp-less": "^3.0.5",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-plumber": "^1.1.0",
+    "gulp-replace-task": "^0.11.0",
+    "merge-stream": "^1.0.0",
+    "run-sequence": "^1.2.2",
+    "yargs": "^4.4.0"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  }
+}

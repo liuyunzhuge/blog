@@ -1,0 +1,38 @@
+@import "../widget/quick_layout";
+
+
+
+.box {
+  margin: 50px auto;
+  width: 400px;
+  height: 400px;
+  background-color: #ccc;
+  position: relative;
+}
+
+.target {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  width: 200px;
+  height: 200px;
+  background-color: orangered;
+}
+
+.box_1 {
+  .target {
+    animation: move 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+}
+
+@keyframes move {
+  50% {
+    left: 0;
+  }
+
+  100% {
+    left: 100px;
+  }
+}
