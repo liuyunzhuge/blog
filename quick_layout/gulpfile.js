@@ -82,7 +82,6 @@ gulp.task('build', ['clean'], function (cb) {
 
 //watch file changes, can only used in develop environment
 gulp.task('watch', function () {
-    gulp.watch(src + '/img/**/*', ['image']);
     gulp.watch(src + '/html/**/*', ['html']);
     gulp.watch(src + '/js/**/*', ['script']);
     gulp.watch(src + '/less/**/*', ['style']);
@@ -113,12 +112,14 @@ gulp.task('server', function () {
  * -r: 生产环境构建
  * -g: 构建到gh-pages
  */
-gulp.task('default', ['build'], function () {
+gulp.task('default', function (cb) {
+    var task_seq = ['build'];
     if (yargs.s) {
-        gulp.start('server');
+        task_seq.push('server');
     }
-
     if (yargs.w) {
-        gulp.start('watch');
+        task_seq.push('watch');
     }
+    task_seq.push(cb);
+    runSequence.apply(null, task_seq);
 });
