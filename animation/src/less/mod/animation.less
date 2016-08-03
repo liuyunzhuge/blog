@@ -1,0 +1,150 @@
+@import "../widget/reset";
+@import "../widget/quick_layout";
+
+.box {
+  width: 400px;
+  height: 400px;
+  background-color: #ccc;
+  margin: 0 auto;
+  position: relative;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.target {
+  position: absolute;
+  z-index: 1;
+  width: 200px;
+  height: 200px;
+  left: 100px;
+  top: 100px;
+  background-color: #3c948b;
+}
+
+.target_1:hover {
+  animation-name: move_1;
+  animation-duration: 2s;
+  animation-delay: 1s;
+  animation-fill-mode: both;
+}
+
+@keyframes move_1 {
+  50% {
+    transform: translate(0, 50px);
+  }
+}
+
+.target_2:hover {
+  animation-name: move_2;
+  animation-duration: 2s;
+  animation-delay: 1s;
+  animation-fill-mode: both;
+}
+
+@keyframes move_2 {
+  0% {
+    transform: translate(-50px, 0);
+  }
+
+  50% {
+    transform: translate(0, 50px);
+  }
+
+  100% {
+    transform: translate(50px, 0);
+  }
+}
+
+.target_3:hover {
+  animation-name: move_3;
+  animation-duration: 2s;
+  animation-delay: 1s;
+  animation-fill-mode: both;
+
+  transform: scale(.5, .5) translateZ(0);
+}
+
+@keyframes move_3 {
+  0% {
+    transform: translate(-50px, 0);
+  }
+
+  50% {
+    transform: translate(0, 50px);
+  }
+
+  100% {
+    transform: translate(50px, 0);
+  }
+}
+
+.target_4:hover {
+  animation-name: move_4, bg_change_4;
+  animation-duration: 2s, 1s;
+  animation-delay: 1s, 1s;
+  animation-fill-mode: both;
+}
+
+@keyframes move_4 {
+  0% {
+    transform: translate(-50px, 0);
+  }
+
+  50% {
+    transform: translate(0, 50px);
+  }
+
+  100% {
+    transform: translate(50px, 0);
+  }
+}
+
+@keyframes bg_change_4 {
+  0% {
+    background-color: orange;
+  }
+
+  100% {
+    background-color: red;
+  }
+}
+
+.target_5_01:hover {
+  animation-name: move_5, bg_change_5;
+  animation-duration: 2s, 1s;
+  animation-delay: 1s, 2s;
+  animation-fill-mode: both;
+}
+
+.target_5_02:hover {
+  animation-name: bg_change_5, move_5;
+  animation-duration: 2s, 1s;
+  animation-delay: 1s, 2s;
+  animation-fill-mode: both;
+}
+
+@keyframes move_5 {
+  0% {
+    transform: translate(-50px, 0);
+  }
+
+  50% {
+    transform: translate(0, 50px);
+  }
+
+  100% {
+    transform: translate(50px, 0);
+  }
+}
+
+@keyframes bg_change_5 {
+  0% {
+    background-color: orange;
+    transform: translateZ(100px);
+  }
+
+  100% {
+    background-color: red;
+    transform: translateZ(100px);
+  }
+}

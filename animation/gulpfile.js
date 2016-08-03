@@ -100,7 +100,7 @@ gulp.task('server', function () {
             }
         },
         port: yargs.p,
-        startPath: 'html/demo1.html'
+        startPath: 'html/hover.html'
     });
 });
 
