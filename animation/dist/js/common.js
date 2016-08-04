@@ -1,5 +1,5 @@
 seajs.config({
-    base: '/',
+    base: '/blog/h5_demo/dist/',
     paths: {
         'app': 'js/app',
         'mod': 'js/mod',

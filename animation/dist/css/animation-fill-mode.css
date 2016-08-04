@@ -10,17 +10,11 @@ html {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   height: 100%;
-  /**
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  -webkit-touch-callout: none;
-  -webkit-user-select:none;
-  -webkit-text-size-adjust: 100%;
-  **/
 }
 body {
   font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
   font-size: 14px;
-  line-height: 20px;
+  line-height: 1.414;
   color: #333;
   background-color: #fff;
   min-height: 100%;
@@ -3908,247 +3902,206 @@ a.tdl:hover {
 }
 .box {
   width: 400px;
-  height: 400px;
-  background-color: #ccc;
+  background-color: #B6E2D3;
   margin: 0 auto;
   position: relative;
-  -webkit-perspective: 1000px;
-          perspective: 1000px;
-  -webkit-transform-style: preserve-3d;
-          transform-style: preserve-3d;
 }
 .target {
-  position: absolute;
-  z-index: 1;
-  width: 200px;
-  height: 200px;
-  left: 100px;
-  top: 100px;
+  width: 50px;
+  height: 50px;
+  margin: 20px auto;
   background-color: #3c948b;
 }
-.target_1:hover {
+#demo1 .target.animate {
   -webkit-animation-name: move_1;
           animation-name: move_1;
   -webkit-animation-duration: 2s;
           animation-duration: 2s;
   -webkit-animation-delay: 1s;
           animation-delay: 1s;
+}
+#demo1 .target.animate.target_1 {
+  -webkit-animation-fill-mode: backwards;
+          animation-fill-mode: backwards;
+}
+#demo1 .target.animate.target_2 {
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+#demo1 .target.animate.target_3 {
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
 }
 @-webkit-keyframes move_1 {
+  0% {
+    -webkit-transform: translate(-50px, 0);
+            transform: translate(-50px, 0);
+  }
   50% {
-    -webkit-transform: translate(0, 50px);
-            transform: translate(0, 50px);
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+  }
+  100% {
+    -webkit-transform: translate(50px, 0);
+            transform: translate(50px, 0);
   }
 }
 @keyframes move_1 {
-  50% {
-    -webkit-transform: translate(0, 50px);
-            transform: translate(0, 50px);
-  }
-}
-.target_2:hover {
-  -webkit-animation-name: move_2;
-          animation-name: move_2;
-  -webkit-animation-duration: 2s;
-          animation-duration: 2s;
-  -webkit-animation-delay: 1s;
-          animation-delay: 1s;
-  -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
-}
-@-webkit-keyframes move_2 {
   0% {
     -webkit-transform: translate(-50px, 0);
             transform: translate(-50px, 0);
   }
   50% {
-    -webkit-transform: translate(0, 50px);
-            transform: translate(0, 50px);
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
   }
   100% {
     -webkit-transform: translate(50px, 0);
             transform: translate(50px, 0);
   }
 }
+/*
+
+.target_2:hover {
+  animation-name: move_2;
+  animation-duration: 2s;
+  animation-delay: 1s;
+  animation-fill-mode: both;
+}
+
 @keyframes move_2 {
   0% {
-    -webkit-transform: translate(-50px, 0);
-            transform: translate(-50px, 0);
+    transform: translate(-50px, 0);
   }
+
   50% {
-    -webkit-transform: translate(0, 50px);
-            transform: translate(0, 50px);
+    transform: translate(0, 50px);
   }
+
   100% {
-    -webkit-transform: translate(50px, 0);
-            transform: translate(50px, 0);
+    transform: translate(50px, 0);
   }
 }
+
 .target_3:hover {
-  -webkit-animation-name: move_3;
-          animation-name: move_3;
-  -webkit-animation-duration: 2s;
-          animation-duration: 2s;
-  -webkit-animation-delay: 1s;
-          animation-delay: 1s;
-  -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
-  -webkit-transform: scale(0.5, 0.5) translateZ(0);
-          transform: scale(0.5, 0.5) translateZ(0);
+  animation-name: move_3;
+  animation-duration: 2s;
+  animation-delay: 1s;
+  animation-fill-mode: both;
+
+  transform: scale(.5, .5) translateZ(0);
 }
-@-webkit-keyframes move_3 {
-  0% {
-    -webkit-transform: translate(-50px, 0);
-            transform: translate(-50px, 0);
-  }
-  50% {
-    -webkit-transform: translate(0, 50px);
-            transform: translate(0, 50px);
-  }
-  100% {
-    -webkit-transform: translate(50px, 0);
-            transform: translate(50px, 0);
-  }
-}
+
 @keyframes move_3 {
   0% {
-    -webkit-transform: translate(-50px, 0);
-            transform: translate(-50px, 0);
+    transform: translate(-50px, 0);
   }
+
   50% {
-    -webkit-transform: translate(0, 50px);
-            transform: translate(0, 50px);
+    transform: translate(0, 50px);
   }
+
   100% {
-    -webkit-transform: translate(50px, 0);
-            transform: translate(50px, 0);
+    transform: translate(50px, 0);
   }
 }
+
 .target_4:hover {
-  -webkit-animation-name: move_4, bg_change_4;
-          animation-name: move_4, bg_change_4;
-  -webkit-animation-duration: 2s, 1s;
-          animation-duration: 2s, 1s;
-  -webkit-animation-delay: 1s, 1s;
-          animation-delay: 1s, 1s;
-  -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
+  animation-name: move_4, bg_change_4;
+  animation-duration: 2s, 1s;
+  animation-delay: 1s, 1s;
+  animation-fill-mode: both;
 }
-@-webkit-keyframes move_4 {
-  0% {
-    -webkit-transform: translate(-50px, 0);
-            transform: translate(-50px, 0);
-  }
-  50% {
-    -webkit-transform: translate(0, 50px);
-            transform: translate(0, 50px);
-  }
-  100% {
-    -webkit-transform: translate(50px, 0);
-            transform: translate(50px, 0);
-  }
-}
+
 @keyframes move_4 {
   0% {
-    -webkit-transform: translate(-50px, 0);
-            transform: translate(-50px, 0);
+    transform: translate(-50px, 0);
   }
+
   50% {
-    -webkit-transform: translate(0, 50px);
-            transform: translate(0, 50px);
+    transform: translate(0, 50px);
   }
+
   100% {
-    -webkit-transform: translate(50px, 0);
-            transform: translate(50px, 0);
+    transform: translate(50px, 0);
   }
 }
-@-webkit-keyframes bg_change_4 {
-  0% {
-    background-color: orange;
-  }
-  100% {
-    background-color: red;
-  }
-}
+
 @keyframes bg_change_4 {
   0% {
     background-color: orange;
   }
+
   100% {
     background-color: red;
   }
 }
+
 .target_5_01:hover {
-  -webkit-animation-name: move_5, bg_change_5;
-          animation-name: move_5, bg_change_5;
-  -webkit-animation-duration: 2s, 1s;
-          animation-duration: 2s, 1s;
-  -webkit-animation-delay: 1s, 2s;
-          animation-delay: 1s, 2s;
-  -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
+  animation-name: move_5, bg_change_5;
+  animation-duration: 2s, 1s;
+  animation-delay: 1s, 2s;
+  animation-fill-mode: both;
 }
+
 .target_5_02:hover {
-  -webkit-animation-name: bg_change_5, move_5;
-          animation-name: bg_change_5, move_5;
-  -webkit-animation-duration: 2s, 1s;
-          animation-duration: 2s, 1s;
-  -webkit-animation-delay: 1s, 2s;
-          animation-delay: 1s, 2s;
-  -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
+  animation-name: bg_change_5, move_5;
+  animation-duration: 2s, 1s;
+  animation-delay: 1s, 2s;
+  animation-fill-mode: both;
 }
-@-webkit-keyframes move_5 {
-  0% {
-    -webkit-transform: translate(-50px, 0);
-            transform: translate(-50px, 0);
-  }
-  50% {
-    -webkit-transform: translate(0, 50px);
-            transform: translate(0, 50px);
-  }
-  100% {
-    -webkit-transform: translate(50px, 0);
-            transform: translate(50px, 0);
-  }
-}
+
 @keyframes move_5 {
   0% {
-    -webkit-transform: translate(-50px, 0);
-            transform: translate(-50px, 0);
+    transform: translate(-50px, 0);
   }
+
   50% {
-    -webkit-transform: translate(0, 50px);
-            transform: translate(0, 50px);
+    transform: translate(0, 50px);
   }
+
   100% {
-    -webkit-transform: translate(50px, 0);
-            transform: translate(50px, 0);
+    transform: translate(50px, 0);
   }
 }
-@-webkit-keyframes bg_change_5 {
-  0% {
-    background-color: orange;
-    -webkit-transform: translateZ(100px);
-            transform: translateZ(100px);
-  }
-  100% {
-    background-color: red;
-    -webkit-transform: translateZ(100px);
-            transform: translateZ(100px);
-  }
-}
+
 @keyframes bg_change_5 {
   0% {
     background-color: orange;
-    -webkit-transform: translateZ(100px);
-            transform: translateZ(100px);
+    transform: translateZ(100px);
   }
+
   100% {
     background-color: red;
-    -webkit-transform: translateZ(100px);
-            transform: translateZ(100px);
+    transform: translateZ(100px);
   }
 }
+
+.target_6:hover {
+  animation-name: move6_01, move6_02;
+  animation-duration: 1s, 1s;
+  animation-delay: 1s, 3s;
+  animation-fill-mode: both,forwards;
+}
+
+@keyframes move6_01 {
+  from {
+    visibility: hidden;
+    opacity: 0;
+    transform: translate(0, 50px);
+  }
+
+  to {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes move6_02 {
+  to {
+    visibility: hidden;
+    opacity: 0;
+    transform: translate(0, -100px);
+  }
+}*/

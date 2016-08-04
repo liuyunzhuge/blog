@@ -3,36 +3,52 @@
 
 .box {
   width: 400px;
-  height: 400px;
-  background-color: #ccc;
+  background-color: #B6E2D3;
   margin: 0 auto;
   position: relative;
-  perspective: 1000px;
-  transform-style: preserve-3d;
 }
 
 .target {
-  position: absolute;
-  z-index: 1;
-  width: 200px;
-  height: 200px;
-  left: 100px;
-  top: 100px;
+  width: 50px;
+  height: 50px;
+  margin: 20px auto;
   background-color: #3c948b;
 }
 
-.target_1:hover {
-  animation-name: move_1;
-  animation-duration: 2s;
-  animation-delay: 1s;
-  animation-fill-mode: both;
+#demo1 {
+  .target.animate {
+    animation-name: move_1;
+    animation-duration: 2s;
+    animation-delay: 1s;
+
+    &.target_1 {
+      animation-fill-mode: backwards;
+    }
+    &.target_2 {
+      animation-fill-mode: forwards;
+    }
+    &.target_3 {
+      animation-fill-mode: both;
+    }
+  }
 }
 
 @keyframes move_1 {
+  0% {
+    transform: translate(-50px, 0);
+  }
+
   50% {
-    transform: translate(0, 50px);
+    transform: translate(0, 0);
+  }
+
+  100% {
+    transform: translate(50px, 0);
   }
 }
+
+//demo1
+/*
 
 .target_2:hover {
   animation-name: move_2;
@@ -148,3 +164,32 @@
     transform: translateZ(100px);
   }
 }
+
+.target_6:hover {
+  animation-name: move6_01, move6_02;
+  animation-duration: 1s, 1s;
+  animation-delay: 1s, 3s;
+  animation-fill-mode: both,forwards;
+}
+
+@keyframes move6_01 {
+  from {
+    visibility: hidden;
+    opacity: 0;
+    transform: translate(0, 50px);
+  }
+
+  to {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes move6_02 {
+  to {
+    visibility: hidden;
+    opacity: 0;
+    transform: translate(0, -100px);
+  }
+}*/
