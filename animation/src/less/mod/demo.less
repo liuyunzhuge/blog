@@ -1,0 +1,122 @@
+@import "../widget/reset";
+@import "../widget/quick_layout";
+@import (inline) "../widget/swiper.css";
+
+body {
+  background: #e5e5e5;
+}
+
+.setTapColor(@c:rgba(0,0,0,0)) {
+  -webkit-tap-highlight-color: @c;
+}
+
+//user action
+.no_select() {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.p_header {
+  height: 44px;
+  padding-right: 10px;
+  padding-left: 10px;
+  border-bottom: 0;
+  background-color: #f7f7f7;
+  box-shadow: 0 1px 6px #ccc;
+  backface-visibility: hidden;
+
+  .title {
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 44px;
+    text-align: center;
+  }
+}
+
+.p_body {
+  padding-bottom: 60px;
+}
+
+.p_footer {
+  height: 60px;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #fff;
+}
+
+.tabs {
+  display: flex;
+
+  @tab-color: #333;
+  @tab-bg-color: #fff;
+  @tab-border: 3px;
+  @tab-font-size: 16px;
+  @tab-line-height: 28px;
+  @tab-padding: 8px 0;
+  @tab-border-color: #dedede;
+  @tab-active-border-color: #007aff;
+  @tab-active-color: @tab-active-border-color;
+  @tab-slide-padding: 15px 10px;
+
+  > li {
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+
+    > a {
+      display: block;
+      flex: 1;
+      text-align: center;
+      .setTapColor();
+      .no_select();
+
+      &,&:active {
+        color: @tab-color;
+      }
+
+      background-color: @tab-bg-color;
+      &:active {
+        background-color: darken(@tab-bg-color, 3%);
+      }
+
+      border-bottom: 1px solid @tab-border-color;
+      font-size: @tab-font-size;
+      line-height: @tab-line-height;
+      padding: @tab-padding;
+    }
+
+    &.active {
+      > a {
+        border-bottom: @tab-border solid  @tab-active-border-color;
+        color: @tab-active-color;
+
+        &:active {
+          color: @tab-active-color;
+          background-color: @tab-bg-color;
+        }
+      }
+    }
+  }
+}
+
+
+.swiper-slide-inner {
+  height: 100%;
+}
+
+.scroller {
+  padding: 10px;
+}
+
+#swiper-tab-content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
