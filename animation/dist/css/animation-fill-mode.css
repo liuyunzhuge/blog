@@ -3960,6 +3960,177 @@ a.tdl:hover {
             transform: translate(50px, 0);
   }
 }
+#demo2 .target.animate {
+  -webkit-animation-name: move_2;
+          animation-name: move_2;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+}
+#demo2 .target.animate.target_1 {
+  -webkit-animation-fill-mode: backwards;
+          animation-fill-mode: backwards;
+}
+#demo2 .target.animate.target_2 {
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+#demo2 .target.animate.target_3 {
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+}
+@-webkit-keyframes move_2 {
+  50% {
+    -webkit-transform: scale(1.2, 1.2);
+            transform: scale(1.2, 1.2);
+  }
+}
+@keyframes move_2 {
+  50% {
+    -webkit-transform: scale(1.2, 1.2);
+            transform: scale(1.2, 1.2);
+  }
+}
+#demo3 .target.animate {
+  -webkit-animation-name: move_3;
+          animation-name: move_3;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+}
+#demo3 .target.animate.target_1 {
+  -webkit-animation-fill-mode: none;
+          animation-fill-mode: none;
+}
+#demo3 .target.animate.target_2 {
+  -webkit-animation-fill-mode: backwards;
+          animation-fill-mode: backwards;
+}
+#demo3 .target.animate.target_3 {
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+#demo3 .target.animate.target_4 {
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+}
+@-webkit-keyframes move_3 {
+  50% {
+    -webkit-transform: scale(1.2, 1.2);
+            transform: scale(1.2, 1.2);
+  }
+}
+@keyframes move_3 {
+  50% {
+    -webkit-transform: scale(1.2, 1.2);
+            transform: scale(1.2, 1.2);
+  }
+}
+#demo4 .target {
+  -webkit-transform: scale(1.2, 1.2);
+      -ms-transform: scale(1.2, 1.2);
+          transform: scale(1.2, 1.2);
+}
+#demo4 .target.animate {
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+}
+#demo4 .target.animate.target_1 {
+  -webkit-animation-fill-mode: none;
+          animation-fill-mode: none;
+  -webkit-animation-name: move_4_01;
+          animation-name: move_4_01;
+}
+#demo4 .target.animate.target_2 {
+  -webkit-animation-fill-mode: backwards;
+          animation-fill-mode: backwards;
+  -webkit-animation-name: move_4_01;
+          animation-name: move_4_01;
+}
+#demo4 .target.animate.target_3 {
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-name: move_4_01;
+          animation-name: move_4_01;
+}
+#demo4 .target.animate.target_1_02 {
+  -webkit-animation-fill-mode: none;
+          animation-fill-mode: none;
+  -webkit-animation-name: move_4_02;
+          animation-name: move_4_02;
+}
+#demo4 .target.animate.target_2_02 {
+  -webkit-animation-fill-mode: backwards;
+          animation-fill-mode: backwards;
+  -webkit-animation-name: move_4_02;
+          animation-name: move_4_02;
+}
+#demo4 .target.animate.target_3_02 {
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-name: move_4_02;
+          animation-name: move_4_02;
+}
+@-webkit-keyframes move_4_01 {
+  0% {
+    -webkit-transform: translate(-50px, 0);
+            transform: translate(-50px, 0);
+  }
+  50% {
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+  }
+  100% {
+    -webkit-transform: translate(50px, 0);
+            transform: translate(50px, 0);
+  }
+}
+@keyframes move_4_01 {
+  0% {
+    -webkit-transform: translate(-50px, 0);
+            transform: translate(-50px, 0);
+  }
+  50% {
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+  }
+  100% {
+    -webkit-transform: translate(50px, 0);
+            transform: translate(50px, 0);
+  }
+}
+@-webkit-keyframes move_4_02 {
+  0% {
+    -webkit-transform: translate(-50px, 0) scale(1.2, 1.2);
+            transform: translate(-50px, 0) scale(1.2, 1.2);
+  }
+  50% {
+    -webkit-transform: translate(0, 0) scale(1.2, 1.2);
+            transform: translate(0, 0) scale(1.2, 1.2);
+  }
+  100% {
+    -webkit-transform: translate(50px, 0) scale(1.2, 1.2);
+            transform: translate(50px, 0) scale(1.2, 1.2);
+  }
+}
+@keyframes move_4_02 {
+  0% {
+    -webkit-transform: translate(-50px, 0) scale(1.2, 1.2);
+            transform: translate(-50px, 0) scale(1.2, 1.2);
+  }
+  50% {
+    -webkit-transform: translate(0, 0) scale(1.2, 1.2);
+            transform: translate(0, 0) scale(1.2, 1.2);
+  }
+  100% {
+    -webkit-transform: translate(50px, 0) scale(1.2, 1.2);
+            transform: translate(50px, 0) scale(1.2, 1.2);
+  }
+}
 /*
 
 .target_2:hover {

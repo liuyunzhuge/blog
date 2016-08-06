@@ -47,6 +47,122 @@
   }
 }
 
+#demo2 {
+  .target.animate {
+    animation-name: move_2;
+    animation-duration: 2s;
+    animation-delay: 1s;
+
+    &.target_1 {
+      animation-fill-mode: backwards;
+    }
+    &.target_2 {
+      animation-fill-mode: forwards;
+    }
+    &.target_3 {
+      animation-fill-mode: both;
+    }
+  }
+}
+
+@keyframes move_2 {
+  50% {
+    transform: scale(1.2, 1.2);
+  }
+}
+
+#demo3 {
+  .target.animate {
+    animation-name: move_3;
+    animation-duration: 2s;
+    animation-delay: 1s;
+
+    &.target_1 {
+      animation-fill-mode: none;
+    }
+    &.target_2 {
+      animation-fill-mode: backwards;
+    }
+    &.target_3 {
+      animation-fill-mode: forwards;
+    }
+    &.target_4 {
+      animation-fill-mode: both;
+    }
+  }
+}
+
+@keyframes move_3 {
+  50% {
+    transform: scale(1.2, 1.2);
+  }
+}
+
+#demo4 {
+  .target {
+    transform: scale(1.2, 1.2);
+  }
+
+  .target.animate {
+    animation-duration: 2s;
+    animation-delay: 1s;
+
+    &.target_1 {
+      animation-fill-mode: none;
+      animation-name: move_4_01;
+    }
+    &.target_2 {
+      animation-fill-mode: backwards;
+      animation-name: move_4_01;
+    }
+    &.target_3 {
+      animation-fill-mode: forwards;
+      animation-name: move_4_01;
+    }
+
+    &.target_1_02 {
+      animation-fill-mode: none;
+      animation-name: move_4_02;
+    }
+    &.target_2_02 {
+      animation-fill-mode: backwards;
+      animation-name: move_4_02;
+    }
+    &.target_3_02 {
+      animation-fill-mode: forwards;
+      animation-name: move_4_02;
+    }
+  }
+}
+
+@keyframes move_4_01 {
+  0% {
+    transform: translate(-50px, 0);
+  }
+
+  50% {
+    transform: translate(0, 0);
+  }
+
+  100% {
+    transform: translate(50px, 0);
+  }
+}
+
+@keyframes move_4_02 {
+  0% {
+    transform: translate(-50px, 0) scale(1.2, 1.2);
+  }
+
+  50% {
+    transform: translate(0, 0) scale(1.2, 1.2);
+  }
+
+  100% {
+    transform: translate(50px, 0) scale(1.2, 1.2);
+  }
+}
+
 //demo1
 /*
 
