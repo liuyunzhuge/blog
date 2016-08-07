@@ -163,96 +163,19 @@
   }
 }
 
-//demo1
-/*
+#demo5 {
+  .target.animate {
+    animation-duration: 1s, 1s;
+    animation-delay: 1s, 2s;
+    animation-fill-mode: both;
 
-.target_2:hover {
-  animation-name: move_2;
-  animation-duration: 2s;
-  animation-delay: 1s;
-  animation-fill-mode: both;
-}
-
-@keyframes move_2 {
-  0% {
-    transform: translate(-50px, 0);
+    &.target_1 {
+      animation-name: move_5, bg_change_5;
+    }
+    &.target_2 {
+      animation-name: bg_change_5, move_5;
+    }
   }
-
-  50% {
-    transform: translate(0, 50px);
-  }
-
-  100% {
-    transform: translate(50px, 0);
-  }
-}
-
-.target_3:hover {
-  animation-name: move_3;
-  animation-duration: 2s;
-  animation-delay: 1s;
-  animation-fill-mode: both;
-
-  transform: scale(.5, .5) translateZ(0);
-}
-
-@keyframes move_3 {
-  0% {
-    transform: translate(-50px, 0);
-  }
-
-  50% {
-    transform: translate(0, 50px);
-  }
-
-  100% {
-    transform: translate(50px, 0);
-  }
-}
-
-.target_4:hover {
-  animation-name: move_4, bg_change_4;
-  animation-duration: 2s, 1s;
-  animation-delay: 1s, 1s;
-  animation-fill-mode: both;
-}
-
-@keyframes move_4 {
-  0% {
-    transform: translate(-50px, 0);
-  }
-
-  50% {
-    transform: translate(0, 50px);
-  }
-
-  100% {
-    transform: translate(50px, 0);
-  }
-}
-
-@keyframes bg_change_4 {
-  0% {
-    background-color: orange;
-  }
-
-  100% {
-    background-color: red;
-  }
-}
-
-.target_5_01:hover {
-  animation-name: move_5, bg_change_5;
-  animation-duration: 2s, 1s;
-  animation-delay: 1s, 2s;
-  animation-fill-mode: both;
-}
-
-.target_5_02:hover {
-  animation-name: bg_change_5, move_5;
-  animation-duration: 2s, 1s;
-  animation-delay: 1s, 2s;
-  animation-fill-mode: both;
 }
 
 @keyframes move_5 {
@@ -261,7 +184,7 @@
   }
 
   50% {
-    transform: translate(0, 50px);
+    transform: translate(0, 0);
   }
 
   100% {
@@ -272,40 +195,109 @@
 @keyframes bg_change_5 {
   0% {
     background-color: orange;
-    transform: translateZ(100px);
+    transform: scale(0.8);
   }
 
   100% {
     background-color: red;
-    transform: translateZ(100px);
+    transform: scale(1.2);
   }
 }
 
-.target_6:hover {
-  animation-name: move6_01, move6_02;
-  animation-duration: 1s, 1s;
-  animation-delay: 1s, 3s;
-  animation-fill-mode: both,forwards;
-}
-
-@keyframes move6_01 {
-  from {
+#demo6 {
+  .target:not(.target_1) {
     visibility: hidden;
     opacity: 0;
-    transform: translate(0, 50px);
   }
 
-  to {
+  .target.animate {
+    &.target_2 {
+      animation-name: move_6_01, move_6_02;
+      animation-duration: 1s, 1s;
+      animation-delay: 0s, 2s;
+      animation-fill-mode: both;
+    }
+  }
+}
+
+#demo7 {
+  .target:not(.target_1) {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .target.animate {
+    &.target_2 {
+      animation-name: move_6_01, move_6_02;
+      animation-duration: 1s, 1s;
+      animation-delay: 0s, 2s;
+      animation-fill-mode: both,forwards;
+    }
+  }
+}
+
+@keyframes move_6_01 {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+    transform: translate(-50px, 0);
+  }
+
+  100% {
     visibility: visible;
     opacity: 1;
     transform: translate(0, 0);
   }
 }
 
-@keyframes move6_02 {
-  to {
+@keyframes move_6_02 {
+  100% {
     visibility: hidden;
     opacity: 0;
-    transform: translate(0, -100px);
+    transform: translate(50px, 0);
   }
-}*/
+}
+
+#demo8 {
+  .target:not(.target_1) {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .target.animate {
+    &.target_2 {
+      animation-name: move_8_01, move_8_02;
+      animation-duration: 1s, 1s;
+      animation-delay: 0s, 2s;
+      animation-fill-mode: both,forwards;
+    }
+  }
+}
+
+@keyframes move_8_01 {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+    transform: translate(-50px, 0);
+  }
+
+  100% {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes move_8_02 {
+  0% {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+
+  100% {
+    visibility: hidden;
+    opacity: 0;
+    transform: translate(50px, 0);
+  }
+}
