@@ -1,1 +1,46 @@
-define("js/app/youku_summer.js?v=4d94256add",["swiper.jquery","jquery","mod/url","mod/simpleImgPreloader","mod/transition"],function(require,exports,module){var n=require("swiper.jquery"),e=require("jquery"),r=require("mod/url"),o=require("mod/simpleImgPreloader");require("mod/transition");var t=e("#preloader"),i=t.find(".preloader_content"),u=["img/youku_summer/1.png?v=7b1dd18ccc","img/youku_summer/24.png?v=a4d90dd9f7","img/youku_summer/15.png?v=b8fe21e161","img/youku_summer/18.png?v=6a3a196dde","img/youku_summer/25.png?v=7cc3fc1c3d","img/youku_summer/10.png?v=9fded4d8f2"],a=300;o(e.map(u,function(n){return r.getUrl(n)}),function(r){i.text((100*r).toFixed(0)+"%"),r>=1&&(t.addClass("leave").one(e.transitionEnd.end,function(){t.remove()}).emulateTransitionEnd(a),new n("#swiper",{direction:"vertical",preloadImages:!1,lazyLoading:!0,lazyLoadingInPrevNext:!0,lazyLoadingInPrevNextAmount:1,slidesPerView:1}))})}),define("mod/url",[],function(){var n=function(){var n=window.location.href,e=n.substring(n.lastIndexOf("?")+1),r={},o=/([^?&=]+)=([^?&=]*)/g;return e.replace(o,function(n,e,o){var t=decodeURIComponent(e),i=decodeURIComponent(o);return i=String(i),r[t]=i,n}),r}(),e=location.protocol+"//"+location.hostname+(""==location.port?"":":"+location.port)+"/",r=function(n){return e+(n||"")};return{getBaseUrl:function(){return e},getUrl:r,getParam:function(e){return n[e]},go:function(n){location.href=r(n)}}}),define("mod/simpleImgPreloader",[],function(){function n(n){return"[object Array]"===Object.prototype.toString.call(n)}var e=function(e,r,o){o=o||5e3,e=n(e)&&e||[],r="function"==typeof r&&r;var t=e.length,i=0,u=[],a=function(){i<t&&(++i,r&&r(i/t))};if(!t)return r&&r(1);for(var d=0;d<t;d++)u[d]=new Image,u[d].onload=u[d].onerror=a,u[d].src=e[d];setTimeout(function(){i<t&&(i=t,r&&r(i/t))},o*t)};return e}),define("mod/transition",["jquery"],function(require){var n=require("jquery"),e=n.transitionEnd={end:function(){var n=document.createElement("transitionEnd"),e={WebkitTransition:"webkitTransitionEnd",MozTransition:"transitionend",OTransition:"oTransitionEnd otransitionend",transition:"transitionend"};for(var r in e)if(void 0!==n.style[r])return e[r];return!1}()};n.fn.emulateTransitionEnd=function(r){var o=!1,t=this,i=function(){o||n(t).trigger(e.end)};return n(this).one(e.end,function(){o=!0}),setTimeout(i,r),this}});
+define('js/app/youku_summer.js', function (require, exports, module) {
+
+    var Swiper = require('swiper.jquery'),
+        $ = require('jquery'),
+        Url = require('mod/url'),
+        SimpleImgPreloader = require('mod/simpleImgPreloader');
+
+    require('mod/transition');
+
+    var $preloader = $('#preloader'),
+        $preloader_content = $preloader.find('.preloader_content'),
+        preLoadList = [
+            'img/youku_summer/1.png',
+            'img/youku_summer/24.png',
+            'img/youku_summer/15.png',
+            'img/youku_summer/18.png',
+            'img/youku_summer/25.png',
+            'img/youku_summer/10.png'
+        ];
+
+    var PRE_LEAVE_DURATION = 300;
+
+    //资源预加载
+    SimpleImgPreloader($.map(preLoadList, function (u) {
+        return Url.getUrl(u);
+    }), function (percentage) {
+
+        $preloader_content.text((percentage * 100).toFixed(0) + '%');
+
+        if (percentage >= 1) {
+            $preloader.addClass('leave').one($.transitionEnd.end, function () {
+                $preloader.remove();
+            }).emulateTransitionEnd(PRE_LEAVE_DURATION);
+
+            //带懒加载的滑屏
+            new Swiper('#swiper', {
+                direction: 'vertical',
+                preloadImages: false,
+                lazyLoading: true,
+                lazyLoadingInPrevNext: true,
+                lazyLoadingInPrevNextAmount: 1,
+                slidesPerView: 1
+            });
+        }
+    });
+});
