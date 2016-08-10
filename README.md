@@ -1,3 +1,17 @@
+##animation
+这个文件存放一些css3 animation相关的demo。
+(1) 该文件夹内的demo运行方法：
+
+1. 前提：安装node.js git gulp
+
+2. 安装：npm install --save
+
+3. 运行：gulp -sw
+
+(2) 该文件夹内容的相关介绍：
+
+1. [animation-fill-mode的一些思考](http://www.cnblogs.com/lyzg/p/5738860.html)
+
 ##backbone_ajax
 这个文件夹提供了一个简单的自定义ajax模块，覆盖了Backbone原有的ajax模块的实现，使得我们可以在用Backbone
 完成异步请求时，完全跟传统的异步方式保持一致，代码很简单，相关的测试页面如下：
