@@ -85,9 +85,7 @@
 ##quick_layout
 这个文件夹里面的内容是对[zxx.lib.css](https://github.com/zhangxinxu/zxx.lib.css)的一个整理，将这些代码利用less进行了整合，同时扩充了更多的属性。
 
-里面提供有mixin，来快速对单个属性，进行等差序列的扩充。详情请研究里面的less代码，相对简单，所以没有写专门的博客介绍。针对zxx.lib.css提供的一些快速布局的
-
-类（如.inline_two,.inline_three这种），做了一个demo，演示它里面一些类的具体作用。你可以通过下面的方法来查看demo，并了解那些类的用法。
+里面提供有mixin，来快速对单个属性，进行等差序列的扩充。详情请研究里面的less代码，相对简单，所以没有写专门的博客介绍。针对zxx.lib.css提供的一些快速布局的类（如.inline_two,.inline_three这种），做了一个demo，演示它里面一些类的具体作用。你可以通过下面的方法来查看demo，并了解那些类的用法。
 
 (1) 该文件夹内的demo运行方法：
 
