@@ -61,6 +61,8 @@ define(function (require, exports, module) {
                 //初始化datepicker组件
                 $element.datepicker(this.pickerOptions);
 
+                $element.prop('readonly', true);
+
                 this.triggerInit();
             },
             getDefaults: function () {

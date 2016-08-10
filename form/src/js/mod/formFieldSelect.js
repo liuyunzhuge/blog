@@ -122,6 +122,22 @@ define(function (require, exports, module) {
                 }
                 return value === null ? '' : value;
             },
+            getText: function () {
+                var $element = this.$element,
+                    $options = $element.find('option'),
+                    vals = [],
+                    i,
+                    l = $options.length,
+                    $o;
+
+                for (i = 0; i < l; i++) {
+                    $o = $options.eq(i);
+                    if ($o[0].selected) {
+                        vals.push($o.text());
+                    }
+                }
+                return vals.join(',');
+            },
             disable: function () {
                 this.$element.addClass('disabled').prop('disabled', true);
             },
