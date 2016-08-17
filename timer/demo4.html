@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box" style="width: 100px;height: 100px;background-color: goldenrod">
+    </div>
+    <br>
+    <button type="button" onclick="start()">开始</button>
+</body>
+<script>
+    var box = document.getElementById('box');
+    function start() {
+        var duration = 1000;//动画时长
+        var s = 120;//总的偏移量
+        var cur_s = 0;//当前偏移总量
+        var p = 16;//定时器间隔
+        var speed = s / (duration / p);//速度
+        var count = 0;
+        var start_time = new Date().getTime();
+        var timer = setInterval(function(){
+            if(cur_s >= s) {
+                clearInterval(timer);
+                console.log('动画运行时间(ms): ' + (new Date().getTime() - start_time));
+                return;
+            }
+
+            count++;
+            cur_s = speed * count;
+            box.style.transform = 'translateX(' + cur_s + 'px)';
+        },p);
+    }
+</script>
+</html>
