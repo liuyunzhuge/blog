@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+</body>
+<script>
+    var start = new Date().getTime(),count = 1;
+    var timer = setInterval(function(){
+        var end = new Date().getTime();
+        console.log('第' + count++ + '次执行，间隔：' + (end - start));
+        start = end;
+
+        if(count == 11) {
+            clearInterval(timer);
+        }
+    },1000);
+</script>
+</html>

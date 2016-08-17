@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+</body>
+<script>
+    var start = new Date().getTime(),count = 0;
+    var timer = requestAnimationFrame(function print(){
+
+        if(count > 0) {
+            var end = new Date().getTime();
+            console.log('第' + count + '次执行，间隔：' + (end - start));
+            start = end;
+        }
+        count++;
+
+        if(count < 11) {
+            requestAnimationFrame(print);
+        }
+    });
+</script>
+</html>

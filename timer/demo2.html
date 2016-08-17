@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+</body>
+<script>
+    var start = new Date().getTime(), prev = start, count = 1;
+
+    //在动画模拟的第2和第3秒之间插入一个耗时任务
+    setTimeout(function () {
+        var i = 0;
+        var cur = new Date().getTime();
+        console.log('耗时任务开始，距动画开始时间：' + (cur-start));
+        while (++i < 3000000000);
+        var cur2 = new Date().getTime();
+        console.log('耗时任务结束，距动画开始时间：' + (cur2-start) + '，耗时：' + (cur2-cur));
+    }, 2400);
+
+    //模拟一个动画
+    var timer = setInterval(function () {
+        var end = new Date().getTime();
+        console.log('第' + count++ + '次执行，间隔：' + (end - prev));
+        prev = end;
+
+        if (count == 11) {
+            clearInterval(timer);
+        }
+    }, 1000);
+</script>
+</html>
