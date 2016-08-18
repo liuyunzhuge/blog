@@ -140,11 +140,16 @@
         clearTimer();
         setUpProbabilityRange();
         setUpRndStats();
-        clearState();
+        clearCardState();
     }
 
-    function clearState() {
+    function clearCardState() {
         $cards.filter('.active').removeClass('active');
+    }
+
+    function setCardState(lotteryIndex){
+        $cards.filter('.active').removeClass('active');
+        $cards.eq(lotteryIndex).addClass('active');
     }
 
     function setUpRndStats() {
@@ -161,9 +166,7 @@
         var html = [];
         data.forEach(function (item, i) {
             html.push([
-                '<div data-index="',
-                i,
-                '" class="card ',
+                '<div class="card ',
                 item.name,
                 '">',
                 item.text,
@@ -184,7 +187,7 @@
         });
     }
 
-    function getTargetIndex() {
+    function getLotteryIndex() {
         var l = probabilityRange.length;
         var target = Math.floor(Math.random() * 100) + 1;
 
@@ -199,12 +202,10 @@
     function setTimer() {
         function callback() {
 
-            var targetIndex = getTargetIndex();
+            var lotteryIndex = getLotteryIndex();
 
-            rnd_stats[targetIndex]++;
-
-            $cards.filter('.active').removeClass('active');
-            $cards.eq(targetIndex).addClass('active');
+            rnd_stats[lotteryIndex]++;
+            setCardState(lotteryIndex);
         }
 
         timer = setInterval(callback, config.interval);
@@ -215,8 +216,10 @@
         timer = undefined;
     }
 
-    function getData() {
-        return $cards && data[$cards.filter('.active').data('index')];
+    function drawLottery() {
+        var lotteryIndex = getLotteryIndex();
+        setCardState(lotteryIndex)
+        return data[lotteryIndex];
     }
 
     createCards();
@@ -230,7 +233,7 @@
     function stop() {
         clearTimer();
 
-        var d = getData();
+        var d = drawLottery();
 
         if (d) {
             alert('恭喜您获得' + d.exp + '经验值~~~');
