@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box" style="width: 100px;height: 100px;background-color: goldenrod">
+    </div>
+    <br>
+    <button type="button" onclick="start()">开始</button>
+</body>
+<script>
+    var box = document.getElementById('box');
+    function start() {
+        var duration = 1000;//动画时长
+        var s = 120;//总的偏移量
+        var start_time = Date.now();
+        var timer = setInterval(function(){
+
+            //percent表示动画的进程
+            var percent = (Date.now() - start_time) / duration;
+
+            if(percent >= 1.0) {
+                percent = 1;
+                clearInterval(timer);
+                console.log('动画运行时间(ms): ' + (new Date().getTime() - start_time));
+            }
+
+            box.style.transform = 'translateX(' + (Math.floor(s * percent)) + 'px)';
+        },16);
+    }
+</script>
+</html>
