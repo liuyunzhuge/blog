@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        .stage {
+            height: 400px;
+            border: 1px solid #ccc;
+            position: relative;
+        }
+
+        .cards {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            line-height: 100px;
+            text-align: center;
+
+            visibility: hidden;
+            position: absolute;
+        }
+
+        .card.active {
+            visibility: visible;
+        }
+
+        .card.bukong {
+            color: #fff;
+            font-size: 20px;
+            background-color: #FFCC99;
+        }
+
+        .card.qiantai {
+            color: #fff;
+            font-size: 20px;
+            background-color: #0066CC;
+        }
+
+        .card.baojie {
+            color: #fff;
+            font-size: 20px;
+            background-color: #009966;
+        }
+
+        .card.caohan {
+            color: #fff;
+            font-size: 20px;
+            background-color: #993399;
+        }
+
+        .card.sheji {
+            color: #fff;
+            font-size: 20px;
+            background-color: #990033;
+        }
+
+        .actions {
+            padding: 5px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div id="stage" class="stage">
+        <div id="cards" class="cards">
+        </div>
+    </div>
+    <div class="actions">
+        <button type="button" onclick="start()">开始</button>
+        <button type="button" onclick="stop()">结束</button>
+        <button type="button" onclick="reset()">重置</button>
+    </div>
+</div>
+</body>
+<script src="jquery.js"></script>
+<script>
+    var data = [
+        {
+            name: 'bukong',
+            exp: 0,
+            probability: 2,
+            text: '捕空',
+            cssClass: '.bukong'
+        },
+        {
+            name: 'qiantai',
+            exp: 15,
+            probability: 40,
+            text: '前台美眉'
+        },
+        {
+            name: 'baojie',
+            exp: 20,
+            probability: 30,
+            text: '保洁阿姨'
+        },
+        {
+            name: 'caohan',
+            exp: 25,
+            probability: 20,
+            text: '糙汉市场'
+        },
+        {
+            name: 'sheji',
+            exp: 40,
+            probability: 8,
+            text: '设鸡师'
+        }
+    ];
+
+    var config = {
+        interval: 17
+    };
+
+    var $stage = $('#stage');
+    var $cards_box = $('#cards');
+    var $cards;
+    var timer;
+    var probabilityRange;
+    var rnd_stats;
+
+    function reset() {
+        clearTimer();
+        setUpProbabilityRange();
+        setUpRndStats();
+        clearState();
+    }
+
+    function clearState() {
+        $cards.filter('.active').removeClass('active');
+    }
+
+    function setUpRndStats() {
+        rnd_stats = {
+            0: 0,
+            1: 0,
+            2: 0,
+            3: 0,
+            4: 0
+        };
+    }
+
+    function createCards() {
+        var html = [];
+        data.forEach(function (item, i) {
+            html.push([
+                '<div data-index="',
+                i,
+                '" class="card ',
+                item.name,
+                '">',
+                item.text,
+                '</div>'
+            ].join(''));
+        });
+        $cards_box.html(html.join(''));
+
+        $cards = $cards_box.find('.card');
+    }
+
+    function setUpProbabilityRange() {
+        var step = 0;
+        probabilityRange = [];
+        data.forEach(function (item, i) {
+            step = step + item.probability;
+            probabilityRange.push(step);
+        });
+    }
+
+    function getTargetIndex() {
+        var l = probabilityRange.length;
+        var target = Math.floor(Math.random() * 100) + 1;
+
+        for (var i = 0; i < l; i++) {
+            if (target <= probabilityRange[i]) {
+                return i;
+            }
+        }
+        return l - 1;
+    }
+
+    function setTimer() {
+        function callback() {
+
+            var targetIndex = getTargetIndex();
+
+            rnd_stats[targetIndex]++;
+
+            $cards.filter('.active').removeClass('active');
+            $cards.eq(targetIndex).addClass('active');
+        }
+
+        timer = setInterval(callback, config.interval);
+    }
+
+    function clearTimer() {
+        timer && clearInterval(timer);
+        timer = undefined;
+    }
+
+    function getData() {
+        return $cards && data[$cards.filter('.active').data('index')];
+    }
+
+    createCards();
+    setUpProbabilityRange();
+    setUpRndStats();
+
+    function start() {
+        setTimer();
+    }
+
+    function stop() {
+        clearTimer();
+
+        var d = getData();
+
+        if (d) {
+            alert('恭喜您获得' + d.exp + '经验值~~~');
+        }
+    }
+</script>
+</html>
