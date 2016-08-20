@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/@@CONTEXT_PATHdist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/@@CONTEXT_PATHdist/css/reset.css"/>
+    <link rel="stylesheet" href="/@@CONTEXT_PATHdist/css/zxx.lib.css"/>
+    <link rel="stylesheet" href="/@@CONTEXT_PATHdist/css/page_view.css"/>
+    <style type="text/css">
+        .page_wrapper {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        .page_wrapper .page_view {
+            text-align: center;
+        }
+
+        .blog-list-wrap {
+            width: 1000px;
+            margin: 100px auto;
+        }
+
+        .blog-entry {
+            padding: 20px 0;
+        }
+
+        .blog-entry + .blog-entry {
+            border-top: 1px dashed #ccc;
+        }
+
+        .diggit {
+            color: #075db3;
+            text-decoration: none;
+            display: block;
+            float: left;
+            width: 46px;
+            text-align: center;
+            margin-top: 1px;
+        }
+
+        .diggit:hover {
+            color: #075db3;
+            text-decoration: none;
+        }
+
+        .diggit-num {
+            border-radius: 2px;
+            line-height: 30px;
+            display: block;
+            background-color: #FFF5D2;
+        }
+
+        .diggit-text {
+            margin-top: 2px;
+            line-height: 20px;
+            display: block;
+            background-color: #F1F8FA;
+        }
+
+        .h50 {
+            height: 50px;
+        }
+
+        .blog-title,
+        .blog-author {
+            text-decoration: underline;
+            color: #105cb6;
+        }
+
+        .blog-title:visited,
+        .blog-author:visited {
+            text-decoration: underline;
+            color: #551a8b;
+        }
+
+        .blog-title:hover,
+        .blog-author:hover {
+            text-decoration: underline;
+            color: red;
+        }
+
+        .blog-stas {
+            color: #555;
+            text-decoration: none;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .blog-stas:visited {
+            color: #555;
+            text-decoration: none;
+        }
+
+        .blog-stas:hover {
+            color: #555;
+            text-decoration: none;
+        }
+    </style>
+    <title>分页组件</title>
+</head>
+<body>
+<div class="blog-list-wrap">
+    <ul id="blog_list" class="blog-list">
+    </ul>
+    <div class="page_wrapper">
+        <ul id="page_view" class="page_view"></ul>
+    </div>
+</div>
+<script src="/@@CONTEXT_PATHdist/js/lib/sea.js"></script>
+<script src="/@@CONTEXT_PATHdist/js/common.js"></script>
+<script>
+    seajs.use('js/app/pageView.js');
+</script>
+</body>
+</html>
