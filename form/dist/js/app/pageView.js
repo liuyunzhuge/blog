@@ -40,6 +40,7 @@ define(function (require, exports, module) {
                 '</li>'].join('');
         },
         getData = function () {
+            pageView.disable();
             Ajax.get(api.list, pageView.getParams())
                 .done(function (res) {
                     if (res.code == 200) {
@@ -51,7 +52,9 @@ define(function (require, exports, module) {
                         });
                         $blog_list.html(html.join(''));
                     }
-                })
+                }).always(function(){
+                    pageView.enable();
+                });
         },
         $blog_list = $('#blog_list'),
         pageView = new PageView('#page_view', {
