@@ -1,0 +1,63 @@
+
+.page_view {
+    padding: 0;
+    margin: 0;
+}
+.page_view:before,
+.page_view:after {
+    content: " ";
+    display: table;
+}
+.page_view:after {
+    clear: both;
+}
+.page_view > li {
+    display: inline-block;
+}
+.page_view > li + li {
+    margin-left: 10px;
+}
+.page_view > li > a,
+.page_view > li > span {
+    display: block;
+    line-height: 26px;
+    height: 28px;
+    text-align: center;
+    color: #646464;
+    border-radius: 14px;
+    background-color: transparent;
+    border: 1px solid #d1ced1;
+    font-size: 12px;
+    width: 28px;
+    font-weight: 400;
+}
+.page_view > li > a:hover,.page_view > li > a:focus {
+    text-decoration: none;
+}
+.page_view:not(.disabled) > li:not(.disabled) > a:hover,
+.page_view > li.active > a {
+    color: #fff;
+    background-color: #06af79;
+    border-color: #06af79;
+}
+.page_view > li.disabled,
+.disabled.page_view > li {
+    opacity: .7;
+}
+.page_view > li.disabled > a:hover,
+.disabled.page_view > li > a:hover {
+    cursor: not-allowed;
+}
+.page_view > li.page_ell {
+    vertical-align: top;
+}
+.page_view > li.page_ell > span {
+    line-height: 18px;
+}
+.page_view > li.prev > a,
+.page_view > li.next > a,
+.page_view > li.first > a,
+.page_view > li.last > a {
+    width: auto;
+    padding: 0 11px;
+}
