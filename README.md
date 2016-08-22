@@ -47,6 +47,8 @@
 
 3. [利用jquery.validate以及bootstrap的tooltip开发气泡式的表单校验组件](http://www.cnblogs.com/lyzg/p/5679408.html)
 
+4. [简单封装分页功能pageView.js](http://www.cnblogs.com/lyzg/p/5791011.html)
+
 ##h5_demo
 
 该文件夹存放我做的一些h5活动页面的demo，现在放的还比较少，将来会放地更多，对h5活动页面制作感兴趣的话欢迎关注这个文件夹的内容。
