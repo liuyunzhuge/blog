@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link href="loader.css" rel="stylesheet">
+</head>
+<body>
+<div id="loader" class="loader">
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped">
+            <div class="progress-value"></div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="jquery.js"></script>
+<script src="loader.js"></script>
+<script>
+
+    var loader = new Loader('#loader', {
+        onComplete: function () {
+            console.log('loading effect finish!');
+        }
+    });
+
+    loader.setValue(1);
+</script>
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link href="loader.css" rel="stylesheet">
+</head>
+<body>
+<div id="loader" class="loader">
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped">
+            <div class="progress-value"></div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="jquery.js"></script>
+<script src="loader.js"></script>
+<script>
+    var loader = new Loader('#loader', {
+        onComplete: function () {
+            console.log('loading effect finish!');
+        }
+    });
+
+    var Task = function (index, duration) {
+        setTimeout(function () {
+            //异步任务完成进度等于 index / 4
+            loader.setValue(index / 4);
+            console.log('第' + index + '个异步任务执行完毕');
+        }, duration);
+    };
+
+    //模拟四个同时发起的异步任务
+    var task1 = new Task(1, 1000);
+    var task2 = new Task(2, 3000);
+    var task3 = new Task(3, 5000);
+    var task4 = new Task(4, 7000);
+</script>
+</html>
