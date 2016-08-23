@@ -49,6 +49,11 @@
 
 4. [简单封装分页功能pageView.js](http://www.cnblogs.com/lyzg/p/5791011.html)
 
+##lottery
+
+一个简单的根据不同的概率进行抽奖的DEMO。在该DEMO中，我预先定义好了五种类型的数据，用probability表示它们被抽到的概率。最后通过drawLottery
+实现单次的抽奖。
+
 ##h5_demo
 
 该文件夹存放我做的一些h5活动页面的demo，现在放的还比较少，将来会放地更多，对h5活动页面制作感兴趣的话欢迎关注这个文件夹的内容。
