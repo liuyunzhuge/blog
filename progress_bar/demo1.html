@@ -17,13 +17,22 @@
 <script src="jquery.js"></script>
 <script src="loader.js"></script>
 <script>
+    var $bar = $('#loader').find('.progress-bar');
+    var $value = $bar.find('.progress-value');
 
-    var loader = new Loader('#loader', {
-        onComplete: function () {
-            console.log('loading effect finish!');
-        }
-    });
+    var Task = function (index, duration) {
+        setTimeout(function () {
+            var p = (index / 4 * 100).toFixed(0) + '%';
+            $bar.css('width',p);
+            $value.text(p);
+            console.log('第' + index + '个异步任务执行完毕');
+        }, duration);
+    };
 
-    loader.setValue(1);
+    //模拟四个同时发起的异步任务
+    var task1 = new Task(1, 1000);
+    var task2 = new Task(2, 3000);
+    var task3 = new Task(3, 5000);
+    var task4 = new Task(4, 7000);
 </script>
 </html>
