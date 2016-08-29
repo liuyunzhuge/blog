@@ -9,7 +9,7 @@ define(function (require) {
         url: '',
         //数据模板
         tpl: '',
-        //jax请求方法
+        //ajax请求方法
         ajaxMethod: 'get',
         //用来判断什么样的ajax返回才是成功的
         isAjaxResSuccess: function (res) {
@@ -25,6 +25,8 @@ define(function (require) {
         },
         //解析ajax返回的数据
         parseData: $.noop,
+        //组件初始化完毕后的回调
+        afterInit: $.noop,
         //ajax请求之前的事件回调
         beforeAjax: $.noop,
         //ajax请求之后的事件回调
@@ -60,7 +62,7 @@ define(function (require) {
                 //模板方法，方便子类继承实现，在此处添加特有逻辑
                 this.initMiddle();
 
-                //初始化分页组件
+                //初始化分页组件，createPageView方法必须返回跟PageView类似的组件实例
                 this.pageView = this.createPageView();
                 if (this.pageView) {
                     //注册分页事件
@@ -81,6 +83,9 @@ define(function (require) {
                 //预编译模板
                 this.itemTplEngine.compile(opts.tpl);
 
+                //模板方法，方便子类继承实现，在此处添加特有逻辑
+                this.beforeBindEvents();
+
                 //绑定所有事件回调
                 this.bindEvents();
 
@@ -88,10 +93,13 @@ define(function (require) {
                 this.initEnd();
 
                 $element.data(this.dataAttr, this);
+
+                this.trigger('afterInit' + this.namespace);
             },
-            //以下三个为模板方法
+            //以下四个为模板方法
             initStart: $.noop,
             initMiddle: $.noop,
+            beforeBindEvents: $.noop,
             initEnd: $.noop,
             //子类实现此方法，提供分页管理对象
             createPageView: $.noop,
@@ -102,6 +110,9 @@ define(function (require) {
                 var opts = this.options;
 
                 //绑定所有事件回调
+                if (typeof(opts.afterInit) === 'function') {
+                    this.on('afterInit' + this.namespace, $.proxy(opts.afterInit, this));
+                }
                 if (typeof(opts.beforeAjax) === 'function') {
                     this.on('beforeAjax' + this.namespace, $.proxy(opts.beforeAjax, this));
                 }
@@ -144,8 +155,7 @@ define(function (require) {
                 return this.itemTplEngine.render(data);
             },
             refresh: function () {
-
-                _query();
+                _query.call(this);
             },
             //query方法，用来实现列表的数据查询功能
             //外部可将查询参数的值以键值对的形式传递到newFilter参数里面
@@ -191,6 +201,20 @@ define(function (require) {
         }
     }
 
+    //_query函数中关键的模板方法与事件的调用顺序：
+    //method: beforeQuery
+    //event: beforeAjax
+    //1-成功：
+    //  event: success
+    //  event: afterAjax
+    //  method: querySuccess
+    //  event: ready
+    //  method: afterQuery
+    //2-失败：
+    //  event: error
+    //  event: afterAjax
+    //  method: queryError
+    //  method: afterQuery
     function _query() {
         var that = this,
             opts = this.options;
@@ -248,7 +272,7 @@ define(function (require) {
                     that.trigger('afterAjax' + that.namespace);
 
                     //调用子类实现的queryError方法，以便子类实现特定的加载失败的展示逻辑
-                    that.queryError(rows, total);
+                    that.queryError();
                 }
             })
             .fail(function () {
@@ -258,7 +282,7 @@ define(function (require) {
                 that.trigger('afterAjax' + that.namespace);
 
                 //调用子类实现的queryError方法，以便子类实现特定的加载失败的展示逻辑
-                that.queryError([], 0);
+                that.queryError();
             })
             .always(function () {
                 //调用子类实现的afterQuery方法，以便子类实现特定的请求之后的逻辑
