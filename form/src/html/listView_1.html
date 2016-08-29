@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/dist/css/bootstrap.css"/>
-    <link rel="stylesheet" href="/dist/css/reset.css"/>
-    <link rel="stylesheet" href="/dist/css/zxx.lib.css"/>
-    <link rel="stylesheet" href="/dist/css/page_view.css"/>
+    <link rel="stylesheet" href="/@@CONTEXT_PATHdist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/@@CONTEXT_PATHdist/css/reset.css"/>
+    <link rel="stylesheet" href="/@@CONTEXT_PATHdist/css/zxx.lib.css"/>
+    <link rel="stylesheet" href="/@@CONTEXT_PATHdist/css/page_view.css"/>
     <style type="text/css">
         .page_wrapper {
             padding-top: 20px;
@@ -102,17 +102,17 @@
     <title>分页组件</title>
 </head>
 <body>
-<div class="blog-list-wrap">
-    <ul id="blog_list" class="blog-list">
+<div id="blog_list" class="blog-list-wrap">
+    <ul class="blog-list data_list">
     </ul>
     <div class="page_wrapper">
-        <ul id="page_view" class="page_view"></ul>
+        <ul class="page_view"></ul>
     </div>
 </div>
-<script src="/dist/js/lib/sea.js"></script>
-<script src="/dist/js/common.js"></script>
+<script src="/@@CONTEXT_PATHdist/js/lib/sea.js"></script>
+<script src="/@@CONTEXT_PATHdist/js/common.js"></script>
 <script>
-    seajs.use('js/app/pageView.js');
+    seajs.use('js/app/listView_1.js');
 </script>
 </body>
 </html>
