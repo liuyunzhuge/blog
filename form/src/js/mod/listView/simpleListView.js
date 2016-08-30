@@ -14,16 +14,13 @@ define(function (require, exports, module) {
 
     var SimpleListView = Class({
         instanceMembers: {
-            initStart: $.noop,
             initMiddle: function () {
                 var opts = this.options,
                     $element = this.$element;
 
                 //缓存核心的jq对象
                 this.$data_list = $element.find(opts.dataListSelector);
-                this.$page_view = $element.find(opts.pageViewSelector);
             },
-            initEnd: $.noop,
             createPageView: function () {
                 var pageView,
                     that = this,
@@ -31,7 +28,7 @@ define(function (require, exports, module) {
 
                 if (opts.pageView) {
                     //初始化分页组件
-                    pageView = new PageView(this.$page_view, $.extend(opts.pageView, {
+                    pageView = new PageView(this.$element.find(opts.pageViewSelector), $.extend(opts.pageView, {
                         onChange: function () {
                             that.refresh();
                         }
@@ -51,13 +48,8 @@ define(function (require, exports, module) {
                     }
                 }
             },
-            bindEvents: function () {
-                var opts = this.options;
-
-                this.base();
-            },
             querySuccess: function (html, rows, total) {
-                console.log(html);
+                this.$data_list.html(html);
             }
         },
         extend: ListViewBase,
