@@ -1,6 +1,6 @@
-define(function (require, exports, module) {
+define(function (require) {
     var $ = require('jquery'),
-        ms = require('mustache'),
+        MustacheEngine = require('mod/listView/mustacheEngine'),
         PageView = require('mod/pageView'),
         ListViewBase = require('mod/listView/listViewBase'),
         Class = require('mod/class');
@@ -23,31 +23,16 @@ define(function (require, exports, module) {
             },
             createPageView: function () {
                 var pageView,
-                    that = this,
                     opts = this.options;
 
                 if (opts.pageView) {
                     //初始化分页组件
-                    pageView = new PageView(this.$element.find(opts.pageViewSelector), $.extend(opts.pageView, {
-                        onChange: function () {
-                            that.refresh();
-                        }
-                    }));
+                    delete opts.pageView.onChange;
+                    pageView = new PageView(this.$element.find(opts.pageViewSelector), $.extend(opts.pageView));
                 }
                 return pageView;
             },
-            createTplEngine: function () {
-                var tpl;
-                return {
-                    compile: function (_tpl) {
-                        ms.parse(_tpl);
-                        tpl = _tpl;
-                    },
-                    render: function (source) {
-                        return ms.render(tpl, source);
-                    }
-                }
-            },
+            createTplEngine: MustacheEngine,
             querySuccess: function (html, rows, total) {
                 this.$data_list.html(html);
             }
