@@ -7,35 +7,27 @@ define(function (require, exports, module) {
         list: './api/pageView.json',
     };
 
-
     var l = window.l = new ListView('#blog_list', {
         url: api.list,
-        tpl: '{{#rows}}{{title}},{{/rows}}',
+        tpl: ['{{#rows}}<li class="blog-entry">',
+            '    <a href="#" class="diggit">',
+            '        <span class="diggit-num">{{like}}</span>',
+            '        <span class="diggit-text">推荐</span>',
+            '    </a>',
+            '    <div class="cell pl15">',
+            '        <h3 class="f14 mb5 lh18"><a href="#" class="blog-title">{{title}}</a></h3>',
+            '        <p class="pt5 mb5 lh24 g3 fix">',
+            '            <img src="{{avatar}}" alt="" class="bdc p1 w50 h50 l mr5">{{content}}</p>',
+            '        <p class="mt10 lh20"><a href="#" class="blog-author">{{author}}</a><span class="dib ml15 mr15">发布于 {{publish_time}}</span><a',
+            '                href="#" class="blog-stas">评论({{comment}})</a><a href="#" class="blog-stas">阅读({{read}})</a></p>',
+            '    </div>',
+            '</li>{{/rows}}'].join(''),
         parseData: function (data) {
-            console.log('parseData');
             return {
                 rows: data
             }
-        },
-        //ajax请求之前的事件回调
-        beforeAjax: function (data) {
-            console.log('beforeAjax');
-        },
-        //ajax请求之后的事件回调
-        afterAjax: function (data) {
-            console.log('afterAjax');
-        },
-        //ajax请求成功的事件回调
-        success: function (data) {
-            console.log('success');
-        },
-        //ajax请求失败的事件回调
-        error: function (data) {
-            console.log('error');
-        },
-        //列表每次渲染后的事件回调
-        ready: function (data) {
-            console.log('ready')
         }
     });
+
+    l.query();
 });
