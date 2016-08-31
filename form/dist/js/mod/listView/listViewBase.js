@@ -62,7 +62,9 @@ define(function (require) {
                 //模板方法，方便子类继承实现，在此处添加特有逻辑
                 this.initMiddle();
 
-                //初始化分页组件，createPageView方法必须返回跟PageView类似的组件实例
+                //初始化分页组件
+                //createPageView必须返回继承了PageViewBase类的实例
+                //这里没有做强的约束，只能靠编码规范来约束
                 this.pageView = this.createPageView();
                 if (this.pageView) {
                     //注册分页事件
@@ -72,16 +74,9 @@ define(function (require) {
                 }
 
                 //初始化模板管理组件，用于列表数据的渲染
+                //createTplEngine必须返回继承了TplBase类的实例
+                //这里没有做强的约束，只能靠编码规范来约束
                 this.itemTplEngine = this.createTplEngine();
-                //要求模板管理组件必须有compile跟render方法
-                if (!('compile' in this.itemTplEngine)) {
-                    throw 'tplEngine must have comple method';
-                }
-                if (!('render' in this.itemTplEngine)) {
-                    throw 'tplEngine must have render method';
-                }
-                //预编译模板
-                this.itemTplEngine.compile(opts.tpl);
 
                 //模板方法，方便子类继承实现，在此处添加特有逻辑
                 this.beforeBindEvents();
