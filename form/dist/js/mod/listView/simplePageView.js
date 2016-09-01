@@ -185,7 +185,10 @@ define(function (require, exports, module) {
         extend: PageViewBase,
         staticMembers: {
             DEFAULTS: DEFAULTS,
-            dataAttr: 'simplePageView'
+            dataAttr: 'simplePageView',
+            create: function(){
+                return $('<div class="page_wrapper"><ul class="page_view"></ul></div>');
+            }
         }
     });
 

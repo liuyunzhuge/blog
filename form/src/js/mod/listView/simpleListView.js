@@ -28,6 +28,7 @@ define(function (require) {
                 if (opts.pageView) {
                     //初始化分页组件
                     delete opts.pageView.onChange;
+                    this.$element.append(SimplePageView.create());
                     pageView = new SimplePageView(this.$element.find(opts.pageViewSelector), $.extend(opts.pageView));
                 }
                 return pageView;
