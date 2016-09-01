@@ -1,8 +1,8 @@
 define(function (require) {
     var $ = require('jquery'),
-        MustacheEngine = require('mod/listView/mustacheEngine'),
-        PageView = require('mod/pageView'),
-        ListViewBase = require('mod/listView/listViewBase'),
+        MustacheTpl = require('mod/listView/MustacheTpl'),
+        SimplePageView = require('mod/listView/simplePageView'),
+        ListViewBase = require('mod/listView/base/listViewBase'),
         Class = require('mod/class');
 
     var DEFAULTS = $.extend({}, ListViewBase.DEFAULTS, {
@@ -28,11 +28,14 @@ define(function (require) {
                 if (opts.pageView) {
                     //初始化分页组件
                     delete opts.pageView.onChange;
-                    pageView = new PageView(this.$element.find(opts.pageViewSelector), $.extend(opts.pageView));
+                    this.$element.append(SimplePageView.create());
+                    pageView = new SimplePageView(this.$element.find(opts.pageViewSelector), $.extend(opts.pageView));
                 }
                 return pageView;
             },
-            createTplEngine: MustacheEngine,
+            createTplEngine: function(){
+                return new MustacheTpl(this.options.tpl);
+            },
             querySuccess: function (html, rows, total) {
                 this.$data_list.html(html);
             }

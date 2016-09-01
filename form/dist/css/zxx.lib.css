@@ -234,12 +234,6 @@ div.dib{*display:inline; *zoom:1;}/* other block level tag(eg. p, li, h1~h6), us
 .f24{font-size:24px;}
 .f28{font-size:28px;}
 /* font-family */
-.fa{font-family:Arial;}
-.ft{font-family:Tahoma;}
-.fv{font-family:Verdana;}
-.fs{font-family:Simsun;}
-.fl{font-family:'Lucida Console';}
-.fw{font-family:'Microsoft Yahei';}
 /* font-style */
 .n{font-weight:normal; font-style:normal; white-space: normal;}
 .b{font-weight:bold;}

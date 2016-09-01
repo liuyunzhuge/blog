@@ -37,7 +37,8 @@ define(function (require) {
         error: $.noop,
         //列表每次渲染后的事件回调
         ready: $.noop,
-        pageView: {}
+        pageView: {},
+        sortView: false
     };
 
     var ListViewBase = Class({
@@ -62,7 +63,9 @@ define(function (require) {
                 //模板方法，方便子类继承实现，在此处添加特有逻辑
                 this.initMiddle();
 
-                //初始化分页组件，createPageView方法必须返回跟PageView类似的组件实例
+                //初始化分页组件
+                //createPageView必须返回继承了PageViewBase类的实例
+                //这里没有做强的约束，只能靠编码规范来约束
                 this.pageView = this.createPageView();
                 if (this.pageView) {
                     //注册分页事件
@@ -72,16 +75,21 @@ define(function (require) {
                 }
 
                 //初始化模板管理组件，用于列表数据的渲染
+                //createTplEngine必须返回继承了TplBase类的实例
+                //这里没有做强的约束，只能靠编码规范来约束
                 this.itemTplEngine = this.createTplEngine();
-                //要求模板管理组件必须有compile跟render方法
-                if (!('compile' in this.itemTplEngine)) {
-                    throw 'tplEngine must have comple method';
+
+
+                //初始化排序组件
+                //createSortView必须返回继承了SortViewBase类的实例
+                //这里没有做强的约束，只能靠编码规范来约束
+                this.sortView = this.createSortView();
+                if (this.sortView) {
+                    //注册排序事件
+                    this.sortView.on('sortViewChange', function () {
+                        that.refresh();
+                    });
                 }
-                if (!('render' in this.itemTplEngine)) {
-                    throw 'tplEngine must have render method';
-                }
-                //预编译模板
-                this.itemTplEngine.compile(opts.tpl);
 
                 //模板方法，方便子类继承实现，在此处添加特有逻辑
                 this.beforeBindEvents();
@@ -105,6 +113,8 @@ define(function (require) {
             createPageView: $.noop,
             //子类实现此方法，提供模板管理对象
             createTplEngine: $.noop,
+            //子类实现此方法，提供排序管理对象
+            createSortView: $.noop,
             //子类可以覆盖此方法，以便添加更多的事件管理，但是在实现此方法时，一定要通过this.base调用父类的方法
             bindEvents: function () {
                 var opts = this.options;
@@ -147,8 +157,11 @@ define(function (require) {
                 return this.constructor.DEFAULTS;
             },
             getParams: function () {
-                //参数由：分页，查询条件以及排序字段构成
-                return $.extend({}, this.pageView ? this.pageView.getParams() : {}, this.filter);
+                //参数由：分页，排序字段以及查询条件构成
+                return $.extend({},
+                    this.pageView ? this.pageView.getParams() : {},
+                    this.sortView ? this.sortView.getParams() : {},
+                    this.filter);
             },
             renderData: function (data) {
                 //通过模板引擎渲染数据

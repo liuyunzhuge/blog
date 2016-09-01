@@ -16,7 +16,7 @@ define(function (require, exports, module) {
             });
             return obj;
         })(),
-        baseUrl = location.protocol + '//' + location.hostname + (location.port == '' ? '' : (':' + location.port)) + '/' + '',
+        baseUrl = location.protocol + '//' + location.hostname + (location.port == '' ? '' : (':' + location.port)) + '/' + 'blog/form/',
         _getUrl = function (url) {
             return baseUrl + (url || '');
         };

@@ -5,9 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/@@CONTEXT_PATHdist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/@@CONTEXT_PATHdist/css/font-awesome.css"/>
     <link rel="stylesheet" href="/@@CONTEXT_PATHdist/css/reset.css"/>
     <link rel="stylesheet" href="/@@CONTEXT_PATHdist/css/zxx.lib.css"/>
     <link rel="stylesheet" href="/@@CONTEXT_PATHdist/css/page_view.css"/>
+    <link rel="stylesheet" href="/@@CONTEXT_PATHdist/css/sort_view.css"/>
     <style type="text/css">
         .page_wrapper {
             padding-top: 20px;
@@ -103,11 +105,14 @@
 </head>
 <body>
 <div id="blog_list" class="blog-list-wrap">
+    <div>按住shift键，再点击排序项，最后松开shift键，可进行多列排序</div>
+    <div id="sort_view" class="btn-group sort_view">
+        <button type="button" data-name="name" class="btn btn-default sort_item sort_asc">名称 <i class="sort_icon"></i></button>
+        <button type="button" data-name="sales" class="btn btn-default sort_item sort_desc">销量 <i class="sort_icon"></i></button>
+        <button type="button" data-name="time" class="btn btn-default sort_item">时间 <i class="sort_icon"></i></button>
+    </div>
     <ul class="blog-list data_list">
     </ul>
-    <div class="page_wrapper">
-        <ul class="page_view"></ul>
-    </div>
 </div>
 <script src="/@@CONTEXT_PATHdist/js/lib/sea.js"></script>
 <script src="/@@CONTEXT_PATHdist/js/common.js"></script>
