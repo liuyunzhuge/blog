@@ -13,37 +13,54 @@ define(function (require, exports, module) {
         var $document = $(document),
             multiple = false,
             $sort_view = $('#sort_view'),
-            sortFields = new SortFields([
-                {field: 'name', value: ''},
-                {field: 'sales', value: 'desc', order: 2, type: 'int'},
-                {field: 'time', value: 'asc', order: 1, type: 'datetime'}
-            ]);
+            $sort_items = $sort_view.find('.sort_item'),
+            renderSortView = function(){
+                this.getConfig().forEach(function(fieldDef){
+                    var $target = $sort_items.filter('[data-name="' + fieldDef.field + '"]');
 
-        $sort_view.on('click', 'button', function(){
-            var $this = $(this);
+                    $target.removeClass('sort_asc sort_desc');
 
-            if(!multiple) {
-                sortFields.startSort();
-            }
+                    if(fieldDef.value !== 'no') {
+                        $target.addClass('sort_' + fieldDef.value);
+                    }
+                });
+            },
+            sortFields = new SortFields({
+                config: [
+                    {field: 'name', value: ''},
+                    {field: 'sales', value: 'desc', order: 2, type: 'int'},
+                    {field: 'time', value: 'asc', order: 1, type: 'datetime'}
+                ],
+                onInit: renderSortView,
+                onSortChange: renderSortView
+            });
 
-            sortFields.nextState($this.data('name'));
-
-            if(!multiple) {
-                sortFields.endSort();
-            }
-        });
 
         $document.on('keydown', function (e) {
             if (e.which == 16) {
                 multiple = true;
-                sortFields.startSort();
             }
         }).on('keyup', function (e) {
             if (e.which == 16 && multiple) {
                 multiple = false;
-                sortFields.endSort();
+
+                //todo checkif sortFields change
+                //if change ,trigger self change event
+                console.log('multiple change');
             }
         });
+
+        $sort_view.on('click', 'button', function(){
+            var $this = $(this);
+            sortFields.changeState($this.data('name'), multiple);
+
+            if(!multiple) {
+                //todo checkif sortFields change
+                //if change ,trigger self change event
+                console.log('single change');
+            }
+        });
+
     })();
 
     var list = new ListView('#blog_list', {
