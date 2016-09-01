@@ -59,7 +59,7 @@ define(function (require, exports, module) {
                 //模板方法，方便子类继承实现，在此处添加特有逻辑
                 this.initEnd();
 
-                $element && $element.data('pageView', this);
+                $element && $element.data(this.dataAttr, this);
                 this.trigger('pageViewInit' + this.namespace);
             },
             getOptions: function (options) {
@@ -96,6 +96,7 @@ define(function (require, exports, module) {
                 }
 
             },
+            //私有方法，设置分页信息对象
             _setup: function (total) {
                 //分页信息对象，可用于渲染UI
                 var data = this.data = {};
