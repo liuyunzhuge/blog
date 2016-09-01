@@ -1,13 +1,52 @@
 define(function (require, exports, module) {
 
     var $ = require('jquery'),
-        ListView = require('mod/listView/simpleListView');
+        ListView = require('mod/listView/simpleListView'),
+        SortFields = window.SF = require('mod/listView/sortFields');
 
     var api = {
         list: './api/pageView.json',
     };
 
-    var l = window.l = new ListView('#blog_list', {
+
+    (function () {
+        var $document = $(document),
+            multiple = false,
+            $sort_view = $('#sort_view'),
+            sortFields = new SortFields([
+                {field: 'name', value: ''},
+                {field: 'sales', value: 'desc', order: 2, type: 'int'},
+                {field: 'time', value: 'asc', order: 1, type: 'datetime'}
+            ]);
+
+        $sort_view.on('click', 'button', function(){
+            var $this = $(this);
+
+            if(!multiple) {
+                sortFields.startSort();
+            }
+
+            sortFields.nextState($this.data('name'));
+
+            if(!multiple) {
+                sortFields.endSort();
+            }
+        });
+
+        $document.on('keydown', function (e) {
+            if (e.which == 16) {
+                multiple = true;
+                sortFields.startSort();
+            }
+        }).on('keyup', function (e) {
+            if (e.which == 16 && multiple) {
+                multiple = false;
+                sortFields.endSort();
+            }
+        });
+    })();
+
+    var list = new ListView('#blog_list', {
         url: api.list,
         tpl: ['{{#rows}}<li class="blog-entry">',
             '    <a href="#" class="diggit">',
@@ -29,5 +68,5 @@ define(function (require, exports, module) {
         }
     });
 
-    l.query();
+    list.query();
 });

@@ -2,7 +2,7 @@ define(function (require) {
     var $ = require('jquery'),
         MustacheTpl = require('mod/listView/MustacheTpl'),
         SimplePageView = require('mod/listView/simplePageView'),
-        ListViewBase = require('mod/listView/listViewBase'),
+        ListViewBase = require('mod/listView/base/listViewBase'),
         Class = require('mod/class');
 
     var DEFAULTS = $.extend({}, ListViewBase.DEFAULTS, {

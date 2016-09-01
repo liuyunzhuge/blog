@@ -1,5 +1,5 @@
 define(function (require) {
-    var TplBase = require('mod/listView/tplBase'),
+    var TplBase = require('mod/listView/base/tplBase'),
         ms = require('mustache'),
         Class = require('mod/class');
 

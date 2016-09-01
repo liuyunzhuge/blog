@@ -1,6 +1,6 @@
 define(function (require, exports, module) {
     var $ = require('jquery'),
-        PageViewBase = require('mod/listView/pageViewBase'),
+        PageViewBase = require('mod/listView/base/pageViewBase'),
         Class = require('mod/class');
 
     var DEFAULTS = $.extend({}, PageViewBase.DEFAULTS, {
