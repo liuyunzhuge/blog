@@ -1,67 +1,10 @@
-define(function (require, exports, module) {
+define(function (require) {
 
     var $ = require('jquery'),
         ListView = require('mod/listView/simpleListView'),
-        SortFields = window.SF = require('mod/listView/sortFields');
-
-    var api = {
-        list: './api/pageView.json',
-    };
-
-
-    (function () {
-        var $document = $(document),
-            multiple = false,
-            $sort_view = $('#sort_view'),
-            $sort_items = $sort_view.find('.sort_item'),
-            renderSortView = function(){
-                this.getConfig().forEach(function(fieldDef){
-                    var $target = $sort_items.filter('[data-name="' + fieldDef.field + '"]');
-
-                    $target.removeClass('sort_asc sort_desc');
-
-                    if(fieldDef.value !== 'no') {
-                        $target.addClass('sort_' + fieldDef.value);
-                    }
-                });
-            },
-            sortFields = new SortFields({
-                config: [
-                    {field: 'name', value: ''},
-                    {field: 'sales', value: 'desc', order: 2, type: 'int'},
-                    {field: 'time', value: 'asc', order: 1, type: 'datetime'}
-                ],
-                onInit: renderSortView,
-                onSortChange: renderSortView
-            });
-
-
-        $document.on('keydown', function (e) {
-            if (e.which == 16) {
-                multiple = true;
-            }
-        }).on('keyup', function (e) {
-            if (e.which == 16 && multiple) {
-                multiple = false;
-
-                //todo checkif sortFields change
-                //if change ,trigger self change event
-                console.log('multiple change');
-            }
-        });
-
-        $sort_view.on('click', 'button', function(){
-            var $this = $(this);
-            sortFields.changeState($this.data('name'), multiple);
-
-            if(!multiple) {
-                //todo checkif sortFields change
-                //if change ,trigger self change event
-                console.log('single change');
-            }
-        });
-
-    })();
+        api = {
+            list: './api/pageView.json',
+        };
 
     var list = new ListView('#blog_list', {
         url: api.list,
@@ -82,6 +25,26 @@ define(function (require, exports, module) {
             return {
                 rows: data
             }
+        },
+        sortView: {
+            config: [
+                {field: 'name', value: ''},
+                {field: 'sales', value: 'desc', order: 2, type: 'int'},
+                {field: 'time', value: 'asc', order: 1, type: 'datetime'}
+            ]
+        },
+        beforeAjax: function () {
+            var html = [],
+                params = list.getParams(),
+                hasOwn = Object.prototype.hasOwnProperty;
+
+            for(var i in params) {
+                if(hasOwn.call(params,i)) {
+                    html.push('<p>' + i + ' : ' + JSON.stringify(params[i]) +  '</p>');
+                }
+            }
+
+            $('#log').html(html.join(''));
         }
     });
 

@@ -22,7 +22,14 @@
 
         .blog-list-wrap {
             width: 1000px;
-            margin: 100px auto;
+            margin: 0 auto;
+        }
+
+        #log_wrap {
+            margin: 10px auto;
+            width: 1000px;
+            border: 1px dashed #ccc;
+            padding: 10px;
         }
 
         .blog-entry {
@@ -104,6 +111,12 @@
     <title>分页组件</title>
 </head>
 <body>
+<div id="log_wrap">
+    当前所有参数：
+    <div id="log">
+
+    </div>
+</div>
 <div id="blog_list" class="blog-list-wrap">
     <div>按住shift键，再点击排序项，最后松开shift键，可进行多列排序</div>
     <div id="sort_view" class="btn-group sort_view">
