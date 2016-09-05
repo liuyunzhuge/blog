@@ -37,7 +37,7 @@ define(function (require, exports, module) {
                         that.multiple = true;
                     }
                 }).on('keyup' + this.namespace + '.' + rnd, function (e) {
-                    if (e.which == 16) {
+                    if (e.which == 16 && that.multiple) {
                         that.multiple = false;
                         //shift键抬起的时候，结束多列排序
                         that.sortFields.endSort();
