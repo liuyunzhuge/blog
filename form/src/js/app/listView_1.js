@@ -14,7 +14,7 @@ define(function (require) {
             '        <span class="diggit-text">推荐</span>',
             '    </a>',
             '    <div class="cell pl15">',
-            '        <h3 class="f14 mb5 lh18"><a href="#" class="blog-title">{{title}}</a></h3>',
+            '        <h3 class="f14 mb5 lh18"><a href="#" class="blog-title">{{title}}{{index}}</a></h3>',
             '        <p class="pt5 mb5 lh24 g3 fix">',
             '            <img src="{{avatar}}" alt="" class="bdc p1 w50 h50 l mr5">{{content}}</p>',
             '        <p class="mt10 lh20"><a href="#" class="blog-author">{{author}}</a><span class="dib ml15 mr15">发布于 {{publish_time}}</span><a',
@@ -22,9 +22,19 @@ define(function (require) {
             '    </div>',
             '</li>{{/rows}}'].join(''),
         parseData: function (data) {
+            var start = list.pageView.data.start;
+
+            data.forEach(function (d) {
+                d.index = start;
+                start = start + 1;
+            });
+
             return {
                 rows: data
             }
+        },
+        pageView: {
+            defaultSize: 3
         },
         sortView: {
             config: [
@@ -38,9 +48,9 @@ define(function (require) {
                 params = list.getParams(),
                 hasOwn = Object.prototype.hasOwnProperty;
 
-            for(var i in params) {
-                if(hasOwn.call(params,i)) {
-                    html.push('<p>' + i + ' : ' + JSON.stringify(params[i]) +  '</p>');
+            for (var i in params) {
+                if (hasOwn.call(params, i)) {
+                    html.push('<p>' + i + ' : ' + JSON.stringify(params[i]) + '</p>');
                 }
             }
 
