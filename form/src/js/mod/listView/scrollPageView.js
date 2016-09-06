@@ -19,6 +19,18 @@ define(function (require, exports, module) {
         that.trigger('pageViewChange');
     }
 
+    function getComputedValue(element, prop) {
+        var computedStyle = window.getComputedStyle(element, null);
+        if (!computedStyle) return null;
+        if (computedStyle.getPropertyValue) {
+            return computedStyle.getPropertyValue(prop);
+        } else if (computedStyle.getAttribute) {
+            return computedStyle.getAttribute(prop);
+        } else if (computedStyle[prop]) {
+            return computedStyle[prop];
+        }
+    }
+
     var ScrollPageView = Class({
         instanceMembers: {
             initMiddle: function () {
@@ -50,25 +62,18 @@ define(function (require, exports, module) {
 
                         var targetHeight, bottom;
 
-                        if(!opts.$target) {
+                        if (!opts.$target) {
                             targetHeight = document.documentElement.clientHeight;
                             bottom = opts.$element[0].getBoundingClientRect().bottom;
                         } else {
                             targetHeight = opts.$target[0].clientHeight;
 
-                            var leftHeight = opts.$target[0].offsetHeight - targetHeight,
-                                targetRect = opts.$target[0].getBoundingClientRect(),
-                                targetBottom = targetRect.bottom,
-                                elemRect = opts.$element[0].getBoundingClientRect(),
-                                elemBottom = elemRect.bottom;
+                            var targetRect = opts.$target[0].getBoundingClientRect(),
+                                targetBorderTop = parseInt(getComputedValue(opts.$target[0], 'border-top-width')),
+                                elemRect = opts.$element[0].getBoundingClientRect();
 
-                            bottom = elemBottom - targetRect.top - (leftHeight - (targetBottom - elemBottom));
+                            bottom = elemRect.bottom - targetRect.top - (isNaN(targetBorderTop) ? 0 : targetBorderTop);
                         }
-
-                        console.log(targetHeight)
-                        console.log(bottom)
-
-                        return;
 
                         if ((bottom + opts.offset) < targetHeight) {
                             pageIndexChange(that.pageIndex + 1, that);
@@ -77,7 +82,8 @@ define(function (require, exports, module) {
                 }, 100);
             },
             disabledScrollPage: function () {
-                this.options.$element && $(window).on('scroll' + this.namespace + '.' + this.namespace_rnd);
+                var opts = this.options;
+                opts.$element && (opts.$target ? opts.$target : $(window)).on('scroll' + this.namespace + '.' + this.namespace_rnd);
             }
         },
         extend: PageViewBase,
