@@ -1,0 +1,36 @@
+
+
+
+.scroll_list .no_content {
+    text-align: center;
+    color: #ddd;
+    margin: 100px auto;
+    display: none;
+}
+
+.scroll_list .no_more {
+    text-align: center;
+    color: #ddd;
+    line-height: 40px;
+    display: none;
+}
+
+.scroll_list .loading_top,
+.scroll_list .loading_bottom {
+    text-align: center;
+    line-height: 40px;
+    color: #333;
+    display: none;
+}
+
+.scroll_list .btn_load_more {
+    display: block;
+    max-width: 200px;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 4px;
+    line-height: 40px;
+    color: #333;
+    border: 1px solid #333;
+    display: none;
+}

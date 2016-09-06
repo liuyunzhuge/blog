@@ -141,12 +141,12 @@ define(function (require, exports, module) {
             //启用
             enable: function () {
                 this.disabled = false;
-                this.$element.removeClass('disabled');
+                this.$element && this.$element.removeClass('disabled');
             },
             //禁用
             disable: function () {
                 this.disabled = true;
-                this.$element.addClass('disabled');
+                this.$element && this.$element.addClass('disabled');
             }
         },
         extend: EventBase,

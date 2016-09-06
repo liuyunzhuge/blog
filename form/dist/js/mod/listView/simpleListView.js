@@ -50,7 +50,7 @@ define(function (require) {
             createTplEngine: function () {
                 return new MustacheTpl(this.options.tpl);
             },
-            querySuccess: function (html, rows, total) {
+            querySuccess: function (html, args) {
                 this.$data_list.html(html);
             }
         },

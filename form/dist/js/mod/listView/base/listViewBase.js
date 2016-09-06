@@ -35,8 +35,6 @@ define(function (require) {
         success: $.noop,
         //ajax请求失败的事件回调
         error: $.noop,
-        //列表每次渲染后的事件回调
-        ready: $.noop,
         //PageView相关的option，为空表示不采用分页
         pageView: {},
         //SortView相关的option，为空表示不采用排序管理
@@ -138,9 +136,6 @@ define(function (require) {
                 if (typeof(opts.error) === 'function') {
                     this.on('error' + this.namespace, $.proxy(opts.error, this));
                 }
-                if (typeof(opts.ready) === 'function') {
-                    this.on('ready' + this.namespace, $.proxy(opts.ready, this));
-                }
             },
             getOptions: function (options) {
                 var defaults = this.getDefaults(),
@@ -171,22 +166,18 @@ define(function (require) {
                 return this.itemTplEngine.render(data);
             },
             refresh: function () {
-                _query.call(this);
+                _query.call(this, false);
             },
             //query方法，用来实现列表的数据查询功能
             //外部可将查询参数的值以键值对的形式传递到newFilter参数里面
             query: function (newFilter, append) {
-                //更新查询条件
-                updateFilter.call(this, newFilter, append);
-
-                //重置分页组件
-                this.pageView && this.pageView.reset();
-
                 //调用_query
-                _query.call(this);
+                _query.call(this, true, newFilter, append);
             },
             //模板方法，供子类实现，方便添加请求前的逻辑
             beforeQuery: $.noop,
+            //模板方法，供子类实现，方便添加查询取消时的逻辑
+            queryCancel: $.noop,
             //模板方法，供子类实现，方便添加后请求后的逻辑
             afterQuery: $.noop,
             //模板方法，供子类实现，方便添加请求成功后的逻辑
@@ -219,26 +210,37 @@ define(function (require) {
 
     //_query函数中关键的模板方法与事件的调用顺序：
     //method: beforeQuery
+    //[method: queryCancel]
     //event: beforeAjax
     //1-成功：
-    //  event: success
-    //  event: afterAjax
     //  method: querySuccess
-    //  event: ready
+    //  event: success
     //  method: afterQuery
-    //2-失败：
-    //  event: error
     //  event: afterAjax
+    //2-失败：
     //  method: queryError
+    //  event: error
     //  method: afterQuery
-    function _query() {
+    //  event: afterAjax
+    function _query(clear, newFilter, append) {
         var that = this,
             opts = this.options;
 
-        if (!opts.url) return;
+        if (!opts.url) return false;
 
         //调用子类可能实现了的beforeQuery方法，以便为该子类添加统一的一些query前的逻辑
-        if (this.beforeQuery() === false) return;
+        if (this.beforeQuery(clear) === false) {
+            this.queryCancel(clear);
+            return false;
+        }
+
+        if (clear) {
+            //更新查询条件
+            updateFilter.call(this, newFilter, append);
+
+            //重置分页组件
+            this.pageView && this.pageView.reset();
+        }
 
         //禁用分页组件，防止重复操作
         this.pageView && this.pageView.disable();
@@ -247,13 +249,9 @@ define(function (require) {
         this.sortView && opts.resetSortWhenQuery && this.sortView.reset();
 
         //触发beforeAjax事件，以便外部根据特有的场景添加特殊的逻辑
-        var e = $.Event('beforeAjax' + this.namespace);
-        this.trigger(e);
-        if (e.isDefaultPrevented()) {
-            return;
-        }
+        this.trigger('beforeAjax' + this.namespace);
 
-        Ajax[opts.ajaxMethod](opts.url, this.getParams())
+        return Ajax[opts.ajaxMethod](opts.url, this.getParams())
             .done(function (res) {
                 //判断ajax是否请求成功
                 var isSuccess = opts.isAjaxResSuccess(res),
@@ -270,47 +268,56 @@ define(function (require) {
                     //刷新分页组件
                     that.pageView && that.pageView.refresh(total);
 
-                    //触发success事件，以便外部根据特有的场景添加特殊的逻辑
-                    that.trigger('success' + that.namespace);
-                    //触发afterAjax事件，以便外部根据特有的场景添加特殊的逻辑
-                    that.trigger('afterAjax' + that.namespace);
-
                     var parsedRows = opts.parseData(rows);
                     if (!parsedRows) {
                         parsedRows = rows;
                     }
 
                     //调用子类实现的querySuccess方法，通常在这个方法内做列表DOM的渲染
-                    that.querySuccess(that.renderData(parsedRows), parsedRows, total);
+                    that.querySuccess(that.renderData(parsedRows), {
+                        clear: clear,
+                        rows: rows,
+                        total: total,
+                        parsedRows: parsedRows
+                    });
 
-                    //触发ready事件，以便外部根据特有的场景添加特殊的逻辑
-                    that.trigger('ready' + that.namespace);
-                } else {
-                    //触发error事件，以便外部根据特有的场景添加特殊的逻辑
-                    that.trigger('error' + that.namespace);
+                    //触发success事件，以便外部根据特有的场景添加特殊的逻辑
+                    that.trigger('success' + that.namespace);
+
+                    _always();
+
                     //触发afterAjax事件，以便外部根据特有的场景添加特殊的逻辑
                     that.trigger('afterAjax' + that.namespace);
-
-                    //调用子类实现的queryError方法，以便子类实现特定的加载失败的展示逻辑
-                    that.queryError();
+                } else {
+                    _fail();
                 }
             })
-            .fail(function () {
-                //触发error事件，以便外部根据特有的场景添加特殊的逻辑
-                that.trigger('error' + that.namespace);
-                //触发afterAjax事件，以便外部根据特有的场景添加特殊的逻辑
-                that.trigger('afterAjax' + that.namespace);
+            .fail(_fail);
 
-                //调用子类实现的queryError方法，以便子类实现特定的加载失败的展示逻辑
-                that.queryError();
-            })
-            .always(function () {
-                //调用子类实现的afterQuery方法，以便子类实现特定的请求之后的逻辑
-                that.afterQuery();
-
-                //重新恢复分页组件的操作
-                that.pageView && that.pageView.enable();
+        function _fail() {
+            //调用子类实现的queryError方法，以便子类实现特定的加载失败的展示逻辑
+            that.queryError({
+                clear: clear
             });
+
+            //触发error事件，以便外部根据特有的场景添加特殊的逻辑
+            that.trigger('error' + that.namespace);
+
+            _always();
+
+            //触发afterAjax事件，以便外部根据特有的场景添加特殊的逻辑
+            that.trigger('afterAjax' + that.namespace);
+        }
+
+        function _always(){
+            //重新恢复分页组件的操作
+            that.pageView && that.pageView.enable();
+
+            //调用子类实现的afterQuery方法，以便子类实现特定的请求之后的逻辑
+            that.afterQuery({
+                clear: clear
+            });
+        }
     }
 
     return ListViewBase;

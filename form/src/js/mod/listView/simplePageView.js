@@ -34,7 +34,7 @@ define(function (require, exports, module) {
     var SimplePageView = Class({
         instanceMembers: {
             bindEvents: function () {
-                //子类在实现bindEvent时，必须先调用父类的同名方法
+                //子类在实现bindEvents时，必须先调用父类的同名方法
                 this.base();
 
                 var that = this,
