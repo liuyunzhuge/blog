@@ -116,13 +116,9 @@ define(function (require) {
                 return new MustacheTpl(this.options.tpl);
             },
             beforeQuery: function (clear) {
-                var states = this.states;
-                //翻页查询时，如果当前的状态是no_content或者no_more，则直接返回
-                if (!clear && (states.isNoContent() || states.isNomore())) return false;
-
                 //如果clear为true，则显示顶部的加载状态，表示正在进行新条件的列表查询
                 //否则显示底部的加载状态，表示正在进行翻页查询
-                states.set(clear ? 'loading_top' : 'loading_bottom');
+                this.states.set(clear ? 'loading_top' : 'loading_bottom');
             },
             querySuccess: function (html, args) {
                 var pageView = this.pageView,
