@@ -61,9 +61,12 @@ define(function (require, exports, module) {
                 this.scroller = scroller;
 
                 var that = this,
-                    opts = this.options,
-                    $target = opts.$element.parent();
+                    opts = this.options;
 
+                if (!opts.scrollPage) return;
+                if (!opts.$element) return;
+
+                var $target = opts.$element.parent();
                 this.scrollCallback = throttle(function () {
                     if (that.disabled) return;
 
