@@ -41,6 +41,8 @@ define(function (require) {
         sortView: false,
         //在调用query方法的时候，是否自动对SortView进行reset
         resetSortWhenQuery: false,
+        //查询延时
+        queryDelay: 0,
     };
 
     var ListViewBase = Class({
@@ -166,13 +168,13 @@ define(function (require) {
                 return this.itemTplEngine.render(data);
             },
             refresh: function () {
-                _query.call(this, false);
+                return _query.call(this, false);
             },
             //query方法，用来实现列表的数据查询功能
             //外部可将查询参数的值以键值对的形式传递到newFilter参数里面
             query: function (newFilter, append) {
                 //调用_query
-                _query.call(this, true, newFilter, append);
+                return _query.call(this, true, newFilter, append);
             },
             //模板方法，供子类实现，方便添加请求前的逻辑
             beforeQuery: $.noop,
@@ -251,48 +253,66 @@ define(function (require) {
         //触发beforeAjax事件，以便外部根据特有的场景添加特殊的逻辑
         this.trigger('beforeAjax' + this.namespace);
 
-        return Ajax[opts.ajaxMethod](opts.url, this.getParams())
-            .done(function (res) {
-                //判断ajax是否请求成功
-                var isSuccess = opts.isAjaxResSuccess(res),
-                    rows = [],
-                    total = 0;
+        if (opts.queryDelay) {
+            var dtd = $.Deferred();
+            var timer = setTimeout(function () {
+                clearTimeout(timer);
+                _request().done(function () {
+                    dtd.resolve.apply(dtd, arguments);
+                }).fail(function () {
+                    dtd.reject.apply(dtd, arguments);
+                });
+            }, opts.queryDelay);
 
-                if (isSuccess) {
-                    //得到所有行
-                    rows = opts.getRowsFromAjax(res);
+            return $.when(dtd);
+        } else {
+            return _request();
+        }
 
-                    //得到总记录数
-                    total = opts.getTotalFromAjax(res);
+        function _request() {
+            return Ajax[opts.ajaxMethod](opts.url, that.getParams())
+                .done(function (res) {
+                    //判断ajax是否请求成功
+                    var isSuccess = opts.isAjaxResSuccess(res),
+                        rows = [],
+                        total = 0;
 
-                    //刷新分页组件
-                    that.pageView && that.pageView.refresh(total);
+                    if (isSuccess) {
+                        //得到所有行
+                        rows = opts.getRowsFromAjax(res);
 
-                    var parsedRows = opts.parseData(rows);
-                    if (!parsedRows) {
-                        parsedRows = rows;
+                        //得到总记录数
+                        total = opts.getTotalFromAjax(res);
+
+                        //刷新分页组件
+                        that.pageView && that.pageView.refresh(total);
+
+                        var parsedRows = opts.parseData(rows);
+                        if (!parsedRows) {
+                            parsedRows = rows;
+                        }
+
+                        //调用子类实现的querySuccess方法，通常在这个方法内做列表DOM的渲染
+                        that.querySuccess(that.renderData(parsedRows), {
+                            clear: clear,
+                            rows: rows,
+                            total: total,
+                            parsedRows: parsedRows
+                        });
+
+                        //触发success事件，以便外部根据特有的场景添加特殊的逻辑
+                        that.trigger('success' + that.namespace);
+
+                        _always();
+
+                        //触发afterAjax事件，以便外部根据特有的场景添加特殊的逻辑
+                        that.trigger('afterAjax' + that.namespace);
+                    } else {
+                        _fail();
                     }
-
-                    //调用子类实现的querySuccess方法，通常在这个方法内做列表DOM的渲染
-                    that.querySuccess(that.renderData(parsedRows), {
-                        clear: clear,
-                        rows: rows,
-                        total: total,
-                        parsedRows: parsedRows
-                    });
-
-                    //触发success事件，以便外部根据特有的场景添加特殊的逻辑
-                    that.trigger('success' + that.namespace);
-
-                    _always();
-
-                    //触发afterAjax事件，以便外部根据特有的场景添加特殊的逻辑
-                    that.trigger('afterAjax' + that.namespace);
-                } else {
-                    _fail();
-                }
-            })
-            .fail(_fail);
+                })
+                .fail(_fail);
+        }
 
         function _fail() {
             //调用子类实现的queryError方法，以便子类实现特定的加载失败的展示逻辑
@@ -309,7 +329,7 @@ define(function (require) {
             that.trigger('afterAjax' + that.namespace);
         }
 
-        function _always(){
+        function _always() {
             //重新恢复分页组件的操作
             that.pageView && that.pageView.enable();
 

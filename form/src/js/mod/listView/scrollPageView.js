@@ -8,7 +8,9 @@ define(function (require, exports, module) {
         $element: null,
         $target: null,
         scrollPage: true,
-        offset: -100
+        offset: -100,
+        scrollBindDelay: 0,
+        throttle: 100,
     });
 
     function pageIndexChange(pageIndex, that) {
@@ -31,6 +33,17 @@ define(function (require, exports, module) {
         }
     }
 
+    function throttle(func, interval) {
+        var last = Date.now();
+        return function () {
+            var now = Date.now();
+            if ((now - last) > interval) {
+                func.apply(this, arguments);
+                last = now;
+            }
+        }
+    }
+
     var ScrollPageView = Class({
         instanceMembers: {
             initMiddle: function () {
@@ -49,41 +62,55 @@ define(function (require, exports, module) {
                     pageIndexChange(that.pageIndex + 1, that);
                 });
 
-                opts.scrollPage && this.enableScrollPage();
+                setTimeout($.proxy(this.enableScrollPage, this), opts.scrollBindDelay);
             },
             enableScrollPage: function () {
                 var that = this,
                     opts = this.options;
 
+                if(!opts.scrollPage) return;
+
                 //滚动加载更多
                 opts.$element && setTimeout(function () {
-                    (opts.$target ? opts.$target : $(window)).on('scroll' + that.namespace + '.' + that.namespace_rnd, function () {
-                        if (that.disabled) return;
+                    (opts.$target ? opts.$target : $(window)).on('scroll' + that.namespace + '.' + that.namespace_rnd,
+                        throttle(function () {
+                            if (that.disabled) return;
 
-                        var targetHeight, bottom;
+                            var targetHeight, bottom;
 
-                        if (!opts.$target) {
-                            targetHeight = document.documentElement.clientHeight;
-                            bottom = opts.$element[0].getBoundingClientRect().bottom;
-                        } else {
-                            targetHeight = opts.$target[0].clientHeight;
+                            if (!opts.$target) {
+                                targetHeight = document.documentElement.clientHeight;
+                                bottom = opts.$element[0].getBoundingClientRect().bottom;
+                            } else {
+                                targetHeight = opts.$target[0].clientHeight;
 
-                            var targetRect = opts.$target[0].getBoundingClientRect(),
-                                targetBorderTop = parseInt(getComputedValue(opts.$target[0], 'border-top-width')),
-                                elemRect = opts.$element[0].getBoundingClientRect();
+                                var targetRect = opts.$target[0].getBoundingClientRect(),
+                                    targetBorderTop = parseInt(getComputedValue(opts.$target[0], 'border-top-width')),
+                                    elemRect = opts.$element[0].getBoundingClientRect();
 
-                            bottom = elemRect.bottom - targetRect.top - (isNaN(targetBorderTop) ? 0 : targetBorderTop);
-                        }
+                                bottom = elemRect.bottom - targetRect.top - (isNaN(targetBorderTop) ? 0 : targetBorderTop);
+                            }
 
-                        if ((bottom + opts.offset) < targetHeight) {
-                            pageIndexChange(that.pageIndex + 1, that);
-                        }
-                    });
+                            if ((bottom + opts.offset) < targetHeight) {
+                                pageIndexChange(that.pageIndex + 1, that);
+                            }
+                        }, opts.throttle));
                 }, 100);
             },
-            disabledScrollPage: function () {
+            disableScrollPage: function () {
                 var opts = this.options;
-                opts.$element && (opts.$target ? opts.$target : $(window)).on('scroll' + this.namespace + '.' + this.namespace_rnd);
+
+                if(!opts.scrollPage) return;
+
+                opts.$element && (opts.$target ? opts.$target : $(window)).off('scroll' + this.namespace + '.' + this.namespace_rnd);
+            },
+            enable: function(){
+                this.base();
+                this.enableScrollPage();
+            },
+            disable: function(){
+                this.base();
+                this.disableScrollPage();
             }
         },
         extend: PageViewBase,
