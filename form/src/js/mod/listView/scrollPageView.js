@@ -95,7 +95,7 @@ define(function (require, exports, module) {
                                 pageIndexChange(that.pageIndex + 1, that);
                             }
                         }, opts.throttle));
-                }, 100);
+                }, opts.scrollBindDelay);
             },
             disableScrollPage: function () {
                 var opts = this.options;
