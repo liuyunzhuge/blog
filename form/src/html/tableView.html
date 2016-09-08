@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/@@CONTEXT_PATHdist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/@@CONTEXT_PATHdist/css/font-awesome.css"/>
+    <link rel="stylesheet" href="/@@CONTEXT_PATHdist/css/reset.css"/>
+    <link rel="stylesheet" href="/@@CONTEXT_PATHdist/css/zxx.lib.css"/>
+    <link rel="stylesheet" href="/@@CONTEXT_PATHdist/css/page_view.css"/>
+    <link rel="stylesheet" href="/@@CONTEXT_PATHdist/css/table_view.css"/>
+    <style type="text/css">
+        .table_view_wrap {
+            margin: 50px 50px;
+        }
+    </style>
+    <title>表格组件</title>
+</head>
+<body>
+<div class="table_view_wrap">
+    <div class="table_view">
+        <div class="table_view_hd">
+            <table class="table_hd">
+                <colgroup>
+                    <col width="70">
+                    <col width="80">
+                    <col width="90">
+                    <col width="100">
+                    <col width="120">
+                    <col>
+                </colgroup>
+                <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>姓名</th>
+                    <th>联系方式</th>
+                    <th>邮箱</th>
+                    <th>昵称</th>
+                    <th>备注</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="table_view_bd">
+            <table class="table_bd">
+                <colgroup>
+                    <col width="70">
+                    <col width="80">
+                    <col width="90">
+                    <col width="100">
+                    <col width="120">
+                    <col>
+                </colgroup>
+                <tbody>
+                <tr>
+                    <td>序号</td>
+                    <td>姓名</td>
+                    <td>联系方式</td>
+                    <td>邮箱</td>
+                    <td>备注</td>
+                    <td>&nbsp;</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="/@@CONTEXT_PATHdist/js/lib/sea.js"></script>
+<script src="/@@CONTEXT_PATHdist/js/common.js"></script>
+<script>
+    seajs.use('js/app/listView_1.js');
+</script>
+</body>
+</html>

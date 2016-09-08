@@ -1,0 +1,38 @@
+
+.table_view {
+    position: relative;
+}
+
+.table_view .table_hd,
+.table_view .table_bd {
+    border-collapse: collapse;
+    border-spacing: 0;
+    background-color: transparent;
+    width: 100%;
+    border: 1px solid #ddd;
+    max-width: 100%;
+}
+
+.table_view .table_hd > thead {
+    background-image: linear-gradient(#fff,#f7f6f5);
+    background-image: -webkit-linear-gradient(#fff,#f7f6f5);
+}
+
+.table_view .table_hd > thead > tr > th,
+.table_view .table_hd > thead > tr > td,
+.table_view .table_bd > tbody > tr > td {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: middle;
+}
+
+.table_view .table_hd > thead > tr > th,
+.table_view .table_hd > thead > tr > td,
+.table_view .table_bd > tbody > tr > td {
+    border: 1px solid #ddd;
+}
+
+.table_view .table_hd > thead > tr > th,
+.table_view .table_hd > thead > tr > td {
+    text-align: center;
+}
