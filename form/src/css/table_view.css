@@ -3,6 +3,15 @@
     position: relative;
 }
 
+.table_view .table_hd {
+    overflow: hidden;
+    cursor: default;
+}
+
+.table_vie .table_bd {
+    overflow: auto;
+}
+
 .table_view .table_hd,
 .table_view .table_bd {
     border-collapse: collapse;
@@ -24,6 +33,7 @@
     padding: 8px;
     line-height: 1.42857143;
     vertical-align: middle;
+    word-break: break-all;
 }
 
 .table_view .table_hd > thead > tr > th,

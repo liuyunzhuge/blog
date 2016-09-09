@@ -10,6 +10,16 @@ define(function (require, exports, module) {
         }),
         $document = $(document);
 
+    function preventSelectStart(type) {
+        $document.on('selectstart' + type, function (e) {
+            e.preventDefault();
+        });
+    }
+
+    function restoreSelectStart(type) {
+        $document.off('selectstart' + type);
+    }
+
     var SimpleSortView = Class({
         instanceMembers: {
             initMiddle: function () {
@@ -35,17 +45,19 @@ define(function (require, exports, module) {
                     if (e.which == 16) {
                         //shift键按下的时候，表示要进行多列排序
                         that.multiple = true;
+                        preventSelectStart(that.namespace + '.' + rnd);
                     }
                 }).on('keyup' + this.namespace + '.' + rnd, function (e) {
                     if (e.which == 16 && that.multiple) {
                         that.multiple = false;
                         //shift键抬起的时候，结束多列排序
                         that.sortFields.endSort();
+                        restoreSelectStart(that.namespace + '.' + rnd);
                     }
                 });
 
                 this.$element.on('click', opts.sortItemSelector, function () {
-                    that.sortFields.changeState($(this).data('name'), that.multiple);
+                    that.sortFields.changeState($(this).data('field'), that.multiple);
                 });
             },
             render: function () {
@@ -53,7 +65,7 @@ define(function (require, exports, module) {
                     opts = this.options;
 
                 this.sortFields.getConfig().forEach(function (fieldDef) {
-                    var $target = that.$sort_items.filter('[data-name="' + fieldDef.field + '"]');
+                    var $target = that.$sort_items.filter('[data-field="' + fieldDef.field + '"]');
 
                     $target.removeClass([
                         opts.sortAscClass,

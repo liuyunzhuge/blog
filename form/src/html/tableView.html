@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/@@CONTEXT_PATHdist/css/reset.css"/>
     <link rel="stylesheet" href="/@@CONTEXT_PATHdist/css/zxx.lib.css"/>
     <link rel="stylesheet" href="/@@CONTEXT_PATHdist/css/page_view.css"/>
+    <link rel="stylesheet" href="/@@CONTEXT_PATHdist/css/sort_view.css"/>
     <link rel="stylesheet" href="/@@CONTEXT_PATHdist/css/table_view.css"/>
     <style type="text/css">
         .table_view_wrap {
@@ -21,7 +22,7 @@
 <div class="table_view_wrap">
     <div id="table_view" class="table_view">
         <div class="table_view_hd">
-            <table class="table_hd">
+            <table class="table_hd sort_view">
                 <colgroup>
                     <col width="70">
                     <col width="80">
@@ -33,9 +34,9 @@
                 <thead>
                 <tr>
                     <th>序号</th>
-                    <th>姓名</th>
-                    <th>联系方式</th>
-                    <th>邮箱</th>
+                    <th data-field="name" class="sort_item">姓名 <i class="sort_icon"></i></th>
+                    <th data-field="contact" class="sort_item">联系方式 <i class="sort_icon"></i></th>
+                    <th data-field="email" class="sort_item">邮箱 <i class="sort_icon"></i></th>
                     <th>昵称</th>
                     <th>备注</th>
                 </tr>
