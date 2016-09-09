@@ -1,4 +1,13 @@
 
+.page_wrapper {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.page_wrapper .page_view {
+    text-align: center;
+}
+
 .page_view {
     padding: 0;
     margin: 0;

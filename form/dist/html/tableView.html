@@ -19,7 +19,7 @@
 </head>
 <body>
 <div class="table_view_wrap">
-    <div class="table_view">
+    <div id="table_view" class="table_view">
         <div class="table_view_hd">
             <table class="table_hd">
                 <colgroup>
@@ -52,15 +52,7 @@
                     <col width="120">
                     <col>
                 </colgroup>
-                <tbody>
-                <tr>
-                    <td>序号</td>
-                    <td>姓名</td>
-                    <td>联系方式</td>
-                    <td>邮箱</td>
-                    <td>备注</td>
-                    <td>&nbsp;</td>
-                </tr>
+                <tbody class="data_list">
                 </tbody>
             </table>
         </div>
@@ -69,7 +61,7 @@
 <script src="/blog/form/dist/js/lib/sea.js"></script>
 <script src="/blog/form/dist/js/common.js"></script>
 <script>
-    seajs.use('js/app/listView_1.js');
+    seajs.use('js/app/tableView.js');
 </script>
 </body>
 </html>

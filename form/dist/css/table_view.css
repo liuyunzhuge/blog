@@ -7,10 +7,10 @@
 .table_view .table_bd {
     border-collapse: collapse;
     border-spacing: 0;
-    background-color: transparent;
     width: 100%;
     border: 1px solid #ddd;
     max-width: 100%;
+    table-layout: fixed;
 }
 
 .table_view .table_hd > thead {
