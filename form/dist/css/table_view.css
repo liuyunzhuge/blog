@@ -35,6 +35,7 @@
     line-height: 1.42857143;
     vertical-align: middle;
     word-break: break-all;
+    position: relative;
 }
 
 .table_view .table_hd > thead > tr > th,

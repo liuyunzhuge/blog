@@ -9,7 +9,12 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #ccc;
-    float: right;
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    height: 20px;
+    line-height: 20px;
+    margin-top: -10px;
 }
 
 .table_view .table_hd .sort_item.sort_asc .sort_icon,

@@ -47,8 +47,8 @@ define(function (require) {
         sortView: {
             config: [
                 {field: 'name', value: ''},
-                {field: 'contact', value: 'desc', order: 2, type: 'int'},
-                {field: 'email', value: 'asc', order: 1, type: 'datetime'}
+                {field: 'contact', value: 'desc', order: 2},
+                {field: 'email', value: 'asc', order: 1}
             ]
         },
         pageView: {
