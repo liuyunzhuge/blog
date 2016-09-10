@@ -1,0 +1,30 @@
+
+
+
+.table_view .table_hd .sort_item .sort_icon {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #ccc;
+    float: right;
+}
+
+.table_view .table_hd .sort_item.sort_asc .sort_icon,
+.table_view .table_hd .sort_item.sort_desc .sort_icon{
+    color: #000;
+}
+
+.table_view .table_hd .sort_item .sort_icon:before {
+    content: "\f0dc";
+}
+
+.table_view .table_hd .sort_item.sort_asc .sort_icon:before {
+    content: "\f0de";
+}
+
+.table_view .table_hd .sort_item.sort_desc .sort_icon:before {
+    content: "\f0dd";
+}

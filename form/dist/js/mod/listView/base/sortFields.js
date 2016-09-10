@@ -17,6 +17,8 @@ define(function (require) {
     var DEFAULTS = {
             config: [],
             onStateChange: $.noop,
+            onSortStart: $.noop,
+            onSortEnd: $.noop,
             onSortChange: $.noop,
             onReset: $.noop,
             onInit: $.noop
@@ -51,6 +53,14 @@ define(function (require) {
 
                 if (typeof(opts.onStateChange) === 'function') {
                     this.on('sortStateChange' + this.namespace, $.proxy(opts.onStateChange, this));
+                }
+
+                if (typeof(opts.onSortStart) === 'function') {
+                    this.on('sortStart' + this.namespace, $.proxy(opts.onSortStart, this));
+                }
+
+                if (typeof(opts.onSortEnd) === 'function') {
+                    this.on('sortEnd' + this.namespace, $.proxy(opts.onSortEnd, this));
                 }
 
                 if (typeof(opts.onInit) === 'function') {
@@ -145,6 +155,8 @@ define(function (require) {
                     //定义一个变量用来管理字段的顺序
                     this.sortIndex = 1;
                     this.sorting = true;
+
+                    this.trigger('sortStart' + this.namespace);
                 }
 
                 //只有在一次排序操作过程中第一个调用此方法的字段，才从lastConfig中取上次的排序状态
@@ -200,6 +212,8 @@ define(function (require) {
                 if (JSON.stringify(oldState) !== JSON.stringify(newState)) {
                     this.trigger('sortChange' + this.namespace);
                 }
+
+                this.trigger('sortEnd' + this.namespace);
             }
         },
         extend: EventBase,

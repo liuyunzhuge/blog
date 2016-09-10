@@ -28,6 +28,21 @@ define(function (require, exports, module) {
                 //用来管理多列排序
                 this.multiple = false;
                 this.$sort_items = this.$element.find(opts.sortItemSelector);
+
+                this.namespace_rnd = Math.round(Math.random() * 10000);
+            },
+            beforeBindEvents: function(){
+                var that = this,
+                    rnd = this.namespace_rnd,
+                    sf = this.sortFields;
+
+                sf.on('sortStart' + sf.namespace, function(){
+                    preventSelectStart(that.namespace + '.' + rnd);
+                });
+
+                sf.on('sortEnd' + sf.namespace, function(){
+                    restoreSelectStart(that.namespace + '.' + rnd);
+                });
             },
             bindEvents: function () {
                 //子类在实现bindEvent时，必须先调用父类的同名方法
@@ -36,7 +51,7 @@ define(function (require, exports, module) {
                 var that = this,
                     opts = this.options;
 
-                var rnd = Math.round(Math.random() * 10000);
+                var rnd = this.namespace_rnd;
 
                 //在事件后面增加随机数的目的是防止$document的事件触发冲突
                 //结合namespace跟rnd，就相当于给document的事件添加了两个命名空间
@@ -45,14 +60,12 @@ define(function (require, exports, module) {
                     if (e.which == 16) {
                         //shift键按下的时候，表示要进行多列排序
                         that.multiple = true;
-                        preventSelectStart(that.namespace + '.' + rnd);
                     }
                 }).on('keyup' + this.namespace + '.' + rnd, function (e) {
                     if (e.which == 16 && that.multiple) {
                         that.multiple = false;
                         //shift键抬起的时候，结束多列排序
                         that.sortFields.endSort();
-                        restoreSelectStart(that.namespace + '.' + rnd);
                     }
                 });
 

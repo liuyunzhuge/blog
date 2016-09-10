@@ -7,13 +7,20 @@ define(function (require) {
         Class = require('mod/class');
 
     var DEFAULTS = $.extend({}, ListViewBase.DEFAULTS, {
-        //列表容器的选择器
-        dataListSelector: '.data_list',
-        //分页组件选择器
-        pageViewSelector: '.page_view',
-        //排序组件选择器
-        sortViewSelector: '.sort_view'
+        colgroup: '',
+        tableHd: '',
+        tableViewHdClass: 'table_view_hd',
+        tableHdClass: 'table_hd',
+        tableViewBdClass: 'table_view_bd',
+        tableBdClass: 'table_bd',
+        tableFtViewClass: 'table_ft_view',
+        dataListClass: 'data_list',
+        pageViewClass: 'table_page_view'
     });
+
+    function class2Selector(classStr) {
+        return ('.' + $.trim(classStr)).replace(/\s+/g,'.');
+    }
 
     var TableView = Class({
         instanceMembers: {
@@ -22,7 +29,38 @@ define(function (require) {
                     $element = this.$element;
 
                 //缓存核心的jq对象
-                this.$data_list = $element.find(opts.dataListSelector);
+
+                this.$tableHdView = $(['<div class="',
+                    opts.tableViewHdClass,
+                    '"></div>'].join('')).appendTo($element);
+
+                this.$tableBdView = $(['<div class="',
+                    opts.tableViewBdClass,
+                    '"></div>'].join('')).appendTo($element);
+
+                this.$tableHd = $(['<table class="',
+                    opts.tableHdClass,
+                    '">',
+                    opts.colgroup || '',
+                    '<thead>',
+                    opts.tableHd || '',
+                    '</thead>',
+                    '</table>'].join("")).appendTo(this.$tableHdView);
+
+                this.$tableBd = $(['<table class="',
+                    opts.tableBdClass,
+                    '">',
+                    opts.colgroup || '',
+                    '    <tbody class="',
+                    opts.dataListClass,
+                    '">',
+                    '    </tbody>',
+                    '</table>'].join("")).appendTo(this.$tableBdView);
+
+                this.$data_list = this.$tableBd.children(class2Selector(opts.dataListClass));
+            },
+            initEnd: function(){
+                this.$element.show();
             },
             createPageView: function () {
                 var pageView,
@@ -31,8 +69,14 @@ define(function (require) {
                 if (opts.pageView) {
                     //初始化分页组件
                     delete opts.pageView.onChange;
-                    this.$element.append(SimplePageView.create());
-                    pageView = new SimplePageView(this.$element.find(opts.pageViewSelector), opts.pageView);
+
+                    this.$tableFtView = $(['<div class="',
+                        opts.tableFtViewClass,
+                        '"><ul class="',
+                        opts.pageViewClass,
+                        '"></ul></div>'].join('')).appendTo(this.$element);
+
+                    pageView = new SimplePageView(this.$tableFtView.children(class2Selector(opts.pageViewClass)), opts.pageView);
                 }
                 return pageView;
             },
@@ -43,7 +87,7 @@ define(function (require) {
                 if (opts.sortView) {
                     //初始化分页组件
                     delete opts.sortView.onChange;
-                    sortView = new SimpleSortView(this.$element.find(opts.sortViewSelector), opts.sortView);
+                    sortView = new SimpleSortView(this.$tableHd, opts.sortView);
                 }
                 return sortView;
             },

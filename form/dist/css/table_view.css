@@ -1,6 +1,7 @@
 
 .table_view {
     position: relative;
+    display: none;
 }
 
 .table_view .table_hd {
