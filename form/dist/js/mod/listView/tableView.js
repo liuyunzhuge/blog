@@ -7,8 +7,10 @@ define(function (require) {
         Class = require('mod/class');
 
     var DEFAULTS = $.extend({}, ListViewBase.DEFAULTS, {
+        heightFixed: false,
         colgroup: '',
         tableHd: '',
+        tableViewInitClass: 'table_view_init',
         tableViewHdClass: 'table_view_hd',
         tableHdClass: 'table_hd',
         tableViewBdClass: 'table_view_bd',
@@ -18,10 +20,32 @@ define(function (require) {
         pageViewClass: 'table_page_view'
     });
 
+    var $window = $(window);
+
     //todo 序号列，单选，多选，滚动，拖拽，获取字段值
 
     function class2Selector(classStr) {
-        return ('.' + $.trim(classStr)).replace(/\s+/g,'.');
+        return ('.' + $.trim(classStr)).replace(/\s+/g, '.');
+    }
+
+    function isOverflowX(elem) {
+        return elem.clientWidth < elem.scrollWidth;
+    }
+
+    function isOverflowY(elem) {
+        return elem.clientHeight < elem.scrollHeight;
+    }
+
+    function scrollbarWidth() {
+        var body = document.body,
+            e = document.createElement('div');
+
+        e.style.cssText = 'position: absolute; top: -9999px; width: 50px; height: 50px; overflow: scroll;';
+
+        body.appendChild(e);
+        var _scrollbarWidth = e.offsetWidth - e.clientWidth
+        body.removeChild(e);
+        return _scrollbarWidth;
     }
 
     var TableView = Class({
@@ -60,9 +84,88 @@ define(function (require) {
                     '</table>'].join("")).appendTo(this.$tableBdView);
 
                 this.$data_list = this.$tableBd.children(class2Selector(opts.dataListClass));
+
+                this.namespace_rnd = Math.round(Math.random() * 10000);
+
+                this.setHeightFixed(opts.heightFixed);
             },
-            initEnd: function(){
-                this.$element.show();
+            initEnd: function () {
+                var opts = this.options;
+
+                this.$element.addClass(opts.tableViewInitClass);
+
+                this.adjustLayout();
+            },
+            bindEvents: function () {
+                var opts = this.options,
+                    that = this;
+
+                this.base();
+
+                $window.on('resize' + this.namespace + '.' + this.namespace_rnd, function(){
+                    that.adjustLayout();
+                });
+            },
+            //调整布局
+            adjustLayout: function () {
+                this.adjustPaddingTop();
+                this.adjustTableHdViewPos();
+                this.adjustTableBdViewHeight();
+                this.checkTableBdScrollState();
+            },
+            adjustPaddingTop: function () {
+                this.$element.css('padding-top', this.$tableHdView.outerHeight() + 'px')
+            },
+            adjustTableHdViewPos: function () {
+                this.$tableHd.css('left', -1 * this.$tableBdView.scrollLeft() + 'px');
+            },
+            adjustTableBdViewHeight: function () {
+                if (this.heightFixed) {
+                    this.$tableBdView.css('height', ( this.$element.outerHeight() - this.$tableHdView.outerHeight()) + 'px');
+                } else {
+                    this.$tableBdView.css('height', '');
+                }
+            },
+            checkTableBdScrollState: function () {
+                var scrollState = this.tableBdScrollState,
+                    opts = this.options,
+                    that = this;
+
+                if (scrollState) {
+                    if (scrollState.scrollX) {
+                        this.$tableBdView.off('scroll' + this.namespace);
+                    }
+
+                    if (scrollState.scrollY) {
+                        this.$tableHdView.css('padding-right', '');
+                    }
+                }
+
+                scrollState = this.tableBdScrollState = {
+                    scrollX: false,
+                    scrollY: false
+                };
+
+                if (isOverflowX(this.$tableBdView[0])) {
+                    scrollState.scrollX = true;
+                }
+
+                if (isOverflowY(this.$tableBdView[0])) {
+                    scrollState.scrollY = true;
+                }
+
+                if (scrollState.scrollX) {
+                    this.$tableBdView.on('scroll' + this.namespace, function () {
+                        that.adjustTableHdViewPos();
+                    });
+                }
+
+                if (scrollState.scrollY) {
+                    this.$tableHdView.css('padding-right', scrollbarWidth() + 'px');
+                }
+            },
+            setHeightFixed: function (heightFixed) {
+                this.heightFixed = heightFixed;
             },
             createPageView: function () {
                 var pageView,
@@ -98,6 +201,7 @@ define(function (require) {
             },
             querySuccess: function (html, args) {
                 this.$data_list.html(html);
+                this.adjustLayout();
             }
         },
         extend: ListViewBase,

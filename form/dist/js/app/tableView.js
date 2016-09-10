@@ -7,6 +7,7 @@ define(function (require) {
         };
 
     var list = new ListView('#table_view', {
+        heightFixed: true,
         url: api.list,
         tableHd: ['<tr>',
             '    <th>序号</th>',
@@ -22,7 +23,7 @@ define(function (require) {
             '    <col width="90">',
             '    <col width="100">',
             '    <col width="120">',
-            '    <col>',
+            '    <col  width="200">',
             '</colgroup>'].join(""),
         tpl: ['{{#rows}}<tr>',
             '<td>{{index}}</td>',
