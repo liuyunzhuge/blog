@@ -4,7 +4,6 @@ define(function (require) {
         SimplePageView = require('mod/listView/simplePageView'),
         ListViewBase = require('mod/listView/base/listViewBase'),
         SimpleSortView = require('mod/listView/simpleSortView'),
-        TableDrag = require('mod/listView/tableDrag'),
         Class = require('mod/class');
 
     var DEFAULTS = $.extend({}, ListViewBase.DEFAULTS, {
@@ -18,7 +17,9 @@ define(function (require) {
         tableBdClass: 'table_bd',
         tableFtViewClass: 'table_ft_view',
         dataListClass: 'data_list',
-        pageViewClass: 'table_page_view'
+        pageViewClass: 'table_page_view',
+        adjustLayout: $.noop,
+        plugins: [],//{plugin: TableDrag, options: {...}}
     });
 
     var $window = $(window);
@@ -97,7 +98,10 @@ define(function (require) {
 
                 this.adjustLayout();
 
-                new TableDrag(this);
+                var that = this;
+                opts.plugins.forEach(function (config) {
+                    new config.plugin(that, config.options)
+                });
             },
             bindEvents: function () {
                 var opts = this.options,
@@ -105,9 +109,13 @@ define(function (require) {
 
                 this.base();
 
-                $window.on('resize' + this.namespace + '.' + this.namespace_rnd, function(){
+                $window.on('resize' + this.namespace + '.' + this.namespace_rnd, function () {
                     that.adjustLayout();
                 });
+
+                if (typeof(opts.adjustLayout) === 'function') {
+                    this.on('adjustLayout' + this.namespace, $.proxy(opts.adjustLayout, this));
+                }
             },
             //调整布局
             adjustLayout: function () {
@@ -115,6 +123,8 @@ define(function (require) {
                 this.adjustTableHdViewPos();
                 this.adjustTableBdViewHeight();
                 this.checkTableBdScrollState();
+
+                this.trigger('adjustLayout' + this.namespace);
             },
             adjustPaddingTop: function () {
                 this.$element.css('padding-top', this.$tableHdView.outerHeight() + 'px')
@@ -125,7 +135,7 @@ define(function (require) {
             adjustTableBdViewHeight: function () {
                 if (this.heightFixed) {
                     this.$tableBdView.css('height', ( this.$element.outerHeight() - this.$tableHdView.outerHeight()) + 'px');
-                    if(!isOverflowY(this.$tableBdView[0])) {
+                    if (!isOverflowY(this.$tableBdView[0])) {
                         this.$tableBdView.css('height', '');
                     }
                 } else {

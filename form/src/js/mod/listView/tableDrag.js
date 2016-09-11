@@ -3,8 +3,18 @@ define(function (require, exports, module) {
         EventBase = require('mod/eventBase'),
         Class = require('mod/class');
 
-    var $body = $(document.body),
+    var DEFAULTS = {
+            draggerClass: 'table_view_dragger',
+            draggingClass: 'table_dragging',
+            minWidth: 20,
+            maxWidth: 0
+        },
+        $body = $(document.body),
         $document = $(document);
+
+    function class2Selector(classStr) {
+        return ('.' + $.trim(classStr)).replace(/\s+/g, '.');
+    }
 
     function preventSelectStart(type) {
         $document.on('selectstart' + type, function (e) {
@@ -18,27 +28,57 @@ define(function (require, exports, module) {
 
     var TableDrag = Class({
         instanceMembers: {
-            init: function (tableView) {
+            init: function (tableView, options) {
+                var opts = this.options = $.extend({}, DEFAULTS, options);
+
                 this.tableView = tableView;
                 this.$tableHdColgroup = tableView.$tableHd.children('colgroup');
                 this.$tableBdColgroup = tableView.$tableBd.children('colgroup');
                 this.namespace = this.tableView.namespace + '.' + this.tableView.namespace_rnd;
 
                 this.createDraggers();
-                tableView.$element.on('mousedown.' + this.namespace, '.table_view_dragger', $.proxy(this.startDrag, this));
+                tableView.$element.on('mousedown.' + this.namespace, class2Selector(opts.draggerClass), $.proxy(this.startDrag, this));
+
+                var that = this;
+                tableView.on('adjustLayout' + tableView.namespace, function () {
+                    var tdWidthMap = {}, total = 0, $tableHeadTds = tableView.$tableHd.find('>thead>tr>th,>thead>tr>td');
+                    $tableHeadTds.each(function (i, td) {
+                        var curWidth = $(td).outerWidth();
+
+                        if (i == ($tableHeadTds.length - 1)) {
+                            curWidth = tableView.$tableHd.outerWidth() - total;
+                        } else {
+                            total += curWidth;
+                        }
+                        tdWidthMap[i] = curWidth;
+                    });
+
+                    that.$tableHdColgroup.children('col').each(function (i, col) {
+                        $(col).attr('width', tdWidthMap[i]);
+                    });
+                    that.$tableBdColgroup.children('col').each(function (i, col) {
+                        $(col).attr('width', tdWidthMap[i]);
+                    });
+                });
             },
             createDraggers: function () {
                 var $tableHd = this.tableView.$tableHd;
+                var opts = this.options;
 
                 $tableHd.find('>thead>tr>th,>thead>tr>td').each(function () {
-                    $(this).append('<span class="table_view_dragger"></span>')
+                    $(this).append('<span class="' + opts.draggerClass + '"></span>');
                 });
+            },
+            afterAjax: function (e) {
+
             },
             startDrag: function (e) {
                 e.stopPropagation();
 
-                $body.addClass('table_dragging');
-                this.tableView.$element.addClass('table_dragging');
+                var opts = this.options;
+
+                $body.addClass(opts.draggingClass);
+                this.tableView.$element.addClass(opts.draggingClass);
 
                 this.moveable = true;
                 this.startPos = {
@@ -49,6 +89,16 @@ define(function (require, exports, module) {
                 var $td = $(e.currentTarget).parent();
                 this.curTdIndex = $td.index();
                 this.curTdWidth = $td.outerWidth();
+                this.curMinWidth = $td.data('dragMin');
+                this.curMaxWidth = $td.data('dragMax');
+
+                if(this.curMinWidth > this.curTdWidth) {
+                    this.curMinWidth = this.curTdWidth;
+                }
+
+                if(this.curMaxWidth < this.curTdWidth) {
+                    this.curMaxWidth = this.curTdWidth;
+                }
 
                 $document.off(this.namespace)
                     .on('mousemove' + this.namespace, $.proxy(this.dragging, this))
@@ -56,8 +106,9 @@ define(function (require, exports, module) {
 
                 preventSelectStart(this.namespace);
             },
-            dragging: function (e) {e.stopPropagation();
-                var movePos, offset;
+            dragging: function (e) {
+                e.stopPropagation();
+                var movePos, offset, opts = this.options;
                 if (!this.moveable) return;
 
                 movePos = {
@@ -72,12 +123,30 @@ define(function (require, exports, module) {
                 offset = movePos.left - startPos.left;
                 var finalWidth = curTdWidth + offset;
 
+                if (opts.minWidth && finalWidth < opts.minWidth) {
+                    finalWidth = opts.minWidth;
+                }
+
+                if(this.curMinWidth && finalWidth < this.curMinWidth) {
+                    finalWidth = this.curMinWidth;
+                }
+
+                if (opts.maxWidth && finalWidth > opts.maxWidth) {
+                    finalWidth = opts.maxWidth;
+                }
+
+                if (this.curMaxWidth && finalWidth > this.curMaxWidth) {
+                    finalWidth = this.curMaxWidth;
+                }
+
                 this.$tableHdColgroup.children('col').eq(curTdIndex).attr('width', finalWidth);
                 this.$tableBdColgroup.children('col').eq(curTdIndex).attr('width', finalWidth);
             },
             stopDrag: function (e) {
-                $body.removeClass('table_dragging');
-                this.tableView.$element.removeClass('table_dragging');
+                var opts = this.options;
+
+                $body.removeClass(opts.draggingClass);
+                this.tableView.$element.removeClass(opts.draggingClass);
                 this.moveable = false;
                 $document.off(this.namespace);
                 restoreSelectStart(this.namespace);

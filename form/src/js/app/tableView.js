@@ -2,6 +2,7 @@ define(function (require) {
 
     var $ = require('jquery'),
         ListView = require('mod/listView/tableView'),
+        TableDrag = require('mod/listView/tableDrag'),
         api = {
             list: './api/tableView.json',
         };
@@ -12,7 +13,7 @@ define(function (require) {
         tableHd: ['<tr>',
             '    <th>序号</th>',
             '    <th data-field="name" class="sort_item">姓名 <i class="sort_icon"></i></th>',
-            '    <th data-field="contact" class="sort_item">联系方式 <i class="sort_icon"></i></th>',
+            '    <th data-field="contact" data-drag-min="100" data-drag-max="200" class="sort_item">联系方式 <i class="sort_icon"></i></th>',
             '    <th data-field="email" class="sort_item">邮箱 <i class="sort_icon"></i></th>',
             '    <th>昵称</th>',
             '    <th>备注</th>',
@@ -55,6 +56,11 @@ define(function (require) {
         pageView: {
             defaultSize: 20
         },
+        plugins: [
+            {
+                plugin: TableDrag
+            }
+        ]
     });
 
     list.query();
