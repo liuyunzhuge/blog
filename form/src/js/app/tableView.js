@@ -19,10 +19,10 @@ define(function (require) {
             '</tr>'].join(""),
         colgroup: ['<colgroup>',
             '    <col width="70">',
-            '    <col width="80">',
-            '    <col width="90">',
-            '    <col width="100">',
             '    <col width="120">',
+            '    <col width="120">',
+            '    <col width="180">',
+            '    <col width="180">',
             '    <col  width="200">',
             '</colgroup>'].join(""),
         tpl: ['{{#rows}}<tr>',
@@ -53,7 +53,7 @@ define(function (require) {
             ]
         },
         pageView: {
-            defaultSize: 3
+            defaultSize: 20
         },
     });
 

@@ -4,6 +4,7 @@ define(function (require) {
         SimplePageView = require('mod/listView/simplePageView'),
         ListViewBase = require('mod/listView/base/listViewBase'),
         SimpleSortView = require('mod/listView/simpleSortView'),
+        TableDrag = require('mod/listView/tableDrag'),
         Class = require('mod/class');
 
     var DEFAULTS = $.extend({}, ListViewBase.DEFAULTS, {
@@ -95,6 +96,8 @@ define(function (require) {
                 this.$element.addClass(opts.tableViewInitClass);
 
                 this.adjustLayout();
+
+                new TableDrag(this);
             },
             bindEvents: function () {
                 var opts = this.options,
@@ -122,6 +125,9 @@ define(function (require) {
             adjustTableBdViewHeight: function () {
                 if (this.heightFixed) {
                     this.$tableBdView.css('height', ( this.$element.outerHeight() - this.$tableHdView.outerHeight()) + 'px');
+                    if(!isOverflowY(this.$tableBdView[0])) {
+                        this.$tableBdView.css('height', '');
+                    }
                 } else {
                     this.$tableBdView.css('height', '');
                 }

@@ -4,6 +4,11 @@
     visibility: hidden;
 }
 
+.table_view,.table_view:before,.table_view :after,
+.table_view *,.table_view *:before,.table_view *:after {
+    box-sizing: border-box;
+}
+
 .table_view.table_view_init {
     visibility: visible;
 }
