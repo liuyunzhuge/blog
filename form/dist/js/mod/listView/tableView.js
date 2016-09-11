@@ -24,7 +24,7 @@ define(function (require) {
 
     var $window = $(window);
 
-    //todo 序号列，单选，多选，滚动，拖拽，获取字段值
+    //todo 序号列，单选，多选，获取字段值
 
     function class2Selector(classStr) {
         return ('.' + $.trim(classStr)).replace(/\s+/g, '.');
