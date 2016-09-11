@@ -3,6 +3,7 @@ define(function (require) {
     var $ = require('jquery'),
         ListView = require('mod/listView/tableView'),
         TableDrag = require('mod/listView/tableDrag'),
+        TableOrder = require('mod/listView/tableOrder'),
         api = {
             list: './api/tableView.json',
         };
@@ -27,25 +28,13 @@ define(function (require) {
             '    <col  width="200">',
             '</colgroup>'].join(""),
         tpl: ['{{#rows}}<tr>',
-            '<td>{{index}}</td>',
+            '<td><span class="table_view_order"></span></td>',
             '<td>{{name}}</td>',
             '<td>{{contact}}</td>',
             '<td>{{email}}</td>',
             '<td>{{nickname}}</td>',
             '<td>{{remark}}</td>',
             '</tr>{{/rows}}'].join(''),
-        parseData: function (data) {
-            var start = list.pageView.data.start;
-
-            data.forEach(function (d) {
-                d.index = start;
-                start = start + 1;
-            });
-
-            return {
-                rows: data
-            }
-        },
         sortView: {
             config: [
                 {field: 'name', value: ''},
@@ -59,6 +48,9 @@ define(function (require) {
         plugins: [
             {
                 plugin: TableDrag
+            },
+            {
+                plugin: TableOrder
             }
         ]
     });

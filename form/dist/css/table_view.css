@@ -90,3 +90,8 @@
 .table_view .table_hd > thead > tr > td {
     text-align: center;
 }
+
+.table_view .table_bd > tbody > tr.selected,
+.table_view .table_bd > tbody > tr:hover {
+    background-color: #f2f2f2;
+}

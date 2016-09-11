@@ -69,9 +69,6 @@ define(function (require, exports, module) {
                     $(this).append('<span class="' + opts.draggerClass + '"></span>');
                 });
             },
-            afterAjax: function (e) {
-
-            },
             startDrag: function (e) {
                 e.stopPropagation();
 

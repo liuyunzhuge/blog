@@ -25,6 +25,12 @@ define(function (require) {
         },
         //解析ajax返回的数据
         parseData: $.noop,
+        //提供给模板引擎满足其要求的数据
+        renderParse: function(paredRows){
+            return {
+                rows: paredRows
+            }
+        },
         //组件初始化完毕后的回调
         afterInit: $.noop,
         //ajax请求之前的事件回调
@@ -293,7 +299,7 @@ define(function (require) {
                         }
 
                         //调用子类实现的querySuccess方法，通常在这个方法内做列表DOM的渲染
-                        that.querySuccess(that.renderData(parsedRows), {
+                        that.querySuccess(that.renderData(opts.renderParse(parsedRows)), {
                             clear: clear,
                             rows: rows,
                             total: total,
