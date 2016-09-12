@@ -19,12 +19,19 @@ define(function (require, exports, module) {
 
                 if(!pageView) return;
 
-                tableView.$element.on('success.' + tableView.namespace, function(){
+                this.tableView = tableView;
+                this.onSuccess = function(){
                     var start = pageView.data.start;
                     $tableBd.find('>tbody>tr>td ' + class2Selector(opts.orderTextClass)).each(function(i,e){
                         $(this).text(start + i);
                     });
-                });
+                };
+
+                tableView.$element.on('success.' + tableView.namespace, this.onSuccess);
+            },
+            destroy: function(){
+                this.tableView.$element.off('success.' + this.tableView.namespace, this.onSuccess);
+                this.onSuccess = undefined;
             }
         }
     });

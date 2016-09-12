@@ -1,6 +1,5 @@
 define(function (require, exports, module) {
     var $ = require('jquery'),
-        EventBase = require('mod/eventBase'),
         Class = require('mod/class');
 
     var DEFAULTS = {
@@ -40,7 +39,7 @@ define(function (require, exports, module) {
                 tableView.$element.on('mousedown.' + this.namespace, class2Selector(opts.draggerClass), $.proxy(this.startDrag, this));
 
                 var that = this;
-                tableView.on('adjustLayout' + tableView.namespace, function () {
+                this.onAdjustLayout = function () {
                     var tdWidthMap = {}, total = 0, $tableHeadTds = tableView.$tableHd.find('>thead>tr>th,>thead>tr>td');
                     $tableHeadTds.each(function (i, td) {
                         var curWidth = $(td).outerWidth();
@@ -59,7 +58,8 @@ define(function (require, exports, module) {
                     that.$tableBdColgroup.children('col').each(function (i, col) {
                         $(col).attr('width', tdWidthMap[i]);
                     });
-                });
+                };
+                tableView.on('adjustLayout' + tableView.namespace, this.onAdjustLayout);
             },
             createDraggers: function () {
                 var $tableHd = this.tableView.$tableHd;
@@ -163,11 +163,22 @@ define(function (require, exports, module) {
                 this.moveable = false;
                 $document.off(this.namespace);
                 restoreSelectStart(this.namespace);
+                this.tableView.adjustLayout();
 
                 this.enableSortView();
+            },
+            destroy: function(){
+
+                var tableView = this.tableView,
+                    opts = this.options;
+
+                tableView.$tableHd.find('>thead>tr>th ' + class2Selector(opts.draggerClass) +
+                    ',>thead>tr>td ' + class2Selector(opts.draggerClass)).remove();
+                tableView.$element.off('mousedown.' + this.namespace);
+                tableView.off('adjustLayout' + tableView.namespace, this.onAdjustLayout);
+                $document.off(this.namespace);
             }
-        },
-        extend: EventBase
+        }
     });
 
     return TableDrag;

@@ -24,7 +24,11 @@ define(function (require) {
 
     var $window = $(window);
 
-    //todo 序号列，单选，多选，获取字段值
+    //todo 单选，多选，获取字段值
+
+    function isFunc(func) {
+        return Object.prototype.toString.call(func) === '[object Function]';
+    }
 
     function class2Selector(classStr) {
         return ('.' + $.trim(classStr)).replace(/\s+/g, '.');
@@ -99,9 +103,37 @@ define(function (require) {
                 this.adjustLayout();
 
                 var that = this;
+                this.plugins = {};
                 opts.plugins.forEach(function (config) {
-                    new config.plugin(that, config.options)
+                    that.addPlugin(config);
                 });
+            },
+            getPlugin: function (name) {
+                return this.plugins[name];
+            },
+            removePlugin: function (name, args) {
+                var plugin = this.getPlugin(name);
+                if (!plugin) return;
+
+                if (isFunc(plugin.destroy)) {
+                    plugin.destroy.apply(plugin, args);
+                }
+
+                delete this.plugins[name];
+            },
+            addPlugin: function (config) {
+                if (!config.name) {
+                    throw "plugin config must have [name] option";
+                }
+                if (!config.plugin) {
+                    throw "plugin config must have [plugin] option";
+                }
+                if (!isFunc(config.plugin)) {
+                    throw "plugin config 's [plugin] options must be a constructor";
+                }
+
+                this.removePlugin(name);
+                this.plugins[config.name] = new config.plugin(this, config.options);
             },
             bindEvents: function () {
                 var opts = this.options,

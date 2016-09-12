@@ -2,13 +2,12 @@ define(function (require) {
 
     var $ = require('jquery'),
         ListView = require('mod/listView/tableView'),
-        TableDrag = require('mod/listView/tableDrag'),
-        TableOrder = require('mod/listView/tableOrder'),
+        TableDefault = require('mod/listView/tableDefault'),
         api = {
             list: './api/tableView.json',
         };
 
-    var list = new ListView('#table_view', {
+    var list = window.l = new ListView('#table_view', {
         heightFixed: true,
         url: api.list,
         tableHd: ['<tr>',
@@ -45,14 +44,7 @@ define(function (require) {
         pageView: {
             defaultSize: 20
         },
-        plugins: [
-            {
-                plugin: TableDrag
-            },
-            {
-                plugin: TableOrder
-            }
-        ]
+        plugins: TableDefault.plugins
     });
 
     list.query();
