@@ -19,6 +19,10 @@ define(function (require) {
         dataListClass: 'data_list',
         pageViewClass: 'table_page_view',
         adjustLayout: $.noop,
+        multipleSelect: false,
+        selectedClass: 'selected',
+        allCheckboxClass: 'table_check_all',
+        rowCheckboxClass: 'table_check_row',
         plugins: [],//{plugin: TableDrag, options: {...}}
     });
 
@@ -102,11 +106,65 @@ define(function (require) {
 
                 this.adjustLayout();
 
+                this.setUpTableSelect();
+
                 var that = this;
                 this.plugins = {};
                 opts.plugins.forEach(function (config) {
                     that.addPlugin(config);
                 });
+            },
+            setRowSelected: function ($tr) {
+                var opts = this.options,
+                    $tableBd = this.$tableBd;
+
+                if (opts.multipleSelect) {
+                    //多选
+                    $tr.toggleClass(opts.selectedClass).find(class2Selector(opts.rowCheckboxClass)).each(function () {
+                        this.checked = $tr.hasClass(opts.selectedClass);
+                    });
+
+                    this.$checkAll[0].checked = ($tableBd.find('>tbody>tr:not(' + class2Selector(opts.selectedClass) + ')').length) ?
+                        false : true;
+                } else {
+                    //单选
+                    $tableBd.find('>tbody>tr' + class2Selector(opts.selectedClass)).removeClass(opts.selectedClass);
+                    $tr.addClass(opts.selectedClass);
+                }
+            },
+            setUpTableSelect: function () {
+                var opts = this.options,
+                    $tableBd = this.$tableBd,
+                    that = this;
+
+                $tableBd.on('click' + this.namespace, '>tbody>tr', function (e) {
+                    that.setRowSelected($(this))
+                });
+
+                if (opts.multipleSelect) {
+                    //全选
+                    var $checkAll = this.$checkAll = this.$element.find(class2Selector(opts.allCheckboxClass));
+
+                    $checkAll.on('change' + this.namespace, function (e) {
+                        var method = this.checked ? 'addClass' : 'removeClass';
+
+                        $tableBd.find('>tbody>tr').each(function () {
+                            var $this = $(this)[method](opts.selectedClass);
+
+                            $this.find(class2Selector(opts.rowCheckboxClass)).each(function () {
+                                this.checked = $this.hasClass(opts.selectedClass);
+                            });
+                        });
+                    });
+                }
+            },
+            registAction: function(eventName, selector, callback){
+                var that = this;
+                this.$tableBd.on(eventName, selector, function(){
+                    var $tr = $(this).closest('tr');
+                    that.setRowSelected($tr);
+                    callback();
+                })
             },
             getPlugin: function (name) {
                 return this.plugins[name];
