@@ -111,6 +111,16 @@ define(function (require, exports, module) {
                 p[this.options.sortParamName] = JSON.stringify(this.sortFields.getValue());
                 return p;
             },
+            //启用
+            enable: function () {
+                this.disabled = false;
+                this.$element && this.$element.removeClass('disabled');
+            },
+            //禁用
+            disable: function () {
+                this.disabled = true;
+                this.$element && this.$element.addClass('disabled');
+            }
         },
         extend: EventBase,
         staticMembers: {

@@ -57,11 +57,15 @@ define(function (require, exports, module) {
                 //结合namespace跟rnd，就相当于给document的事件添加了两个命名空间
                 //这样即使同一个页面中有多个SimpleSortView的实例，互相之间也不会有事件冲突的影响
                 $document.on('keydown' + this.namespace + '.' + rnd, function (e) {
+                    if(that.disabled) return;
+
                     if (e.which == 16) {
                         //shift键按下的时候，表示要进行多列排序
                         that.multiple = true;
                     }
                 }).on('keyup' + this.namespace + '.' + rnd, function (e) {
+                    if(that.disabled) return;
+
                     if (e.which == 16 && that.multiple) {
                         that.multiple = false;
                         //shift键抬起的时候，结束多列排序
@@ -70,6 +74,8 @@ define(function (require, exports, module) {
                 });
 
                 this.$element.on('click', opts.sortItemSelector, function () {
+                    if(that.disabled) return;
+
                     that.sortFields.changeState($(this).data('field'), that.multiple);
                 });
             },

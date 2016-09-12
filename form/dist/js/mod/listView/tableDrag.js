@@ -69,8 +69,24 @@ define(function (require, exports, module) {
                     $(this).append('<span class="' + opts.draggerClass + '"></span>');
                 });
             },
+            disableSortView: function () {
+                var sortView = this.tableView.sortView;
+                if(sortView) {
+                    sortView.disable();
+                }
+            },
+            enableSortView: function(){
+                var sortView = this.tableView.sortView;
+                if(sortView) {
+                    setTimeout(function(){
+                        sortView.enable();
+                    },0);
+                }
+            },
             startDrag: function (e) {
                 e.stopPropagation();
+
+                this.disableSortView();
 
                 var opts = this.options;
 
@@ -89,11 +105,11 @@ define(function (require, exports, module) {
                 this.curMinWidth = $td.data('dragMin');
                 this.curMaxWidth = $td.data('dragMax');
 
-                if(this.curMinWidth > this.curTdWidth) {
+                if (this.curMinWidth > this.curTdWidth) {
                     this.curMinWidth = this.curTdWidth;
                 }
 
-                if(this.curMaxWidth < this.curTdWidth) {
+                if (this.curMaxWidth < this.curTdWidth) {
                     this.curMaxWidth = this.curTdWidth;
                 }
 
@@ -124,7 +140,7 @@ define(function (require, exports, module) {
                     finalWidth = opts.minWidth;
                 }
 
-                if(this.curMinWidth && finalWidth < this.curMinWidth) {
+                if (this.curMinWidth && finalWidth < this.curMinWidth) {
                     finalWidth = this.curMinWidth;
                 }
 
@@ -147,6 +163,8 @@ define(function (require, exports, module) {
                 this.moveable = false;
                 $document.off(this.namespace);
                 restoreSelectStart(this.namespace);
+
+                this.enableSortView();
             }
         },
         extend: EventBase
