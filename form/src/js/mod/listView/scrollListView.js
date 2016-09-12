@@ -122,7 +122,7 @@ define(function (require) {
             },
             querySuccess: function (html, args) {
                 var pageView = this.pageView,
-                    rows = args.rows,
+                    rows = this.originalRows,
                     method = args.clear ? 'html' : 'append';//根据查询类型，来决定要如何处理渲染新的数据
 
                 //没有查到结果
