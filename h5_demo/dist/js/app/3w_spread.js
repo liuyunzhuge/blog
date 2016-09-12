@@ -3,20 +3,21 @@ define('js/app/3w_spread.js', function (require, exports, module) {
         Swiper = require('swiper.jquery'),
         SimpleImgPreloader = require('mod/simpleImgPreloader'),
         ProgressBar = require('mod/progressBar'),
-        StateManager = require('mod/stateManager'),
-        $swiper = $('#swiper');
+        StateManager = require('mod/stateManager');
 
     require('mod/transition');
 
-
-
-    var PRE_LEAVE_DURATION = 350,
+    var PRE_LEAVE_DURATION = 300,
         Conf = {
             firstPreloadRes: [
-                '/img/3w_spread/1.jpg',
-                '/img/3w_spread/2.png',
-                '/img/3w_spread/3.png',
-                '/img/3w_spread/4.png',
+                '/blog/h5_demo/dist/img/3w_spread/bg.jpg',
+                '/blog/h5_demo/dist/img/3w_spread/flash_1.png',
+                '/blog/h5_demo/dist/img/3w_spread/flash_2.png',
+                '/blog/h5_demo/dist/img/3w_spread/star.png',
+                '/blog/h5_demo/dist/img/3w_spread/zhiwen.png',
+                '/blog/h5_demo/dist/img/3w_spread/page_1/1.png',
+                '/blog/h5_demo/dist/img/3w_spread/page_1/2.png',
+                '/blog/h5_demo/dist/img/3w_spread/page_1/3.png',
             ],
             secondPreloadRes: []
         };
@@ -75,7 +76,7 @@ define('js/app/3w_spread.js', function (require, exports, module) {
     }
 
     function main() {
-        new Swiper($swiper[0], {
+        new Swiper('#swiper', {
             direction: 'vertical',
             preloadImages: false,
             lazyLoading: true,
@@ -90,7 +91,6 @@ define('js/app/3w_spread.js', function (require, exports, module) {
 
         var video = new Video({
             onPlay: function(){
-                console.log(111)
             }
         });
     }
@@ -99,10 +99,9 @@ define('js/app/3w_spread.js', function (require, exports, module) {
     var initState = new StateManager({
         preload: false
     }, function () {
-        $swiper.addClass('in').one($.transitionEnd.end, function () {
+        $('#main').addClass('in').one($.transitionEnd.end, function () {
             $('#loader_wrap').remove();
             loader.destroy();
-
             main();
         }).emulateTransitionEnd(PRE_LEAVE_DURATION);
     });
@@ -112,7 +111,8 @@ define('js/app/3w_spread.js', function (require, exports, module) {
         onComplete: function () {
             //告诉initState，预加载的资源已经OK了
             initState.set('preload', true);
-        }
+        },
+        duration: 1000
     });
 
     //资源预加载

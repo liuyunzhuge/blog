@@ -4952,7 +4952,7 @@ body {
   animation-name: zoomInRight;
 }
 .preloader_container {
-  background: url("/img/youku_summer/load_bg.jpg") left top repeat-y;
+  background: url("/blog/h5_demo/dist/img/youku_summer/load_bg.jpg") left top repeat-y;
 }
 .preloader_content {
   width: 80%;

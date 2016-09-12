@@ -5,32 +5,60 @@
     <meta name="renderer" content="webkit">
     <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
     <title>3W传播</title>
-    <link rel="stylesheet" inline href="/css/3w_spread.css"/>
+    <link rel="stylesheet" inline href="/blog/h5_demo/dist/css/3w_spread.css"/>
 </head>
 <body ontouchstart>
-<div id="loader_wrap" class="loader_wrap">
+<div id="loader_wrap" class="loader_wrap full_screen">
     <div id="loader" class="loader">
+        <div class="loader_bg full_bg" style="background-image: url(/blog/h5_demo/dist/img/3w_spread/loading.png)"></div>
         <div class="progress">
-            <div class="progress-bar progress-bar-striped">
+            <div class="progress-bar">
             </div>
+            <div class="progress-value"></div>
         </div>
     </div>
 </div>
 <video id="video" style="position: absolute;top:0;left:-100%; z-index: 999;" width="100%" preload=""
        src="http://freecens.com/ts/mp3/1.mp4"></video>
-<div id="swiper" class="swiper-container">
-    <div class="swiper-wrapper">
-        <div class="swiper-slide" style="background-image: url(/img/3w_spread/1.jpg);background-size: cover;">
-            <button id="btn_play_video" class="btn btn_play_video">播放</button>
-        </div>
-        <div class="swiper-slide">
-2
+<div id="main" class="main full_screen">
+    <div class="full_screen full_bg" style="background-image: url(/blog/h5_demo/dist/img/3w_spread/bg.jpg)"></div>
+    <div id="swiper" class="swiper-container full_screen">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide page_1">
+                <div class="circle_bg_layer full_screen">
+                    <div class="circle_1_wrap">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle_2_wrap">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle_3_wrap">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+
+                <div class="page_item auto item_1 full_bg">
+                    <img src="/blog/h5_demo/dist/img/3w_spread/page_1/1.png" alt="">
+                </div>
+                <div class="page_item auto item_2 full_bg">
+                    <img src="/blog/h5_demo/dist/img/3w_spread/page_1/2.png" alt="">
+                </div>
+                <div class="page_item auto item_3 full_bg">
+                    <img src="/blog/h5_demo/dist/img/3w_spread/page_1/3.png" alt="">
+                </div>
+                <div class="btn_play_wrap auto">
+                    <button id="btn_play_video" style="background-image: url(/blog/h5_demo/dist/img/3w_spread/zhiwen.png)" class="btn btn_play_video full_bg dn">&nbsp;</button>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                2
+            </div>
         </div>
     </div>
 </div>
-<script inline src="/js/lib/sea.js"></script>
-<script inline src="/js/conf/3w_spread.js"></script>
-<script inline src="/js/app/3w_spread.js"></script>
+<script inline src="/blog/h5_demo/dist/js/lib/sea.js"></script>
+<script inline src="/blog/h5_demo/dist/js/conf/3w_spread.js"></script>
+<script inline src="/blog/h5_demo/dist/js/app/3w_spread.js"></script>
 <script>
     seajs.use('js/app/3w_spread.js');
 </script>
