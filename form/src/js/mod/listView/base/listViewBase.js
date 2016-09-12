@@ -287,6 +287,8 @@ define(function (require) {
                         //得到所有行
                         rows = opts.getRowsFromAjax(res);
 
+                        that.originalRows = rows;
+
                         //得到总记录数
                         total = opts.getTotalFromAjax(res);
 
@@ -298,12 +300,12 @@ define(function (require) {
                             parsedRows = rows;
                         }
 
+                        that.parsedRows = parsedRows;
+
                         //调用子类实现的querySuccess方法，通常在这个方法内做列表DOM的渲染
                         that.querySuccess(that.renderData(opts.renderParse(parsedRows)), {
                             clear: clear,
-                            rows: rows,
-                            total: total,
-                            parsedRows: parsedRows
+                            total: total
                         });
 
                         //触发success事件，以便外部根据特有的场景添加特殊的逻辑

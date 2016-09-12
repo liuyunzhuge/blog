@@ -36,7 +36,7 @@ define(function (require) {
             '<td>{{contact}}</td>',
             '<td>{{email}}</td>',
             '<td>{{nickname}}</td>',
-            '<td>{{remark}}</td>',
+            '<td><button class="btn-action" type="button">操作</button></td>',
             '</tr>{{/rows}}'].join(''),
         sortView: {
             config: [
@@ -49,6 +49,10 @@ define(function (require) {
             defaultSize: 20
         },
         plugins: TableDefault.plugins
+    });
+
+    list.registClickAction('.btn-action', function(e, $tr) {
+        console.log($tr)
     });
 
     list.query();

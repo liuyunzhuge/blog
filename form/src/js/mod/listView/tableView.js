@@ -158,13 +158,24 @@ define(function (require) {
                     });
                 }
             },
-            registAction: function(eventName, selector, callback){
+            registClickAction: function(selector, callback){
                 var that = this;
-                this.$tableBd.on(eventName, selector, function(){
-                    var $tr = $(this).closest('tr');
+
+                if(!isFunc(callback)) return;
+
+                this.$tableBd.on('click', selector, function(e){
+                    e.stopPropagation();
+
+                    var $tr = $(this).closest(class2Selector(that.options.tableBdClass) + ' > tbody > tr');
                     that.setRowSelected($tr);
-                    callback();
-                })
+                    callback.apply(this, [e, $tr]);
+                });
+            },
+            getFields: function(){
+
+            },
+            getOriginalFields: function(){
+
             },
             getPlugin: function (name) {
                 return this.plugins[name];

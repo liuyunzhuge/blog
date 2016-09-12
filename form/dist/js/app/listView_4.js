@@ -31,10 +31,6 @@ define(function (require) {
                 d.index = start;
                 start = start + 1;
             });
-
-            return {
-                rows: data
-            }
         }
     });
 
