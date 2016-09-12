@@ -11,7 +11,7 @@ button, input {
     -webkit-appearance: none;
   }
 
-  &.btn-inline, &.btn-inline {
+  &.btn_inline, &.btn_inline {
     width: auto;
   }
 }
@@ -26,12 +26,9 @@ button, input {
   text-decoration: none;
   overflow: hidden;
   background-image: none;
-  padding-left: @btn-padding-horizontal;
-  padding-right: @btn-padding-horizontal;
 
-  .setTapColor();
   .btn-size();
-  .btn-variant();
+  .setTapColor();
   .no_select();
 
   &:after {
@@ -49,10 +46,6 @@ button, input {
   }
 }
 
-.btn-inline {
+.btn_inline {
   display: inline-block;
-}
-
-.btn-area {
-
 }

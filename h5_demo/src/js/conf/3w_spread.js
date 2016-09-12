@@ -1,5 +1,5 @@
 seajs.config({
-    base: '/',
+    base: '@@CONTEXT_PATH/',
     paths: {
         'app': 'js/app',
         'mod': 'js/mod',
@@ -10,6 +10,6 @@ seajs.config({
     alias: {
         'swiper.jquery': 'lib/swiper.jquery.umd.js?v=20160721',
         'swiper': 'lib/swiper.js?v=20160721',
-        'jquery': 'lib/zepto.js?v=20160721'
+        'jquery': 'lib/3w_spread/zepto.js?v=20160721'
     }
 });

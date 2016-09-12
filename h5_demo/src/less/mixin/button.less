@@ -1,6 +1,6 @@
 @import "../_variables";
 
-.btn-size(@font-size: @btn-font-size, @line-height: @btn-line-height, @border-radius: @btn-border-radius) {
+.btn-size(@font-size: 14px, @line-height: 40px, @border-radius: 2px) {
   & {
     font-size: @font-size;
     line-height: @line-height;
@@ -12,7 +12,7 @@
   }
 }
 
-.btn-variant(@color:@btn-color; @background:@btn-bg-color; @border:@btn-border-color; @percent: 10%) {
+.btn-variant(@color; @background; @border; @percent: 10%) {
   &, &:visited {
     color: @color;
     background-color: @background;
@@ -29,7 +29,9 @@
       border-color: darken(@border, @percent);
     }
   }
+}
 
+.btn-variant-disable(@color; @background; @border; @percent: 10%) {
   &[disabled],&.disabled {
     &,&:active {
       background-color: lighten(@background, @percent);

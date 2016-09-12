@@ -1,0 +1,59 @@
+@import "../_variables";
+@import "../widget/reset";
+@import "../widget/swiper";
+@import "../widget/quick_layout";
+@import "../widget/progress-bar";
+@import "../widget/button";
+
+body {
+  overflow: hidden;
+}
+
+.swiper-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  color:#fff;
+  background-color: #000;
+
+  backface-visibility: hidden;
+  transform: translate3D(0, 100%, 0);
+  transition: transform .35s;
+
+  &.in {
+    transform: translate3D(0, 0, 0);
+  }
+}
+
+.loader_wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1e6c9e;
+}
+
+.loader {
+  width: 60%;
+
+  .progress {
+    height: 16px;
+    border: 2px solid #fff;
+  }
+}
+
+.btn {
+  &.btn_play_video {
+    width: 100px;
+    line-height: 40px;
+    height: 40px;
+    margin-top: 10px;
+  }
+}

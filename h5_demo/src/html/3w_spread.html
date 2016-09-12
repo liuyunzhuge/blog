@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <title>3W传播</title>
+    <link rel="stylesheet" inline href="@@CONTEXT_PATH/css/3w_spread.css"/>
+</head>
+<body ontouchstart>
+<div id="loader_wrap" class="loader_wrap">
+    <div id="loader" class="loader">
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped">
+            </div>
+        </div>
+    </div>
+</div>
+<video id="video" style="position: absolute;top:0;left:-100%; z-index: 999;" width="100%" preload=""
+       src="http://freecens.com/ts/mp3/1.mp4"></video>
+<div id="swiper" class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide" style="background-image: url(@@CONTEXT_PATH/img/3w_spread/1.jpg);background-size: cover;">
+            <button id="btn_play_video" class="btn btn_play_video">播放</button>
+        </div>
+        <div class="swiper-slide">
+2
+        </div>
+    </div>
+</div>
+<script inline src="@@CONTEXT_PATH/js/lib/sea.js"></script>
+<script inline src="@@CONTEXT_PATH/js/conf/3w_spread.js"></script>
+<script inline src="@@CONTEXT_PATH/js/app/3w_spread.js"></script>
+<script>
+    seajs.use('js/app/3w_spread.js');
+</script>
+</body>
+</html>
