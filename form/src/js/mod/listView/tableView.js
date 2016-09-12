@@ -28,8 +28,6 @@ define(function (require) {
 
     var $window = $(window);
 
-    //todo 单选，多选，获取字段值
-
     function isFunc(func) {
         return Object.prototype.toString.call(func) === '[object Function]';
     }
@@ -171,11 +169,43 @@ define(function (require) {
                     callback.apply(this, [e, $tr]);
                 });
             },
-            getFields: function(){
-
+            getSelectedTrs: function(){
+                return this.$tableBd.find('>tbody>tr' + class2Selector(this.options.selectedClass));
             },
-            getOriginalFields: function(){
+            getSelectedIndexs: function(){
+                return $.map(this.getSelectedTrs(), function(tr){
+                    return $(tr).index()
+                });
+            },
+            _getRowData: function(dataSource,index){
+                if(!this[dataSource]) return;
+                return this[dataSource][index];
+            },
+            getRowData: function(index){
+                return this._getRowData('parsedRows', index);
+            },
+            getOriginalRowData: function(index){
+                return this._getRowData('originalRows', index);
+            },
+            _getFields: function(dataSource, fieldName){
+                var that = this, ret = [];
 
+                if(!this[dataSource]) return ret;
+
+                this.getSelectedIndexs().forEach(function(i){
+                    var d = that[dataSource][i];
+                    if(d && (fieldName in d)) {
+                        ret.push(d[fieldName]);
+                    }
+                });
+
+                return ret;
+            },
+            getFields: function(fieldName){
+                return this._getFields('parsedRows', fieldName);
+            },
+            getOriginalFields: function(fieldName){
+                return this._getFields('originalRows', fieldName);
             },
             getPlugin: function (name) {
                 return this.plugins[name];
