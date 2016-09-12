@@ -1,6 +1,6 @@
 define(function (require) {
     var $ = require('jquery'),
-        MustacheTpl = require('mod/listView/MustacheTpl'),
+        MustacheTpl = require('mod/listView/mustacheTpl'),
         SimplePageView = require('mod/listView/simplePageView'),
         ListViewBase = require('mod/listView/base/listViewBase'),
         SimpleSortView = require('mod/listView/simpleSortView'),
