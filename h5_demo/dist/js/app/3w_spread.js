@@ -10,21 +10,21 @@ define('js/app/3w_spread.js', function (require, exports, module) {
     var PRE_LEAVE_DURATION = 300,
         Conf = {
             firstPreloadRes: [
-                '/img/3w_spread/bg.jpg',
-                '/img/3w_spread/flash_1.png',
-                '/img/3w_spread/flash_2.png',
-                '/img/3w_spread/star.png',
-                '/img/3w_spread/zhiwen.png',
-                '/img/3w_spread/page_1/1.png',
-                '/img/3w_spread/page_1/2.png',
-                '/img/3w_spread/page_1/3.png',
+                '/blog/h5_demo/dist/img/3w_spread/bg.jpg',
+                '/blog/h5_demo/dist/img/3w_spread/flash_1.png',
+                '/blog/h5_demo/dist/img/3w_spread/flash_2.png',
+                '/blog/h5_demo/dist/img/3w_spread/star.png',
+                '/blog/h5_demo/dist/img/3w_spread/zhiwen.png',
+                '/blog/h5_demo/dist/img/3w_spread/page_1/1.png',
+                '/blog/h5_demo/dist/img/3w_spread/page_1/2.png',
+                '/blog/h5_demo/dist/img/3w_spread/page_1/3.png',
             ],
             secondPreloadRes: []
         };
 
     function Video (options) {
         var opts = $.extend({
-            onPlay: $.noop
+            onExit: $.noop
         }, options);
 
         var video = document.getElementById('video'),
@@ -41,8 +41,6 @@ define('js/app/3w_spread.js', function (require, exports, module) {
             }
         }
 
-        video.addEventListener('playing', opts.onPlay, false);
-
         var fullscreenchangeEvent;
         ['onfullscreenchange', 'onwebkitfullscreenchange', 'onmozfullscreenchange', 'onmsfullscreenchange'].forEach(function (eventName) {
             if (!fullscreenchangeEvent && (eventName in docE)) {
@@ -51,19 +49,23 @@ define('js/app/3w_spread.js', function (require, exports, module) {
         });
 
         //监听全屏切换的事件
-        docE[fullscreenchangeEvent] = function (event) {
-            playing = !playing;
+        if(fullscreenchangeEvent) {
+            docE[fullscreenchangeEvent] = function (event) {
+                playing = !playing;
 
-            if (!playing) {
-                _pause()
-            } else {
+                if (!playing) {
+                    opts.onExit();
+                    _pause();
+                }
+            };
+        } else {
+            video.addEventListener('webkitendfullscreen', opts.onExit, false);
+        }
 
-            }
-        };
 
         var _pause = function () {
-            video.load();
             video.pause();
+            video.load();
         };
 
         return {
@@ -86,12 +88,13 @@ define('js/app/3w_spread.js', function (require, exports, module) {
         });
 
         $('#btn_play_video').on('tap', function (e) {
-            //video.play();
-            swiper.slideTo(1);
+            video.play();
+            //swiper.slideTo(1);
         });
 
         var video = new Video({
-            onPlay: function(){
+            onExit: function(){
+                video.pause();
                 swiper.slideTo(1);
             }
         });
