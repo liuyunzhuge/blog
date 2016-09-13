@@ -66,21 +66,24 @@ define(function (require, exports, module) {
                 var opts = this.options;
 
                 $tableHd.find('>thead>tr>th,>thead>tr>td').each(function () {
-                    $(this).append('<span class="' + opts.draggerClass + '"></span>');
+                    var $td = $(this);
+                    if ($td.data('drag') !== false) {
+                        $td.append('<span class="' + opts.draggerClass + '"></span>');
+                    }
                 });
             },
             disableSortView: function () {
                 var sortView = this.tableView.sortView;
-                if(sortView) {
+                if (sortView) {
                     sortView.disable();
                 }
             },
-            enableSortView: function(){
+            enableSortView: function () {
                 var sortView = this.tableView.sortView;
-                if(sortView) {
-                    setTimeout(function(){
+                if (sortView) {
+                    setTimeout(function () {
                         sortView.enable();
-                    },0);
+                    }, 0);
                 }
             },
             startDrag: function (e) {
@@ -167,7 +170,7 @@ define(function (require, exports, module) {
 
                 this.enableSortView();
             },
-            destroy: function(){
+            destroy: function () {
 
                 var tableView = this.tableView,
                     opts = this.options;
