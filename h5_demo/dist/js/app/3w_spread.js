@@ -10,14 +10,14 @@ define('js/app/3w_spread.js', function (require, exports, module) {
     var PRE_LEAVE_DURATION = 300,
         Conf = {
             firstPreloadRes: [
-                '/blog/h5_demo/dist/img/3w_spread/bg.jpg',
-                '/blog/h5_demo/dist/img/3w_spread/flash_1.png',
-                '/blog/h5_demo/dist/img/3w_spread/flash_2.png',
-                '/blog/h5_demo/dist/img/3w_spread/star.png',
-                '/blog/h5_demo/dist/img/3w_spread/zhiwen.png',
-                '/blog/h5_demo/dist/img/3w_spread/page_1/1.png',
-                '/blog/h5_demo/dist/img/3w_spread/page_1/2.png',
-                '/blog/h5_demo/dist/img/3w_spread/page_1/3.png',
+                '/img/3w_spread/bg.jpg',
+                '/img/3w_spread/flash_1.png',
+                '/img/3w_spread/flash_2.png',
+                '/img/3w_spread/star.png',
+                '/img/3w_spread/zhiwen.png',
+                '/img/3w_spread/page_1/1.png',
+                '/img/3w_spread/page_1/2.png',
+                '/img/3w_spread/page_1/3.png',
             ],
             secondPreloadRes: []
         };
@@ -76,21 +76,23 @@ define('js/app/3w_spread.js', function (require, exports, module) {
     }
 
     function main() {
-        new Swiper('#swiper', {
+        var swiper = new Swiper('#swiper', {
             direction: 'vertical',
             preloadImages: false,
             lazyLoading: true,
             lazyLoadingInPrevNext: true,
-            lazyLoadingInPrevNextAmount: 1,
+            lazyLoadingInPrevNextAmount: 2,
             slidesPerView: 1
         });
 
         $('#btn_play_video').on('tap', function (e) {
-            video.play();
+            //video.play();
+            swiper.slideTo(1);
         });
 
         var video = new Video({
             onPlay: function(){
+                swiper.slideTo(1);
             }
         });
     }
@@ -103,6 +105,7 @@ define('js/app/3w_spread.js', function (require, exports, module) {
             $('#loader_wrap').remove();
             loader.destroy();
             main();
+            $('#main').addClass('main_init');
         }).emulateTransitionEnd(PRE_LEAVE_DURATION);
     });
 

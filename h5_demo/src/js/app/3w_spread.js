@@ -76,21 +76,23 @@ define('js/app/3w_spread.js', function (require, exports, module) {
     }
 
     function main() {
-        new Swiper('#swiper', {
+        var swiper = new Swiper('#swiper', {
             direction: 'vertical',
             preloadImages: false,
             lazyLoading: true,
             lazyLoadingInPrevNext: true,
-            lazyLoadingInPrevNextAmount: 1,
+            lazyLoadingInPrevNextAmount: 2,
             slidesPerView: 1
         });
 
         $('#btn_play_video').on('tap', function (e) {
-            video.play();
+            //video.play();
+            swiper.slideTo(1);
         });
 
         var video = new Video({
             onPlay: function(){
+                swiper.slideTo(1);
             }
         });
     }
@@ -103,6 +105,7 @@ define('js/app/3w_spread.js', function (require, exports, module) {
             $('#loader_wrap').remove();
             loader.destroy();
             main();
+            $('#main').addClass('main_init');
         }).emulateTransitionEnd(PRE_LEAVE_DURATION);
     });
 

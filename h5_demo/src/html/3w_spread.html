@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="renderer" content="webkit">
-    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
     <title>3W传播</title>
     <link rel="stylesheet" inline href="@@CONTEXT_PATH/css/3w_spread.css"/>
+    <script inline src="@@CONTEXT_PATH/js/lib/flexible.js"></script>
 </head>
 <body ontouchstart>
 <div id="loader_wrap" class="loader_wrap full_screen">
@@ -22,9 +22,17 @@
        src="http://freecens.com/ts/mp3/1.mp4"></video>
 <div id="main" class="main full_screen">
     <div class="full_screen full_bg" style="background-image: url(@@CONTEXT_PATH/img/3w_spread/bg.jpg)"></div>
+    <div class="star_layer full_screen">
+        <div class="star star_1"><img src="@@CONTEXT_PATH/img/3w_spread/star.png" alt=""></div>
+        <div class="star star_2"><img src="@@CONTEXT_PATH/img/3w_spread/star.png" alt=""></div>
+        <div class="star star_3"><img src="@@CONTEXT_PATH/img/3w_spread/star.png" alt=""></div>
+        <div class="star star_4"><img src="@@CONTEXT_PATH/img/3w_spread/star.png" alt=""></div>
+        <div class="star star_5"><img src="@@CONTEXT_PATH/img/3w_spread/star.png" alt=""></div>
+        <div class="star star_6"><img src="@@CONTEXT_PATH/img/3w_spread/star.png" alt=""></div>
+    </div>
     <div id="swiper" class="swiper-container full_screen">
         <div class="swiper-wrapper">
-            <div class="swiper-slide page_1">
+            <div class="swiper-slide page_1 swiper-no-swiping">
                 <div class="circle_bg_layer full_screen">
                     <div class="circle_1_wrap">
                         <div class="circle"></div>
@@ -36,22 +44,381 @@
                         <div class="circle"></div>
                     </div>
                 </div>
-
-                <div class="page_item auto item_1 full_bg">
-                    <img src="@@CONTEXT_PATH/img/3w_spread/page_1/1.png" alt="">
-                </div>
-                <div class="page_item auto item_2 full_bg">
-                    <img src="@@CONTEXT_PATH/img/3w_spread/page_1/2.png" alt="">
-                </div>
-                <div class="page_item auto item_3 full_bg">
-                    <img src="@@CONTEXT_PATH/img/3w_spread/page_1/3.png" alt="">
-                </div>
-                <div class="btn_play_wrap auto">
-                    <button id="btn_play_video" style="background-image: url(@@CONTEXT_PATH/img/3w_spread/zhiwen.png)" class="btn btn_play_video full_bg dn">&nbsp;</button>
+                <div class="page_item_wrap">
+                    <div class="page_item auto item_1">
+                        <img src="@@CONTEXT_PATH/img/3w_spread/page_1/1.png" alt="">
+                    </div>
+                    <div class="page_item auto item_2">
+                        <img src="@@CONTEXT_PATH/img/3w_spread/page_1/2.png" alt="">
+                    </div>
+                    <div class="page_item auto item_3">
+                        <img src="@@CONTEXT_PATH/img/3w_spread/page_1/3.png" alt="">
+                    </div>
+                    <div class="btn_play_wrap auto">
+                        <button id="btn_play_video"
+                                style="background-image: url(@@CONTEXT_PATH/img/3w_spread/zhiwen.png)"
+                                class="btn btn_play_video full_bg">&nbsp;</button>
+                    </div>
                 </div>
             </div>
-            <div class="swiper-slide">
-                2
+            <div class="swiper-slide page_2">
+                <div class="page_item_wrap">
+                    <div class="page_item auto item_1 flash_wrap">
+                        <img data-src="@@CONTEXT_PATH/img/3w_spread/page_2/1.png" class="swiper-lazy" alt="">
+                        <img data-src="@@CONTEXT_PATH/img/3w_spread/flash_1.png" class="swiper-lazy flash flash_1"
+                             alt="">
+                        <img data-src="@@CONTEXT_PATH/img/3w_spread/flash_2.png" class="swiper-lazy flash flash_2"
+                             alt="">
+                    </div>
+                    <div class="page_item auto item_2">
+                        <img data-src="@@CONTEXT_PATH/img/3w_spread/page_2/2.png" class="swiper-lazy" alt="">
+                    </div>
+                    <div class="page_item auto item_3">
+                        <img data-src="@@CONTEXT_PATH/img/3w_spread/page_2/3.png" class="swiper-lazy" alt="">
+                    </div>
+                    <div class="page_item auto item_4">
+                        <img data-src="@@CONTEXT_PATH/img/3w_spread/page_2/4.png" class="swiper-lazy" alt="">
+                    </div>
+                </div>
+                <div class="slide_arrow">
+                    <div class="caret auto"></div>
+                    <div class="line line_1 auto"></div>
+                    <div class="line line_2 auto"></div>
+                </div>
+            </div>
+            <div class="swiper-slide page_3">
+                <div class="page_item_wrap">
+                    <div class="page_item auto item_1 flash_wrap">
+                        <img data-src="@@CONTEXT_PATH/img/3w_spread/page_3/1.png" class="swiper-lazy" alt="">
+                        <img data-src="@@CONTEXT_PATH/img/3w_spread/flash_1.png" class="swiper-lazy flash flash_1"
+                             alt="">
+                        <img data-src="@@CONTEXT_PATH/img/3w_spread/flash_2.png" class="swiper-lazy flash flash_2"
+                             alt="">
+                    </div>
+                    <div class="item_list auto">
+                        <div class="item_col item_col_1">
+                            <div class="page_item item_2">
+                                <img data-src="@@CONTEXT_PATH/img/3w_spread/page_3/2.png" class="swiper-lazy" alt="">
+                            </div>
+                            <div class="page_item item_4">
+                                <img data-src="@@CONTEXT_PATH/img/3w_spread/page_3/4.png" class="swiper-lazy" alt="">
+                            </div>
+                            <div class="page_item item_6">
+                                <img data-src="@@CONTEXT_PATH/img/3w_spread/page_3/6.png" class="swiper-lazy" alt="">
+                            </div>
+                            <div class="page_item item_8">
+                                <img data-src="@@CONTEXT_PATH/img/3w_spread/page_3/8.png" class="swiper-lazy" alt="">
+                            </div>
+                            <div class="page_item item_10">
+                                <img data-src="@@CONTEXT_PATH/img/3w_spread/page_3/10.png" class="swiper-lazy" alt="">
+                            </div>
+                            <div class="page_item item_12">
+                                <img data-src="@@CONTEXT_PATH/img/3w_spread/page_3/12.png" class="swiper-lazy" alt="">
+                            </div>
+                            <div class="page_item item_14">
+                                <img data-src="@@CONTEXT_PATH/img/3w_spread/page_3/14.png" class="swiper-lazy" alt="">
+                            </div>
+                        </div>
+                        <div class="item_col item_col_2">
+                            <div class="page_item item_3">
+                                <img data-src="@@CONTEXT_PATH/img/3w_spread/page_3/3.png" class="swiper-lazy" alt="">
+                            </div>
+                            <div class="page_item item_5">
+                                <img data-src="@@CONTEXT_PATH/img/3w_spread/page_3/5.png" class="swiper-lazy" alt="">
+                            </div>
+                            <div class="page_item item_7">
+                                <img data-src="@@CONTEXT_PATH/img/3w_spread/page_3/7.png" class="swiper-lazy" alt="">
+                            </div>
+                            <div class="page_item item_9">
+                                <img data-src="@@CONTEXT_PATH/img/3w_spread/page_3/9.png" class="swiper-lazy" alt="">
+                            </div>
+                            <div class="page_item item_11">
+                                <img data-src="@@CONTEXT_PATH/img/3w_spread/page_3/11.png" class="swiper-lazy" alt="">
+                            </div>
+                            <div class="page_item item_13">
+                                <img data-src="@@CONTEXT_PATH/img/3w_spread/page_3/13.png" class="swiper-lazy" alt="">
+                            </div>
+                            <div class="page_item item_15">
+                                <img data-src="@@CONTEXT_PATH/img/3w_spread/page_3/15.png" class="swiper-lazy" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide_arrow">
+                    <div class="caret auto"></div>
+                    <div class="line line_1 auto"></div>
+                    <div class="line line_2 auto"></div>
+                </div>
+            </div>
+            <div class="swiper-slide page_4">
+                <div class="page_item_wrap">
+                    <div class="item_2_wrap swiper-lazy" data-background="@@CONTEXT_PATH/img/3w_spread/page_4/1.png">
+                        <div class="page_item auto item_2">
+                            <img data-src="@@CONTEXT_PATH/img/3w_spread/page_4/2.png" class="swiper-lazy" alt="">
+                        </div>
+                    </div>
+                    <div class="page_item auto item_3 flash_wrap">
+                        <img data-src="@@CONTEXT_PATH/img/3w_spread/page_4/3.png" class="swiper-lazy" alt="">
+                        <img data-src="@@CONTEXT_PATH/img/3w_spread/flash_1.png" class="swiper-lazy flash flash_1"
+                             alt="">
+                        <img data-src="@@CONTEXT_PATH/img/3w_spread/flash_2.png" class="swiper-lazy flash flash_2"
+                             alt="">
+                    </div>
+                    <div class="page_item auto item_4">
+                        <img data-src="@@CONTEXT_PATH/img/3w_spread/page_4/4.png" class="swiper-lazy" alt="">
+                    </div>
+                </div>
+                <div class="slide_arrow">
+                    <div class="caret auto"></div>
+                    <div class="line line_1 auto"></div>
+                    <div class="line line_2 auto"></div>
+                </div>
+            </div>
+            <div class="swiper-slide page_5">
+                <div class="page_item_wrap auto">
+                    <div class="page_item auto item_1 flash_wrap">
+                        <img data-src="@@CONTEXT_PATH/img/3w_spread/page_5/1.png" class="swiper-lazy" alt="">
+                        <img data-src="@@CONTEXT_PATH/img/3w_spread/flash_1.png" class="swiper-lazy flash flash_1"
+                             alt="">
+                        <img data-src="@@CONTEXT_PATH/img/3w_spread/flash_2.png" class="swiper-lazy flash flash_2"
+                             alt="">
+                    </div>
+                    <div class="item_2_wrap fix">
+                        <div class="page_item l item_2">
+                            <img data-src="@@CONTEXT_PATH/img/3w_spread/page_5/2.png" class="swiper-lazy" alt="">
+                        </div>
+                    </div>
+                    <div class="item_3_wrap fix">
+                        <div class="page_item l item_3 flash_wrap">
+                            <img data-src="@@CONTEXT_PATH/img/3w_spread/page_5/3.png" class="swiper-lazy" alt="">
+                            <img data-src="@@CONTEXT_PATH/img/3w_spread/flash_1.png" class="swiper-lazy flash flash_1"
+                                 alt="">
+                        </div>
+                    </div>
+                    <div class="item_4_wrap fix">
+                        <div class="page_item l item_4">
+                            <img data-src="@@CONTEXT_PATH/img/3w_spread/page_5/4.png" class="swiper-lazy" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="slide_arrow">
+                    <div class="caret auto"></div>
+                    <div class="line line_1 auto"></div>
+                    <div class="line line_2 auto"></div>
+                </div>
+            </div>
+
+            <div class="swiper-slide page_6">
+                <div class="page_item_wrap auto">
+                    <div class="page_item auto item_1">
+                        <img data-src="@@CONTEXT_PATH/img/3w_spread/page_6/1.png" class="swiper-lazy" alt="">
+                    </div>
+                    <div class="item_2_wrap fix">
+                        <div class="page_item r item_2">
+                            <img data-src="@@CONTEXT_PATH/img/3w_spread/page_6/2.png" class="swiper-lazy" alt="">
+                        </div>
+                    </div>
+                    <div class="item_3_wrap fix">
+                        <div class="page_item r item_3 flash_wrap">
+                            <img data-src="@@CONTEXT_PATH/img/3w_spread/page_6/3.png" class="swiper-lazy" alt="">
+                            <img data-src="@@CONTEXT_PATH/img/3w_spread/flash_1.png" class="swiper-lazy flash flash_1"
+                                 alt="">
+                        </div>
+                    </div>
+                    <div class="item_4_wrap fix">
+                        <div class="page_item r item_4">
+                            <img data-src="@@CONTEXT_PATH/img/3w_spread/page_6/4.png" class="swiper-lazy" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="slide_arrow">
+                    <div class="caret auto"></div>
+                    <div class="line line_1 auto"></div>
+                    <div class="line line_2 auto"></div>
+                </div>
+            </div>
+
+            <div class="swiper-slide page_7">
+                <div class="page_item_wrap auto">
+                    <div class="page_item auto item_1">
+                        <img data-src="@@CONTEXT_PATH/img/3w_spread/page_7/1.png" class="swiper-lazy" alt="">
+                    </div>
+                    <div class="item_2_wrap fix">
+                        <div class="page_item l item_2">
+                            <img data-src="@@CONTEXT_PATH/img/3w_spread/page_7/2.png" class="swiper-lazy" alt="">
+                        </div>
+                    </div>
+                    <div class="item_3_wrap fix">
+                        <div class="page_item l item_3 flash_wrap">
+                            <img data-src="@@CONTEXT_PATH/img/3w_spread/page_7/3.png" class="swiper-lazy" alt="">
+                            <img data-src="@@CONTEXT_PATH/img/3w_spread/flash_1.png" class="swiper-lazy flash flash_1"
+                                 alt="">
+                        </div>
+                    </div>
+                    <div class="item_4_wrap fix">
+                        <div class="page_item l item_4">
+                            <img data-src="@@CONTEXT_PATH/img/3w_spread/page_7/4.png" class="swiper-lazy" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="slide_arrow">
+                    <div class="caret auto"></div>
+                    <div class="line line_1 auto"></div>
+                    <div class="line line_2 auto"></div>
+                </div>
+            </div>
+            <div class="swiper-slide page_8">
+                <div class="page_item_wrap auto">
+                    <div class="page_item auto item_1">
+                        <img data-src="@@CONTEXT_PATH/img/3w_spread/page_8/1.png" class="swiper-lazy" alt="">
+                    </div>
+                    <div class="item_2_wrap fix">
+                        <div class="page_item r item_2">
+                            <img data-src="@@CONTEXT_PATH/img/3w_spread/page_8/2.png" class="swiper-lazy" alt="">
+                        </div>
+                    </div>
+                    <div class="item_3_wrap fix">
+                        <div class="page_item r item_3 flash_wrap">
+                            <img data-src="@@CONTEXT_PATH/img/3w_spread/page_8/3.png" class="swiper-lazy" alt="">
+                            <img data-src="@@CONTEXT_PATH/img/3w_spread/flash_1.png" class="swiper-lazy flash flash_1"
+                                 alt="">
+                        </div>
+                    </div>
+                    <div class="item_4_wrap fix">
+                        <div class="page_item r item_4">
+                            <img data-src="@@CONTEXT_PATH/img/3w_spread/page_8/4.png" class="swiper-lazy" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="slide_arrow">
+                    <div class="caret auto"></div>
+                    <div class="line line_1 auto"></div>
+                    <div class="line line_2 auto"></div>
+                </div>
+            </div>
+            <div class="swiper-slide page_9">
+                <div class="page_item_wrap auto">
+                    <div class="page_item auto item_1 flash_wrap">
+                        <img data-src="@@CONTEXT_PATH/img/3w_spread/page_9/1.png" class="swiper-lazy" alt="">
+                        <img data-src="@@CONTEXT_PATH/img/3w_spread/flash_2.png" class="swiper-lazy flash flash_2"
+                             alt="">
+                    </div>
+                    <div class="circle_layer">
+                        <div class="circle_bg circle_bg_1 circle">
+                        </div>
+                        <div class="circle_bd circle_bd_1 circle">
+                            <div class="circle_bd_1_inner circle pos_center">
+                                <div class="page_item item_2">
+                                    <img data-src="@@CONTEXT_PATH/img/3w_spread/page_9/2.png" class="swiper-lazy" alt="">
+                                </div>
+                            </div>
+                            <div class="circle pos_center circle_dot"></div>
+                        </div>
+                        <div class="circle_bg circle_bg_2 circle">
+                        </div>
+                        <div class="circle_bd circle_bd_2 circle">
+                            <div class="circle_bd_2_inner circle pos_center">
+                                <div class="page_item item_3">
+                                    <img data-src="@@CONTEXT_PATH/img/3w_spread/page_9/3.png" class="swiper-lazy" alt="">
+                                </div></div>
+                            <div class="circle pos_center circle_dot"></div>
+                            <div class="dot_line dot_line_1">
+
+                            </div>
+                            <div class="dot_line dot_line_2">
+
+                            </div>
+                        </div>
+                        <div class="circle_bg circle_bg_3 circle">
+                        </div>
+                        <div class="circle_bd circle_bd_3 circle">
+                            <div class="circle_bd_3_inner circle pos_center">
+                                <div class="page_item item_4">
+                                    <img data-src="@@CONTEXT_PATH/img/3w_spread/page_9/4.png" class="swiper-lazy" alt="">
+                                </div></div>
+                            <div class="circle pos_center circle_dot"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide_arrow">
+                    <div class="caret auto"></div>
+                    <div class="line line_1 auto"></div>
+                    <div class="line line_2 auto"></div>
+                </div>
+            </div>
+            <div class="swiper-slide page_10">
+                <form id="appForm" autocomplete="off">
+                    <div class="page_item_wrap auto">
+                        <div class="page_item auto item_1 flash_wrap">
+                            <img data-src="@@CONTEXT_PATH/img/3w_spread/page_10/1.png" class="swiper-lazy" alt="">
+                            <img data-src="@@CONTEXT_PATH/img/3w_spread/flash_2.png" class="swiper-lazy flash flash_2"
+                                 alt="">
+                        </div>
+                        <div class="page_item auto item_2">
+                            <img data-src="@@CONTEXT_PATH/img/3w_spread/page_10/2.png" class="swiper-lazy" alt="">
+
+                            <div class="form-control-wrap">
+                                <input class="form-control form-field"
+                                       name="name"
+                                       data-type="text"
+                                       data-default-value=""
+                                       type="text"
+                                       placeholder="">
+                            </div>
+                        </div>
+                        <div class="page_item auto item_3">
+                            <img data-src="@@CONTEXT_PATH/img/3w_spread/page_10/3.png" class="swiper-lazy" alt="">
+
+                            <div class="form-control-wrap">
+                                <input class="form-control form-field"
+                                       name="company"
+                                       data-type="text"
+                                       data-default-value=""
+                                       type="text"
+                                       placeholder="">
+                            </div>
+                        </div>
+                        <div class="page_item auto item_4">
+                            <img data-src="@@CONTEXT_PATH/img/3w_spread/page_10/4.png" class="swiper-lazy" alt="">
+
+                            <div class="form-control-wrap">
+                                <input class="form-control form-field"
+                                       name="position"
+                                       data-type="text"
+                                       data-default-value=""
+                                       type="text"
+                                       placeholder="">
+                            </div>
+                        </div>
+                        <div class="page_item auto item_5">
+                            <img data-src="@@CONTEXT_PATH/img/3w_spread/page_10/5.png" class="swiper-lazy" alt="">
+
+                            <div class="form-control-wrap">
+                                <input class="form-control form-field"
+                                       name="contact"
+                                       data-type="text"
+                                       data-default-value=""
+                                       type="text"
+                                       placeholder="">
+                            </div>
+                        </div>
+                        <div class="page_item auto item_6">
+                            <img data-src="@@CONTEXT_PATH/img/3w_spread/page_10/6.png" class="swiper-lazy" alt="">
+
+                            <div class="form-control-wrap">
+                                <input class="form-control form-field"
+                                       name="needs"
+                                       data-type="text"
+                                       data-default-value=""
+                                       type="text"
+                                       placeholder="">
+                            </div>
+                        </div>
+                        <button id="btn_submit" type="button"
+                                data-background="@@CONTEXT_PATH/img/3w_spread/page_10/7.png"
+                                class="btn full_bg page_item auto item_7 swiper-lazy">&nbsp;</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
