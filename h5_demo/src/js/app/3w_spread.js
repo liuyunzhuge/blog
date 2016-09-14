@@ -1,13 +1,18 @@
 define('js/app/3w_spread.js', function (require, exports, module) {
-    var $ = require('jquery'),
-        Swiper = require('swiper.jquery'),
+    var $ = require('proj/3w_spread/zepto'),
+        Swiper = require('proj/3w_spread/swiper.jquery'),
+        Ajax = require('proj/3w_spread/ajax'),
+        Util = require('mod/util'),
         SimpleImgPreloader = require('mod/simpleImgPreloader'),
         ProgressBar = require('mod/progressBar'),
         StateManager = require('mod/stateManager');
 
     require('mod/transition');
 
-    var PRE_LEAVE_DURATION = 300,
+    var api = {
+            save: '/api/activity/save'
+        },
+        PRE_LEAVE_DURATION = 300,
         Conf = {
             firstPreloadRes: [
                 '@@CONTEXT_PATH/img/3w_spread/bg.jpg',
@@ -22,9 +27,10 @@ define('js/app/3w_spread.js', function (require, exports, module) {
             secondPreloadRes: []
         };
 
-    function Video (options) {
+    function Video(options) {
         var opts = $.extend({
-            onExit: $.noop
+            onExit: $.noop,
+            onPlay: $.noop
         }, options);
 
         var video = document.getElementById('video'),
@@ -49,7 +55,7 @@ define('js/app/3w_spread.js', function (require, exports, module) {
         });
 
         //监听全屏切换的事件
-        if(fullscreenchangeEvent) {
+        if (fullscreenchangeEvent) {
             docE[fullscreenchangeEvent] = function (event) {
                 playing = !playing;
 
@@ -61,6 +67,9 @@ define('js/app/3w_spread.js', function (require, exports, module) {
         } else {
             video.addEventListener('webkitendfullscreen', opts.onExit, false);
         }
+
+
+        video.addEventListener('playing', opts.onPlay, false);
 
 
         var _pause = function () {
@@ -89,15 +98,96 @@ define('js/app/3w_spread.js', function (require, exports, module) {
 
         $('#btn_play_video').on('tap', function (e) {
             video.play();
-            //swiper.slideTo(1);
         });
 
         var video = new Video({
-            onExit: function(){
+            onExit: function () {
                 video.pause();
                 swiper.slideTo(1);
+                audio && audio.play();
+            },
+            onPlay: function () {
+                audio && audio.pause();
             }
         });
+
+        var audio;
+        audio = (function () {
+            var audio = document.getElementById('bg-audio');
+
+            var $icon = $('#bgm_icon');
+            $icon.on('click', function (e) {
+                e.preventDefault();
+                audio.paused ? audio.play() : audio.pause();
+                $icon.toggleClass('animate');
+            }).trigger('click');
+
+            $icon.addClass('show');
+
+            return {
+                play: function(){
+                    if(audio.paused) {
+                        audio.play();
+                        $icon.addClass('animate');
+                    }
+                },
+                pause: function(){
+                    if(!audio.paused) {
+                        audio.pause();
+                        $icon.removeClass('animate');
+                    }
+                }
+            };
+        })();
+
+        var $form = $('#appForm'),
+            $form_inner = $('#form_inner'),
+            $form_success = $('#form_success');
+
+        $('#btn_submit').on('tap', function () {
+            var that = this;
+            this.disabled = true;
+
+            var formData = Util.formatForm($form);
+
+            if($.trim(formData.username) == '') {
+                new Msg('姓名不能为空:)');
+                return;
+            }
+            if($.trim(formData.company) == '') {
+                new Msg('公司不能为空:)');
+                return;
+            }
+            if($.trim(formData.position) == '') {
+                new Msg('联系方式不能为空:)');
+                return;
+            }
+            if($.trim(formData.desc) == '') {
+                new Msg('传播需求不能为空:)');
+                return;
+            }
+
+            Ajax.post(api.save, Util.formatData(formData, 'Chuanbo')).done(function (res) {
+                if(res.code == 1) {
+                    $form_inner.hide();
+                    $form_success.show();
+                } else {
+                    new Msg('请再试一下，没提交好:(');
+                }
+            }).always(function () {
+                that.disabled = false;
+            })
+        });
+    }
+
+    function Msg(content,delay){
+        var $msg = $('<div class="msg">' + content + '</div>').appendTo($(document.body));
+        $msg[0].offsetWidth;
+
+        $msg.addClass('msg_show');
+        setTimeout(function(){
+            $msg.remove();
+        },(delay || 1500) + 300);
     }
 
     //页面初始化状态管理

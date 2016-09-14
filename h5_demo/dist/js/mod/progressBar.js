@@ -1,5 +1,5 @@
 define(function (require, exports, module) {
-    var $ = require('jquery');
+    var $ = require('proj/3w_spread/zepto');
 
     //loading队列
     var Queue = function () {

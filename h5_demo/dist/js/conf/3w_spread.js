@@ -3,13 +3,8 @@ seajs.config({
     paths: {
         'app': 'js/app',
         'mod': 'js/mod',
-        'lib': 'js/lib'
+        'lib': 'js/lib',
+        'proj': 'js/proj'
     },
-    debug: false,
-    //对应lib/中的12个文件
-    alias: {
-        'swiper.jquery': 'lib/swiper.jquery.umd.js?v=20160721',
-        'swiper': 'lib/swiper.js?v=20160721',
-        'jquery': 'lib/3w_spread/zepto.js?v=20160721'
-    }
+    debug: false
 });

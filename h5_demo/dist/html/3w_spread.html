@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="renderer" content="webkit">
     <title>3W传播</title>
-    <link rel="stylesheet" href="/blog/h5_demo/dist/css/3w_spread.css"/>
+    <link rel="stylesheet" inline href="/blog/h5_demo/dist/css/3w_spread.css"/>
     <script inline src="/blog/h5_demo/dist/js/lib/flexible.js"></script>
 </head>
 <body ontouchstart>
@@ -19,7 +19,10 @@
     </div>
 </div>
 <video id="video" style="position: absolute;top:0;left:-100%; z-index: 999;" width="100%" preload=""
-       src="http://freecens.com/ts/mp3/1.mp4"></video>
+       src="http://o7gow40er.bkt.clouddn.com/chuanbo.mp4"></video>
+<div id="bgm_icon" class="bgm_icon">
+    <audio src="http://m.3wcoffee.com/static/20160714/img/www_space_music.mp3" id="bg-audio" loop></audio>
+</div>
 <div id="main" class="main full_screen">
     <div class="full_screen full_bg" style="background-image: url(/blog/h5_demo/dist/img/3w_spread/bg.jpg)"></div>
     <div class="star_layer full_screen">
@@ -193,6 +196,7 @@
                             <img data-src="/blog/h5_demo/dist/img/3w_spread/page_5/3.png" class="swiper-lazy" alt="">
                             <img data-src="/blog/h5_demo/dist/img/3w_spread/flash_1.png" class="swiper-lazy flash flash_1"
                                  alt="">
+
                             <div class="bottom_line fix">
                                 <span class="line_dot line_dot_1"></span>
                                 <span class="line_dot line_dot_2"></span>
@@ -237,6 +241,7 @@
                             <img data-src="/blog/h5_demo/dist/img/3w_spread/page_6/3.png" class="swiper-lazy" alt="">
                             <img data-src="/blog/h5_demo/dist/img/3w_spread/flash_1.png" class="swiper-lazy flash flash_1"
                                  alt="">
+
                             <div class="bottom_line bottom_line_right fix">
                                 <span class="line_dot line_dot_1"></span>
                                 <span class="line_dot line_dot_2"></span>
@@ -281,6 +286,7 @@
                             <img data-src="/blog/h5_demo/dist/img/3w_spread/page_7/3.png" class="swiper-lazy" alt="">
                             <img data-src="/blog/h5_demo/dist/img/3w_spread/flash_1.png" class="swiper-lazy flash flash_1"
                                  alt="">
+
                             <div class="bottom_line fix">
                                 <span class="line_dot line_dot_1"></span>
                                 <span class="line_dot line_dot_2"></span>
@@ -324,6 +330,7 @@
                             <img data-src="/blog/h5_demo/dist/img/3w_spread/page_8/3.png" class="swiper-lazy" alt="">
                             <img data-src="/blog/h5_demo/dist/img/3w_spread/flash_1.png" class="swiper-lazy flash flash_1"
                                  alt="">
+
                             <div class="bottom_line bottom_line_right fix">
                                 <span class="line_dot line_dot_1"></span>
                                 <span class="line_dot line_dot_2"></span>
@@ -416,69 +423,79 @@
                             <img data-src="/blog/h5_demo/dist/img/3w_spread/flash_2.png" class="swiper-lazy flash flash_2"
                                  alt="">
                         </div>
-                        <div class="page_item auto item_2">
-                            <img data-src="/blog/h5_demo/dist/img/3w_spread/page_10/2.png" class="swiper-lazy" alt="">
+                        <div id="form_inner" class="form_inner">
+                            <div class="page_item auto item_2">
+                                <img data-src="/blog/h5_demo/dist/img/3w_spread/page_10/2.png" class="swiper-lazy" alt="">
 
-                            <div class="form-control-wrap">
-                                <input class="form-control form-field"
-                                       name="name"
-                                       data-type="text"
-                                       data-default-value=""
-                                       type="text"
-                                       placeholder="">
+                                <div class="form-control-wrap">
+                                    <input class="form-control form-field"
+                                           name="username"
+                                           data-type="text"
+                                           data-default-value=""
+                                           type="text"
+                                           placeholder="">
+                                </div>
+                            </div>
+                            <div class="page_item auto item_3">
+                                <img data-src="/blog/h5_demo/dist/img/3w_spread/page_10/3.png" class="swiper-lazy" alt="">
+
+                                <div class="form-control-wrap">
+                                    <input class="form-control form-field"
+                                           name="company"
+                                           data-type="text"
+                                           data-default-value=""
+                                           type="text"
+                                           placeholder="">
+                                </div>
+                            </div>
+                            <div class="page_item auto item_4">
+                                <img data-src="/blog/h5_demo/dist/img/3w_spread/page_10/4.png" class="swiper-lazy" alt="">
+
+                                <div class="form-control-wrap">
+                                    <input class="form-control form-field"
+                                           name="position"
+                                           data-type="text"
+                                           data-default-value=""
+                                           type="text"
+                                           placeholder="">
+                                </div>
+                            </div>
+                            <div class="page_item auto item_5">
+                                <img data-src="/blog/h5_demo/dist/img/3w_spread/page_10/5.png" class="swiper-lazy" alt="">
+
+                                <div class="form-control-wrap">
+                                    <input class="form-control form-field"
+                                           name="contact"
+                                           data-type="text"
+                                           data-default-value=""
+                                           type="text"
+                                           placeholder="">
+                                </div>
+                            </div>
+                            <div class="page_item auto item_6">
+                                <img data-src="/blog/h5_demo/dist/img/3w_spread/page_10/6.png" class="swiper-lazy" alt="">
+
+                                <div class="form-control-wrap">
+                                    <input class="form-control form-field"
+                                           name="desc"
+                                           data-type="text"
+                                           data-default-value=""
+                                           type="text"
+                                           placeholder="">
+                                </div>
+                            </div>
+                            <button id="btn_submit" type="button"
+                                    data-background="/blog/h5_demo/dist/img/3w_spread/page_10/7.png"
+                                    class="btn full_bg page_item auto item_7 swiper-lazy">&nbsp;</button>
+                        </div>
+                        <div id="form_success"  class="form_success">
+                            <div class="page_item auto item_8">
+                                <img data-src="/blog/h5_demo/dist/img/3w_spread/page_10/8.png" class="swiper-lazy" alt="">
+                            </div>
+                            <div class="page_item auto item_9">
+                                <img data-src="/blog/h5_demo/dist/img/3w_spread/page_10/9.png" class="swiper-lazy" alt="">
                             </div>
                         </div>
-                        <div class="page_item auto item_3">
-                            <img data-src="/blog/h5_demo/dist/img/3w_spread/page_10/3.png" class="swiper-lazy" alt="">
-
-                            <div class="form-control-wrap">
-                                <input class="form-control form-field"
-                                       name="company"
-                                       data-type="text"
-                                       data-default-value=""
-                                       type="text"
-                                       placeholder="">
-                            </div>
-                        </div>
-                        <div class="page_item auto item_4">
-                            <img data-src="/blog/h5_demo/dist/img/3w_spread/page_10/4.png" class="swiper-lazy" alt="">
-
-                            <div class="form-control-wrap">
-                                <input class="form-control form-field"
-                                       name="position"
-                                       data-type="text"
-                                       data-default-value=""
-                                       type="text"
-                                       placeholder="">
-                            </div>
-                        </div>
-                        <div class="page_item auto item_5">
-                            <img data-src="/blog/h5_demo/dist/img/3w_spread/page_10/5.png" class="swiper-lazy" alt="">
-
-                            <div class="form-control-wrap">
-                                <input class="form-control form-field"
-                                       name="contact"
-                                       data-type="text"
-                                       data-default-value=""
-                                       type="text"
-                                       placeholder="">
-                            </div>
-                        </div>
-                        <div class="page_item auto item_6">
-                            <img data-src="/blog/h5_demo/dist/img/3w_spread/page_10/6.png" class="swiper-lazy" alt="">
-
-                            <div class="form-control-wrap">
-                                <input class="form-control form-field"
-                                       name="needs"
-                                       data-type="text"
-                                       data-default-value=""
-                                       type="text"
-                                       placeholder="">
-                            </div>
-                        </div>
-                        <button id="btn_submit" type="button"
-                                data-background="/blog/h5_demo/dist/img/3w_spread/page_10/7.png"
-                                class="btn full_bg page_item auto item_7 swiper-lazy">&nbsp;</button>
                     </div>
                 </form>
             </div>

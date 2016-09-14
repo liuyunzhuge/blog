@@ -1,7 +1,6 @@
 @import "../_variables";
 @import "../widget/reset";
 @import "../widget/swiper";
-@import "../widget/quick_layout";
 @import "../widget/button";
 @import "../_mixin";
 
@@ -25,6 +24,57 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
+}
+
+.msg {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  z-index: 10;
+  backface-visibility: hidden;
+  transform:  translate(-50%,-50%) scale(2);
+  opacity: 0;
+  padding: 20rem/@base-size 30rem/@base-size;
+  background-color: rgba(red(@brand-primary), green(@brand-primary), blue(@brand-primary), .8);
+  transform-origin: center center;
+  color: #fff;
+  border-radius: 6rem/@base-size;
+  .flexible-font-size(14px, 30px, 46px);
+
+  &.msg_show {
+    transition: all .3s;
+    opacity: 1;
+    transform:  translate(-50%,-50%) scale(1);
+  }
+}
+
+.form_success {
+  display: none;
+}
+
+.bgm_icon {
+  z-index: 9;
+  position: absolute;
+  width: 60rem/@base-size;
+  height: 60rem/@base-size;
+  right: .4rem;
+  top: .4rem;
+  opacity: 0;
+
+  background-image: url(http://o7gow40er.bkt.clouddn.com/bgm_icon.svg);
+  background-size: 100% 100%;
+  background-position: center center;
+
+  &.show {
+    opacity: 1;
+  }
+
+  &.animate {
+    animation-name: rotate360;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
 }
 
 .pos_center {
@@ -247,6 +297,25 @@ body {
         display: none;
       }
     }
+  }
+}
+
+.btn_play_text {
+  text-align: center;
+  .flexible-font-size(14px, 28px, 42px);
+  color: #14c38c;
+  text-shadow: 0 0 6rem/@base-size;
+  margin-top: 10rem/@base-size;
+  opacity: 0;
+  display: none;
+
+  .swiper-slide-active & {
+    animation-name: fadeIn;
+    animation-duration: .6s;
+    animation-delay: 3s;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-iteration-count: 1;
   }
 }
 
@@ -1841,6 +1910,18 @@ body {
     &:after {
       display: none;
     }
+  }
+
+  .item_8 {
+    width: 213rem/@base-size;
+    margin-top: 200rem/@base-size;
+    opacity: 1;
+  }
+
+  .item_9 {
+    width: 338rem/@base-size;
+    margin-top: 40rem/@base-size;
+    opacity: 1;
   }
 }
 
