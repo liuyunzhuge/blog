@@ -4,18 +4,23 @@ define(function (require, exports, module) {
         Class = require('mod/class');
 
     var DEFAULTS = $.extend({}, SortViewBase.DEFAULTS, {
+            //排序项的选择器
             sortItemSelector: '.sort_item',
+            //升序状态的css类名
             sortAscClass: 'sort_asc',
+            //降序状态的css类名
             sortDescClass: 'sort_desc'
         }),
         $document = $(document);
 
+    //禁用文本选择
     function preventSelectStart(type) {
         $document.on('selectstart' + type, function (e) {
             e.preventDefault();
         });
     }
 
+    //恢复文本选择
     function restoreSelectStart(type) {
         $document.off('selectstart' + type);
     }
@@ -36,6 +41,9 @@ define(function (require, exports, module) {
                     rnd = this.namespace_rnd,
                     sf = this.sortFields;
 
+                //注意：sf是在sortViewBase中构造的sortFields类的实例。
+                //preventSelectStart的原因是：一般进行多选的时候，可能会用到shift键和鼠标单击同时操作，这样很容易造成不需要的文本选择
+                //所以需要想办法禁用掉
                 sf.on('sortStart' + sf.namespace, function(){
                     preventSelectStart(that.namespace + '.' + rnd);
                 });
@@ -68,7 +76,7 @@ define(function (require, exports, module) {
 
                     if (e.which == 16 && that.multiple) {
                         that.multiple = false;
-                        //shift键抬起的时候，结束多列排序
+                        //shift键抬起的时候，调用sortFields的实例的endSort方法，结束多列排序
                         that.sortFields.endSort();
                     }
                 });
@@ -83,6 +91,7 @@ define(function (require, exports, module) {
                 var that = this,
                     opts = this.options;
 
+                //根据sortFields的当前状态，重新渲染所有排序项
                 this.sortFields.getConfig().forEach(function (fieldDef) {
                     var $target = that.$sort_items.filter('[data-field="' + fieldDef.field + '"]');
 

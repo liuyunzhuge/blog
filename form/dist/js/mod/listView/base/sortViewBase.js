@@ -6,7 +6,7 @@ define(function (require, exports, module) {
 
     var DEFAULTS = {
         config: [],//排序字段的配置
-        sortParamName: 'sort_fields',//分页大小参数名称
+        sortParamName: 'sort_fields',//排序参数名称
         onChange: $.noop,//排序改变时的回调
         onInit: $.noop,//初始化完毕的回调
     };

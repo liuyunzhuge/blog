@@ -11,21 +11,21 @@ define(function (require) {
         tpl: '',
         //ajax请求方法
         ajaxMethod: 'get',
-        //用来判断什么样的ajax返回才是成功的
+        //判断成功的ajax
         isAjaxResSuccess: function (res) {
             return res.code == 200;
         },
-        //获取所有行
+        //从ajax返回中解析出数据
         getRowsFromAjax: function (res) {
             return res.data.rows;
         },
-        //获取所有记录数
+        //从ajax返回中解析出总记录数
         getTotalFromAjax: function (res) {
             return res.data.total;
         },
-        //解析ajax返回的数据
+        //提供给外部解析ajax返回的数据
         parseData: $.noop,
-        //提供给模板引擎满足其要求的数据
+        //提供给模板引擎，以便得到满足其要求的数据
         renderParse: function(paredRows){
             return {
                 rows: paredRows
@@ -64,7 +64,7 @@ define(function (require) {
                 //模板方法，方便子类继承实现，在此处添加特有逻辑
                 this.initStart();
 
-                //设置数据属性名称命名空间名称
+                //设置数据属性名称、命名空间名称
                 this.dataAttr = this.constructor.dataAttr;
                 this.namespace = '.' + this.dataAttr;
                 //存放查询条件

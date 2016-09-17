@@ -7,8 +7,11 @@ define(function (require) {
         Class = require('mod/class');
 
     var DEFAULTS = $.extend({}, ListViewBase.DEFAULTS, {
+        //是否固定高度，如果固定高度，将会在合适的时候添加纵向滚动条
         heightFixed: false,
+        //colgroup的html
         colgroup: '',
+        //用来作为标题行的html
         tableHd: '',
         tableViewInitClass: 'table_view_init',
         tableViewHdClass: 'table_view_hd',
@@ -18,11 +21,17 @@ define(function (require) {
         tableFtViewClass: 'table_ft_view',
         dataListClass: 'data_list',
         pageViewClass: 'table_page_view',
+        //布局改变时的回调
         adjustLayout: $.noop,
+        //是否进行多列选择
         multipleSelect: false,
+        //行选中时添加的css类
         selectedClass: 'selected',
+        //全选的checkbox的l类名
         allCheckboxClass: 'table_check_all',
+        //单选的checkbox类名
         rowCheckboxClass: 'table_check_row',
+        //插件列表
         plugins: [],//{plugin: TableDrag, options: {...}}
     });
 
@@ -32,18 +41,22 @@ define(function (require) {
         return Object.prototype.toString.call(func) === '[object Function]';
     }
 
+    //类名转换成选择器，如 table_init table_tss => .table_init.table_tss
     function class2Selector(classStr) {
         return ('.' + $.trim(classStr)).replace(/\s+/g, '.');
     }
 
+    //判断是否横向溢出
     function isOverflowX(elem) {
         return elem.clientWidth < elem.scrollWidth;
     }
 
+    //判断是否纵向溢出
     function isOverflowY(elem) {
         return elem.clientHeight < elem.scrollHeight;
     }
 
+    //计算浏览器滚动条的宽度
     function scrollbarWidth() {
         var body = document.body,
             e = document.createElement('div');
@@ -102,8 +115,10 @@ define(function (require) {
 
                 this.$element.addClass(opts.tableViewInitClass);
 
+                //设置布局
                 this.adjustLayout();
 
+                //初始化行选择的功能
                 this.setUpTableSelect();
 
                 var that = this;
@@ -156,6 +171,9 @@ define(function (require) {
                     });
                 }
             },
+            //注册行里面一些元素的click事件，只有click事件需要通过这个方法来注册，其它事件不需要
+            //通过这个方法注册的原因是因为，在这些行的子元素点击事件之前，必须先做行选中的操作
+            //否则它们的事件回调里面讲无法通过tableView提供的方法获取选择行的一些数据信息
             registClickAction: function(selector, callback){
                 var that = this;
 
@@ -169,9 +187,11 @@ define(function (require) {
                     callback.apply(this, [e, $tr]);
                 });
             },
+            //获取选中的行的jq对象
             getSelectedTrs: function(){
                 return this.$tableBd.find('>tbody>tr' + class2Selector(this.options.selectedClass));
             },
+            //获取选中的行的索引
             getSelectedIndexs: function(){
                 return $.map(this.getSelectedTrs(), function(tr){
                     return $(tr).index()
@@ -181,9 +201,11 @@ define(function (require) {
                 if(!this[dataSource]) return;
                 return this[dataSource][index];
             },
+            //从经过opts.parsedData函数解析后的数据里面，获取某一行对应的数据
             getRowData: function(index){
                 return this._getRowData('parsedRows', index);
             },
+            //从原始的ajax返回的数据里面，获取某一行对应的数据
             getOriginalRowData: function(index){
                 return this._getRowData('originalRows', index);
             },
@@ -201,25 +223,30 @@ define(function (require) {
 
                 return ret;
             },
+            //从经过opts.parsedData函数解析后的数据里面，获取某个字段的值
             getFields: function(fieldName){
                 return this._getFields('parsedRows', fieldName);
             },
+            //从经过opts.parsedData函数解析后的数据里面，获取某个字段的值
             getOriginalFields: function(fieldName){
                 return this._getFields('originalRows', fieldName);
             },
             getPlugin: function (name) {
                 return this.plugins[name];
             },
+            //移除插件
             removePlugin: function (name, args) {
                 var plugin = this.getPlugin(name);
                 if (!plugin) return;
 
+                //插件必须定义destroy方法，才能有效的回收内存
                 if (isFunc(plugin.destroy)) {
                     plugin.destroy.apply(plugin, args);
                 }
 
                 delete this.plugins[name];
             },
+            //添加插件
             addPlugin: function (config) {
                 if (!config.name) {
                     throw "plugin config must have [name] option";
@@ -248,7 +275,8 @@ define(function (require) {
                     this.on('adjustLayout' + this.namespace, $.proxy(opts.adjustLayout, this));
                 }
             },
-            //调整布局
+            //调整布局，这个方法tableView结构的核心，任何DOM的变化，或者用户操作，以及浏览器窗口大小改变等都有可能影响tableView的UI
+            //所以需要这个方法来统一设置tableView的布局
             adjustLayout: function () {
                 this.adjustPaddingTop();
                 this.adjustTableHdViewPos();
@@ -275,7 +303,6 @@ define(function (require) {
             },
             checkTableBdScrollState: function () {
                 var scrollState = this.tableBdScrollState,
-                    opts = this.options,
                     that = this;
 
                 if (scrollState) {
@@ -348,6 +375,7 @@ define(function (require) {
             },
             querySuccess: function (html, args) {
                 this.$data_list.html(html);
+                //DOM改变，调用adjustLayout
                 this.adjustLayout();
             }
         },

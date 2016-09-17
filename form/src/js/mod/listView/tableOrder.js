@@ -10,6 +10,7 @@ define(function (require, exports, module) {
         return ('.' + $.trim(classStr)).replace(/\s+/g, '.');
     }
 
+    //给tableView添加序号列的功能
     var TableOrder = Class({
         instanceMembers: {
             init: function (tableView, options) {

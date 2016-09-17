@@ -8,9 +8,11 @@ define(function (require) {
             init: function (_tpl) {
                 this.base(_tpl);
             },
+            //±‡“Î
             compile: function () {
                 ms.parse(this._tpl);
             },
+            //‰÷»æ
             render: function (source) {
                 return ms.render(this._tpl, source);
             }

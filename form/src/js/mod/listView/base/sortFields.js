@@ -15,12 +15,19 @@ define(function (require) {
     };
 
     var DEFAULTS = {
+            //排序字段配置
             config: [],
+            //排序状态改变的事件回调
             onStateChange: $.noop,
+            //排序开始的事件回调
             onSortStart: $.noop,
+            //排序结束的事件回调
             onSortEnd: $.noop,
+            //排序值改变的事件回调
             onSortChange: $.noop,
+            //排序重置的事件回调
             onReset: $.noop,
+            //初始化后的事件回调
             onInit: $.noop
         },
         isArray = function (arr) {
@@ -42,7 +49,7 @@ define(function (require) {
                 //初始化，注册事件管理的功能：EventBase
                 this.base();
 
-                //设置数据属性名称命名空间名称
+                //设置数据属性名称、命名空间名称
                 this.dataAttr = this.constructor.dataAttr;
                 this.namespace = '.' + this.dataAttr;
 
@@ -121,6 +128,7 @@ define(function (require) {
             getConfig: function () {
                 return $.extend(true, [], this.config);
             },
+            //返回当前的排序值，也就是value不等于no的字段，以数组形式返回，元素在数据中的顺序，代表排序字段的顺序
             getValue: function () {
                 return this.getConfig().filter(function (def) {
                     return def.value !== 'no';
@@ -141,6 +149,9 @@ define(function (require) {
                     def.order = 0;
                 });
             },
+            //用来改变字段的排序状态，第二个参数表示是否在进行多个字段排序
+            //如果不是多个字段排序，在这个方法最后会立即调用endSort方法
+            //否则由外部决定何时调用endSort方法。因为在多个字段的排序场景下，这个组件并不知道什么时候才能结束多列排序的操作
             changeState: function (fieldName, multiple) {
                 var curDef = getDefFrom(this.config, fieldName);
                 if (!curDef) return;

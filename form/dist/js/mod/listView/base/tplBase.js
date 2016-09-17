@@ -10,9 +10,11 @@ define(function (require) {
                     this.compile();
                 }
             },
+            //编译
             compile: function () {
                 //待子类实现
             },
+            //渲染
             render: function (source) {
                 //待子类实现
             }
