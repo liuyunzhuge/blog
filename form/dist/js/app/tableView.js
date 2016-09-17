@@ -51,8 +51,8 @@ define(function (require) {
         plugins: TableDefault.plugins
     });
 
-    list.registClickAction('.btn-action', function(e, $tr) {
-        console.log(list.getRowData($tr.index()));
+    list.$element.on('click','.btn-action', function(e) {
+        console.log(list.getRowData($(this).closest('tr').index()));
     });
 
     list.query();

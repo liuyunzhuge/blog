@@ -171,22 +171,6 @@ define(function (require) {
                     });
                 }
             },
-            //注册行里面一些元素的click事件，只有click事件需要通过这个方法来注册，其它事件不需要
-            //通过这个方法注册的原因是因为，在这些行的子元素点击事件之前，必须先做行选中的操作
-            //否则它们的事件回调里面讲无法通过tableView提供的方法获取选择行的一些数据信息
-            registClickAction: function(selector, callback){
-                var that = this;
-
-                if(!isFunc(callback)) return;
-
-                this.$tableBd.on('click', selector, function(e){
-                    e.stopPropagation();
-
-                    var $tr = $(this).closest(class2Selector(that.options.tableBdClass) + ' > tbody > tr');
-                    that.setRowSelected($tr);
-                    callback.apply(this, [e, $tr]);
-                });
-            },
             //获取选中的行的jq对象
             getSelectedTrs: function(){
                 return this.$tableBd.find('>tbody>tr' + class2Selector(this.options.selectedClass));
