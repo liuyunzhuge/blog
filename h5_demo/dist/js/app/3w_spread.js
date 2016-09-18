@@ -2,12 +2,12 @@ define('js/app/3w_spread.js', function (require, exports, module) {
     var $ = require('proj/3w_spread/zepto'),
         Swiper = require('proj/3w_spread/swiper.jquery'),
         Ajax = require('proj/3w_spread/ajax'),
-        Util = require('mod/util'),
-        SimpleImgPreloader = require('mod/simpleImgPreloader'),
-        ProgressBar = require('mod/progressBar'),
-        StateManager = require('mod/stateManager');
+        Util = require('mod/3w_spread/util'),
+        SimpleImgPreloader = require('mod/3w_spread/simpleImgPreloader'),
+        ProgressBar = require('mod/3w_spread/progressBar'),
+        StateManager = require('mod/3w_spread/stateManager');
 
-    require('mod/transition');
+    require('mod/3w_spread/transition');
 
     var api = {
             save: '/api/activity/save'

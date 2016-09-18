@@ -1,6 +1,6 @@
 define(function (require) {
 
-    var $ = require('jquery');
+    var $ = require('proj/3w_spread/zepto');
 
     var transition = $.transitionEnd = {
         end: (function () {
