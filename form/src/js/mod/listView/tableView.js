@@ -359,7 +359,9 @@ define(function (require) {
             },
             querySuccess: function (html, args) {
                 this.$data_list.html(html);
-                //DOM改变，调用adjustLayout
+            },
+            afterQuery: function(){
+                //DOM在请求后会改变，调用adjustLayout重设布局
                 this.adjustLayout();
             }
         },
