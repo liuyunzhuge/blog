@@ -7,7 +7,7 @@ define(function (require) {
             list: './api/tableView.json',
         };
 
-    var list = window.l = new ListView('#table_view', {
+    var list = new ListView('#table_view', {
         multipleSelect: true,
         heightFixed: true,
         url: api.list,

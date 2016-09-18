@@ -6,7 +6,7 @@ define(function (require) {
             list: './api/pageView.json',
         };
 
-    var list = new ListView('#blog_list', {
+    var list = window.l = new ListView('#blog_list', {
         url: api.list,
         tpl: ['{{#rows}}<li class="blog-entry">',
             '    <a href="#" class="diggit">',

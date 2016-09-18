@@ -217,15 +217,15 @@ define(function (require) {
     }
 
     //_query函数中关键的模板方法与事件的调用顺序：
-    //method: beforeQuery
-    //[method: queryCancel]
-    //event: beforeAjax
-    //1-成功：
+    // method: beforeQuery
+    // [method: queryCancel]
+    // event: beforeAjax
+    // 1-成功：
     //  method: querySuccess
     //  event: success
     //  method: afterQuery
     //  event: afterAjax
-    //2-失败：
+    // 2-失败：
     //  method: queryError
     //  event: error
     //  method: afterQuery
