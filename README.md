@@ -49,6 +49,16 @@
 
 4. [简单封装分页功能pageView.js](http://www.cnblogs.com/lyzg/p/5791011.html)
 
+5. [列表组件抽象（1）-概述](http://www.cnblogs.com/lyzg/p/5879724.html)
+
+6. [列表组件抽象（2）-listViewBase说明](http://www.cnblogs.com/lyzg/p/5881350.html)
+
+7. [列表组件抽象（3）-分页和排序管理说明](http://www.cnblogs.com/lyzg/p/5881352.html)
+
+8. [列表组件抽象（4）-滚动列表及分页说明](http://www.cnblogs.com/lyzg/p/5881355.html)
+
+9. [列表组件抽象（5）-简洁易用的表格组件](http://www.cnblogs.com/lyzg/p/5881357.html)
+
 ##lottery
 
 一个简单的根据不同的概率进行抽奖的DEMO。在该DEMO中，我预先定义好了五种类型的数据，用probability表示它们被抽到的概率。最后通过drawLottery
