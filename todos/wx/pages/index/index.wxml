@@ -1,0 +1,52 @@
+<!--list.wxml-->
+<view class="container">
+    <view class="app-hd">
+        <view class="fx1">
+            <input class="new-todo-input" value="{{newTodoText}}" auto-focus  bindinput="newTodoTextInput"/>    
+        </view>
+        <button type="primary" size="mini" bindtap="addOne" loading="{{addOneLoading}}" disabled="{{addOneLoading}}"> 
+        + Add
+        </button>
+    </view>
+    <view class="todos-list" >
+        <view class="todo-item {{index == 0 ? '' : 'todo-item-not-first'}} {{todo.complete ? 'todo-item-complete' : ''}}" wx:for="{{todos}}" wx:for-item="todo">
+            <view wx-if="{{!todo.editing}}">
+                <checkbox-group id="todo-item-chk-{{todo.id}}" bindchange="toggleTodo">
+                    <label class="checkbox">
+                        <checkbox value="1" checked="{{todo.complete}}"/>
+                    </label>
+                </checkbox-group>
+            </view>
+            <view id="todo-item-txt-{{todo.id}}" class="todo-text" wx-if="{{!todo.editing}}" bindlongtap="startEdit">
+                <text>{{todo.text}}</text>
+            </view>
+            <view wx-if="{{!todo.editing}}">
+                <button id="btn-del-item-{{todo.id}}" bindtap="clearSingle" type="warn" size="mini" loading="{{todo.loading}}"  disabled="{{todo.loading}}"> 
+                    Clear
+                </button>
+            </view>
+            <input id="todo-item-edit-{{todo.id}}" class="todo-text-input" value="{{todo.text}}" auto-focus bindblur="endEditTodo" wx-if="{{todo.editing}}"/>    
+        </view>
+    </view>
+    <view class="app-ft" wx:if="{{todos.length > 0}}">
+        <view class="fx1">
+            <checkbox-group bindchange="toggleAll">
+                <label class="checkbox">
+                    <checkbox value="1" checked="{{todosOfUncomplted.length == 0}}"/>
+                </label>
+            </checkbox-group>
+            <text>{{todosOfUncomplted.length}} left.</text>
+        </view>
+        <view wx:if="{{todosOfComplted.length > 0}}">
+            <button type="warn" size="mini" bindtap="clearAll" loading="{{clearAllLoading}}" disabled="{{clearAllLoading}}"> 
+                Clear {{todosOfComplted.length}} of done.
+            </button>
+        </view>
+    </view>
+    <loading hidden="{{loadingHidden}}" bindchange="loadingChange">
+        {{loadingText}}
+    </loading>
+    <toast hidden="{{toastHidden}}" bindchange="toastChange">
+        {{toastText}}
+    </toast>
+</view>

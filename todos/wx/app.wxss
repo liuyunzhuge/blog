@@ -1,0 +1,144 @@
+/**app.wxss**/
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+} 
+
+
+.df {
+  display: flex;
+}
+
+.dif {
+  display: inline-flex;
+}
+
+.fdr {
+  flex-direction: row;
+}
+.fdrr {
+  flex-direction: row-reverse;
+}
+.fdc {
+  flex-direction: column;
+}
+.fdcr {
+  flex-direction: column-reverse;
+}
+
+.fwn {
+  flex-wrap: nowrap;
+}
+.fww {
+  flex-wrap: wrap;
+}
+.fwr {
+  flex-wrap: wrap-reverse;
+}
+
+.jcfs {
+  justify-content:  flex-start;
+}
+.jcfe {
+  justify-content:  flex-end;
+}
+.jcc {
+  justify-content:  center;
+}
+.jcsb {
+  justify-content:  space-between;
+}
+.jcsa {
+  justify-content:  space-around;
+}
+
+.aifs {
+  align-items: flex-start;
+}
+.aife {
+  align-items: flex-end;
+}
+.aic {
+  align-items: center;
+}
+.aib {
+  align-items: baseline;
+}
+.ais {
+  align-items: stretch;
+}
+
+.ass {
+  align-self: stretch;
+}
+
+.asa {
+  align-self: auto;
+}
+
+.asb{
+  align-self: baseline;
+}
+
+.asc {
+  align-self: center;
+}
+
+.asfs {
+  align-self: flex-start;
+}
+
+.asfe {
+  align-self: flex-end;
+}
+
+
+.acfs {
+  align-content: flex-start;
+}
+.acfe {
+  align-content: flex-end;
+}
+.acc {
+  align-content: center;
+}
+.acsb {
+  align-content: space-between;
+}
+.acsa {
+  align-content: space-around;
+}
+.acs {
+  align-content: stretch;
+}
+
+.fxa {
+  flex: auto;
+}
+
+.fxn {
+  flex: none;
+}
+
+.fx1 {
+  flex: 1;
+}
+.fx2 {
+  flex: 2;
+}
+.fx3 {
+  flex: 3;
+}
+.fx4 {
+  flex: 4;
+}
+.fx5 {
+  flex: 5;
+}
+.fx6 {
+  flex: 6;
+}
