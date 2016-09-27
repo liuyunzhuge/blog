@@ -126,6 +126,8 @@
 
 1. [介绍一种基于gulp对seajs的模块做合并压缩的方式](http://www.cnblogs.com/lyzg/p/5581961.html)
 
+2. [快速了解微信小程序的使用，一个根据小程序的框架开发的todos app](http://www.cnblogs.com/lyzg/p/5906496.html)
+
 ##todos
 这个文件夹提供多个版本的todos这个经典应用的实现。里面的子文件夹名分别代表它的实现方式。暂时只想用jquery和
 backbone两个库来分别实现。目的是为了对比传统面向对象开发方法与MVVM开发方法的区别。
