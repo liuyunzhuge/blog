@@ -84,6 +84,12 @@
 
 1. [判断鼠标移入移出元素时的方向](http://www.cnblogs.com/lyzg/p/5689761.html)
 
+##history
+
+该文件夹内容的相关介绍：
+
+1. [理解浏览器的历史记录](http://www.cnblogs.com/lyzg/p/5941919.html)
+
 ##numerGrow
 原本应该把这个文件夹命名为numberGrow，结果弄错了，懒得改了...
 
