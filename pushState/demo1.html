@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/quick_layout.css"/>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/demo.js"></script>
+    <style type="text/css">
+        ul {
+            list-style: none;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu {
+            width: 320px;
+            margin: 10px auto;
+            text-align: center;
+        }
+
+        .menu li,
+        .menu a {
+            float: left;
+            width: 100px;
+        }
+
+        .menu > .active > a {
+            font-weight: bold;
+        }
+
+        .menu > li + li {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="container" class="container"></div>
+<script>
+    //容器
+    var Container = {
+        $element: $('#container'),
+        actions: {}
+    };
+
+    //action实例配置定义
+    var Actions = {
+        'index': {
+            destroy: function () {
+                this.$content.remove();
+            },
+            doAction: function () {
+                var $content = this.$content = $('<div class="content">这是首页的内容</div>');
+                $content.appendTo(Container.$element);
+            }
+        },
+        'list': {
+            destroy: function () {
+                this.$content.remove();
+            },
+            doAction: function () {
+                var $content = this.$content = $('<div class="content">这是列表页的内容</div>');
+                $content.appendTo(Container.$element);
+            }
+        },
+        'about': {
+            destroy: function () {
+                this.$content.remove();
+            },
+            doAction: function () {
+                var $content = this.$content = $('<div class="content">这是关于页的内容</div>');
+                $content.appendTo(Container.$element);
+            }
+        }
+    };
+
+    //公共方法，渲染菜单
+    var getMenu = function (actionName) {
+        return ['<ul class="menu fix">',
+            '        <li class="' + (actionName == 'index' ? 'active' : '') + '"><a href="#index">首页</a></li>',
+            '        <li class="' + (actionName == 'list' ? 'active' : '') + '"><a href="#list">列表页</a></li>',
+            '        <li class="' + (actionName == 'about' ? 'active' : '') + '"><a href="#about">关于页</a></li>',
+            '    </ul>'].join("");
+    };
+
+    function hashchange(event) {
+        var actionName = (location.hash || '#index').substring(1);
+
+        //重复
+        if (Container._current && Container._current.actionName == actionName) {
+            return;
+        }
+
+        //未定义
+        if (!Actions[actionName]) {
+            return;
+        }
+
+        //已定义的action
+        var action = Container.actions[actionName];
+
+        //销毁之前的action
+        Container._current && Container._current.destroy();
+
+        if (!action) {
+            //未定义则立即创建
+            action = (function () {
+                //action实例
+                var ret = $.extend(true, {
+                    destory: $.noop,
+                    doAction: $.noop
+                }, Actions[actionName]);
+
+                //添加actionName属性
+                ret.actionName = actionName;
+
+                //代理destroy方法，封装公共逻辑
+                ret.destroy = (function () {
+                    var _destroy = ret.destroy;
+
+                    return function () {
+                        //移除菜单
+                        ret.$menu.remove();
+
+                        //调用Actions中定义的destroy方法
+                        _destroy.apply(ret, arguments);
+                    };
+                })();
+
+                //代理doAction方法，封装公共逻辑
+                ret.doAction = (function () {
+                    var _doAction = ret.doAction;
+                    return function () {
+                        //添加菜单
+                        var $menu = ret.$menu = $(getMenu(ret.actionName));
+                        $menu.appendTo(Container.$element);
+
+                        //调用Actions中定义的doAction方法
+                        _doAction.apply(ret, arguments);
+                    }
+                })();
+
+                return ret;
+            })();
+        }
+
+        Container._current = action;
+        action.doAction();
+    }
+
+    //初始化调用
+    hashchange();
+    //用hashchange当页面切换的控制器
+    window.onhashchange = hashchange;
+
+</script>
+</body>
+</html>
