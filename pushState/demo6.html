@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/quick_layout.css"/>
+    <script src="./js/jquery.js"></script>
+</head>
+<body>
+<div class="tc">
+    通过pushState改变页面地址：
+</div>
+<div class="tc mt10 mb10">
+    <button type="button" onclick="pushState({data:'foo'},'foo.html');">pushState({data:'foo'},'foo.html')</button>
+    <button type="button" onclick="replaceState({data:'bar'},'bar.html');">replaceState({data:'bar'},'bar.html')</button>
+</div>
+<div class="tc">
+    改变页面的hash:
+</div>
+<div class="tc mt10 mb10">
+    <a href="#yes">#yes</a>
+    <a href="javascript:toHash('#kkk');">location.hash = '#no';</a>
+</div>
+<div id="log" class="tc">
+
+</div>
+<script>
+    function pushState(state, page) {
+        history.pushState(state, '', page);
+    }
+
+    function replaceState(state, page) {
+        history.replaceState(state, '', page);
+    }
+
+    function toHash(hash){
+        location.hash = hash;
+    }
+
+    window.onpopstate = function(event) {
+        $('#log').html('当前网页关联的state：' + JSON.stringify(event.state));
+    }
+</script>
+</body>
+</html>

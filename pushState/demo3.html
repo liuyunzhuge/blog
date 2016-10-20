@@ -4,37 +4,12 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <link rel="stylesheet" href="./css/quick_layout.css"/>
-    <script src="./js/demo.js"></script>
+    <script src="./js/jquery.js"></script>
 </head>
 <body>
 <div class="tc">
-    通过超链接改变页面地址：
-</div>
-<div class="tc mt10 mb10">
-    <a href="demo1.html">demo1</a>
-    <a href="demo2.html">demo2</a>
-    <a href="demo3.html">demo3</a>
+    <a href="javascript:history.go(-1)">返回</a>
     <a href="demo4.html">demo4</a>
-</div>
-<div class="tc">
-    通过location.href改变页面地址：
-</div>
-<div class="tc mt10 mb10">
-    <button type="button" onclick="changeHref(1);">href="demo1.html"</button>
-    <button type="button" onclick="changeHref(2);">href="demo2.html"</button>
-    <button type="button" onclick="changeHref(3);">href="demo3.html"</button>
-    <button type="button" onclick="changeHref(4);">href="demo4.html"</button>
-</div>
-<div class="tc">
-    通过表单提交改变页面地址：
-</div>
-<div class="tc mt10 mb10">
-    <form action="demo1.html" method="get" class="dib"><button type="submit" >demo1.html</button></form>
-    <form action="demo2.html" method="get" class="dib"><button type="submit" >demo2.html</button></form>
-    <form action="demo3.html" method="get" class="dib"><button type="submit" >demo3.html</button></form>
-    <form action="demo4.html" method="get" class="dib"><button type="submit" >demo4.html</button></form>
-</div>
-<div id="log" class="tc mt50 mb50">
 </div>
 </body>
 </html>
