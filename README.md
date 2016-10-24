@@ -105,6 +105,12 @@
 
 1. [数字限时增长效果实现：numberGrow.js](http://www.cnblogs.com/lyzg/p/5517190.html)
 
+##pushState
+
+该文件夹内容的相关介绍：
+
+1. [理解浏览器历史记录（2）-hashchange、pushState](http://www.cnblogs.com/lyzg/p/5960609.html)
+
 ##quick_layout
 这个文件夹里面的内容是对[zxx.lib.css](https://github.com/zhangxinxu/zxx.lib.css)的一个整理，将这些代码利用less进行了整合，同时扩充了更多的属性。
 
