@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>backbone history</title>
+    <link rel="stylesheet" href="./css/bootstrap.css"/>
+</head>
+<body>
+<header id="header">
+    <nav class="header-nav">
+        <ul class="nav-menu">
+            <li><a href="routeto:/">首页</a></li>
+            <li><a href="routeto:/list">列表</a></li>
+            <li><a href="routeto:/detail/1">详情</a></li>
+            <li><a href="routeto:/about">关于</a></li>
+        </ul>
+    </nav>
+</header>
+
+以下是不参与route的链接：
+<ul class="">
+    <li><a href="http://www.baidu.com" target="_blank">普通超链接</a></li>
+    <li><a href="#header">普通锚点链接</a></li>
+    <li><a href="javascript:alert(1)">javascript:alert(1)</a></li>
+    <li><a href="tel:95555">tel:95555</a></li>
+    <li><a href="mailto:aaa@aaa.com">mailto:aaa@aaa.com</a></li>
+</ul>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/underscore.js"></script>
+<script src="./js/backbone.js"></script>
+<script src="./js/backbone.localStorage.js"></script>
+<script src="./js/backbone.ajax.js"></script>
+<script src="./js/mustache.js"></script>
+<script>
+
+    //拦截所有的超链接的点击事件，根据href自动判断是否调用history实例进行跳转
+    $(document).on('click', 'a', function (e) {
+        var $a = $(this);
+        var href = $.trim($a.attr('href'));
+
+        //只有href以routeto:开头的链接元素会被拦截
+        if (!/^(routeto:)/.test(href)) {
+            return;
+        }
+
+        href = href.replace(/^(routeto:)/,'');
+
+        var options = {
+            trigger: $a.data('trigger') !== false,
+            replace: $a.data('replace') !== false
+        };
+
+        if ($a.data('visited') !== true) {
+            options.replace = false;
+            $a.data('visited', true);
+        }
+
+        Backbone.history.navigate(href, options);
+
+        e.preventDefault();
+    });
+
+    var AppRouter = Backbone.Router.extend({
+        routes: {
+            '': 'index',
+            'index': 'index',
+            'list': 'renderList',
+            'detail/:id': 'renderDetail',
+            '*error': 'renderError'
+        },
+        index: function () {
+            console.log('首页action');
+        },
+        renderList: function () {
+            console.log('列表action');
+        },
+        renderDetail: function (id) {
+            console.log('详情action, 详情id为: ' + id);
+        },
+        renderError: function (error) {
+            console.log('URL错误, 错误信息: ' + error);
+        }
+    });
+
+    var router = new AppRouter();
+
+    //浏览器支持pushState的情况
+    Backbone.history.start({pushState: true});
+
+    //模拟浏览器不支持pushState
+    //Backbone.history.start({});
+
+    //模拟浏览器不支持pushState和hashChange
+    //Backbone.history.start({hashChange: false});
+</script>
+</body>
+</html>
