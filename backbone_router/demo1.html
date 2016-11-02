@@ -41,14 +41,9 @@
         var href = $.trim($a.attr('href'));
 
         var options = {
-            trigger: $a.data('trigger') !== false,
-            replace: $a.data('replace') !== false
+            trigger: $a.data('trigger') !== false,//默认点击链接后都要自动触发回调
+            replace: Backbone.history.getFragment(href) == Backbone.history.fragment//如果链接地址与当前地址匹配就采用replace的方式
         };
-
-        if ($a.data('visited') !== true) {
-            options.replace = false;
-            $a.data('visited', true);
-        }
 
         Backbone.history.navigate(href, options);
 

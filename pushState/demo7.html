@@ -50,7 +50,7 @@
 
     //action实例配置定义
     var Actions = {
-        'index': {
+        '': {
             destroy: function () {
                 this.$content.remove();
             },
@@ -82,7 +82,7 @@
     //公共方法，渲染菜单
     var getMenu = function (actionName) {
         return ['<ul class="menu fix">',
-            '        <li class="' + (actionName == 'index' ? 'active' : '') + '"><a href="/index">首页</a></li>',
+            '        <li class="' + (actionName == 'index' ? 'active' : '') + '"><a href="/">首页</a></li>',
             '        <li class="' + (actionName == 'list' ? 'active' : '') + '"><a href="/list">列表页</a></li>',
             '        <li class="' + (actionName == 'about' ? 'active' : '') + '"><a href="/about">关于页</a></li>',
             '    </ul>'].join("");
@@ -90,26 +90,30 @@
 
     $(document).on('click', 'a', function (e) {
         var $a = $(this);
-        var href = $.trim($a.attr('href'));
-
-        var method = 'replaceState';
-
-        if ($a.data('visited') !== true) {
-            method = 'pushState';
-            $a.data('visited', true);
-        }
-
-        history[method]({}, '', '/' + root.replace(/^\/|\/$/g,'') + '/' +  href.replace(/^\/|\/$/g,''));
-
-        loadUrl();
+        var href = $.trim($a.attr('href')).replace(/^\/|\/$/g,'');
 
         e.preventDefault();
+
+        if(href == getActionName()) {
+            return;
+        }
+
+        history.pushState({}, '', '/' + root.replace(/^\/|\/$/g,'') + '/' +  href);
+
+        loadUrl();
     });
 
-    function loadUrl() {
-        var actionName = (location.pathname.replace(/\/$/g,'') + '/').replace(root, '') || 'index';
+    function getActionName(){
+        var actionName = (location.pathname.replace(/\/$/g,'') + '/').replace(root, '');
 
         actionName = actionName.replace(/\/$/g,'');
+
+        return actionName;
+    }
+
+    function loadUrl() {
+
+        var actionName = getActionName();
 
         //重复
         if (Container._current && Container._current.actionName == actionName) {
