@@ -25,6 +25,11 @@
 
 [我对Backbone.js的一些认识](http://www.cnblogs.com/lyzg/p/5634565.html)
 
+##backbone_router
+(1) 该文件夹内容的相关介绍：
+
+[使用backbone的history管理SPA应用的url](http://www.cnblogs.com/lyzg/p/6018050.html)
+
 ##css_name
 (1) 该文件夹内容的相关介绍：
 
