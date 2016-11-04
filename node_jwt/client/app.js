@@ -11,14 +11,14 @@ app.set('views', __dirname + '/views');
 app.use(express.static('static'));
 
 app.get('/', function (req, res) {
-  res.render('index', {
-    title: '基于JWT的api认证'
-  });
+    res.render('index', {
+        title: '基于JWT的api认证'
+    });
 });
 
 var server = app.listen(2000, function () {
-  var host = server.address().address;
-  var port = server.address().port;
+    var host = server.address().address;
+    var port = server.address().port;
 
-  console.log('Example app listening at http://%s:%s', host, port);
+    console.log('Example app listening at http://%s:%s', host, port);
 });
