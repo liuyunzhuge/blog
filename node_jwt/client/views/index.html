@@ -9,18 +9,18 @@
 </head>
 <body>
 <div class="mt20 mb20 tc">
-    <button type="button" name="button" class="btn btn-default" onclick="getToken()">获取token</button>
-</div>
-<div class="mt20 mb20 tc">
-    <button type="button" name="button" class="btn btn-info" onclick="refreshToken()">刷新token</button>
+    <button type="button" name="button" class="btn btn-default" onclick="auth()">获取token</button>
 </div>
 <div class="mt20 mb20 tc">
     <button type="button" name="button" class="btn btn-primary" onclick="getUser()">获取用户信息</button>
 </div>
+<div class="mt20 mb20 tc">
+    <button type="button" name="button" class="btn btn-primary" onclick="destroyToken()">销毁token</button>
+</div>
 <script type="text/javascript">
-    function getToken() {
+    function auth() {
         $.ajax({
-            url: 'http://localhost:3000/api/getToken',
+            url: 'http://localhost:3000/api/auth',
             type: 'GET',
             dataType: 'json',
             data: {
@@ -29,25 +29,7 @@
             },
             success: function (res) {
                 if (res.code == 200) {
-                    localStorage.setItem('token', res.data);
-                } else {
-                    console.log(JSON.stringify(res));
-                }
-            }
-        });
-    }
-
-    function refreshToken() {
-        $.ajax({
-            url: 'http://localhost:3000/api/refreshToken',
-            type: 'GET',
-            dataType: 'json',
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
-            success: function (res) {
-                if (res.code == 200) {
-                    localStorage.setItem('token', res.data);
+                    localStorage.setItem('token', res.token);
                 } else {
                     console.log(JSON.stringify(res));
                 }
@@ -56,21 +38,32 @@
     }
 
     function getUser() {
+        var token = localStorage.getItem('token');
+        if(!token) {
+            alert('请先登录');
+            return;
+        }
         $.ajax({
             url: 'http://localhost:3000/api/getUser',
             type: 'GET',
             dataType: 'json',
             headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
+                'Authorization': 'Bearer ' + token
             },
             success: function (res) {
                 if (res.code == 200) {
                     console.log(res.data);
-                } else {
-                    console.log(JSON.stringify(res));
+                    localStorage.setItem('token', res.token);
+                } else if(res.code == 304) {
+                    alert('请先登录');
                 }
             }
         });
+    }
+
+    function destroyToken() {
+        localStorage.removeItem('token');
+        location.reload();
     }
 </script>
 </body>

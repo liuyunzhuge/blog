@@ -8,10 +8,15 @@ module.exports = function (options) {
         pub_cert_file: 'rsa_public_key.pem',
         pri_cert_file: 'rsa_private_key.pem',
         query_name: 'token',
-        getFormData: function () {
+        data_name: 'data',
+        //指定过期时间
+        expiresIn: '1h',
+        //用于从请求信息中获取登录凭证，用户名、密码...
+        getCredentials: function () {
             return {};
         },
-        checkIdentity: function () {
+        //用于登录验证，根据用户名密码验证用户是否有效
+        verifyIdentity: function () {
             return true;
         }
     }, options);
@@ -22,34 +27,30 @@ module.exports = function (options) {
     var pri_cert = fs.readFileSync(opts.pri_cert_file);
 
     return {
-        //生成token
-        createToken: function (req) {
-            var data = opts.checkIdentity(opts.getFormData(req));
+        _create: function (data) {
+            var payload = {};
+            payload[opts.data_name] = data;
 
-            if (!data) {
-                return '';
-            }
-
-            return jwt.sign({data: data}, pri_cert, {
-                expiresIn: '30s',
+            return jwt.sign(payload, pri_cert, {
+                expiresIn: opts.expiresIn,
                 algorithm: 'RS256',
                 noTimestamp: true
             });
         },
+        //第一次生成token
+        generateToken: function (req) {
+            var data = opts.verifyIdentity(opts.getCredentials(req));
+            if (!data) return '';
+            return this._create(data);
+        },
+        //刷新token
         refreshToken: function (req) {
             var payload = this.verify(req);
-
-            if (payload) {
-                return jwt.sign({data: payload}, pri_cert, {
-                    expiresIn: '30s',
-                    algorithm: 'RS256'
-                });
-            }
-
+            if (payload) return this._create(payload[opts.data_name]);
             return '';
         },
-        //验证token并得到其中的payload
-        verify: function (req) {
+        //从请求中获取token的字符串
+        _getReqToken: function (req) {
             var token = '';
 
             //获取token
@@ -59,24 +60,39 @@ module.exports = function (options) {
                 token = req.query[opts.query_name];
             }
 
+            return token;
+        },
+        //验证token并得到其中的payload
+        verify: function (req) {
+            var token = this._getReqToken(req);
             if (!token) return false;
 
             var payload = null;
 
             try {
+                //验证token是否有效
                 payload = jwt.verify(token, pub_cert, {algorithms: 'RS256'});
             } catch (err) {
                 console.log(err);
             }
 
-            console.log(JSON.stringify(payload));
-
             return payload;
+        },
+        //token解码
+        decode: function (token) {
+            var decoded = null;
+
+            try {
+                decoded = jwt.decode(token, {complete: true, json: true});
+            } catch (err) {
+                console.log(err);
+            }
+            return decoded;
         },
         //获得身份信息
         getIdentity: function (req) {
             var payload = this.verify(req);
-            return payload && payload.data;
+            return payload && payload[opts.data_name];
         }
     }
 };

@@ -11,13 +11,13 @@ app.use(bodyParser.json());
 
 //认证管理的组件实例
 var auth = new Authentication({
-    getFormData: function (req) {
+    getCredentials: function (req) {
         return {
             username: req.body.username || req.query.username,
             password: req.body.password || req.query.password
         }
     },
-    checkIdentity: function (formData) {
+    verifyIdentity: function (formData) {
         return users.getUser(formData.username, formData.password);
     }
 });
@@ -33,29 +33,41 @@ app.all('*', function (req, res, next) {
 });
 
 //获取token
-app.get('/api/getToken', function (req, res) {
-
+app.get('/api/auth', function (req, res) {
     res.json({
         code: 200,
-        data: auth.createToken(req)
+        token: auth.generateToken(req)
     });
 });
 
-//刷新token
-app.get('/api/refreshToken', function (req, res) {
-    var token = auth.refreshToken(req);
+app.use(/^\/api\/.+/g, function (req, res, next) {
+    //如果是认证的请求，直接跳过
+    if (/^\/api\/auth/g.test(res.pathname)) {
+        console.log('客户端请求认证...');
+        next();
+        return;
+    }
 
-    res.json({
-        code: token ? 200 : 304,
-        data: token
-    });
+    //其它请求验证用户是否登录
+    if (!auth.verify(req)) {
+        console.log('客户端token无效...');
+        res.json({
+            code: 304
+        });
+    } else {
+        next();
+    }
 });
 
 //拉取用户信息的接口
 app.get('/api/getUser', function (req, res) {
+    var data = auth.getIdentity(req);
+    //刷新token
+    var token = auth.refreshToken(req);
     res.json({
         code: 200,
-        data: auth.getIdentity(req)
+        data: data,
+        token: token
     });
 });
 
