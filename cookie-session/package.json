@@ -1,0 +1,19 @@
+{
+  "name": "cookie-session",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "extend": "^3.0.0",
+    "cookie-session": "^1.0.0",
+    "consolidate": "^0.14.1",
+    "mustache": "^2.2.1"
+  }
+}
