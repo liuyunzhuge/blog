@@ -35,6 +35,16 @@
 
 1. [面向属性的CSS命名](http://www.cnblogs.com/lyzg/p/5561001.html)
 
+##layout
+(1) 该文件夹内容的相关介绍：
+
+1. [圣杯布局小结](http://www.cnblogs.com/lyzg/p/5160570.html)
+
+##equal_height_layout
+(1) 该文件夹内容的相关介绍：
+
+1. [等高分栏布局小结](http://www.cnblogs.com/lyzg/p/5164593.html)
+
 ##form
 (1) 该文件夹内的demo运行方法：
 
