@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style type="text/css">
+    /*本页所需样式，非布局所需 start*/
+    header, footer {
+        background-color: #ccc;
+        text-align: center;
+        line-height: 50px;
+    }
+
+    .layout, header, footer {
+        margin: 10px 0;
+        line-height: 50px;
+    }
+
+    .layout__aside, .layout__main {
+        text-align: center;
+    }
+
+    /*本页所需样式，非布局所需 end*/
+    .layout:after {
+        content: " ";
+        clear: both;
+        display: table;
+    }
+
+    .layout__aside, .layout__main {
+        float: left;
+        height: 100%;
+    }
+
+    .layout {
+        padding:0 201px;
+        position: relative;
+    }
+
+    .layout__main {
+        width: 100%;
+    }
+
+    .layout__aside {
+        width: 200px;
+    }
+
+    .layout__aside--left {
+        margin-left: -201px;
+    }
+
+    .layout__aside--right {
+        margin-right: -201px;
+        float: right;
+    }
+
+    .layout__division {
+        position: absolute;
+        border-left: 1px solid #ccc;
+        height: 100%;
+    }
+
+    .layout__division--left {
+        left:200px;
+    }
+
+    .layout__division--right {
+        right:200px;
+    }
+
+</style>
+</head>
+<body>
+<header>顶部</header>
+<div class="layout">
+    <aside class="layout__division layout__division--left"></aside>
+    <aside class="layout__division layout__division--right"></aside>
+    <aside class="layout__aside layout__aside--left">左侧边栏宽度固定<br>再加点东西<br>再加点东西</aside>
+    <div class="layout__main">内容栏宽度自适应<br>高度增加一点</div>
+    <aside class="layout__aside layout__aside--right">右侧边栏宽度固定</aside>
+</div>
+<footer>底部</footer>
+</body>
+</html>

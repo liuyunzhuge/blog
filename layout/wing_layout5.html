@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        /*本页所需样式，非布局所需 start*/
+
+        header,
+        footer {
+            background-color: #ccc;
+            text-align: center;
+            line-height: 50px;
+        }
+
+        .layout__main {
+            line-height: 50px;
+            background: #4DBCB0;
+        }
+
+        .layout__aside {
+            line-height: 50px;
+            background: #daf1ef;
+        }
+
+        .layout__aside, .layout__main-wrapper {
+            text-align: center;
+            margin:10px 0;
+        }
+
+        /*本页所需样式，非布局所需 end*/
+        .clear {
+            clear: both;
+        }
+
+        .layout__main-wrapper,.layout__aside {
+            float: left;
+        }
+
+        .layout__main-wrapper {
+            width: 100%;
+        }
+
+        .layout__main {
+            margin-right:420px;
+        }
+
+        .layout__aside {
+            width: 200px;
+        }
+
+        .layout__aside--first {
+            margin-left: -200px;
+            position: relative;
+            left: -210px;
+        }
+
+        .layout__aside--second {
+            margin-left: -200px;
+        }
+
+    </style>
+</head>
+<body>
+<header>顶部</header>
+<div class="layout__main-wrapper">
+    <div class="layout__main">主内容栏宽度自适应</div>
+</div>
+<aside class="layout__aside layout__aside--first">第1个侧边栏宽度固定</aside>
+<aside class="layout__aside layout__aside--second">第2个侧边栏宽度固定</aside>
+<footer class="clear">底部</footer>
+</body>
+</html>
