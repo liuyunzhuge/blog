@@ -124,7 +124,6 @@ body, .loader_wrap {
   opacity: 0;
 }
 
-
 .layer_main {
   position: absolute;
   left: 0;
@@ -132,8 +131,8 @@ body, .loader_wrap {
   top: 38rem/@base-size;
   margin-left: auto;
   margin-right: auto;
-  width: 678rem/@base-size;
-  height: 1096rem/@base-size;
+  width: @layout_main_width * 1rem/@base-size;
+  height: @layout_main_height * 1rem/@base-size;
 }
 
 .public_layer1 {
@@ -183,12 +182,16 @@ body, .loader_wrap {
     background-size: 100% 100%;
 
     .animate_end.main & {
-      animation: left_slide_arrow_ani .8s linear infinite;
+      //animation: left_slide_arrow_ani .8s linear infinite;
     }
 
     @keyframes left_slide_arrow_ani {
-      from  { background-position: 0 -25rem/@base-size; }
-      to    { background-position: 0 0; }
+      from {
+        background-position: 0 -25rem/@base-size;
+      }
+      to {
+        background-position: 0 0;
+      }
     }
   }
 
@@ -242,6 +245,12 @@ body, .loader_wrap {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  .swiper-slide-active & {
+    animation: fadeIn .6s, slideInDown .6s;
+    animation-fill-mode: both;
+    animation-delay: 3.5s, 3.5s;
+  }
 
   .btn_sign {
     display: block;

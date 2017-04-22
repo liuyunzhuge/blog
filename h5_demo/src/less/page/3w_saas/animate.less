@@ -74,6 +74,23 @@
   }
 }
 
+@keyframes hd_star_line_ani {
+  from {
+    opacity: 0;
+    transform: translate3D(500%, 0, 0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translate3D(0, 0, 0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3D(-500%, 0, 0);
+  }
+}
+
 
 @keyframes bounceIn {
   from, 20%, 40%, 60%, 80%, to {
@@ -105,5 +122,46 @@
   to {
     opacity: 1;
     transform: scale3d(1, 1, 1);
+  }
+}
+
+
+@keyframes slideInDown {
+  from {
+    transform: translate3d(0, -100%, 0);
+    visibility: visible;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes page_title_ani {
+  from {
+    opacity: 0;
+    transform: translate3D((@layout_main_width - 195) / 2 * 1rem/@base-size, 0, 0);
+  }
+
+  40%, 60% {
+    opacity: 1;
+    transform: translate3D((@layout_main_width - 195) / 2 * 1rem/@base-size, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3D(0, 0, 0);
+  }
+}
+
+@keyframes hd_line_long_ani {
+  from {
+    opacity: 1;
+    transform: scale(0,1);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1,1);
   }
 }

@@ -10,12 +10,12 @@
     top: 0;
     width: 195rem/@base-size;
     height: 140rem/@base-size;
-    /*opacity: 0;
 
     .swiper-slide-active& {
-      animation: bounceIn .6s;
+      animation: page_title_ani .8s;
       animation-fill-mode: both;
-    }*/
+      animation-delay: .1s;
+    }
   }
 
   .title_star_line_1, .title_star_line_2 {
@@ -30,8 +30,9 @@
     opacity: 0;
 
     .swiper-slide-active& {
-      animation: title_star_line_ani 2s linear infinite;
+      animation: title_star_line_ani 1s linear;
       animation-fill-mode: both;
+      animation-delay: .9s;
     }
   }
 
@@ -41,9 +42,9 @@
     opacity: 0;
 
     .swiper-slide-active& {
-      animation: title_star_line_ani 2s linear infinite;
+      animation: title_star_line_ani 1s linear;
       animation-fill-mode: both;
-      animation-delay: 1s;
+      animation-delay: 1.6s;
     }
   }
 
@@ -61,6 +62,12 @@
     height: 100%;
     top: 0;
     left: 0;
+
+    .swiper-slide-active& {
+      animation: fadeIn .6s;
+      animation-fill-mode: both;
+      animation-delay: .9s;
+    }
   }
 
   .content_star_line_1 {
@@ -69,6 +76,12 @@
     height: 14rem/@base-size;
     top: 44rem/@base-size;
     right: 230rem/@base-size;
+
+    .swiper-slide-active& {
+      animation: hd_star_line_ani 1s linear;
+      animation-fill-mode: both;
+      animation-delay: 3s;
+    }
   }
 
   .content_star_line_2 {
@@ -77,6 +90,12 @@
     height: 13rem/@base-size;
     top: 96rem/@base-size;
     right: 86rem/@base-size;
+
+    .swiper-slide-active& {
+      animation: hd_star_line_ani 1s linear;
+      animation-fill-mode: both;
+      animation-delay: 3.5s;
+    }
   }
 
   .content_hd {
@@ -85,6 +104,12 @@
     top: 170rem/@base-size;
     width: 209rem/@base-size;
     height: 29rem/@base-size;
+
+    .swiper-slide-active& {
+      animation: fadeIn .6s;
+      animation-fill-mode: both;
+      animation-delay: 1.6s;
+    }
   }
 
   .hd_line_short {
@@ -93,6 +118,12 @@
     top: 154rem/@base-size;
     width: 16rem/@base-size;
     height: 9rem/@base-size;
+
+    .swiper-slide-active& {
+      animation: fadeIn .6s;
+      animation-fill-mode: both;
+      animation-delay: 1.6s;
+    }
   }
 
   .hd_line_long {
@@ -101,6 +132,12 @@
     top: 206rem/@base-size;
     width: 209rem/@base-size;
     height: 10rem/@base-size;
+
+    .swiper-slide-active& {
+      animation: hd_line_long_ani .6s;
+      animation-fill-mode: both;
+      animation-delay: 1.6s;
+    }
   }
 
   .content_bd {
@@ -109,6 +146,12 @@
     top: 248rem/@base-size;
     width: 464rem/@base-size;
     height: 194rem/@base-size;
+
+    .swiper-slide-active& {
+      animation: fadeIn .6s;
+      animation-fill-mode: both;
+      animation-delay: 2.2s;
+    }
   }
 
   .line_angle {
@@ -117,6 +160,12 @@
     bottom: 168rem/@base-size;
     width: 98rem/@base-size;
     height: 58rem/@base-size;
+
+    .swiper-slide-active& {
+      animation: fadeIn .6s;
+      animation-fill-mode: both;
+      animation-delay: .9s;
+    }
   }
 
   .stripe_rect_box {
@@ -130,12 +179,18 @@
       background-size: 100% 100%;
 
       .swiper-slide-active& {
-        animation: stripe_rect_ani .5s linear infinite;
+        animation: fadeIn .6s, stripe_rect_ani .5s linear infinite;
+        animation-fill-mode: both;
+        animation-delay: .9s, .9s;
       }
 
       @keyframes stripe_rect_ani {
-        from  { background-position: 0 0; }
-        to    { background-position: 12rem/@base-size 0; }
+        from {
+          background-position: 0 0;
+        }
+        to {
+          background-position: 12rem/@base-size 0;
+        }
       }
     }
 
@@ -154,5 +209,13 @@
     bottom: -12rem/@base-size;
     width: 321rem/@base-size;
     height: 324rem/@base-size;
+  }
+
+  .buttons {
+    .swiper-slide-active& {
+      animation: fadeIn .6s, slideInDown .6s;
+      animation-fill-mode: both;
+      animation-delay: 3.2s, 3.2s;
+    }
   }
 }
