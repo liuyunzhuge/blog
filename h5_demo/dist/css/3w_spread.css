@@ -99,7 +99,6 @@ select:focus {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-  -webkit-transition-property: -webkit-transform;
   transition-property: -webkit-transform;
   transition-property: transform;
   transition-property: transform, -webkit-transform;
@@ -119,7 +118,6 @@ select:focus {
   flex-wrap: wrap;
 }
 .swiper-container-free-mode > .swiper-wrapper {
-  -webkit-transition-timing-function: ease-out;
   transition-timing-function: ease-out;
   margin: 0 auto;
 }
@@ -141,10 +139,7 @@ select:focus {
   -webkit-box-align: start;
   -ms-flex-align: start;
   -webkit-align-items: flex-start;
-  -ms-grid-row-align: flex-start;
-      align-items: flex-start;
-  -webkit-transition-property: -webkit-transform, height;
-  -webkit-transition-property: height, -webkit-transform;
+  align-items: flex-start;
   transition-property: height, -webkit-transform;
   transition-property: transform, height;
   transition-property: transform, height, -webkit-transform;
@@ -219,7 +214,6 @@ select:focus {
 .swiper-pagination {
   position: absolute;
   text-align: center;
-  -webkit-transition: 300ms;
   transition: 300ms;
   -webkit-transform: translate3d(0, 0, 0);
   -ms-transform: translate3d(0, 0, 0);
@@ -360,9 +354,7 @@ button.swiper-pagination-bullet {
   z-index: 10;
 }
 .swiper-container-3d .swiper-slide-shadow-left {
-  background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0)));
   /* Safari 4+, Chrome */
-  background-image: -webkit-linear-gradient(right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
   /* Chrome 10+, Safari 5.1+, iOS 5+ */
   /* Firefox 3.6-15 */
   /* Opera 11.10-12.00 */
@@ -370,9 +362,7 @@ button.swiper-pagination-bullet {
   /* Firefox 16+, IE10, Opera 12.50+ */
 }
 .swiper-container-3d .swiper-slide-shadow-right {
-  background-image: -webkit-gradient(linear, right top, left top, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0)));
   /* Safari 4+, Chrome */
-  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
   /* Chrome 10+, Safari 5.1+, iOS 5+ */
   /* Firefox 3.6-15 */
   /* Opera 11.10-12.00 */
@@ -380,9 +370,7 @@ button.swiper-pagination-bullet {
   /* Firefox 16+, IE10, Opera 12.50+ */
 }
 .swiper-container-3d .swiper-slide-shadow-top {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0)));
   /* Safari 4+, Chrome */
-  background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
   /* Chrome 10+, Safari 5.1+, iOS 5+ */
   /* Firefox 3.6-15 */
   /* Opera 11.10-12.00 */
@@ -390,9 +378,7 @@ button.swiper-pagination-bullet {
   /* Firefox 16+, IE10, Opera 12.50+ */
 }
 .swiper-container-3d .swiper-slide-shadow-bottom {
-  background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0)));
   /* Safari 4+, Chrome */
-  background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
   /* Chrome 10+, Safari 5.1+, iOS 5+ */
   /* Firefox 3.6-15 */
   /* Opera 11.10-12.00 */
@@ -474,12 +460,10 @@ button.swiper-pagination-bullet {
 }
 /* Fade */
 .swiper-container-fade.swiper-container-free-mode .swiper-slide {
-  -webkit-transition-timing-function: ease-out;
   transition-timing-function: ease-out;
 }
 .swiper-container-fade .swiper-slide {
   pointer-events: none;
-  -webkit-transition-property: opacity;
   transition-property: opacity;
 }
 .swiper-container-fade .swiper-slide .swiper-slide {
@@ -675,7 +659,6 @@ body {
   font-size: 46px;
 }
 .msg.msg_show {
-  -webkit-transition: all .3s;
   transition: all .3s;
   opacity: 1;
   -webkit-transform: translate(-50%, -50%) scale(1);
@@ -724,7 +707,6 @@ body {
   -webkit-transform: translate3D(0, 100%, 0);
       -ms-transform: translate3D(0, 100%, 0);
           transform: translate3D(0, 100%, 0);
-  -webkit-transition: -webkit-transform .3s;
   transition: -webkit-transform .3s;
   transition: transform .3s;
   transition: transform .3s, -webkit-transform .3s;

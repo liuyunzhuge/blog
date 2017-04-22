@@ -205,6 +205,7 @@ gulp.task('watch', function () {
     gulp.watch(src + '/html/**/*', ['html']);
     gulp.watch(src + '/js/**/*', ['script']);
     gulp.watch(src + '/less/**/*', ['style']);
+    gulp.watch(src + '/img/**/*', ['image']);
 });
 
 gulp.task('server', function () {

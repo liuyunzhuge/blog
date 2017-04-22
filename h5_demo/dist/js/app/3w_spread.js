@@ -15,14 +15,14 @@ define('js/app/3w_spread.js', function (require, exports, module) {
         PRE_LEAVE_DURATION = 300,
         Conf = {
             firstPreloadRes: [
-                '/blog/h5_demo/dist/img/3w_spread/bg.jpg',
-                '/blog/h5_demo/dist/img/3w_spread/flash_1.png',
-                '/blog/h5_demo/dist/img/3w_spread/flash_2.png',
-                '/blog/h5_demo/dist/img/3w_spread/star.png',
-                '/blog/h5_demo/dist/img/3w_spread/zhiwen.png',
-                '/blog/h5_demo/dist/img/3w_spread/page_1/1.png',
-                '/blog/h5_demo/dist/img/3w_spread/page_1/2.png',
-                '/blog/h5_demo/dist/img/3w_spread/page_1/3.png',
+                '/img/3w_spread/bg.jpg',
+                '/img/3w_spread/flash_1.png',
+                '/img/3w_spread/flash_2.png',
+                '/img/3w_spread/star.png',
+                '/img/3w_spread/zhiwen.png',
+                '/img/3w_spread/page_1/1.png',
+                '/img/3w_spread/page_1/2.png',
+                '/img/3w_spread/page_1/3.png',
             ],
             secondPreloadRes: []
         };

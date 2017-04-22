@@ -1,0 +1,263 @@
+@import "../_variables";
+@import "../widget/reset";
+@import "../widget/swiper";
+@import "../widget/button";
+@import "../_mixin";
+@import "../page/3w_saas/variables";
+
+body {
+  overflow: hidden;
+}
+
+.full_bg {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
+}
+
+.full_screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.pos_center {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.main {
+  backface-visibility: hidden;
+  transform: translate3D(0, 100%, 0);
+  visibility: visible;
+
+  &.slideInUp {
+    animation: slideInUp .3s;
+    animation-fill-mode: forwards;
+  }
+
+  &.animate_end {
+    transform: translate3D(0, 0, 0);;
+    visibility: visible;
+  }
+}
+
+.fix {
+  *zoom: 1;
+}
+
+.dn {
+  display: none;
+}
+
+.fix:after {
+  display: table;
+  content: '';
+  clear: both;
+}
+
+.l {
+  float: left;
+}
+
+.r {
+  float: right;
+}
+
+.loader_wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body, .loader_wrap {
+  background-color: @background-color;
+}
+
+.public_layer1 {
+  background-color: @background-color;
+  background-size: 42rem/@base-size 42rem/@base-size;
+}
+
+.loader {
+
+  @border-color: #562fba;
+  @background-color: @brand-primary;
+
+  border: solid 8rem/@base-size @border-color;
+  border-right-color: transparent;
+  border-left-color: transparent;
+  padding: 28rem/@base-size;
+  width: 128rem/@base-size;
+  height: 128rem/@base-size;
+  border-radius: 50%;
+  background: @background-color;
+  background-clip: content-box;
+  animation: loader_ani 1.5s linear infinite;
+
+  @keyframes loader_ani {
+    50% {
+      border-top-color: @background-color;
+      border-bottom-color: @background-color;
+      background-color: @border-color;
+    }
+
+    100% {
+      transform: rotate(1turn);
+    }
+  }
+}
+
+.page_item_ani {
+  opacity: 0;
+}
+
+
+.layer_main {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 38rem/@base-size;
+  margin-left: auto;
+  margin-right: auto;
+  width: 678rem/@base-size;
+  height: 1096rem/@base-size;
+}
+
+.public_layer1 {
+
+  .public_bottom_layer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 150rem/@base-size;
+    background-color: @background-color;
+    background-position: bottom center;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+  }
+
+  .page_top_angle {
+    position: absolute;
+    top: -38rem/@base-size;
+    right: 100rem/@base-size;
+    width: 134rem/@base-size;
+    height: 70rem/@base-size;
+  }
+
+  .top_right_text {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20rem/@base-size;
+    height: 172rem/@base-size;
+  }
+
+  .bottom_l_text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 18rem/@base-size;
+    height: 253rem/@base-size;
+  }
+
+  .left_slide_arrow {
+    position: absolute;
+    bottom: 150rem/@base-size;
+    left: 34rem/@base-size;
+    width: 20rem/@base-size;
+    height: 100rem/@base-size;
+    background-position: 0 0;
+    background-size: 100% 100%;
+
+    .animate_end.main & {
+      animation: left_slide_arrow_ani .8s linear infinite;
+    }
+
+    @keyframes left_slide_arrow_ani {
+      from  { background-position: 0 -25rem/@base-size; }
+      to    { background-position: 0 0; }
+    }
+  }
+
+  .right_slide_arrow_box {
+    position: absolute;
+    right: 0;
+    bottom: 24rem/@base-size;
+    perspective: 100px;
+
+    > div {
+      animation-duration: 2s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+
+      .animate_end.main & {
+        animation-name: rotateY;
+      }
+    }
+  }
+
+  .right_slide_arrow_top {
+    width: 20rem/@base-size;
+    height: 42rem/@base-size;
+    .auto();
+    margin-bottom: 12rem/@base-size;
+
+  }
+
+  .right_slide_arrow_bottom {
+    width: 24rem/@base-size;
+    height: 46rem/@base-size;
+  }
+
+  .bg_main_angle {
+    position: absolute;
+    bottom: 154rem/@base-size;
+    left: 84rem/@base-size;
+    width: 536rem/@base-size;
+    height: 264rem/@base-size;
+  }
+}
+
+.buttons {
+  position: absolute;
+  bottom: 108rem/@base-size;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 560rem/@base-size;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .btn_sign {
+    display: block;
+    width: 266rem/@base-size;
+    height: 74rem/@base-size;
+  }
+
+  .btn_vip {
+    display: block;
+    width: 267rem/@base-size;
+    height: 74rem/@base-size;
+  }
+}
+
+@import "../page/3w_saas/animate";
+@import "../page/3w_saas/page_1";
+
+
+

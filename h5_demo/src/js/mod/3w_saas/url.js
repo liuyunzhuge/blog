@@ -14,7 +14,7 @@ define(function () {
             });
             return obj;
         })(),
-        baseUrl = location.protocol + '//' + location.hostname + (location.port == '' ? '' : (':' + location.port)) + '/',
+        baseUrl = location.protocol + '//' + location.hostname + (location.port == '' ? '' : (':' + location.port)) + '@@CONTEXT_PATH/',
         _getUrl = function (url) {
             return baseUrl + (url || '');
         };

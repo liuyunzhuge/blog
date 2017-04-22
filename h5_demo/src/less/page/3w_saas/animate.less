@@ -1,0 +1,109 @@
+@import "../../_variables";
+@import "../../_mixin";
+@import "../../_mixin";
+@import "variables";
+
+.animated {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.animated.infinite {
+  animation-iteration-count: infinite;
+}
+
+.animated.hinge {
+  animation-duration: 2s;
+}
+
+.animated.flipOutX,
+.animated.flipOutY,
+.animated.bounceIn,
+.animated.bounceOut {
+  animation-duration: .75s;
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translate3d(0, 100%, 0);
+    visibility: visible;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rotateY {
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
+@keyframes rotate {
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes title_star_line_ani {
+  from {
+    opacity: 0;
+    transform: translate3D(-300%, 300%, 0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translate3D(0, 0, 0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3D(300%, -300%, 0);
+  }
+}
+
+
+@keyframes bounceIn {
+  from, 20%, 40%, 60%, 80%, to {
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+
+  0% {
+    opacity: 0;
+    transform: scale3d(.3, .3, .3);
+  }
+
+  20% {
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+
+  40% {
+    transform: scale3d(.9, .9, .9);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale3d(1.03, 1.03, 1.03);
+  }
+
+  80% {
+    transform: scale3d(.97, .97, .97);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+}

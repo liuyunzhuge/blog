@@ -14,7 +14,7 @@ define(function () {
             });
             return obj;
         })(),
-        baseUrl = location.protocol + '//' + location.hostname + (location.port == '' ? '' : (':' + location.port)) + '/blog/h5_demo/dist/',
+        baseUrl = location.protocol + '//' + location.hostname + (location.port == '' ? '' : (':' + location.port)) + '/',
         _getUrl = function (url) {
             return baseUrl + (url || '');
         };
