@@ -231,6 +231,22 @@ body, .loader_wrap {
     left: 84rem/@base-size;
     width: 536rem/@base-size;
     height: 264rem/@base-size;
+
+    .animate_end.main & {
+      animation: bg_main_angle_ani 3s linear infinite;
+    }
+
+    @keyframes bg_main_angle_ani {
+      0% {
+        transform: scale(1, 1);
+      }
+      50% {
+        transform: scale(0.85, 0.85);
+      }
+      100% {
+        transform: scale(1, 1);
+      }
+    }
   }
 }
 
@@ -246,12 +262,6 @@ body, .loader_wrap {
   justify-content: space-between;
   align-items: center;
 
-  .swiper-slide-active & {
-    animation: fadeIn .6s, slideInDown .6s;
-    animation-fill-mode: both;
-    animation-delay: 3.5s, 3.5s;
-  }
-
   .btn_sign {
     display: block;
     width: 266rem/@base-size;
@@ -265,8 +275,30 @@ body, .loader_wrap {
   }
 }
 
+.swiper-container-horizontal {
+  > .swiper-pagination-bullets {
+    bottom: -2rem/@base-size;
+  }
+
+  > .swiper-pagination-bullets .swiper-pagination-bullet {
+    margin: 0 8rem/@base-size;
+    width: 14rem/@base-size;
+    height: 14rem/@base-size;
+    display: inline-block;
+    background: url('@{CONTEXT_PATH}/img/3w_saas/bullet_default.png') no-repeat center center transparent;
+    background-size: 100% 100%;
+
+
+    &.swiper-pagination-bullet-active {
+      background-image: url('@{CONTEXT_PATH}/img/3w_saas/bullet_active.png');
+    }
+  }
+}
+
 @import "../page/3w_saas/animate";
 @import "../page/3w_saas/page_1";
+@import "../page/3w_saas/page_2";
+@import "../page/3w_saas/page_3";
 
 
 

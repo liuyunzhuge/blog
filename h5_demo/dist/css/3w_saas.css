@@ -842,6 +842,38 @@ body,
   width: 7.14666667rem;
   height: 3.52rem;
 }
+.animate_end.main .public_layer1 .bg_main_angle {
+  -webkit-animation: bg_main_angle_ani 3s linear infinite;
+          animation: bg_main_angle_ani 3s linear infinite;
+}
+@-webkit-keyframes bg_main_angle_ani {
+  0% {
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+  }
+  50% {
+    -webkit-transform: scale(0.85, 0.85);
+            transform: scale(0.85, 0.85);
+  }
+  100% {
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+  }
+}
+@keyframes bg_main_angle_ani {
+  0% {
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+  }
+  50% {
+    -webkit-transform: scale(0.85, 0.85);
+            transform: scale(0.85, 0.85);
+  }
+  100% {
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+  }
+}
 .buttons {
   position: absolute;
   bottom: 1.44rem;
@@ -863,14 +895,6 @@ body,
       -ms-flex-align: center;
           align-items: center;
 }
-.swiper-slide-active .buttons {
-  -webkit-animation: fadeIn .6s, slideInDown .6s;
-          animation: fadeIn .6s, slideInDown .6s;
-  -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
-  -webkit-animation-delay: 3.5s, 3.5s;
-          animation-delay: 3.5s, 3.5s;
-}
 .buttons .btn_sign {
   display: block;
   width: 3.54666667rem;
@@ -880,6 +904,20 @@ body,
   display: block;
   width: 3.56rem;
   height: 0.98666667rem;
+}
+.swiper-container-horizontal > .swiper-pagination-bullets {
+  bottom: -0.02666667rem;
+}
+.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
+  margin: 0 0.10666667rem;
+  width: 0.18666667rem;
+  height: 0.18666667rem;
+  display: inline-block;
+  background: url('/img/3w_saas/bullet_default.png') no-repeat center center transparent;
+  background-size: 100% 100%;
+}
+.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background-image: url('/img/3w_saas/bullet_active.png');
 }
 .animated {
   -webkit-animation-duration: 1s;
@@ -1124,6 +1162,48 @@ body,
     -webkit-transform: translate3d(0, -100%, 0);
             transform: translate3d(0, -100%, 0);
     visibility: visible;
+  }
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+  }
+}
+@-webkit-keyframes flash {
+  1%,
+  50%,
+  to {
+    opacity: 1;
+  }
+  25%,
+  75% {
+    opacity: 0;
+  }
+}
+@keyframes flash {
+  1%,
+  50%,
+  to {
+    opacity: 1;
+  }
+  25%,
+  75% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes slideInLeft {
+  from {
+    -webkit-transform: translate3d(-100%, 0, 0);
+            transform: translate3d(-100%, 0, 0);
+  }
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes slideInLeft {
+  from {
+    -webkit-transform: translate3d(-100%, 0, 0);
+            transform: translate3d(-100%, 0, 0);
   }
   to {
     -webkit-transform: translate3d(0, 0, 0);
@@ -1411,11 +1491,338 @@ body,
   width: 4.28rem;
   height: 4.32rem;
 }
+.swiper-slide-active.page_1 .circel_stripe {
+  -webkit-animation: fadeIn .6s;
+          animation: fadeIn .6s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-delay: 1.5s;
+          animation-delay: 1.5s;
+}
 .swiper-slide-active.page_1 .buttons {
   -webkit-animation: fadeIn .6s, slideInDown .6s;
           animation: fadeIn .6s, slideInDown .6s;
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
-  -webkit-animation-delay: 3.2s, 3.2s;
-          animation-delay: 3.2s, 3.2s;
+  -webkit-animation-delay: 2.6s, 2.6s;
+          animation-delay: 2.6s, 2.6s;
+}
+.page_2 .page_title {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3.72rem;
+  height: 1.72rem;
+}
+.swiper-slide-active.page_2 .page_title {
+  -webkit-animation: page_title_ani .8s;
+          animation: page_title_ani .8s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-delay: .1s;
+          animation-delay: .1s;
+}
+.page_2 .title_star_line_1,
+.page_2 .title_star_line_2 {
+  position: absolute;
+  width: 0.89333333rem;
+  height: 0.81333333rem;
+}
+.page_2 .title_star_line_1 {
+  top: 0.50666667rem;
+  left: 0.45333333rem;
+  opacity: 0;
+}
+.swiper-slide-active.page_2 .title_star_line_1 {
+  -webkit-animation: title_star_line_ani 1s linear;
+          animation: title_star_line_ani 1s linear;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-delay: .9s;
+          animation-delay: .9s;
+}
+.page_2 .title_star_line_2 {
+  top: 1.89333333rem;
+  left: 0.13333333rem;
+  opacity: 0;
+}
+.swiper-slide-active.page_2 .title_star_line_2 {
+  -webkit-animation: title_star_line_ani 1s linear;
+          animation: title_star_line_ani 1s linear;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-delay: 1.6s;
+          animation-delay: 1.6s;
+}
+.page_2 .decorate_1 {
+  position: absolute;
+  top: 1.2rem;
+  right: 0.42666667rem;
+  width: 1.26666667rem;
+  height: 1.30666667rem;
+}
+.swiper-slide-active.page_2 .decorate_1 {
+  -webkit-animation: fadeIn .6s;
+          animation: fadeIn .6s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-delay: .9s;
+          animation-delay: .9s;
+}
+.page_2 .line_angle {
+  position: absolute;
+  right: -0.21333333rem;
+  bottom: 2.45333333rem;
+  width: 1.30666667rem;
+  height: 0.77333333rem;
+}
+.swiper-slide-active.page_2 .line_angle {
+  -webkit-animation: fadeIn .6s;
+          animation: fadeIn .6s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-delay: .9s;
+          animation-delay: .9s;
+}
+.page_2 .content_main {
+  position: absolute;
+  left: 0.15333333rem;
+  top: 2.64rem;
+  width: 8.73333333rem;
+}
+.page_2 .content_main .content_item {
+  width: 8.73333333rem;
+  height: 1.33333333rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-left: 0.18666667rem;
+  padding-right: 0.58666667rem;
+}
+.page_2 .content_main .content_item + .content_item {
+  margin-top: 0.45333333rem;
+}
+.page_2 .content_main .content_item img {
+  display: block;
+}
+.swiper-slide-active.page_2 .content_main .content_item {
+  -webkit-animation: fadeIn .6s, slideInLeft .6s;
+          animation: fadeIn .6s, slideInLeft .6s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+}
+.swiper-slide-active.page_2 .content_main .content_item.content_item_1 {
+  -webkit-animation-delay: 1s, 1s;
+          animation-delay: 1s, 1s;
+}
+.swiper-slide-active.page_2 .content_main .content_item.content_item_2 {
+  -webkit-animation-delay: 1.6s, 1.6s;
+          animation-delay: 1.6s, 1.6s;
+}
+.swiper-slide-active.page_2 .content_main .content_item.content_item_3 {
+  -webkit-animation-delay: 2.2s, 2.2s;
+          animation-delay: 2.2s, 2.2s;
+}
+.swiper-slide-active.page_2 .content_main .content_item.content_item_4 {
+  -webkit-animation-delay: 2.8s, 2.8s;
+          animation-delay: 2.8s, 2.8s;
+}
+.swiper-slide-active.page_2 .content_main .content_item.content_item_5 {
+  -webkit-animation-delay: 3.4s, 3.4s;
+          animation-delay: 3.4s, 3.4s;
+}
+.page_2 .content_main .content_icon img {
+  width: 1.06666667rem;
+  height: 1.06666667rem;
+}
+.page_2 .content_main .content_bd {
+  padding-left: 0.26666667rem;
+}
+.page_2 .content_main .content_bd img {
+  height: 0.74666667rem;
+}
+.page_2 .content_main .content_order img {
+  width: 0.45333333rem;
+  height: 0.49333333rem;
+}
+.page_2 .buttons {
+  bottom: 0.98666667rem;
+}
+.swiper-slide-active.page_2 .buttons {
+  -webkit-animation: fadeIn .6s, slideInDown .6s;
+          animation: fadeIn .6s, slideInDown .6s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-delay: 4.1s, 4.1s;
+          animation-delay: 4.1s, 4.1s;
+}
+.page_3 .page_title {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2.84rem;
+  height: 1.78666667rem;
+}
+.swiper-slide-active.page_3 .page_title {
+  -webkit-animation: page_title_ani .8s;
+          animation: page_title_ani .8s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-delay: .1s;
+          animation-delay: .1s;
+}
+.page_3 .title_star_line_1,
+.page_3 .title_star_line_2 {
+  position: absolute;
+  width: 0.89333333rem;
+  height: 0.81333333rem;
+}
+.page_3 .title_star_line_1 {
+  top: 0.50666667rem;
+  left: 0.45333333rem;
+  opacity: 0;
+}
+.swiper-slide-active.page_3 .title_star_line_1 {
+  -webkit-animation: title_star_line_ani 1s linear;
+          animation: title_star_line_ani 1s linear;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-delay: .9s;
+          animation-delay: .9s;
+}
+.page_3 .title_star_line_2 {
+  top: 1.89333333rem;
+  left: 0.13333333rem;
+  opacity: 0;
+}
+.swiper-slide-active.page_3 .title_star_line_2 {
+  -webkit-animation: title_star_line_ani 1s linear;
+          animation: title_star_line_ani 1s linear;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-delay: 1.6s;
+          animation-delay: 1.6s;
+}
+.page_3 .decorate_2 {
+  position: absolute;
+  top: 0;
+  right: 0.33333333rem;
+  width: 1.33333333rem;
+  height: 3.06666667rem;
+}
+.swiper-slide-active.page_3 .decorate_2 {
+  -webkit-animation: fadeIn .6s;
+          animation: fadeIn .6s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-delay: .9s;
+          animation-delay: .9s;
+}
+.page_3 .decorate_5 {
+  position: absolute;
+  top: 3.57333333rem;
+  right: -0.49333333rem;
+  width: 4.65333333rem;
+  height: 4.18666667rem;
+}
+.swiper-slide-active.page_3 .decorate_5 {
+  -webkit-animation: fadeIn .6s;
+          animation: fadeIn .6s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-delay: .9s;
+          animation-delay: .9s;
+}
+.page_3 .content_star_line_1 {
+  position: absolute;
+  width: 1.46666667rem;
+  height: 0.18666667rem;
+  top: 0.58666667rem;
+  right: 3.46666667rem;
+}
+.swiper-slide-active.page_3 .content_star_line_1 {
+  -webkit-animation: hd_star_line_ani 1s linear;
+          animation: hd_star_line_ani 1s linear;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-delay: 3s;
+          animation-delay: 3s;
+}
+.page_3 .content_star_line_2 {
+  position: absolute;
+  width: 0.8rem;
+  height: 0.17333333rem;
+  top: 1.28rem;
+  right: 1.54666667rem;
+}
+.swiper-slide-active.page_3 .content_star_line_2 {
+  -webkit-animation: hd_star_line_ani 1s linear;
+          animation: hd_star_line_ani 1s linear;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-delay: 3.5s;
+          animation-delay: 3.5s;
+}
+.page_3 .content_main {
+  position: absolute;
+  top: 3.25333333rem;
+  width: 7.36rem;
+  height: 8.10666667rem;
+  left: 0.84rem;
+}
+.page_3 .content_main .content_item {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.page_3 .content_main .content_bd {
+  position: absolute;
+  bottom: 0.72rem;
+  left: 0;
+  width: 7.36rem;
+  height: 6.66666667rem;
+  opacity: 1;
+  padding: 3.73333333rem 0.85333333rem 0;
+}
+.page_3 .content_main .content_hd {
+  position: absolute;
+  top: 0;
+  left: 1.01333333rem;
+  width: 5.33333333rem;
+  height: 3.70666667rem;
+  opacity: 1;
+  border-radius: 0.16rem;
+  overflow: hidden;
+}
+.page_3 .content_main .content_title {
+  height: 0.37333333rem;
+  opacity: 1;
+}
+.page_3 .content_main .content_title img {
+  display: block;
+  height: 100%;
+}
+.page_3 .content_main .content_desc {
+  opacity: 1;
+  margin-top: 0.24rem;
+  width: 5.86666667rem;
+}
+.page_3 .content_main .content_desc img {
+  width: 100%;
+}
+.page_3 .buttons {
+  bottom: 0.98666667rem;
+}
+.swiper-slide-active.page_3 .buttons {
+  -webkit-animation: fadeIn .6s, slideInDown .6s;
+          animation: fadeIn .6s, slideInDown .6s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-delay: 4.1s, 4.1s;
+          animation-delay: 4.1s, 4.1s;
 }

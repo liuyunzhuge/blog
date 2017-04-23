@@ -9,17 +9,23 @@ define('js/app/3w_saas.js', function (require, exports, module) {
         return this.each(function () {
             var $this = $(this);
 
-            if(Object.prototype.toString.call(option) != '[object Object]') {
+            if (Object.prototype.toString.call(option) != '[object Object]') {
                 return;
             }
 
-            if(option.animateClass) {
+            if (option.animateClass) {
                 option.before && option.before();
 
-                $this.addClass(option.animateClass).one('animationend webkitAnimationEnd', function(){
+                $this.addClass(option.animateClass).one('animationend webkitAnimationEnd', (function (call) {
+                    var ret;
+                    return function () {
+                        return !ret && (ret = call.apply(this, arguments));
+                    }
+                })(function () {
                     option.after && option.after();
                     $this.addClass('animate_end').removeClass(option.animateClass);
-                });
+                    return true;
+                }));
             }
         })
     };
@@ -33,14 +39,60 @@ define('js/app/3w_saas.js', function (require, exports, module) {
             secondPreloadRes: []
         },
         main = function () {
+            var $swiper = $('#swiper'),
+                pages = $swiper.children('.swiper-wrapper').children('.swiper-slide').length;
+
+            for (var i = 0; i < pages; i++) {
+                Pages[i] = new Page(i, PageConf[i]);
+            }
+
             new Swiper('#swiper', {
                 direction: 'vertical',
                 preloadImages: false,
                 lazyLoading: true,
                 lazyLoadingInPrevNext: true,
                 lazyLoadingInPrevNextAmount: 2,
-                slidesPerView: 1
+                slidesPerView: 1,
+                onInit: function (swiper) {
+                    Pages[swiper.activeIndex].init(swiper);
+                },
+                onSlideChangeEnd: function(swiper){
+                    Pages[swiper.activeIndex].init(swiper);
+                }
             });
+        },
+        Page = function (index, conf) {
+            return {
+                _init: false,
+                init: function (swiper) {
+                    if (this._init) return;
+
+                    this.$page = $(swiper.slides[index]);
+                    if (conf) {
+                        $.extend(this, conf);
+                    }
+                    this.ready();
+                    this._init = true;
+                },
+                ready: $.noop,
+                reset: $.noop
+            }
+        },
+        Pages = {},
+        PageConf = {
+            2: {
+                ready: function(){
+                    this.contentSwiper = new Swiper(this.$page.find('.swiper-container')[0], {
+                        preloadImages: false,
+                        lazyLoading: true,
+                        lazyLoadingInPrevNext: true,
+                        lazyLoadingInPrevNextAmount: 2,
+                        slidesPerView: 1,
+                        pagination: '.swiper-pagination',
+                        spaceBetween: lib.flexible.rem2px(0.66666)
+                    });
+                }
+            }
         };
 
     //页面初始化状态管理
@@ -49,11 +101,11 @@ define('js/app/3w_saas.js', function (require, exports, module) {
     }, function () {
         $('#main').cssAnimate({
             animateClass: 'slideInUp',
-            before: function(){
+            before: function () {
                 $('#loader_wrap').remove();
                 loader.destroy();
             },
-            after: function(){
+            after: function () {
                 main();
             }
         });
@@ -63,7 +115,7 @@ define('js/app/3w_saas.js', function (require, exports, module) {
     var loader = new ProgressBar('#loader', {
         onComplete: function () {
             //告诉initState，预加载的资源已经OK了
-           initState.set('preload', true);
+            initState.set('preload', true);
         },
         duration: 1000
     });

@@ -209,13 +209,19 @@
     bottom: -12rem/@base-size;
     width: 321rem/@base-size;
     height: 324rem/@base-size;
+
+    .swiper-slide-active& {
+      animation: fadeIn .6s;
+      animation-fill-mode: both;
+      animation-delay: 1.5s;
+    }
   }
 
   .buttons {
     .swiper-slide-active& {
       animation: fadeIn .6s, slideInDown .6s;
       animation-fill-mode: both;
-      animation-delay: 3.2s, 3.2s;
+      animation-delay: 2.6s, 2.6s;
     }
   }
 }
