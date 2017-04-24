@@ -92,6 +92,32 @@ define('js/app/3w_saas.js', function (require, exports, module) {
                         spaceBetween: lib.flexible.rem2px(0.66666)
                     });
                 }
+            },
+            4: {
+                ready: function(){
+                    this.contentSwiper = new Swiper(this.$page.find('.swiper-container')[0], {
+                        preloadImages: false,
+                        lazyLoading: true,
+                        lazyLoadingInPrevNext: true,
+                        lazyLoadingInPrevNextAmount: 2,
+                        slidesPerView: 1,
+                        pagination: '.swiper-pagination',
+                        spaceBetween: lib.flexible.rem2px(0.66666)
+                    });
+                }
+            },
+            5: {
+                ready: function(){
+                    this.contentSwiper = new Swiper(this.$page.find('.swiper-container')[0], {
+                        preloadImages: false,
+                        lazyLoading: true,
+                        lazyLoadingInPrevNext: true,
+                        lazyLoadingInPrevNextAmount: 2,
+                        slidesPerView: 1,
+                        pagination: '.swiper-pagination',
+                        spaceBetween: lib.flexible.rem2px(0.66666)
+                    });
+                }
             }
         };
 

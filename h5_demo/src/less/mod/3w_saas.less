@@ -285,12 +285,11 @@ body, .loader_wrap {
     width: 14rem/@base-size;
     height: 14rem/@base-size;
     display: inline-block;
-    background: url('@{CONTEXT_PATH}/img/3w_saas/bullet_default.png') no-repeat center center transparent;
-    background-size: 100% 100%;
-
+    background: transparent;
+    border: 3rem/@base-size solid @brand-primary;
 
     &.swiper-pagination-bullet-active {
-      background-image: url('@{CONTEXT_PATH}/img/3w_saas/bullet_active.png');
+      background: @brand-primary;
     }
   }
 }
@@ -299,6 +298,12 @@ body, .loader_wrap {
 @import "../page/3w_saas/page_1";
 @import "../page/3w_saas/page_2";
 @import "../page/3w_saas/page_3";
+@import "../page/3w_saas/page_5";
+@import "../page/3w_saas/page_6";
+@import "../page/3w_saas/page_7";
+@import "../page/3w_saas/page_8";
+@import "../page/3w_saas/page_9";
+
 
 
 

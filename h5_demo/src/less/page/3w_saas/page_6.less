@@ -2,14 +2,14 @@
 @import "../../_mixin";
 @import "variables";
 
-.page_3 {
+.page_6 {
 
   .page_title {
     position: absolute;
     left: 0;
     top: 0;
-    width: 213rem/@base-size;
-    height: 134rem/@base-size;
+    width: 208rem/@base-size;
+    height: 128rem/@base-size;
 
     .swiper-slide-active& {
       animation: page_title_ani .8s;
@@ -106,10 +106,17 @@
 
   .content_main {
     position: absolute;
-    top: 244rem/@base-size;
-    width: 552rem/@base-size;
-    height: 608rem/@base-size;
-    left: (@layout_main_width - 552) / 2 * 1rem/@base-size;
+    top: 184rem/@base-size;
+    width: 568rem/@base-size;
+    height: 710rem/@base-size;
+    left: (@layout_main_width - 568) / 2 * 1rem/@base-size;
+
+    .swiper-container {
+      position: absolute;
+      width: 526rem/@base-size;
+      height: 698rem/@base-size;
+      left: (568 - 526) / 2 * 1rem/@base-size;
+    }
 
     .content_item {
       position: relative;
@@ -117,53 +124,18 @@
       height: 100%;
     }
 
-    .content_bd {
+    .content_item_inner {
+      position: relative;
+      height: 648rem/@base-size;
+      opacity: 1;
+    }
+
+    .decorate_6 {
       position: absolute;
-      bottom: 54rem/@base-size;
-      left: 0;
-      width: 552rem/@base-size;
-      height: 500rem/@base-size;
-      opacity: 1;
-      padding: 280rem/@base-size 64rem/@base-size 0;
-    }
-
-    .content_hd {
-      position: absolute;
-      top: 0;
-      left: (552 - 400) / 2 * 1rem/@base-size;
-      width: 400rem/@base-size;
-      height: 278rem/@base-size;
-      opacity: 1;
-      border-radius: 12rem/@base-size;
-      overflow: hidden;
-    }
-
-    .content_title {
-      height: 28rem/@base-size;
-      opacity: 1;
-
-      img {
-        display: block;
-        height: 100%;
-      }
-    }
-
-    .content_desc {
-      opacity: 1;
-      margin-top: 18rem/@base-size;
-      width: 440rem/@base-size;
-
-      img {
-        width: 100%;
-      }
-    }
-
-    .decorate_1 {
-      position: absolute;
-      width: 50rem/@base-size;
-      height: 50rem/@base-size;
-      left: 40rem/@base-size;
-      top: -20rem/@base-size;
+      width: 65rem/@base-size;
+      height: 65rem/@base-size;
+      left: -15rem/@base-size;
+      top: 34rem/@base-size;
       opacity: 1;
     }
 
@@ -171,8 +143,8 @@
       position: absolute;
       width: 53rem/@base-size;
       height: 46rem/@base-size;
-      right: -16rem/@base-size;
-      bottom: 4rem/@base-size;
+      right: -10rem/@base-size;
+      bottom: 60rem/@base-size;
       opacity: 1;
     }
 
@@ -180,8 +152,8 @@
       position: absolute;
       width: 60rem/@base-size;
       height: 53rem/@base-size;
-      left: -52rem/@base-size;
-      bottom: 50rem/@base-size;
+      left: -40rem/@base-size;
+      bottom: 106rem/@base-size;
       opacity: 1;
     }
 
@@ -189,17 +161,16 @@
       position: absolute;
       width: 128rem/@base-size;
       height: 38rem/@base-size;
-      right: -74rem/@base-size;
-      bottom: 122rem/@base-size;
+      right: -70rem/@base-size;
+      bottom: 178rem/@base-size;
       background-repeat: repeat;
       background-size: auto 100%;
-      z-index: 1;
       opacity: 1;
     }
   }
 
   .buttons {
-    bottom: 74rem/@base-size;
+    bottom: 200rem/@base-size;
 
     .swiper-slide-active& {
       animation: fadeIn .6s, slideInDown .6s;
