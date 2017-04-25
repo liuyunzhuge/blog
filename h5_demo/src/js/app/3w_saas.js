@@ -84,6 +84,12 @@ define('js/app/3w_saas.js', function (require, exports, module) {
                 },
                 onSlideChangeEnd: function (swiper) {
                     Pages[swiper.activeIndex].init(swiper);
+
+                    if(swiper.activeIndex == 3 || swiper.activeIndex == 5) {
+                        if($cur_location_pop) {
+                            $cur_location_pop.removeClass('active');
+                        }
+                    }
                 }
             });
         },
@@ -106,6 +112,7 @@ define('js/app/3w_saas.js', function (require, exports, module) {
             }
         },
         Pages = {},
+        $cur_location_pop,
         PageConf = {
             3: {
                 ready: function () {
@@ -116,6 +123,25 @@ define('js/app/3w_saas.js', function (require, exports, module) {
                         spaceBetween: lib.flexible.rem2px(0.66666),
                         onInit: initSlide,
                         onSlideChangeEnd: initSlide
+                    });
+                }
+            },
+            4: {
+                ready: function () {
+                    this.$page.on('click', 'a.location',function(){
+                        var id = this.id,
+                            city = id.substring(9);
+
+                        var $pop = $('#'+city+ '_pop').addClass('active');
+                        $pop[0].offsetWidth;
+
+                        $cur_location_pop = $pop;
+                    });
+
+                    this.$page.on('click', 'a.btn_close',function(){
+                        $(this).closest('.location_pop').removeClass('active');
+
+                        $cur_location_pop = null;
                     });
                 }
             },

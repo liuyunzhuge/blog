@@ -1,0 +1,227 @@
+@import "../../_variables";
+@import "../../_mixin";
+@import "variables";
+
+.page_4 {
+
+  .map_layer {
+    img {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  .location {
+    position: absolute;
+    width: 12rem/@base-size;
+    height: 12rem/@base-size;
+    opacity: 1;
+  }
+
+  .location_text {
+    position: absolute;
+    opacity: 1;
+  }
+
+  .location_beijing {
+    left: 518rem/@base-size;
+    top: 262rem/@base-size;
+
+    .location_text {
+      width: 56rem/@base-size;
+      height: 28rem/@base-size;
+      top: 50%;
+      margin-top: -28 / 2 * 1rem/@base-size;
+      left: 26rem/@base-size;
+    }
+  }
+
+  .location_chengdu {
+    left: 52rem/@base-size;
+    top: 720rem/@base-size;
+
+    .location_text {
+      width: 56rem/@base-size;
+      height: 28rem/@base-size;
+      top: 50%;
+      margin-top: -28 / 2 * 1rem/@base-size;
+      left: 26rem/@base-size;
+    }
+  }
+
+  .location_wuhan {
+    left: 422rem/@base-size;
+    top: 754rem/@base-size;
+
+    .location_text {
+      width: 57rem/@base-size;
+      height: 27rem/@base-size;
+      top: 50%;
+      margin-top: -28 / 2 * 1rem/@base-size;
+      left: -76rem/@base-size;
+    }
+  }
+
+  .location_hangzhou {
+    left: 666rem/@base-size;
+    top: 775rem/@base-size;
+
+    .location_text {
+      width: 56rem/@base-size;
+      height: 29rem/@base-size;
+      top: 50%;
+      margin-top: -28 / 2 * 1rem/@base-size;
+      left: -76rem/@base-size;
+    }
+  }
+
+  .location_fuzhou {
+    left: 630rem/@base-size;
+    top: 960rem/@base-size;
+
+    .location_text {
+      width: 57rem/@base-size;
+      height: 28rem/@base-size;
+      top: 50%;
+      margin-top: -28 / 2 * 1rem/@base-size;
+      left: 26rem/@base-size;
+    }
+  }
+
+  .location_xiamen {
+    left: 572rem/@base-size;
+    top: 1046rem/@base-size;
+
+    .location_text {
+      width: 57rem/@base-size;
+      height: 27rem/@base-size;
+      top: 50%;
+      margin-top: -28 / 2 * 1rem/@base-size;
+      left: 26rem/@base-size;
+    }
+  }
+
+  .location_shenzhen {
+    left: 472rem/@base-size;
+    top: 1080rem/@base-size;
+
+    .location_text {
+      width: 57rem/@base-size;
+      height: 28rem/@base-size;
+      top: 50%;
+      margin-top: -28 / 2 * 1rem/@base-size;
+      left: 26rem/@base-size;
+    }
+  }
+
+  .location_guangzhou {
+    left: 408rem/@base-size;
+    top: 1088rem/@base-size;
+
+    .location_text {
+      width: 56rem/@base-size;
+      height: 28rem/@base-size;
+      top: 100%;
+      margin-top: -28 / 2 * 1rem/@base-size;
+      left: -76rem/@base-size;
+    }
+  }
+
+  .location_icon {
+    position: absolute;
+    width: 47rem/@base-size;
+    height: 52rem/@base-size;
+    left: 50%;
+    margin-left: -48 / 2 * 1rem/@base-size;
+    top: -56rem/@base-size;
+    transform-origin: center bottom;
+
+    .swiper-slide-active& {
+      animation: fadeIn .1s, bounceIn .6s;
+      animation-fill-mode: both;
+      animation-delay: .2s;
+    }
+  }
+
+  .location_date {
+    position: absolute;
+    width: 0;
+    height: 42rem/@base-size;
+    right: -4rem/@base-size;
+    top: -53rem/@base-size;
+
+    &.right_dir {
+      left: -4rem/@base-size;
+      right: auto;
+    }
+  }
+
+  .location_current {
+    .location_date {
+      .swiper-slide-active& {
+        opacity: 1;
+        animation: width_grow .3s;
+        animation-fill-mode: both;
+        animation-delay: 0.8s;
+      }
+    }
+  }
+
+  @keyframes width_grow {
+    from {
+      width: 0;
+    }
+
+    to {
+      width: 203rem/@base-size;
+    }
+  }
+
+  .location_pop {
+    display: none;
+
+    .location_pop_bd {
+      .pos_center();
+      width: 662rem/@base-size;
+      height: 655rem/@base-size;
+      border-radius: 10rem/@base-size;
+    }
+
+    &.active {
+      display: block;
+
+      animation: zoomIn2 .5s;
+      animation-fill-mode: both;
+    }
+
+    .btn_close {
+      position: absolute;
+      display: block;
+      right: 20rem/@base-size;
+      top: 20rem/@base-size;
+      width: 39rem/@base-size;
+      height: 39rem/@base-size;
+    }
+  }
+
+  .buttons {
+    width: 586rem/@base-size;
+    bottom: 40rem/@base-size;
+
+    .swiper-slide-active& {
+      animation: fadeIn .4s, slideInDown .4s;
+      animation-fill-mode: both;
+      animation-delay: 1.2s, 1.2s;
+    }
+
+    .btn_sign {
+      width: 280rem/@base-size;
+      height: 91rem/@base-size;
+    }
+
+    .btn_vip {
+      width: 283rem/@base-size;
+      height: 91rem/@base-size;
+    }
+  }
+}
