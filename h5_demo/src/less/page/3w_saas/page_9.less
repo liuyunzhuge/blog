@@ -11,7 +11,7 @@
     width: 236rem/@base-size;
     height: 131rem/@base-size;
 
-    .swiper-slide-active& {
+    .swiper-slide-init& {
       animation: page_title_ani .8s;
       animation-fill-mode: both;
       animation-delay: .1s;
@@ -29,7 +29,7 @@
     left: 34rem/@base-size;
     opacity: 0;
 
-    .swiper-slide-active& {
+    .swiper-slide-init& {
       animation: title_star_line_ani 1s linear;
       animation-fill-mode: both;
       animation-delay: .9s;
@@ -41,7 +41,7 @@
     left: 10rem/@base-size;
     opacity: 0;
 
-    .swiper-slide-active& {
+    .swiper-slide-init& {
       animation: title_star_line_ani 1s linear;
       animation-fill-mode: both;
       animation-delay: 1.6s;
@@ -63,7 +63,7 @@
     top: 0;
     left: 0;
 
-    .swiper-slide-active& {
+    .swiper-slide-init& {
       animation: fadeIn .6s;
       animation-fill-mode: both;
       animation-delay: .9s;
@@ -76,27 +76,11 @@
     height: 14rem/@base-size;
     top: -33rem/@base-size;
     left: 350rem/@base-size;
-    opacity: 1;
 
-    .swiper-slide-active& {
-      //animation: hd_star_line_ani 1s linear;
+    .swiper-slide-init& {
+      animation: hd_star_line_ani 1s linear;
       animation-fill-mode: both;
-      animation-delay: 3s;
-    }
-  }
-
-  .content_star_line_2 {
-    position: absolute;
-    width: 60rem/@base-size;
-    height: 13rem/@base-size;
-    top: 122rem/@base-size;
-    left: 485rem/@base-size;
-    opacity: 1;
-
-    .swiper-slide-active& {
-      //animation: hd_star_line_ani 1s linear;
-      animation-fill-mode: both;
-      animation-delay: 3.5s;
+      animation-delay: 1.5s;
     }
   }
 
@@ -106,26 +90,11 @@
     height: 14rem/@base-size;
     bottom: 95rem/@base-size;
     right: -80rem/@base-size;
-    opacity: 1;
 
-    .swiper-slide-active& {
-      //animation: hd_star_line_ani 1s linear;
+    .swiper-slide-init& {
+      animation: hd_star_line_ani 1s linear;
       animation-fill-mode: both;
-      animation-delay: 3.5s;
-    }
-  }
-
-  .hd_line_short {
-    position: absolute;
-    left: 120rem/@base-size;
-    top: 130rem/@base-size;
-    width: 16rem/@base-size;
-    height: 9rem/@base-size;
-
-    .swiper-slide-active& {
-      animation: fadeIn .6s;
-      animation-fill-mode: both;
-      animation-delay: 1.6s;
+      animation-delay: 2s;
     }
   }
 
@@ -136,10 +105,10 @@
     width: 89rem/@base-size;
     height: 100rem/@base-size;
 
-    .swiper-slide-active& {
+    .swiper-slide-init& {
       animation: fadeIn .6s;
       animation-fill-mode: both;
-      animation-delay: 1.6s;
+      animation-delay: 0.9s;
     }
   }
 
@@ -153,10 +122,10 @@
       height: 11rem/@base-size;
       background-size: 100% 100%;
 
-      .swiper-slide-active& {
-        animation: fadeIn .6s, stripe_rect_ani .5s linear infinite;
+      .swiper-slide-init& {
+        animation: fadeIn .4s, stripe_rect_ani .5s linear infinite;
         animation-fill-mode: both;
-        animation-delay: .9s, .9s;
+        animation-delay: 1.5s, 1.5s;
       }
 
       @keyframes stripe_rect_ani {
@@ -179,10 +148,10 @@
   }
 
   .buttons {
-    .swiper-slide-active& {
-      animation: fadeIn .6s, slideInDown .6s;
+    .swiper-slide-init& {
+      animation: fadeIn .4s, slideInDown .4s;
       animation-fill-mode: both;
-      animation-delay: 2.6s, 2.6s;
+      animation-delay: 2s, 2s;
     }
   }
 }

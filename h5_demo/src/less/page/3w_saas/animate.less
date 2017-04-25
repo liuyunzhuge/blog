@@ -125,6 +125,16 @@
   }
 }
 
+@keyframes slideInUp {
+  from {
+    transform: translate3d(0, 100%, 0);
+    visibility: visible;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
 
 @keyframes slideInDown {
   from {
@@ -134,6 +144,18 @@
 
   to {
     transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(4);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
   }
 }
 

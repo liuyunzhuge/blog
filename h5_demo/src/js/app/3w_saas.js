@@ -5,6 +5,13 @@ define('js/app/3w_saas.js', function (require, exports, module) {
         ProgressBar = require('mod/3w_saas/progressBar'),
         StateManager = require('mod/3w_saas/stateManager');
 
+   /* $('[data-background]').each(function(){
+        if(!($(this).hasClass('swiper-lazy'))) {
+            console.log($(this).data('background'));
+        }
+    });
+    return;*/
+
     $.fn.cssAnimate = function (option) {
         return this.each(function () {
             var $this = $(this);
@@ -32,9 +39,27 @@ define('js/app/3w_saas.js', function (require, exports, module) {
 
     var Conf = {
             firstPreloadRes: [
-                //'@@CONTEXT_PATH/img/3w_saas/bg.jpg'
                 '@@CONTEXT_PATH/img/3w_saas/btn_sign.png',
-                '@@CONTEXT_PATH/img/3w_saas/btn_vip.png',
+                '@@CONTEXT_PATH/img/3w_saas/bottom_bg.png',
+                '@@CONTEXT_PATH/img/3w_saas/top_right_text.png',
+                '@@CONTEXT_PATH/img/3w_saas/bottom_l_text.png',
+                '@@CONTEXT_PATH/img/3w_saas/slide_arrow.png',
+                '@@CONTEXT_PATH/img/3w_saas/bottom_right_arrow_up.png',
+                '@@CONTEXT_PATH/img/3w_saas/bottom_right_arrow_down.png',
+                '@@CONTEXT_PATH/img/3w_saas/bg_main_angle.png',
+                '@@CONTEXT_PATH/img/3w_saas/bg_top_angle.png',
+                '@@CONTEXT_PATH/img/3w_saas/angle_01.png',
+                '@@CONTEXT_PATH/img/3w_saas/page_0/title_banner.png',
+                '@@CONTEXT_PATH/img/3w_saas/page_0/main_bg.png',
+                '@@CONTEXT_PATH/img/3w_saas/page_0/title_top.png',
+                '@@CONTEXT_PATH/img/3w_saas/page_0/title_bottom.png',
+                '@@CONTEXT_PATH/img/3w_saas/page_0/title_decorate_1.png',
+                '@@CONTEXT_PATH/img/3w_saas/page_0/title_decorate_2.png',
+                '@@CONTEXT_PATH/img/3w_saas/page_0/title_text_top.png',
+                '@@CONTEXT_PATH/img/3w_saas/page_0/title_text_bottom.png',
+                '@@CONTEXT_PATH/img/3w_saas/page_0/address.png',
+                '@@CONTEXT_PATH/img/3w_saas/page_0/address_line.png',
+                '@@CONTEXT_PATH/img/3w_saas/page_0/page_bottom.png'
             ],
             secondPreloadRes: []
         },
@@ -47,6 +72,7 @@ define('js/app/3w_saas.js', function (require, exports, module) {
             }
 
             new Swiper('#swiper', {
+                resistanceRatio: 0,
                 direction: 'vertical',
                 preloadImages: false,
                 lazyLoading: true,
@@ -56,7 +82,7 @@ define('js/app/3w_saas.js', function (require, exports, module) {
                 onInit: function (swiper) {
                     Pages[swiper.activeIndex].init(swiper);
                 },
-                onSlideChangeEnd: function(swiper){
+                onSlideChangeEnd: function (swiper) {
                     Pages[swiper.activeIndex].init(swiper);
                 }
             });
@@ -68,6 +94,7 @@ define('js/app/3w_saas.js', function (require, exports, module) {
                     if (this._init) return;
 
                     this.$page = $(swiper.slides[index]);
+                    this.$page.addClass('swiper-slide-init');
                     if (conf) {
                         $.extend(this, conf);
                     }
@@ -80,45 +107,45 @@ define('js/app/3w_saas.js', function (require, exports, module) {
         },
         Pages = {},
         PageConf = {
-            2: {
-                ready: function(){
-                    this.contentSwiper = new Swiper(this.$page.find('.swiper-container')[0], {
-                        preloadImages: false,
-                        lazyLoading: true,
-                        lazyLoadingInPrevNext: true,
-                        lazyLoadingInPrevNextAmount: 2,
+            3: {
+                ready: function () {
+                    new Swiper(this.$page.find('.swiper-container')[0], {
+                        resistanceRatio: 0,
                         slidesPerView: 1,
                         pagination: '.swiper-pagination',
-                        spaceBetween: lib.flexible.rem2px(0.66666)
-                    });
-                }
-            },
-            4: {
-                ready: function(){
-                    this.contentSwiper = new Swiper(this.$page.find('.swiper-container')[0], {
-                        preloadImages: false,
-                        lazyLoading: true,
-                        lazyLoadingInPrevNext: true,
-                        lazyLoadingInPrevNextAmount: 2,
-                        slidesPerView: 1,
-                        pagination: '.swiper-pagination',
-                        spaceBetween: lib.flexible.rem2px(0.66666)
+                        spaceBetween: lib.flexible.rem2px(0.66666),
+                        onInit: initSlide,
+                        onSlideChangeEnd: initSlide
                     });
                 }
             },
             5: {
-                ready: function(){
-                    this.contentSwiper = new Swiper(this.$page.find('.swiper-container')[0], {
-                        preloadImages: false,
-                        lazyLoading: true,
-                        lazyLoadingInPrevNext: true,
-                        lazyLoadingInPrevNextAmount: 2,
+                ready: function () {
+                    new Swiper(this.$page.find('.swiper-container')[0], {
+                        resistanceRatio: 0,
                         slidesPerView: 1,
                         pagination: '.swiper-pagination',
-                        spaceBetween: lib.flexible.rem2px(0.66666)
+                        spaceBetween: lib.flexible.rem2px(0.66666),
+                        onInit: initSlide,
+                        onSlideChangeEnd: initSlide
+                    });
+                }
+            },
+            6: {
+                ready: function () {
+                    new Swiper(this.$page.find('.swiper-container')[0], {
+                        resistanceRatio: 0,
+                        slidesPerView: 1,
+                        pagination: '.swiper-pagination',
+                        spaceBetween: lib.flexible.rem2px(0.66666),
+                        onInit: initSlide,
+                        onSlideChangeEnd: initSlide
                     });
                 }
             }
+        },
+        initSlide = function (swiper) {
+            $(swiper.slides[swiper.activeIndex]).addClass('swiper-slide-init');
         };
 
     //页面初始化状态管理

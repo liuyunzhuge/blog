@@ -133,6 +133,20 @@ body, .loader_wrap {
   margin-right: auto;
   width: @layout_main_width * 1rem/@base-size;
   height: @layout_main_height * 1rem/@base-size;
+
+  .page_top_angle {
+    position: absolute;
+    top: -38rem/@base-size;
+    right: 100rem/@base-size;
+    width: 134rem/@base-size;
+    height: 70rem/@base-size;
+
+    .swiper-slide-init & {
+      animation: fadeIn .5s;
+      animation-fill-mode: both;
+      animation-delay: .1s;
+    }
+  }
 }
 
 .public_layer1 {
@@ -142,18 +156,10 @@ body, .loader_wrap {
     bottom: 0;
     width: 100%;
     height: 150rem/@base-size;
-    background-color: @background-color;
+    //background-color: @background-color;
     background-position: bottom center;
     background-size: 100% auto;
     background-repeat: no-repeat;
-  }
-
-  .page_top_angle {
-    position: absolute;
-    top: -38rem/@base-size;
-    right: 100rem/@base-size;
-    width: 134rem/@base-size;
-    height: 70rem/@base-size;
   }
 
   .top_right_text {
@@ -295,6 +301,7 @@ body, .loader_wrap {
 }
 
 @import "../page/3w_saas/animate";
+@import "../page/3w_saas/page_0";
 @import "../page/3w_saas/page_1";
 @import "../page/3w_saas/page_2";
 @import "../page/3w_saas/page_3";

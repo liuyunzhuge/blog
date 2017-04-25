@@ -11,7 +11,7 @@
     width: 172rem/@base-size;
     height: 133rem/@base-size;
 
-    .swiper-slide-active& {
+    .swiper-slide-init& {
       animation: page_title_ani .8s;
       animation-fill-mode: both;
       animation-delay: .1s;
@@ -29,7 +29,7 @@
     left: 34rem/@base-size;
     opacity: 0;
 
-    .swiper-slide-active& {
+    .swiper-slide-init& {
       animation: title_star_line_ani 1s linear;
       animation-fill-mode: both;
       animation-delay: .9s;
@@ -41,7 +41,7 @@
     left: 10rem/@base-size;
     opacity: 0;
 
-    .swiper-slide-active& {
+    .swiper-slide-init& {
       animation: title_star_line_ani 1s linear;
       animation-fill-mode: both;
       animation-delay: 1.6s;
@@ -55,7 +55,7 @@
     width: 100rem/@base-size;
     height: 230rem/@base-size;
 
-    .swiper-slide-active& {
+    .swiper-slide-init& {
       animation: fadeIn .6s;
       animation-fill-mode: both;
       animation-delay: .9s;
@@ -69,7 +69,7 @@
     width: 349rem/@base-size;
     height: 314rem/@base-size;
 
-    .swiper-slide-active& {
+    .swiper-slide-init& {
       animation: fadeIn .6s;
       animation-fill-mode: both;
       animation-delay: .9s;
@@ -83,10 +83,10 @@
     top: 44rem/@base-size;
     right: 260rem/@base-size;
 
-    .swiper-slide-active& {
+    .swiper-slide-init& {
       animation: hd_star_line_ani 1s linear;
       animation-fill-mode: both;
-      animation-delay: 3s;
+      animation-delay: 2.3s;
     }
   }
 
@@ -97,10 +97,10 @@
     top: 96rem/@base-size;
     right: 116rem/@base-size;
 
-    .swiper-slide-active& {
+    .swiper-slide-init& {
       animation: hd_star_line_ani 1s linear;
       animation-fill-mode: both;
-      animation-delay: 3.5s;
+      animation-delay: 2.8s;
     }
   }
 
@@ -125,11 +125,9 @@
     .content_item_child {
       width: 269rem/@base-size;
       height: 317rem/@base-size;
-      opacity: 1;
       position: absolute;
 
       &:first-child {
-
       }
 
       &:nth-child(2) {
@@ -154,7 +152,12 @@
       height: 50rem/@base-size;
       left: -28rem/@base-size;
       top: 6rem/@base-size;
-      opacity: 1;
+
+      .swiper-slide-init& {
+        animation: fadeIn .5s;
+        animation-fill-mode: both;
+        animation-delay: 2s;
+      }
     }
 
     .decorate_3 {
@@ -163,7 +166,12 @@
       height: 46rem/@base-size;
       right: -10rem/@base-size;
       bottom: 60rem/@base-size;
-      opacity: 1;
+
+      .swiper-slide-init& {
+        animation: fadeIn .5s;
+        animation-fill-mode: both;
+        animation-delay: 2s;
+      }
     }
 
     .decorate_4 {
@@ -172,7 +180,12 @@
       height: 53rem/@base-size;
       left: -40rem/@base-size;
       bottom: 106rem/@base-size;
-      opacity: 1;
+
+      .swiper-slide-init& {
+        animation: fadeIn .5s;
+        animation-fill-mode: both;
+        animation-delay: 2s;
+      }
     }
 
     .water_stripe {
@@ -183,17 +196,109 @@
       bottom: 178rem/@base-size;
       background-repeat: repeat;
       background-size: auto 100%;
+
+      .swiper-slide-init& {
+        animation: fadeIn .5s;
+        animation-fill-mode: both;
+        animation-delay: 2s;
+      }
+    }
+  }
+
+  .swiper-pagination-bullets {
+    .swiper-slide-init& {
+      animation: fadeIn .5s;
+      animation-fill-mode: both;
+      animation-delay: 1.9s;
+    }
+  }
+
+  @keyframes content_item_child_1 {
+    from {
+      opacity: 0;
+      transform: translate(50%, 50%);
+    }
+
+    to {
       opacity: 1;
+      transform: translate(0, 0);
+    }
+  }
+
+  @keyframes content_item_child_2 {
+    from {
+      opacity: 0;
+      transform: translate(-50%, 50%);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+  }
+
+  @keyframes content_item_child_3 {
+    from {
+      opacity: 0;
+      transform: translate(50%, -50%);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+  }
+
+  @keyframes content_item_child_4 {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -50%);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+  }
+
+  .swiper-slide-init {
+    .content_item_child {
+
+      &:first-child {
+        animation: content_item_child_1 .5s;
+        animation-fill-mode: both;
+      }
+
+      &:nth-child(2) {
+        animation: content_item_child_2 .5s;
+        animation-fill-mode: both;
+      }
+
+      &:nth-child(3) {
+        animation: content_item_child_3 .5s;
+        animation-fill-mode: both;
+      }
+
+      &:nth-child(4) {
+        animation: content_item_child_4 .5s;
+        animation-fill-mode: both;
+      }
+    }
+
+    &:first-child {
+      .content_item_child {
+        animation-delay: 1.5s;
+      }
     }
   }
 
   .buttons {
     bottom: 74rem/@base-size;
 
-    .swiper-slide-active& {
-      animation: fadeIn .6s, slideInDown .6s;
+    .swiper-slide-init& {
+      animation: fadeIn .4s, slideInDown .4s;
       animation-fill-mode: both;
-      animation-delay: 4.1s, 4.1s;
+      animation-delay: 2s, 2s;
     }
   }
 }
