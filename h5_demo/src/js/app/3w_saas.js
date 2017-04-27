@@ -5,12 +5,19 @@ define('js/app/3w_saas.js', function (require, exports, module) {
         ProgressBar = require('mod/3w_saas/progressBar'),
         StateManager = require('mod/3w_saas/stateManager');
 
-   /* $('[data-background]').each(function(){
-        if(!($(this).hasClass('swiper-lazy'))) {
-            console.log($(this).data('background'));
+    /* $('[data-background]').each(function(){
+     if(!($(this).hasClass('swiper-lazy'))) {
+     console.log($(this).data('background'));
+     }
+     });
+     return;*/
+
+    function one(call) {
+        var ret;
+        return function () {
+            return !ret && (ret = call.apply(this, arguments));
         }
-    });
-    return;*/
+    }
 
     $.fn.cssAnimate = function (option) {
         return this.each(function () {
@@ -23,12 +30,7 @@ define('js/app/3w_saas.js', function (require, exports, module) {
             if (option.animateClass) {
                 option.before && option.before();
 
-                $this.addClass(option.animateClass).one('animationend webkitAnimationEnd', (function (call) {
-                    var ret;
-                    return function () {
-                        return !ret && (ret = call.apply(this, arguments));
-                    }
-                })(function () {
+                $this.addClass(option.animateClass).one('animationend webkitAnimationEnd', one(function () {
                     option.after && option.after();
                     $this.addClass('animate_end').removeClass(option.animateClass);
                     return true;
@@ -80,15 +82,15 @@ define('js/app/3w_saas.js', function (require, exports, module) {
                 lazyLoadingInPrevNextAmount: 2,
                 slidesPerView: 1,
                 onInit: function (swiper) {
+                    Pages[swiper.activeIndex]._show();
                     Pages[swiper.activeIndex].init(swiper);
                 },
                 onSlideChangeEnd: function (swiper) {
+                    Pages[swiper.activeIndex]._show();
                     Pages[swiper.activeIndex].init(swiper);
 
-                    if(swiper.activeIndex == 3 || swiper.activeIndex == 5) {
-                        if($cur_location_pop) {
-                            $cur_location_pop.removeClass('active');
-                        }
+                    if (swiper.activeIndex == 3 || swiper.activeIndex == 5) {
+                        Pages[4].reset();
                     }
                 }
             });
@@ -108,11 +110,16 @@ define('js/app/3w_saas.js', function (require, exports, module) {
                     this._init = true;
                 },
                 ready: $.noop,
+                _show: function () {
+                    if (!this._init) return;
+
+                    this.show();
+                },
+                show: $.noop,
                 reset: $.noop
             }
         },
         Pages = {},
-        $cur_location_pop,
         PageConf = {
             3: {
                 ready: function () {
@@ -128,21 +135,69 @@ define('js/app/3w_saas.js', function (require, exports, module) {
             },
             4: {
                 ready: function () {
-                    this.$page.on('click', 'a.location',function(){
-                        var id = this.id,
-                            city = id.substring(9);
+                    var that = this;
 
-                        var $pop = $('#'+city+ '_pop').addClass('active');
-                        $pop[0].offsetWidth;
-
-                        $cur_location_pop = $pop;
+                    this.$locations = this.$page.find('a.location');
+                    this.$page.on('click', 'a.location', function () {
+                        that.showPop(this);
                     });
 
-                    this.$page.on('click', 'a.btn_close',function(){
+                    this.startBounce();
+                    this.openCurrentPop();
+
+                    this.$page.on('click', 'a.btn_close', function () {
                         $(this).closest('.location_pop').removeClass('active');
 
-                        $cur_location_pop = null;
+                        that.$cur_location_pop = null;
+                        that.startBounce();
                     });
+                },
+                showPop: function (locationElem) {
+                    var id = locationElem.id,
+                        city = id.substring(9),
+                        $pop = $('#' + city + '_pop');
+
+                    $pop.addClass('active');
+                    $pop[0].offsetWidth;
+
+                    this.$cur_location_pop = $pop;
+                    this.stopBounce();
+                },
+                stopBounce: function () {
+                    this.timer && clearTimeout(this.timer);
+                },
+                startBounce: function () {
+                    var that = this;
+                    this.$locations.removeClass('animate_stop');
+                    this.$locations.addClass('animate_start');
+
+                    setTimeout(function(){
+                        that.$locations.removeClass('animate_start').addClass('animate_stop');
+                    }, 620);
+
+                    this.timer = setTimeout(function () {
+                        that.startBounce();
+                    }, 1500);
+                },
+                openCurrentPop: function () {
+                    var that = this,
+                        $cur_icon = this.$page.find('.location_current .location_icon');
+
+                    setTimeout(function () {
+                        that.showPop($cur_icon.closest('.location')[0]);
+                    }, 620);
+                },
+                reset: function () {
+                    if (!this._init) return;
+
+                    this.stopBounce();
+                    this.$locations.removeClass('animate_stop animate_start');
+                    this.$cur_location_pop && this.$cur_location_pop.removeClass('active');
+                },
+                show: function () {
+
+                    this.startBounce();
+                    this.openCurrentPop();
                 }
             },
             5: {

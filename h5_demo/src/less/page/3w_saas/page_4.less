@@ -135,37 +135,47 @@
     margin-left: -48 / 2 * 1rem/@base-size;
     top: -56rem/@base-size;
     transform-origin: center bottom;
-
-    .swiper-slide-active& {
-      animation: fadeIn .1s, bounceIn .6s;
-      animation-fill-mode: both;
-      animation-delay: .4s;
-    }
   }
 
-  .location_date {
-    position: absolute;
-    width: 0;
-    height: 42rem/@base-size;
-    right: -4rem/@base-size;
-    top: -53rem/@base-size;
-
-    &.right_dir {
-      left: -4rem/@base-size;
-      right: auto;
-    }
-  }
-
-  .location_current {
-    .location_date {
-      .swiper-slide-active& {
-        opacity: 1;
-        animation: width_grow .3s;
+  .location {
+    &.animate_start {
+      .location_icon {
+        animation: bounceIn .8s;
         animation-fill-mode: both;
-        animation-delay: 1s;
+      }
+    }
+
+    &.animate_stop {
+      .location_icon {
+        opacity: 1;
       }
     }
   }
+
+  /*
+    .location_date {
+      position: absolute;
+      width: 0;
+      height: 42rem/@base-size;
+      right: -4rem/@base-size;
+      top: -53rem/@base-size;
+
+      &.right_dir {
+        left: -4rem/@base-size;
+        right: auto;
+      }
+    }
+
+    .location_current {
+      .location_date {
+        .swiper-slide-active& {
+          opacity: 1;
+          animation: width_grow .3s;
+          animation-fill-mode: both;
+          animation-delay: 1s;
+        }
+      }
+    }*/
 
   @keyframes width_grow {
     from {
@@ -211,7 +221,7 @@
     .swiper-slide-active& {
       animation: fadeIn .4s, slideInDown .4s;
       animation-fill-mode: both;
-      animation-delay: 1.3s, 1.3s;
+      animation-delay: .9s, .9s;
     }
 
     .btn_sign {
