@@ -23,7 +23,7 @@ var gulp = require('gulp'),
     src = './src',
     dist = './dist',
     option = {base: src},
-    CONTEXT_PATH = '/blog/h5_demo/dist',
+    CONTEXT_PATH = '/dist',
     replace_patterns = [
         {
             match: 'CONTEXT_PATH',
