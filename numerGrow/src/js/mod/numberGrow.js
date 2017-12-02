@@ -35,7 +35,7 @@ define(function (require, exports, module) {
                 return;
             }
 
-            old = t;
+            old = interval ? t : start;
             $this.text(old);
         }, 16);
     }
