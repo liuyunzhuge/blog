@@ -35,7 +35,7 @@ define(function (require, exports, module) {
                 return;
             }
 
-            old = interval ? t : start;
+            old = interval ? t : start; // 需要加上这个吗
             $this.text(old);
         }, 16);
     }
